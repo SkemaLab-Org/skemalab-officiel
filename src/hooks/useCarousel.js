@@ -3,10 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 
-/**
- * Shared carousel state: index, prev/next, autoplay, swipe.
- * Autoplay pauses when reduced-motion is preferred or when paused=true.
- */
 export default function useCarousel(length, { intervalMs = 6500, paused = false } = {}) {
   const [index, setIndex] = useState(0);
   const touchX = useRef(null);

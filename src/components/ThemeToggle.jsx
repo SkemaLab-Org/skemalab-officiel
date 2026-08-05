@@ -4,7 +4,7 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
 
 export default function ThemeToggle() {
-  const { theme, toggleTheme, ready } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const isDark = theme === "dark";
 
   return (
@@ -15,10 +15,10 @@ export default function ThemeToggle() {
       title={isDark ? "Mode clair" : "Mode sombre"}
       className="flex h-11 w-11 items-center justify-center rounded-[3px] border border-line bg-surface text-fg transition-all duration-300 hover:border-brand hover:text-brand"
     >
-      {!ready || !isDark ? (
-        <Moon size={17} strokeWidth={1.75} />
-      ) : (
+      {isDark ? (
         <Sun size={17} strokeWidth={1.75} />
+      ) : (
+        <Moon size={17} strokeWidth={1.75} />
       )}
     </button>
   );

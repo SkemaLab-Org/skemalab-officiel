@@ -1,6 +1,32 @@
 import { ArrowUpRight } from "lucide-react";
 import { contactInfo, navLinks } from "@/data/content";
 import BrandMark from "@/components/BrandMark";
+import {
+  GmailIcon,
+  LinkedInIcon,
+  WhatsAppIcon,
+} from "@/components/icons/SocialIcons";
+
+const socialLinks = [
+  {
+    label: "LinkedIn",
+    href: contactInfo.linkedin,
+    Icon: LinkedInIcon,
+    external: true,
+  },
+  {
+    label: "WhatsApp",
+    href: `https://wa.me/${contactInfo.whatsapp}`,
+    Icon: WhatsAppIcon,
+    external: true,
+  },
+  {
+    label: "Gmail",
+    href: `mailto:${contactInfo.email}`,
+    Icon: GmailIcon,
+    external: false,
+  },
+];
 
 export default function Footer() {
   return (
@@ -14,7 +40,24 @@ export default function Footer() {
             Studio digital orienté résultats. Développement, marketing et
             automatisation pour les entreprises qui veulent accélérer.
           </p>
-          <div className="mt-6 inline-flex items-center rounded-[3px] border border-line bg-page px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-muted sm:mt-8 sm:px-4 sm:text-[11px] sm:tracking-[0.2em]">
+
+          <div className="mt-6 flex items-center gap-2.5 sm:mt-8">
+            {socialLinks.map(({ label, href, Icon, external }) => (
+              <a
+                key={label}
+                href={href}
+                {...(external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                aria-label={label}
+                className="flex h-11 w-11 items-center justify-center rounded-[3px] border border-line bg-page text-fg/80 transition-all duration-300 hover:border-brand hover:bg-brand hover:text-white"
+              >
+                <Icon className="h-[18px] w-[18px]" />
+              </a>
+            ))}
+          </div>
+
+          <div className="mt-5 inline-flex items-center rounded-[3px] border border-line bg-page px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-muted sm:mt-6 sm:px-4 sm:text-[11px] sm:tracking-[0.2em]">
             Build · Grow · Automate
           </div>
         </div>

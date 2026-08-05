@@ -38,4 +38,10 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Contact form
 
-Validated client-side; submit opens a prefilled `mailto:` to `contactInfo.email`. No fake “message saved” without a real endpoint.
+Tous les champs sont obligatoires. Envoi via `/api/contact` → Google Form → Sheets.
+
+**Sécurité :** validation serveur, honeypot, rate limit (5 / 15 min / IP), contrôle d’origine same-origin, headers CSP / HSTS.
+
+1. Copie `.env.example` → `.env`
+2. Remplis `GOOGLE_FORM_ACTION` + `GF_ENTRY_*` (lien prérempli Google Form)
+3. Redémarre `npm run dev`

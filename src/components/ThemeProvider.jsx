@@ -13,7 +13,6 @@ import {
 const ThemeContext = createContext({
   theme: "light",
   toggleTheme: () => {},
-  ready: false,
 });
 
 function applyThemeClass(next) {
@@ -68,7 +67,7 @@ export function ThemeProvider({ children }) {
   }, []);
 
   const value = useMemo(
-    () => ({ theme, toggleTheme, ready: true }),
+    () => ({ theme, toggleTheme }),
     [theme, toggleTheme],
   );
 

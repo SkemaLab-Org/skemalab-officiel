@@ -1,18 +1,43 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import BrandMark from "@/components/BrandMark";
 
-const LOAD_MS = 700;
+const LOAD_MS = 450;
+const SESSION_KEY = "skemalab-loader-seen";
+
+function subscribe() {
+  return () => {};
+}
+
+function getSkipSnapshot() {
+  try {
+    return sessionStorage.getItem(SESSION_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function getServerSkipSnapshot() {
+  return true;
+}
 
 export default function Loader() {
   const reduceMotion = useReducedMotion();
+  const skip = useSyncExternalStore(
+    subscribe,
+    getSkipSnapshot,
+    getServerSkipSnapshot,
+  );
   const [progress, setProgress] = useState(0);
   const [done, setDone] = useState(false);
 
+  const shouldAnimate = !skip && reduceMotion === false;
+  const visible = shouldAnimate && !done;
+
   useEffect(() => {
-    if (reduceMotion !== false) return undefined;
+    if (!shouldAnimate) return undefined;
 
     const start = performance.now();
     let frame;
@@ -25,10 +50,15 @@ export default function Loader() {
       if (next < 100) {
         frame = requestAnimationFrame(tick);
       } else {
+        try {
+          sessionStorage.setItem(SESSION_KEY, "1");
+        } catch {
+          /* ignore */
+        }
         setTimeout(() => {
           setDone(true);
           document.body.style.overflow = "";
-        }, 120);
+        }, 80);
       }
     };
 
@@ -38,9 +68,7 @@ export default function Loader() {
       cancelAnimationFrame(frame);
       document.body.style.overflow = "";
     };
-  }, [reduceMotion]);
-
-  const visible = reduceMotion !== true && !done;
+  }, [shouldAnimate]);
 
   return (
     <AnimatePresence>
@@ -50,7 +78,7 @@ export default function Loader() {
           initial={{ opacity: 1 }}
           exit={{
             opacity: 0,
-            transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+            transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
           }}
           aria-hidden="true"
         >
@@ -59,9 +87,9 @@ export default function Loader() {
 
           <motion.div
             className="relative z-10 flex flex-col items-center gap-6 px-6 sm:gap-10"
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.3 }}
           >
             <div className="text-center">
               <p className="mb-4 text-[11px] uppercase tracking-[0.4em] text-muted">

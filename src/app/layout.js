@@ -45,9 +45,6 @@ export const metadata = {
     index: true,
     follow: true,
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
 
 const themeInitScript = `

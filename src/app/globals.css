@@ -55,9 +55,14 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
 }
 
 ::selection {
@@ -167,15 +172,6 @@ html.dark .gradient-mesh {
   color: #ffffff;
 }
 
-html.dark .nav-link--over-hero {
-  color: rgba(243, 244, 247, 0.92);
-}
-
-html.dark .nav-link--over-hero:hover,
-html.dark .nav-link--over-hero:focus-visible {
-  color: #ffffff;
-}
-
 .nav-link-mobile {
   position: relative;
   display: flex;
@@ -279,10 +275,6 @@ html.dark .nav-link--over-hero:focus-visible {
   .hero-progress {
     animation: none;
     transform: scaleX(1);
-  }
-
-  html {
-    scroll-behavior: auto;
   }
 }
 

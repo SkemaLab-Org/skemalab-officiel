@@ -39,6 +39,17 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (e) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      queueMicrotask(() => menuButtonRef.current?.focus());
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   const closeMenu = () => {
     setOpen(false);
     queueMicrotask(() => menuButtonRef.current?.focus());
@@ -109,7 +120,7 @@ export default function Navbar() {
 
                   <div className="mt-auto border-t border-line pt-8">
                     <Button
-                      href="#contact"
+                      href="/#contact"
                       onClick={closeMenu}
                       className="w-full"
                     >
@@ -155,7 +166,7 @@ export default function Navbar() {
 
           <div className="hidden items-center gap-3 lg:flex">
             <ThemeToggle />
-            <Button href="#contact" variant="primary" className="px-5 py-2.5">
+            <Button href="/#contact" variant="primary" className="px-5 py-2.5">
               Devis gratuit
               <ArrowUpRight size={15} />
             </Button>

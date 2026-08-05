@@ -50,6 +50,7 @@ export default function Hero() {
               priority={slide.id === services[0].id}
               className="object-cover object-center"
               sizes="100vw"
+              aria-hidden="true"
             />
           </motion.div>
         </AnimatePresence>
@@ -58,9 +59,9 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-10 pt-28 sm:px-8 sm:pb-16 sm:pt-32 lg:pb-24">
         <div className="mb-5 flex flex-wrap items-center gap-2 sm:mb-8 sm:gap-3">
-          <span className="rounded-[3px] border border-line bg-surface/80 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-fg backdrop-blur-md sm:px-3 sm:py-1.5 sm:text-[11px] sm:tracking-[0.22em]">
+          <h1 className="rounded-[3px] border border-line bg-surface/80 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-fg backdrop-blur-md sm:px-3 sm:py-1.5 sm:text-[11px] sm:tracking-[0.22em]">
             Skema<span className="text-brand">lab</span>
-          </span>
+          </h1>
           <span className="hidden text-[11px] font-medium uppercase tracking-[0.22em] text-white/95 drop-shadow-[0_1px_6px_rgba(11,14,20,0.45)] sm:inline">
             Développement · Marketing · Automatisation
           </span>
@@ -83,9 +84,9 @@ export default function Hero() {
                 <p className="mt-3 text-[10px] uppercase tracking-[0.18em] text-accent sm:mt-4 sm:text-[11px] sm:tracking-[0.24em]">
                   {slide.title}
                 </p>
-                <h1 className="mt-2 text-[clamp(1.45rem,5.5vw,3.4rem)] font-semibold leading-[1.12] tracking-tight text-balance text-fg sm:mt-3">
+                <p className="mt-2 text-[clamp(1.45rem,5.5vw,3.4rem)] font-semibold leading-[1.12] tracking-tight text-balance text-fg sm:mt-3">
                   {slide.heroHeadline}
-                </h1>
+                </p>
                 <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted sm:mt-5 sm:text-base md:text-lg">
                   {slide.heroText}
                 </p>
@@ -131,15 +132,14 @@ export default function Hero() {
 
             <div
               className="w-full space-y-2 lg:max-w-sm lg:self-end"
-              role="tablist"
-              aria-label="Services"
+              role="group"
+              aria-label="Choisir un service"
             >
               {services.map((item, i) => (
                 <button
                   key={item.id}
                   type="button"
-                  role="tab"
-                  aria-selected={i === index}
+                  aria-pressed={i === index}
                   aria-current={i === index ? "true" : undefined}
                   onClick={() => setIndex(i)}
                   className={`group flex min-h-12 w-full touch-manipulation items-center gap-3 rounded-[3px] border px-3 py-3 text-left transition-all duration-300 sm:px-4 ${

@@ -11,28 +11,29 @@ const variants = {
 
 export default function Button({
   children,
-  href = "#contact",
+  href,
   variant = "primary",
   className = "",
   type,
   onClick,
+  disabled = false,
 }) {
   const classes = clsx(
-    "inline-flex min-h-11 items-center justify-center gap-2.5 px-5 py-3 text-[13px] font-medium tracking-[0.04em] transition-all duration-300 rounded-[3px] touch-manipulation hover:-translate-y-0.5 active:translate-y-0 sm:px-7 sm:py-3.5",
+    "inline-flex min-h-11 items-center justify-center gap-2.5 px-5 py-3 text-[13px] font-medium tracking-[0.04em] transition-all duration-300 rounded-[3px] touch-manipulation hover:-translate-y-0.5 active:translate-y-0 sm:px-7 sm:py-3.5 disabled:pointer-events-none disabled:opacity-60",
     variants[variant],
     className,
   );
 
   if (type === "submit" || type === "button") {
     return (
-      <button type={type} onClick={onClick} className={classes}>
+      <button type={type} onClick={onClick} disabled={disabled} className={classes}>
         {children}
       </button>
     );
   }
 
   return (
-    <a href={href} onClick={onClick} className={classes}>
+    <a href={href || "/#contact"} onClick={onClick} className={classes}>
       {children}
     </a>
   );

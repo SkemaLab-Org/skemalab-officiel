@@ -122,15 +122,14 @@ export default function Projects() {
 
         <div
           className="-mx-4 mt-5 flex gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 lg:grid-cols-5"
-          role="tablist"
+          role="group"
           aria-label="Projets"
         >
           {projects.map((item, i) => (
             <button
               key={item.title}
               type="button"
-              role="tab"
-              aria-selected={i === index}
+              aria-pressed={i === index}
               aria-label={item.title}
               onClick={() => setIndex(i)}
               className={`group relative w-[42%] min-w-[42%] shrink-0 overflow-hidden rounded-[3px] border text-left transition-all duration-300 touch-manipulation sm:w-auto sm:min-w-0 ${

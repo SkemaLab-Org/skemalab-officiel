@@ -1,9 +1,9 @@
 export const navLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#method", label: "Méthode" },
-  { href: "#projets", label: "Projets" },
-  { href: "#agence", label: "Agence" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#services", label: "Services" },
+  { href: "/#method", label: "Méthode" },
+  { href: "/#projets", label: "Projets" },
+  { href: "/#agence", label: "Agence" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export const services = [
@@ -115,7 +115,7 @@ export const projects = [
     category: "Marketing",
     result: "3,2× leads qualifiés / mois",
     image:
-      "https://images.unsplash.com/photo-1542744173-8e7e53415bb6?auto=format&fit=crop&w=1400",
+      "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1400",
   },
   {
     title: "Automatisation CRM",
@@ -183,6 +183,66 @@ export const aboutContent = {
   ],
 };
 
+export const aboutPage = {
+  heroImage:
+    "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2400",
+  workspaceImage:
+    "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600",
+  headline: "Un studio digital bâti pour accélérer les entreprises ambitieuses.",
+  lead:
+    "Skemalab conçoit, lance et optimise des systèmes digitaux qui créent de la valeur mesurable — pas des slides, des résultats.",
+  story: {
+    eyebrow: "Notre histoire",
+    title: "Nés de la conviction que la tech doit servir le business.",
+    paragraphs: [
+      "Skemalab est un studio digital basé à Essaouira, opérant en remote avec l’Europe et la région MENA. Nous accompagnons les entreprises qui veulent transformer leur présence digitale en véritable levier de croissance.",
+      "Notre différence : une équipe qui parle produit, acquisition et opérations dans le même langage. Développement, marketing digital et automatisation ne sont pas des silos — c’est un système unique, orienté ROI.",
+      "Nous préférons les partenariats longs aux projets jetables. Diagnostic clair, exécution rapide, indicateurs suivis : chaque livraison doit laisser une empreinte mesurable.",
+    ],
+  },
+  principles: [
+    {
+      num: "01",
+      title: "Clarté avant tout",
+      text: "Pas de jargon inutile. Une feuille de route compréhensible, des priorités assumées, des livrables concrets.",
+    },
+    {
+      num: "02",
+      title: "Exécution mesurable",
+      text: "Chaque initiative a un objectif business et un indicateur de succès défini dès le départ.",
+    },
+    {
+      num: "03",
+      title: "Systèmes durables",
+      text: "Nous construisons pour durer : architecture propre, process automatisés, maintenance anticipée.",
+    },
+    {
+      num: "04",
+      title: "Partenariat réel",
+      text: "Nous nous intégrons à vos équipes. Transparence, rythme court, responsabilité partagée.",
+    },
+  ],
+  expertise: [
+    {
+      label: "Build",
+      title: "Développement",
+      text: "Sites, plateformes et applications conçus pour convertir, scaler et rester maintenables.",
+    },
+    {
+      label: "Grow",
+      title: "Marketing digital",
+      text: "Acquisition, contenu et tunnels alignés sur vos objectifs — pour attirer et convertir durablement.",
+    },
+    {
+      label: "Automate",
+      title: "Workflows & IA",
+      text: "Connexion de vos outils, suppression des tâches répétitives, reporting automatisé.",
+    },
+  ],
+  closing:
+    "Si vous cherchez un partenaire capable de relier stratégie, technique et croissance — parlons-en.",
+};
+
 export const ctaContent = {
   image:
     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2200",
@@ -191,7 +251,9 @@ export const ctaContent = {
 export const contactInfo = {
   email: "contact@skemalab.com",
   phone: "+212 6 00 00 00 00",
-  locations: ["Essaouira", "Remote EU / MENA"],
+  whatsapp: "212600000000",
+  linkedin: "https://www.linkedin.com/company/skemalab",
+  locations: ["Essaouira", "Maroc"],
 };
 
 export const siteConfig = {

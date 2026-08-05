@@ -1,23 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Quote } from "lucide-react";
 import { testimonials } from "@/data/content";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+import useCarousel from "@/hooks/useCarousel";
 
 export default function Testimonials() {
-  const [index, setIndex] = useState(0);
-  const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (reduceMotion) return undefined;
-    const id = setInterval(() => {
-      setIndex((i) => (i + 1) % testimonials.length);
-    }, 5600);
-    return () => clearInterval(id);
-  }, [reduceMotion]);
+  const { index, setIndex, reduceMotion } = useCarousel(testimonials.length, {
+    intervalMs: 5600,
+  });
 
   const item = testimonials[index];
 
