@@ -265,6 +265,6 @@ export const siteConfig = {
 
 /** CTA navbar — ouvre Calendly (NEXT_PUBLIC_CALENDLY_URL) */
 export const bookingCta = {
-  label: "Demandez un RDV",
+  label: "Demander RDV",
   subtitle: "Choisissez un créneau disponible",
 };
