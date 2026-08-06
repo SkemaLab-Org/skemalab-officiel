@@ -1,8 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Fewer legacy polyfills for modern browsers (PageSpeed "Legacy JavaScript")
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
   images: {
     formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    qualities: [70, 75],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1600],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
@@ -49,7 +54,6 @@ const nextConfig = {
       "https://img.freepik.com",
     ].join(" ");
 
-    // Iframe-only Calendly embed (scripts run inside the iframe origin)
     const frameSrc = [
       "'self'",
       "https://calendly.com",

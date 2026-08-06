@@ -22,7 +22,7 @@ export const services = [
     image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600",
     heroImage:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=70",
     heroLabel: "01 — Build",
     heroHeadline: "Des produits digitaux qui accélèrent votre business.",
     heroText:
@@ -185,7 +185,7 @@ export const aboutContent = {
 
 export const aboutPage = {
   heroImage:
-    "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2400",
+    "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=70",
   workspaceImage:
     "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600",
   headline: "Un studio digital bâti pour accélérer les entreprises ambitieuses.",
@@ -245,7 +245,7 @@ export const aboutPage = {
 
 export const ctaContent = {
   image:
-    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2200",
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=70",
 };
 
 export const contactInfo = {

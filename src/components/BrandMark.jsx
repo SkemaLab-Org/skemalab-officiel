@@ -1,6 +1,6 @@
 import Image from "next/image";
 import clsx from "clsx";
-import logo from "@/app/logo_2.png";
+import logo from "@/assets/logo.webp";
 
 export default function BrandMark({
   className = "",
@@ -13,8 +13,8 @@ export default function BrandMark({
     <Image
       src={logo}
       alt="SkemaLab"
-      className={clsx("w-auto object-contain", className || "h-8 sm:h-9")}
-      sizes="(max-width: 640px) 140px, 180px"
+      className={clsx("w-auto object-contain", className || "h-6 sm:h-7")}
+      sizes="(max-width: 640px) 120px, 150px"
       priority={priority}
     />
   );

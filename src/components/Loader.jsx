@@ -4,8 +4,8 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import BrandMark from "@/components/BrandMark";
 
-const LOAD_MS = 1900;
-const EXIT_MS = 520;
+const LOAD_MS = 1100;
+const EXIT_MS = 380;
 const SESSION_KEY = "skemalab-loader-seen";
 
 const STAGES = [
@@ -102,8 +102,6 @@ export default function Loader() {
           initial={{ opacity: 1 }}
           exit={{
             opacity: 0,
-            scale: 1.02,
-            filter: "blur(6px)",
             transition: {
               duration: EXIT_MS / 1000,
               ease: [0.22, 1, 0.36, 1],
@@ -140,7 +138,7 @@ export default function Loader() {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <BrandMark as="span" className="h-14 sm:h-[4.5rem]" priority />
+              <BrandMark as="span" className="h-10 sm:h-12" />
             </motion.div>
 
             <motion.div

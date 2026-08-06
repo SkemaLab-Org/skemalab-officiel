@@ -48,8 +48,9 @@ export default function Hero() {
               alt=""
               fill
               priority={slide.id === services[0].id}
+              quality={70}
               className="object-cover object-center"
-              sizes="100vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1400px"
               aria-hidden="true"
             />
           </motion.div>

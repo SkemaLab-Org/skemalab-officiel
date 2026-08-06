@@ -11,8 +11,9 @@ export default function CTA() {
         src={ctaContent.image}
         alt="Skyline urbain — croissance et ambition"
         fill
+        quality={70}
         className="object-cover object-center"
-        sizes="100vw"
+        sizes="(max-width: 1280px) 100vw, 1400px"
       />
       <div className="absolute inset-0 bg-ink/35" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/20 to-ink/25" />

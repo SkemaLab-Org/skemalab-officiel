@@ -33,7 +33,7 @@ export default function Footer() {
     <footer className="brand-fusion-bg relative overflow-hidden text-mist">
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:gap-12 sm:px-8 sm:py-16 lg:grid-cols-[1.5fr_1fr_1fr] lg:gap-14 lg:py-20">
         <div>
-          <BrandMark className="h-9 sm:h-10" />
+          <BrandMark className="h-7 sm:h-8" />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65 sm:mt-5">
             Studio digital orienté résultats. Développement, marketing et
             automatisation pour les entreprises qui veulent accélérer.

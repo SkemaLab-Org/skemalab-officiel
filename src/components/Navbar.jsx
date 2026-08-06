@@ -83,7 +83,7 @@ export default function Navbar() {
                 <div className="flex h-16 shrink-0 items-center justify-between border-b border-line px-4 sm:h-[76px] sm:px-8">
                   <BrandMark
                     onClick={closeMenu}
-                    className="h-7 sm:h-8"
+                    className="h-5 sm:h-6"
                   />
                   <div className="flex items-center gap-2">
                     <ThemeToggle />
@@ -157,7 +157,7 @@ export default function Navbar() {
         )}
       >
         <div className="relative z-[81] mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-[76px] sm:px-8">
-          <BrandMark className="h-8 sm:h-9" priority />
+          <BrandMark className="h-6 sm:h-7" priority />
 
           <nav className="hidden items-center lg:flex" aria-label="Principale">
             {navLinks.map((link) => (
