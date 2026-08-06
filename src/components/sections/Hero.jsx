@@ -62,7 +62,7 @@ export default function Hero() {
           <h1 className="rounded-[3px] border border-line bg-surface/80 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-fg backdrop-blur-md sm:px-3 sm:py-1.5 sm:text-[11px] sm:tracking-[0.22em]">
             Skema<span className="text-brand">lab</span>
           </h1>
-          <span className="hidden text-[11px] font-medium uppercase tracking-[0.22em] text-white/95 drop-shadow-[0_1px_6px_rgba(11,14,20,0.45)] sm:inline">
+          <span className="hidden text-[11px] font-medium uppercase tracking-[0.22em] text-white/95 drop-shadow-[0_1px_6px_rgba(11,15,14,0.45)] sm:inline">
             Développement · Marketing · Automatisation
           </span>
         </div>

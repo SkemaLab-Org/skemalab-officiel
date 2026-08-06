@@ -43,7 +43,7 @@ export const services = [
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600",
     heroImage:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=2400",
+      "https://images.unsplash.com/photo-1543286386-2e659306cd6c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     heroLabel: "02 — Grow",
     heroHeadline: "Une acquisition digitale orientée ROI.",
     heroText:
@@ -64,7 +64,7 @@ export const services = [
     image:
       "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1600",
     heroImage:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=2400",
+      "https://images.unsplash.com/photo-1698434156088-a80e7bcdd198?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     heroLabel: "03 — Automate",
     heroHeadline: "Des workflows intelligents qui libèrent vos équipes.",
     heroText:
@@ -261,4 +261,10 @@ export const siteConfig = {
   url: "https://skemalab.com",
   description:
     "Skemalab est un studio digital orienté résultats : développement informatique, marketing digital et automatisation de workflows pour accélérer votre croissance.",
+};
+
+/** CTA navbar — ouvre Calendly (NEXT_PUBLIC_CALENDLY_URL) */
+export const bookingCta = {
+  label: "Demandez un RDV",
+  subtitle: "Choisissez un créneau disponible",
 };

@@ -25,7 +25,7 @@ function env(name) {
   return process.env[name]?.trim() || "";
 }
 
-export function getGoogleFormConfig() {
+function getGoogleFormConfig() {
   return {
     actionUrl: normalizeFormActionUrl(env("GOOGLE_FORM_ACTION")),
     entries: {

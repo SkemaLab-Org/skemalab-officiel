@@ -97,7 +97,8 @@ export default function Loader() {
               </p>
               <BrandMark
                 as="span"
-                className="text-4xl tracking-[-0.03em] sm:text-5xl md:text-6xl"
+                className="h-12 sm:h-16 md:h-20"
+                priority
               />
               <div className="mx-auto mt-5 h-[2px] w-16 rounded-[3px] bg-brand" />
             </div>

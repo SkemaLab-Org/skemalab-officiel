@@ -106,7 +106,7 @@ export function AboutStory() {
               <div className="absolute inset-0 bg-gradient-to-t from-page/70 via-transparent to-transparent" />
             </div>
             <div className="absolute -bottom-4 -left-2 hidden h-16 w-16 rounded-[3px] bg-brand sm:block md:-left-4" />
-            <div className="absolute -right-2 -top-4 hidden h-12 w-12 rounded-[3px] bg-accent sm:block md:-right-4" />
+            <div className="absolute -right-2 -top-4 hidden h-12 w-12 rounded-[3px] bg-deep sm:block md:-right-4" />
           </div>
         </Reveal>
       </div>

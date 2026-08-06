@@ -1,14 +1,23 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { navLinks } from "@/data/content";
-import Button from "@/components/ui/Button";
+import { navLinks, bookingCta } from "@/data/content";
 import BrandMark from "@/components/BrandMark";
 import ThemeToggle from "@/components/ThemeToggle";
 import clsx from "clsx";
+
+const CalendlyButton = dynamic(() => import("@/components/CalendlyButton"), {
+  ssr: false,
+  loading: () => (
+    <span className="inline-flex min-h-11 items-center justify-center gap-2.5 rounded-[3px] bg-brand px-5 py-2.5 text-[13px] font-medium tracking-[0.04em] text-white opacity-80">
+      {bookingCta.label}
+    </span>
+  ),
+});
 
 const MENU_ID = "mobile-nav-menu";
 
@@ -74,7 +83,7 @@ export default function Navbar() {
                 <div className="flex h-16 shrink-0 items-center justify-between border-b border-line px-4 sm:h-[76px] sm:px-8">
                   <BrandMark
                     onClick={closeMenu}
-                    className="text-xl sm:text-[1.35rem]"
+                    className="h-7 sm:h-8"
                   />
                   <div className="flex items-center gap-2">
                     <ThemeToggle />
@@ -119,14 +128,12 @@ export default function Navbar() {
                   </nav>
 
                   <div className="mt-auto border-t border-line pt-8">
-                    <Button
-                      href="/#contact"
-                      onClick={closeMenu}
+                    <CalendlyButton
                       className="w-full"
+                      onBeforeOpen={closeMenu}
                     >
-                      Devis gratuit
-                      <ArrowUpRight size={16} />
-                    </Button>
+                      {bookingCta.label}
+                    </CalendlyButton>
                     <p className="mt-4 text-center text-xs text-muted">
                       Développement · Marketing · Automatisation
                     </p>
@@ -143,21 +150,21 @@ export default function Navbar() {
     <>
       <header
         className={clsx(
-          "fixed inset-x-0 top-0 z-[80] transition-all duration-300",
+          "fixed inset-x-0 top-0 z-[80] overflow-hidden transition-all duration-300",
           scrolled
-            ? "border-b border-line bg-page/95 shadow-[0_4px_16px_rgba(11,14,20,0.03)] backdrop-blur-md dark:bg-page/95 dark:shadow-[0_4px_16px_rgba(0,0,0,0.15)]"
+            ? "brand-fusion-bg brand-fusion-bg--bar border-b border-white/10"
             : "bg-transparent",
         )}
       >
         <div className="relative z-[81] mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-[76px] sm:px-8">
-          <BrandMark className="text-xl sm:text-[1.35rem]" />
+          <BrandMark className="h-8 sm:h-9" priority />
 
           <nav className="hidden items-center lg:flex" aria-label="Principale">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className={clsx("nav-link", !scrolled && "nav-link--over-hero")}
+                className="nav-link nav-link--over-hero"
               >
                 {link.label}
               </a>
@@ -165,22 +172,26 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex">
-            <ThemeToggle />
-            <Button href="/#contact" variant="primary" className="px-5 py-2.5">
-              Devis gratuit
-              <ArrowUpRight size={15} />
-            </Button>
+            <ThemeToggle className={scrolled ? "nav-chrome" : ""} />
+            <CalendlyButton className="px-5 py-2.5">
+              {bookingCta.label}
+            </CalendlyButton>
           </div>
 
           <div className="flex items-center gap-2 lg:hidden">
-            <ThemeToggle />
+            <ThemeToggle className={scrolled ? "nav-chrome" : ""} />
             <button
               ref={menuButtonRef}
               type="button"
               aria-label="Ouvrir le menu"
               aria-expanded={open}
               aria-controls={MENU_ID}
-              className="relative z-[82] flex h-11 w-11 touch-manipulation items-center justify-center rounded-[3px] border border-line bg-surface text-fg transition-colors hover:border-brand hover:text-brand"
+              className={clsx(
+                "relative z-[82] flex h-11 w-11 touch-manipulation items-center justify-center rounded-[3px] border transition-colors",
+                scrolled
+                  ? "nav-chrome"
+                  : "border-line bg-surface text-fg hover:border-brand hover:text-brand",
+              )}
               onClick={() => setOpen(true)}
             >
               <Menu size={18} />

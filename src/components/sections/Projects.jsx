@@ -109,7 +109,7 @@ export default function Projects() {
                   </div>
                   <a
                     href="#contact"
-                    className="mt-8 inline-flex min-h-11 w-fit touch-manipulation items-center gap-2 rounded-[3px] bg-brand px-5 py-3 text-sm font-medium text-white transition-all hover:bg-[#2140ef] hover:gap-3"
+                    className="mt-8 inline-flex min-h-11 w-fit touch-manipulation items-center gap-2 rounded-[3px] bg-brand px-5 py-3 text-sm font-medium text-white transition-all hover:bg-accent hover:gap-3"
                   >
                     Projet similaire
                     <ArrowUpRight size={16} />
@@ -134,7 +134,7 @@ export default function Projects() {
               onClick={() => setIndex(i)}
               className={`group relative w-[42%] min-w-[42%] shrink-0 overflow-hidden rounded-[3px] border text-left transition-all duration-300 touch-manipulation sm:w-auto sm:min-w-0 ${
                 i === index
-                  ? "border-brand shadow-[0_0_0_1px_rgba(42,76,255,0.12)]"
+                  ? "border-brand shadow-[0_0_0_1px_rgba(8,149,135,0.18)]"
                   : "border-line hover:border-brand/30"
               }`}
             >

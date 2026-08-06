@@ -9,23 +9,61 @@ const nextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "img.magnific.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.magnific.com",
+      },
+      {
+        protocol: "https",
+        hostname: "magnific.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.freepik.com",
+      },
     ],
   },
   async headers() {
     const isDev = process.env.NODE_ENV !== "production";
+
     const scriptSrc = [
       "'self'",
       "'unsafe-inline'",
       ...(isDev ? ["'unsafe-eval'"] : []),
     ].join(" ");
 
+    const connectSrc = ["'self'", ...(isDev ? ["ws:", "wss:"] : [])].join(" ");
+
+    const imgSrc = [
+      "'self'",
+      "data:",
+      "blob:",
+      "https://images.unsplash.com",
+      "https://img.magnific.com",
+      "https://www.magnific.com",
+      "https://magnific.com",
+      "https://img.freepik.com",
+    ].join(" ");
+
+    // Iframe-only Calendly embed (scripts run inside the iframe origin)
+    const frameSrc = [
+      "'self'",
+      "https://calendly.com",
+      "https://*.calendly.com",
+    ].join(" ");
+
     const csp = [
       "default-src 'self'",
       `script-src ${scriptSrc}`,
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://images.unsplash.com",
+      `img-src ${imgSrc}`,
       "font-src 'self' data:",
-      "connect-src 'self' ws: wss:",
+      `connect-src ${connectSrc}`,
+      `frame-src ${frameSrc}`,
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",

@@ -27,7 +27,7 @@ export default function About() {
           <div className="relative mx-auto w-full max-w-md px-1 sm:max-w-none sm:px-3 lg:mx-0">
             <div className="absolute inset-0 rounded-[3px] border border-brand/25 sm:-inset-3" />
             <div className="absolute -bottom-3 -right-3 hidden h-20 w-20 rounded-[3px] bg-accent/90 sm:block sm:h-28 sm:w-28 md:-bottom-4 md:-right-4" />
-            <div className="absolute -left-3 -top-3 hidden h-14 w-14 rounded-[3px] bg-brand/80 sm:block sm:h-20 sm:w-20 md:-left-4 md:-top-4" />
+            <div className="absolute -left-3 -top-3 hidden h-14 w-14 rounded-[3px] bg-deep/90 sm:block sm:h-20 sm:w-20 md:-left-4 md:-top-4" />
 
             <div className="relative overflow-hidden rounded-[3px]">
               <div className="relative aspect-[5/6] overflow-hidden sm:aspect-[4/5]">

@@ -177,6 +177,7 @@ export default function Contact() {
                   label="Nom"
                   name="name"
                   required
+                  maxLength={CONTACT_LIMITS.name}
                   error={errors.name}
                   autoComplete="name"
                 />
@@ -185,6 +186,7 @@ export default function Contact() {
                   label="Entreprise"
                   name="company"
                   required
+                  maxLength={CONTACT_LIMITS.company}
                   error={errors.company}
                   autoComplete="organization"
                 />
@@ -194,6 +196,7 @@ export default function Contact() {
                   name="email"
                   type="email"
                   required
+                  maxLength={200}
                   error={errors.email}
                   autoComplete="email"
                 />
@@ -203,6 +206,7 @@ export default function Contact() {
                   name="phone"
                   type="tel"
                   required
+                  maxLength={CONTACT_LIMITS.phone}
                   error={errors.phone}
                   autoComplete="tel"
                 />
@@ -360,6 +364,7 @@ function Field({
   name,
   type = "text",
   required = false,
+  maxLength,
   error,
   autoComplete,
 }) {
@@ -377,6 +382,7 @@ function Field({
         type={type}
         name={name}
         required={required}
+        maxLength={maxLength}
         autoComplete={autoComplete}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
