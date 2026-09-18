@@ -176,10 +176,10 @@ export const aboutContent = {
   image:
     "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400",
   pillars: [
-    ["Mission", "Allier tech, marketing et automation pour scaler."],
-    ["Approche", "Diagnostic précis, exécution rapide, ROI suivi."],
-    ["Équipes", "Produit, design, growth & automation."],
-    ["Modèle", "Partenariat long terme, pas livraison jetable."],
+    [ "Mission", "Allier tech, marketing et automation pour scaler." ],
+    [ "Approche", "Diagnostic précis, exécution rapide, ROI suivi." ],
+    [ "Équipes", "Produit, design, growth & automation." ],
+    [ "Modèle", "Partenariat long terme, pas livraison jetable." ],
   ],
 };
 
@@ -250,10 +250,10 @@ export const ctaContent = {
 
 export const contactInfo = {
   email: "contact@skemalab.com",
-  phone: "+212 6 00 00 00 00",
-  whatsapp: "212600000000",
+  phone: "+212 6 99 99 57 54",
+  whatsapp: "212699995754",
   linkedin: "https://www.linkedin.com/company/skemalab",
-  locations: ["Essaouira", "Maroc"],
+  locations: [ "Essaouira", "Maroc" ],
 };
 
 export const siteConfig = {
