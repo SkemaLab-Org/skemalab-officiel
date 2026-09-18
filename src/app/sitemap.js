@@ -1,18 +1,40 @@
 import { siteConfig } from "@/data/content";
 
 export default function sitemap() {
+  const baseUrl = siteConfig.url;
+  const lastModified = new Date();
+
   return [
     {
-      url: siteConfig.url,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
+      url: baseUrl,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 1.0,
+      alternates: {
+        languages: {
+          fr: baseUrl,
+          "x-default": baseUrl,
+        },
+      },
+      images: [
+        `${baseUrl}/opengraph-image`,
+        `${baseUrl}/icon.png`,
+      ],
     },
     {
-      url: `${siteConfig.url}/about`,
-      lastModified: new Date(),
+      url: `${baseUrl}/about`,
+      lastModified,
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.8,
+      alternates: {
+        languages: {
+          fr: `${baseUrl}/about`,
+          "x-default": `${baseUrl}/about`,
+        },
+      },
+      images: [
+        `${baseUrl}/opengraph-image`,
+      ],
     },
   ];
 }

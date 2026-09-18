@@ -258,9 +258,34 @@ export const contactInfo = {
 
 export const siteConfig = {
   name: "Skemalab",
-  url: "https://skemalab.com",
+  legalName: "Skemalab Studio",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.skemalab.com",
+  ogImage: "/opengraph-image",
   description:
-    "Skemalab est un studio digital orienté résultats : développement informatique, marketing digital et automatisation de workflows pour accélérer votre croissance.",
+    "Skemalab est un studio digital orienté résultats : développement web & mobile sur mesure, marketing digital ROI et automatisation de workflows (n8n, Make, IA) pour propulser votre croissance.",
+  shortDescription:
+    "Studio digital d'excellence : Développement Web, Marketing Digital et Automatisation de workflows.",
+  keywords: [
+    "Skemalab",
+    "studio digital",
+    "agence web Maroc",
+    "développement web sur mesure",
+    "marketing digital ROI",
+    "automatisation de workflows",
+    "n8n",
+    "Make",
+    "Next.js",
+    "création site web",
+    "développement application mobile",
+    "acquisition digitale",
+    "SEO Maroc",
+    "SaaS MVP",
+    "consulting digital",
+    "Essaouira tech",
+    "automatisation IA",
+  ],
+  locale: "fr_FR",
+  localeAlternate: "en_US",
 };
 
 /** CTA navbar — ouvre Calendly (NEXT_PUBLIC_CALENDLY_URL) */

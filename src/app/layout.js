@@ -2,6 +2,7 @@ import Script from "next/script";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import JsonLd from "@/components/seo/JsonLd";
 import { siteConfig } from "@/data/content";
 
 const poppins = Poppins({
@@ -14,37 +15,57 @@ const poppins = Poppins({
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Skemalab | Développement, Marketing Digital & Automatisation",
+    default: "Skemalab | Développement Web, Marketing Digital & Automatisation",
     template: "%s | Skemalab",
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  keywords: [
-    "développement web",
-    "marketing digital",
-    "automatisation",
-    "workflows",
-    "agence digitale",
-    "Skemalab",
-  ],
-  authors: [{ name: siteConfig.name }],
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
+  publisher: siteConfig.name,
+  category: "technology",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
-    locale: "fr_FR",
+    locale: siteConfig.locale || "fr_FR",
+    alternateLocale: siteConfig.localeAlternate ? [siteConfig.localeAlternate] : undefined,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: "Skemalab | Développement, Marketing Digital & Automatisation",
+    title: "Skemalab | Studio Digital : Développement, Marketing & Automatisation",
     description: siteConfig.description,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Skemalab — Studio Digital",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
-    title: "Skemalab | Développement, Marketing Digital & Automatisation",
+    card: "summary_large_image",
+    title: "Skemalab | Développement Web, Marketing Digital & Automatisation",
     description: siteConfig.description,
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
   },
 };
 
@@ -57,6 +78,9 @@ export default function RootLayout({ children }) {
       className={`${poppins.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <JsonLd />
+      </head>
       <body className="min-h-full font-sans text-fg antialiased">
         <Script
           id="theme-init"
