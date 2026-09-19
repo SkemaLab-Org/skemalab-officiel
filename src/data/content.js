@@ -172,6 +172,114 @@ export const clients = [
   "Helix Legal",
 ];
 
+export const founders = [
+  {
+    id: "feissal-tarkaoui",
+    name: "Feissal Tarkaoui",
+    role: "Fondateur & CEO",
+    title: "Chief Executive Officer & Stratégie Business",
+    bio: "Entrepreneur visionnaire et stratège digital, Feissal pilote la vision globale, le développement commercial et la stratégie produit de Skemalab. Fort d'une expertise aiguisée en croissance digitale, conversion et négociation, il veille à ce que chaque solution développée devienne un puissant moteur de rentabilité pour nos partenaires.",
+    shortBio: "Stratège business, direction commerciale et accélération ROI.",
+    image: "/team/feissal_tarkaoui.jpg",
+    quote: "La technologie n’a de réelle valeur que si elle produit un impact financier et opérationnel mesurable pour l'entreprise.",
+    expertise: [
+      "Vision & Stratégie Business",
+      "Acquisition Digitale & ROI",
+      "Product Management & UX",
+      "Direction Commerciale & Partenariats",
+    ],
+    social: {
+      linkedin: "https://www.linkedin.com/company/skemalab",
+      email: "feissal@skemalab.com",
+    },
+    focusArea: "Business, Growth & Vision",
+  },
+  {
+    id: "marouan-khadiri",
+    name: "Marouan Khadiri",
+    role: "CTO",
+    title: "Chief Technology Officer & Architecte Systèmes",
+    bio: "Architecte logiciel et expert en automatisation avancée, Marouan conçoit les infrastructures techniques, les plateformes web haute performance et les systèmes de workflows intelligents chez Skemalab. Spécialiste Next.js, API & écosystèmes n8n / IA, il transforme la complexité technique en architectures fluides et scalables.",
+    shortBio: "Architecture full-stack, automatisation des process et agents IA.",
+    image: "/team/marouan_khadiri.jpg",
+    quote: "Automatiser le répétitif et bâtir des architectures robustes pour libérer le potentiel humain et faire grandir les entreprises sans friction.",
+    expertise: [
+      "Architecture Logicielle & Next.js",
+      "Workflows n8n, Make & Zapier",
+      "Intégration d’Agents IA & LLMs",
+      "Sécurité, APIs & Performance",
+    ],
+    social: {
+      linkedin: "https://www.linkedin.com/company/skemalab",
+      email: "marouan@skemalab.com",
+    },
+    focusArea: "Deep Tech, Architecture & IA",
+  },
+];
+
+export const timelineMilestones = [
+  {
+    id: "genesis",
+    year: "2023",
+    period: "Genèse",
+    title: "L'Étincelle Fondatrice & Le Constat",
+    subtitle: "La vision partagée de Feissal Tarkaoui & Marouan Khadiri",
+    description:
+      "Feissal (visionnaire business) et Marouan (architecte tech) font un constat sans appel : les entreprises sont ralenties par des sites vitrines sans conversion, des outils fragmentés et des centaines d'heures perdues sur des tâches manuelles. Ils décident d'unir leurs forces pour créer un studio hybride où l'ingénierie technique sert directement le chiffre d'affaires.",
+    tag: "L'Idée Initiale",
+    highlight: "Combler le fossé entre Deep Tech, Growth et Automatisation",
+    foundersImpact: "Synergie Business × Ingénierie",
+  },
+  {
+    id: "foundation",
+    year: "2023",
+    period: "Lancement",
+    title: "Création de SkemaLab & Premiers Déploiements",
+    subtitle: "Implantation à Essaouira, rayonnement international",
+    description:
+      "Naissance officielle de SkemaLab. Les fondateurs conçoivent leur laboratoire R&D et livrent leurs premiers systèmes pour des clients en Europe et MENA : plateformes web ultra-rapides, pipelines CRM automatisés et tunnels de conversion. Les premiers retours confirment des gains spectaculaires de productivité.",
+    tag: "Fondation",
+    highlight: "Premiers clients internationaux et 15h+ économisées / semaine",
+    foundersImpact: "Validation du modèle opérationnel",
+  },
+  {
+    id: "methodology",
+    year: "2024",
+    period: "Expansion",
+    title: "Le Système « Build · Grow · Automate »",
+    subtitle: "Formalisation d'une méthodologie propriétaire éprouvée",
+    description:
+      "Skemalab structure son approche en 3 piliers synergiques. Développement sur-mesure (Build), marketing à haute valeur ajoutée (Grow), et automatisation des processus métiers (Automate). Plus de 25 projets majeurs sont déployés avec une rigueur de sprint millimétrée.",
+    tag: "Système Éprouvé",
+    highlight: "Une cadence de livraison rapide et des résultats mesurables",
+    foundersImpact: "Méthode de croissance à fort impact",
+  },
+  {
+    id: "ai-era",
+    year: "2025",
+    period: "Innovation",
+    title: "L'Intégration Massive de l'IA & Workflows Autonomes",
+    subtitle: "L'avant-garde des opérations intelligentes",
+    description:
+      "Sous le leadership technologique de Marouan et la vision d'échelle de Feissal, SkemaLab connecte les agents IA et les architectures Next.js cloud-native aux process internes des clients. Les délais de traitement chutent de 50% chez nos partenaires.",
+    tag: "Révolution IA",
+    highlight: "Workflows autonomes 24/7 et assistants sur-mesure",
+    foundersImpact: "Pionniers de l'automatisation IA",
+  },
+  {
+    id: "scale",
+    year: "2026",
+    period: "Aujourd'hui & Futur",
+    title: "L'Expansion & La Référence Internationale",
+    subtitle: "Le partenaire technologique des entreprises ambitieuses",
+    description:
+      "Avec plus de 40 projets d'envergure livrés, un taux de satisfaction de 98% et un portefeuille international solide, SkemaLab s'impose comme le studio digital qui transforme la technologie en levier de souveraineté et d'hyper-croissance.",
+    tag: "Cap Futur",
+    highlight: "40+ projets réussis · Partenaire stratégique global",
+    foundersImpact: "Excellence continue & Scale",
+  },
+];
+
 export const aboutContent = {
   image:
     "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400",
@@ -188,59 +296,60 @@ export const aboutPage = {
     "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=70",
   workspaceImage:
     "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600",
-  headline: "Un studio digital bâti pour accélérer les entreprises ambitieuses.",
+  labImage: "/team/lab_concept.jpg",
+  headline: "L'ingénierie digitale et l'intelligence opérationnelle au service de votre croissance.",
   lead:
-    "Skemalab conçoit, lance et optimise des systèmes digitaux qui créent de la valeur mesurable — pas des slides, des résultats.",
+    "Skemalab conçoit, bâtit et automatise des écosystèmes digitaux performants qui génèrent une valeur business immédiate et durable.",
   story: {
     eyebrow: "Notre histoire",
     title: "Nés de la conviction que la tech doit servir le business.",
     paragraphs: [
-      "Skemalab est un studio digital basé à Essaouira, opérant en remote avec l’Europe et la région MENA. Nous accompagnons les entreprises qui veulent transformer leur présence digitale en véritable levier de croissance.",
-      "Notre différence : une équipe qui parle produit, acquisition et opérations dans le même langage. Développement, marketing digital et automatisation ne sont pas des silos — c’est un système unique, orienté ROI.",
-      "Nous préférons les partenariats longs aux projets jetables. Diagnostic clair, exécution rapide, indicateurs suivis : chaque livraison doit laisser une empreinte mesurable.",
+      "Skemalab est un studio digital fondé à Essaouira, opérant à l'international avec l'Europe et la région MENA. Nous accompagnons les fondateurs et dirigeants qui veulent transformer leur technologie en véritable moteur de rentabilité.",
+      "Notre singularité : une alliance parfaite entre vision business et excellence d'ingénierie. Développement moderne, acquisition digitale et automatisation ne sont pas des silos séparés — ils constituent un système unifié, orchestré pour maximiser votre retour sur investissement.",
+      "Nous croyons aux partenariats durables : diagnostic clair, exécution rapide, architecture pérenne et transparence absolue.",
     ],
   },
   principles: [
     {
       num: "01",
-      title: "Clarté avant tout",
-      text: "Pas de jargon inutile. Une feuille de route compréhensible, des priorités assumées, des livrables concrets.",
+      title: "Clarté & Obsession ROI",
+      text: "Pas de jargon inutile ni de fonctionnalités décoratives. Chaque ligne de code et chaque workflow répondent à un objectif financier précis.",
     },
     {
       num: "02",
-      title: "Exécution mesurable",
-      text: "Chaque initiative a un objectif business et un indicateur de succès défini dès le départ.",
+      title: "Excellence d'Ingénierie",
+      text: "Architectures modernes Next.js, APIs sécurisées et automatisation résiliente pour garantir performance, rapidité et scalabilité.",
     },
     {
       num: "03",
-      title: "Systèmes durables",
-      text: "Nous construisons pour durer : architecture propre, process automatisés, maintenance anticipée.",
+      title: "Systèmes Durables & Scalables",
+      text: "Nous concevons des fondations modulaires capables d'encaisser votre croissance sans nécessiter de refonte coûteuse.",
     },
     {
       num: "04",
-      title: "Partenariat réel",
-      text: "Nous nous intégrons à vos équipes. Transparence, rythme court, responsabilité partagée.",
+      title: "Partenariat & Agilité Sprints",
+      text: "Une collaboration étroite avec vos équipes, des cycles de livraison courts et un suivi en temps réel de vos indicateurs clés.",
     },
   ],
   expertise: [
     {
       label: "Build",
-      title: "Développement",
-      text: "Sites, plateformes et applications conçus pour convertir, scaler et rester maintenables.",
+      title: "Développement & SaaS",
+      text: "Applications web & mobile, plateformes sur-mesure et architectures Next.js ultra-rapides conçues pour convertir et durer.",
     },
     {
       label: "Grow",
-      title: "Marketing digital",
-      text: "Acquisition, contenu et tunnels alignés sur vos objectifs — pour attirer et convertir durablement.",
+      title: "Acquisition & Marketing ROI",
+      text: "Tunnels de vente, SEO technique, contenu et stratégies paid media orientées génération de leads qualifiés et rentabilité.",
     },
     {
       label: "Automate",
-      title: "Workflows & IA",
-      text: "Connexion de vos outils, suppression des tâches répétitives, reporting automatisé.",
+      title: "Workflows n8n & Agents IA",
+      text: "Connexion de vos outils SaaS, suppression des tâches chronophages et déploiement d'agents intelligents autonomes.",
     },
   ],
   closing:
-    "Si vous cherchez un partenaire capable de relier stratégie, technique et croissance — parlons-en.",
+    "Prêt à transformer votre présence digitale et à automatiser vos opérations avec nos fondateurs ?",
 };
 
 export const ctaContent = {
