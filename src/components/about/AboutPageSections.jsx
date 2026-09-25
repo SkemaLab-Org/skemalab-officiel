@@ -55,7 +55,7 @@ export function AboutHero() {
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-8">
         <Reveal>
-          <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-white/90 backdrop-blur-md">
+          <div className="inline-flex items-center rounded-sm border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-white/90 backdrop-blur-md">
             Studio Digital d’Excellence · Essaouira &amp; International
           </div>
         </Reveal>
@@ -718,9 +718,8 @@ export function AboutNumbers() {
         {stats.map((stat, index) => (
           <Reveal key={stat.label} delay={index * 0.05} className="h-full">
             <div
-              className={`h-full border-b border-line px-6 py-10 last:border-b-0 sm:px-8 sm:py-12 lg:border-b-0 ${
-                index % 2 === 0 ? "sm:border-r" : ""
-              } ${index < stats.length - 1 ? "lg:border-r lg:border-line" : ""}`}
+              className={`h-full border-b border-line px-6 py-10 last:border-b-0 sm:px-8 sm:py-12 lg:border-b-0 ${index % 2 === 0 ? "sm:border-r" : ""
+                } ${index < stats.length - 1 ? "lg:border-r lg:border-line" : ""}`}
             >
               <p className="text-[clamp(2.2rem,6vw,3.5rem)] font-bold leading-none tracking-tight text-fg">
                 {stat.value}

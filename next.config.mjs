@@ -16,6 +16,26 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "i.imgur.com",
+      },
+      {
+        protocol: "https",
+        hostname: "imgur.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.imgur.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.skemalab.com",
+      },
+      {
+        protocol: "https",
+        hostname: "skemalab.com",
+      },
+      {
+        protocol: "https",
         hostname: "img.magnific.com",
       },
       {
@@ -48,6 +68,10 @@ const nextConfig = {
       "data:",
       "blob:",
       "https://images.unsplash.com",
+      "https://i.imgur.com",
+      "https://*.imgur.com",
+      "https://www.skemalab.com",
+      "https://skemalab.com",
       "https://img.magnific.com",
       "https://www.magnific.com",
       "https://magnific.com",

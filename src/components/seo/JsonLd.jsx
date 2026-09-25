@@ -107,16 +107,16 @@ export default function JsonLd() {
     inLanguage: "fr-FR",
   };
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [orgSchema, websiteSchema],
+  };
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      suppressHydrationWarning
+    />
   );
 }

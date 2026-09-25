@@ -1,4 +1,3 @@
-import Script from "next/script";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -78,14 +77,12 @@ export default function RootLayout({ children }) {
       className={`${poppins.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <head>
-        <JsonLd />
-      </head>
       <body className="min-h-full font-sans text-fg antialiased">
-        <Script
+        <JsonLd />
+        <script
           id="theme-init"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: themeInitScript }}
+          suppressHydrationWarning
         />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
