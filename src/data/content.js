@@ -1,11 +1,3 @@
-export const navLinks = [
-  { href: "/#services", label: "Services" },
-  { href: "/#method", label: "Méthode" },
-  { href: "/#projets", label: "Projets" },
-  { href: "/#agence", label: "Agence" },
-  { href: "/#contact", label: "Contact" },
-];
-
 export const services = [
   {
     id: "dev",
@@ -72,104 +64,11 @@ export const services = [
   },
 ];
 
-export const processSteps = [
-  {
-    step: "01",
-    title: "Diagnostic",
-    text: "Nous cartographions vos enjeux, vos process et vos leviers de croissance pour définir une feuille de route claire.",
-  },
-  {
-    step: "02",
-    title: "Architecture",
-    text: "Stratégie, design et stack technique alignés sur un objectif business précis — pas sur des tendances.",
-  },
-  {
-    step: "03",
-    title: "Exécution",
-    text: "Sprints courts, livrables mesurables, communication transparente. On construit, on teste, on itère.",
-  },
-  {
-    step: "04",
-    title: "Optimisation",
-    text: "Après le lancement, nous mesurons, automatisons et améliorons en continu pour maximiser le ROI.",
-  },
-];
-
-export const projects = [
-  {
-    title: "Plateforme SaaS B2B",
-    category: "Développement",
-    result: "+48% d’activation utilisateurs",
-    image:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400",
-  },
-  {
-    title: "Refonte e-commerce",
-    category: "Web & UX",
-    result: "+62% de taux de conversion",
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1400",
-  },
-  {
-    title: "Engine d’acquisition",
-    category: "Marketing",
-    result: "3,2× leads qualifiés / mois",
-    image:
-      "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1400",
-  },
-  {
-    title: "Automatisation CRM",
-    category: "Workflows",
-    result: "18h / semaine économisées",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400",
-  },
-  {
-    title: "Dashboard data",
-    category: "IA & Data",
-    result: "Décisions en temps réel",
-    image:
-      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1400",
-  },
-];
-
 export const stats = [
   { value: 40, suffix: "+", label: "Projets livrés" },
   { value: 98, suffix: "%", label: "Clients satisfaits" },
   { value: 5, suffix: "h", label: "Économisées / jour en moyenne" },
   { value: 3, suffix: "×", label: "Accélération des process" },
-];
-
-export const testimonials = [
-  {
-    quote:
-      "Skemalab a transformé notre site vitrine en véritable machine d’acquisition. Les résultats sont concrets, mesurables, sans jargon inutile.",
-    name: "Sara Benali",
-    role: "Directrice Marketing, FinTech",
-  },
-  {
-    quote:
-      "Leur stack d’automatisation a réduit nos délais de traitement de moitié. Nos équipes se concentrent enfin sur la valeur ajoutée.",
-    name: "Youssef Amrani",
-    role: "COO, Retail",
-  },
-  {
-    quote:
-      "Un partenaire rare : vision business, exécution technique solide et suivi rigoureux. On a livré un MVP SaaS en 8 semaines.",
-    name: "Camille Dupont",
-    role: "Fondatrice, Scale-up",
-  },
-];
-
-export const clients = [
-  "Northline",
-  "Atlas Retail",
-  "Pulse Finance",
-  "Orion Santé",
-  "Vertex Logistique",
-  "Maison Clarisse",
-  "Nova Media",
-  "Helix Legal",
 ];
 
 export const founders = [

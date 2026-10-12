@@ -2,7 +2,8 @@
 
 import { useId, useState } from "react";
 import { ArrowUpRight, Mail, MapPin, Phone, CheckCircle2, AlertCircle } from "lucide-react";
-import { contactInfo, services } from "@/data/content";
+import { contactInfo } from "@/data/content";
+import { useI18n } from "@/components/I18nProvider";
 import {
   CONTACT_LIMITS,
   validateContactInput,
@@ -11,12 +12,13 @@ import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 
-const serviceOptions = [
-  ...services.map((s) => ({ value: s.id, label: s.title })),
-  { value: "global", label: "Accompagnement global" },
-];
-
 export default function Contact() {
+  const { t } = useI18n();
+  const copy = t.contactSection;
+  const serviceOptions = [
+    ...t.servicesList.map((s) => ({ value: s.id, label: s.title })),
+    { value: "global", label: copy.globalService },
+  ];
   const formId = useId();
   const [status, setStatus] = useState("idle");
   const [errors, setErrors] = useState({});
@@ -36,7 +38,14 @@ export default function Contact() {
     };
 
     const parsed = validateContactInput(form, { withMessages: true });
-    setErrors(parsed.errors);
+    setErrors(
+      Object.fromEntries(
+        Object.entries(parsed.errors).map(([field, code]) => [
+          field,
+          t.contactErrors[code] || code,
+        ]),
+      ),
+    );
     if (!parsed.ok) return;
 
     const serviceLabel =
@@ -87,9 +96,9 @@ export default function Contact() {
         <div className="min-w-0">
           <Reveal>
             <SectionHeading
-              eyebrow="Contact"
-              title="Parlons de votre prochain levier de croissance."
-              description="Décrivez votre besoin — site, produit, acquisition ou automation. Nous revenons vers vous sous 24h ouvrées."
+              eyebrow={copy.eyebrow}
+              title={copy.title}
+              description={copy.description}
             />
           </Reveal>
 
@@ -97,19 +106,19 @@ export default function Contact() {
             <ul className="mt-8 space-y-3 sm:mt-12 sm:space-y-4">
               <ContactRow
                 icon={Mail}
-                label="Email"
+                label={copy.emailLabel}
                 href={`mailto:${contactInfo.email}`}
                 value={contactInfo.email}
               />
               <ContactRow
                 icon={Phone}
-                label="Téléphone"
+                label={copy.phoneLabel}
                 href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
                 value={contactInfo.phone}
               />
               <ContactRow
                 icon={MapPin}
-                label="Localisation"
+                label={copy.locationLabel}
                 value={contactInfo.locations.join(" · ")}
               />
             </ul>
@@ -127,34 +136,34 @@ export default function Contact() {
             {status === "success" ? (
               <StatusPanel
                 variant="success"
-                title="Message envoyé."
-                eyebrow="Merci"
-                text="Votre demande a bien été transmise. Notre équipe vous recontacte sous 24h ouvrées."
+                title={copy.successTitle}
+                eyebrow={copy.successEyebrow}
+                text={copy.successText}
                 onReset={() => setStatus("idle")}
-                resetLabel="Envoyer un autre message"
+                resetLabel={copy.resetSuccess}
               />
             ) : status === "rate_limit" ? (
               <StatusPanel
                 variant="error"
-                title="Trop de demandes."
-                eyebrow="Limite"
-                text={`Patientez environ 15 minutes, ou écrivez-nous à ${contactInfo.email}.`}
+                title={copy.rateLimitTitle}
+                eyebrow={copy.rateLimitEyebrow}
+                text={copy.rateLimitText}
                 onReset={() => setStatus("idle")}
-                resetLabel="Retour"
+                resetLabel={copy.backBtn}
               />
             ) : status === "error" || status === "unavailable" ? (
               <StatusPanel
                 variant="error"
-                title="Envoi impossible."
-                eyebrow="Erreur"
-                text={`Réessayez dans un instant, ou écrivez-nous à ${contactInfo.email}.`}
+                title={copy.errorTitle}
+                eyebrow={copy.errorEyebrow}
+                text={copy.errorText}
                 onReset={() => setStatus("idle")}
-                resetLabel="Réessayer"
+                resetLabel={copy.retryBtn}
               />
             ) : (
               <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
                 <p className="text-sm text-muted md:col-span-2">
-                  Tous les champs sont obligatoires — réponse sous 24h ouvrées.
+                  {copy.fieldsRequirement}
                 </p>
 
                 {/* Honeypot anti-bot — ne pas remplir */}
@@ -174,7 +183,7 @@ export default function Contact() {
 
                 <Field
                   id={`${formId}-name`}
-                  label="Nom"
+                  label={copy.nameInput}
                   name="name"
                   required
                   maxLength={CONTACT_LIMITS.name}
@@ -183,7 +192,7 @@ export default function Contact() {
                 />
                 <Field
                   id={`${formId}-company`}
-                  label="Entreprise"
+                  label={copy.companyInput}
                   name="company"
                   required
                   maxLength={CONTACT_LIMITS.company}
@@ -192,7 +201,7 @@ export default function Contact() {
                 />
                 <Field
                   id={`${formId}-email`}
-                  label="Email"
+                  label={copy.emailInput}
                   name="email"
                   type="email"
                   required
@@ -202,7 +211,7 @@ export default function Contact() {
                 />
                 <Field
                   id={`${formId}-phone`}
-                  label="Téléphone"
+                  label={copy.phoneInput}
                   name="phone"
                   type="tel"
                   required
@@ -215,7 +224,7 @@ export default function Contact() {
                     htmlFor={`${formId}-service`}
                     className="mb-2 block text-[11px] uppercase tracking-[0.18em] text-muted"
                   >
-                    Service concerné *
+                    {copy.serviceInput} *
                   </label>
                   <select
                     id={`${formId}-service`}
@@ -229,7 +238,7 @@ export default function Contact() {
                     className="field appearance-none pr-10"
                   >
                     <option value="" disabled>
-                      Choisir un service
+                      {copy.servicePlaceholder}
                     </option>
                     {serviceOptions.map((opt) => (
                       <option key={opt.value} value={opt.value}>
@@ -252,7 +261,7 @@ export default function Contact() {
                     htmlFor={`${formId}-message`}
                     className="mb-2 block text-[11px] uppercase tracking-[0.18em] text-muted"
                   >
-                    Votre besoin *
+                    {copy.messageInput} *
                   </label>
                   <textarea
                     id={`${formId}-message`}
@@ -260,7 +269,7 @@ export default function Contact() {
                     required
                     rows={5}
                     maxLength={CONTACT_LIMITS.message}
-                    placeholder="Objectifs, délais, contexte..."
+                    placeholder={copy.messagePlaceholder}
                     aria-invalid={Boolean(errors.message)}
                     aria-describedby={
                       errors.message ? `${formId}-message-error` : undefined
@@ -284,7 +293,7 @@ export default function Contact() {
                     className="w-full sm:w-auto"
                     disabled={status === "sending"}
                   >
-                    {status === "sending" ? "Envoi…" : "Envoyer la demande"}
+                    {status === "sending" ? copy.submitting : copy.submitBtn}
                     {status !== "sending" && <ArrowUpRight size={16} />}
                   </Button>
                 </div>

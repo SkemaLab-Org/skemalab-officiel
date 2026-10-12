@@ -3,16 +3,18 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { projects } from "@/data/content";
+import { useI18n } from "@/components/I18nProvider";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import useCarousel from "@/hooks/useCarousel";
 
 export default function Projects() {
+  const { t } = useI18n();
+  const projectList = t.projectsSection.list;
   const { index, setIndex, prev, next, reduceMotion, onTouchStart, onTouchEnd } =
-    useCarousel(projects.length, { intervalMs: 7000 });
+    useCarousel(projectList.length, { intervalMs: 7000 });
 
-  const project = projects[index];
+  const project = projectList[index];
 
   return (
     <section id="projets" className="relative overflow-hidden bg-page py-16 sm:py-24 lg:py-36">
@@ -22,9 +24,9 @@ export default function Projects() {
         <div className="mb-10 flex flex-col gap-6 sm:mb-14 sm:gap-8 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
           <Reveal>
             <SectionHeading
-              eyebrow="Réalisations"
-              title="Des projets pensés pour performer."
-              description="Chaque livraison allie design, technique et impact business — des résultats concrets, pas des slides."
+              eyebrow={t.projectsSection.eyebrow}
+              title={t.projectsSection.title}
+              description={t.projectsSection.description}
             />
           </Reveal>
           <Reveal delay={0.1}>
@@ -32,7 +34,7 @@ export default function Projects() {
               <button
                 type="button"
                 onClick={prev}
-                aria-label="Projet précédent"
+                aria-label={t.projectsSection.prevLabel}
                 className="flex h-11 w-11 touch-manipulation items-center justify-center rounded-[3px] border border-line bg-surface text-fg transition-all hover:border-brand hover:bg-brand hover:text-white sm:h-12 sm:w-12"
               >
                 <ArrowLeft size={18} />
@@ -40,7 +42,7 @@ export default function Projects() {
               <button
                 type="button"
                 onClick={next}
-                aria-label="Projet suivant"
+                aria-label={t.projectsSection.nextLabel}
                 className="flex h-11 w-11 touch-manipulation items-center justify-center rounded-[3px] border border-line bg-surface text-fg transition-all hover:border-brand hover:bg-brand hover:text-white sm:h-12 sm:w-12"
               >
                 <ArrowRight size={18} />
@@ -48,7 +50,7 @@ export default function Projects() {
               <span className="ml-2 font-mono text-sm text-muted sm:ml-3" aria-hidden="true">
                 <span className="text-fg">{String(index + 1).padStart(2, "0")}</span>
                 <span className="mx-1.5 text-muted/40">/</span>
-                {String(projects.length).padStart(2, "0")}
+                {String(projectList.length).padStart(2, "0")}
               </span>
             </div>
           </Reveal>
@@ -93,7 +95,7 @@ export default function Projects() {
                 <div className="relative z-10 flex flex-col justify-between p-5 sm:p-8 lg:py-14 lg:pl-4 lg:pr-12">
                   <div>
                     <p className="text-[10px] uppercase tracking-[0.22em] text-accent sm:text-[11px] sm:tracking-[0.28em]">
-                      Impact mesuré
+                      {t.projectsSection.measuredImpact}
                     </p>
                     <h3 className="mt-3 text-2xl font-semibold tracking-tight text-fg sm:mt-5 sm:text-3xl lg:text-4xl">
                       {project.title}
@@ -102,16 +104,14 @@ export default function Projects() {
                       {project.result}
                     </p>
                     <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted sm:mt-6">
-                      Conception, build et optimisation — livrés avec une
-                      feuille de route claire et des indicateurs de succès
-                      définis dès le départ.
+                      {t.projectsSection.summary}
                     </p>
                   </div>
                   <a
                     href="#contact"
                     className="mt-8 inline-flex min-h-11 w-fit touch-manipulation items-center gap-2 rounded-[3px] bg-brand px-5 py-3 text-sm font-medium text-white transition-all hover:bg-accent hover:gap-3"
                   >
-                    Projet similaire
+                    {t.projectsSection.similarProject}
                     <ArrowUpRight size={16} />
                   </a>
                 </div>
@@ -123,9 +123,9 @@ export default function Projects() {
         <div
           className="-mx-4 mt-5 flex gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 lg:grid-cols-5"
           role="group"
-          aria-label="Projets"
+          aria-label={t.projectsSection.eyebrow}
         >
-          {projects.map((item, i) => (
+          {projectList.map((item, i) => (
             <button
               key={item.title}
               type="button"

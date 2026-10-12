@@ -4,13 +4,16 @@ import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { services } from "@/data/content";
 import Button from "@/components/ui/Button";
 import useCarousel from "@/hooks/useCarousel";
+import { useI18n } from "@/components/I18nProvider";
 
 const SLIDE_MS = 6500;
 
 export default function Hero() {
+  const { t, isRTL } = useI18n();
+  const services = t.servicesList;
+
   const [paused, setPaused] = useState(false);
   const {
     index,
@@ -22,7 +25,7 @@ export default function Hero() {
     onTouchEnd,
   } = useCarousel(services.length, { intervalMs: SLIDE_MS, paused });
 
-  const slide = services[index];
+  const slide = services[index] || services[0];
 
   return (
     <section
@@ -64,7 +67,7 @@ export default function Hero() {
             Skema<span className="text-brand">lab</span>
           </h1>
           <span className="hidden text-[11px] font-medium uppercase tracking-[0.22em] text-white/95 drop-shadow-[0_1px_6px_rgba(11,15,14,0.45)] sm:inline">
-            Développement · Marketing · Automatisation
+            {t.common.tagline}
           </span>
         </div>
 
@@ -93,11 +96,11 @@ export default function Hero() {
                 </p>
                 <div className="mt-6 flex w-full flex-col gap-3 sm:mt-8 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
                   <Button href="#contact" variant="primary" className="w-full sm:w-auto">
-                    Lancer un projet
-                    <ArrowUpRight size={16} />
+                    {t.hero.ctaPrimary}
+                    <ArrowUpRight size={16} className="rtl-flip" />
                   </Button>
                   <Button href="#services" variant="ghost" className="w-full sm:w-auto">
-                    Voir le service
+                    {t.hero.ctaSecondary}
                   </Button>
                 </div>
               </motion.div>
@@ -110,18 +113,18 @@ export default function Hero() {
                 <button
                   type="button"
                   onClick={prev}
-                  aria-label="Slide précédent"
+                  aria-label={t.hero.prevSlide}
                   className="flex h-11 w-11 touch-manipulation items-center justify-center rounded-[3px] border border-line bg-surface/85 text-fg backdrop-blur-md transition-all hover:border-brand hover:bg-brand hover:text-white sm:h-12 sm:w-12"
                 >
-                  <ArrowLeft size={18} />
+                  {isRTL ? <ArrowRight size={18} /> : <ArrowLeft size={18} />}
                 </button>
                 <button
                   type="button"
                   onClick={next}
-                  aria-label="Slide suivant"
+                  aria-label={t.hero.nextSlide}
                   className="flex h-11 w-11 touch-manipulation items-center justify-center rounded-[3px] border border-line bg-surface/85 text-fg backdrop-blur-md transition-all hover:border-brand hover:bg-brand hover:text-white sm:h-12 sm:w-12"
                 >
-                  <ArrowRight size={18} />
+                  {isRTL ? <ArrowLeft size={18} /> : <ArrowRight size={18} />}
                 </button>
               </div>
               <span className="font-mono text-sm text-muted" aria-hidden="true">
@@ -134,7 +137,7 @@ export default function Hero() {
             <div
               className="w-full space-y-2 lg:max-w-sm lg:self-end"
               role="group"
-              aria-label="Choisir un service"
+              aria-label={t.hero.selectService}
             >
               {services.map((item, i) => (
                 <button
@@ -143,7 +146,7 @@ export default function Hero() {
                   aria-pressed={i === index}
                   aria-current={i === index ? "true" : undefined}
                   onClick={() => setIndex(i)}
-                  className={`group flex min-h-12 w-full touch-manipulation items-center gap-3 rounded-[3px] border px-3 py-3 text-left transition-all duration-300 sm:px-4 ${
+                  className={`group flex min-h-12 w-full touch-manipulation items-center gap-3 rounded-[3px] border px-3 py-3 text-start transition-all duration-300 sm:px-4 ${
                     i === index
                       ? "border-brand bg-surface/90"
                       : "border-line/60 bg-surface/50 hover:border-line hover:bg-surface/80"
@@ -167,7 +170,7 @@ export default function Hero() {
                     <span className="relative hidden h-[3px] w-10 shrink-0 overflow-hidden rounded-[3px] bg-line sm:block">
                       <span
                         key={`${item.id}-${paused}`}
-                        className={`absolute inset-y-0 left-0 origin-left rounded-[3px] bg-brand ${
+                        className={`absolute inset-y-0 ${isRTL ? "right-0 origin-right" : "left-0 origin-left"} rounded-[3px] bg-brand ${
                           paused ? "" : "hero-progress"
                         }`}
                         style={paused ? { width: "100%" } : undefined}

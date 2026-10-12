@@ -67,11 +67,10 @@ export const BRAND_CONFIG = {
  * Template 1: Executive Prestige (Official CEO & Executive Board Signature)
  * Redesigned for luxury aesthetics: larger logo under avatar, refined typography, elegant contact grid, tagline banner & same-line CTA.
  */
-export function generateExecutiveTemplate(data, options = {}) {
+function generateExecutiveTemplate(data, options = {}) {
   const isProd = options.useProdUrls !== false;
   const avatarSrc = data.avatar || "https://i.imgur.com/t5DqN7J.jpeg";
   const logoSrc = isProd ? (options.logoUrl || "https://i.imgur.com/NSFMNT7.png") : "https://i.imgur.com/NSFMNT7.png";
-  const showBooking = options.showBooking ?? true;
   const showAddress = options.showAddress ?? true;
   const showDisclaimer = options.showDisclaimer ?? false;
 
@@ -230,7 +229,7 @@ export function generateExecutiveTemplate(data, options = {}) {
 /**
  * Template 2: Fortune 500 Corporate (Clean Silicon Valley / Consulting Architecture)
  */
-export function generateModernStudioTemplate(data, options = {}) {
+function generateModernStudioTemplate(data, options = {}) {
   const isProd = options.useProdUrls !== false;
   const avatarSrc = data.avatar || "https://i.imgur.com/t5DqN7J.jpeg";
   const logoSrc = isProd ? (options.logoUrl || "https://i.imgur.com/NSFMNT7.png") : "https://i.imgur.com/NSFMNT7.png";
@@ -342,7 +341,7 @@ export function generateModernStudioTemplate(data, options = {}) {
 /**
  * Template 3: Luxury Dark Titanium (Deep Tech & AI Agency Edition)
  */
-export function generateDarkExecutiveTemplate(data, options = {}) {
+function generateDarkExecutiveTemplate(data, options = {}) {
   const isProd = options.useProdUrls !== false;
   const avatarSrc = data.avatar || "https://i.imgur.com/t5DqN7J.jpeg";
   const logoSrc = isProd ? (options.logoUrl || "https://i.imgur.com/NSFMNT7.png") : "https://i.imgur.com/NSFMNT7.png";
@@ -437,8 +436,7 @@ export function generateDarkExecutiveTemplate(data, options = {}) {
 /**
  * Template 4: Compact C-Level (Streamlined for rapid email threads)
  */
-export function generateCompactCleanTemplate(data, options = {}) {
-  const isProd = options.useProdUrls !== false;
+function generateCompactCleanTemplate(data) {
   const avatarSrc = data.avatar || "https://i.imgur.com/t5DqN7J.jpeg";
 
   return `<table cellpadding="0" cellspacing="0" border="0" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.35; color: #111827; border-collapse: collapse; max-width: 560px;">

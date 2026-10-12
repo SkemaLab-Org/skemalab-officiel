@@ -5,11 +5,13 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { aboutContent } from "@/data/content";
+import { useI18n } from "@/components/I18nProvider";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 
 export default function About() {
+  const { t } = useI18n();
   const ref = useRef(null);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -34,7 +36,7 @@ export default function About() {
                 <motion.div className="absolute inset-[-14%]" style={{ y }}>
                   <Image
                     src={aboutContent.image}
-                    alt="Équipe Skemalab en collaboration"
+                    alt={t.aboutHome.imageAlt}
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 45vw"
@@ -45,11 +47,10 @@ export default function About() {
 
               <div className="absolute bottom-3 left-3 right-3 rounded-[3px] border border-line bg-surface/90 p-3.5 backdrop-blur-xl sm:bottom-5 sm:left-5 sm:right-5 sm:p-5">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-accent sm:text-[11px] sm:tracking-[0.24em]">
-                  Notre promesse
+                  {t.aboutHome.promiseEyebrow}
                 </p>
                 <p className="mt-1.5 text-xs leading-relaxed text-fg/90 sm:mt-2 sm:text-sm">
-                  Pas de projets décoratifs. Des systèmes digitaux qui créent
-                  de la valeur mesurable.
+                  {t.aboutHome.promiseText}
                 </p>
               </div>
             </div>
@@ -59,28 +60,23 @@ export default function About() {
         <div className="min-w-0">
           <Reveal>
             <SectionHeading
-              eyebrow="L’agence"
-              title="Votre partenaire de croissance digitale."
+              eyebrow={t.aboutHome.eyebrow}
+              title={t.aboutHome.title}
             />
           </Reveal>
 
           <Reveal delay={0.1}>
             <p className="mt-5 text-sm leading-relaxed text-muted sm:mt-6 sm:text-base md:text-lg">
-              Skemalab accompagne les entreprises ambitieuses dans leur
-              transformation digitale. Nous allions stratégie business,
-              excellence technique et automatisation intelligente pour bâtir
-              des leviers de performance durables.
+              {t.aboutHome.p1}
             </p>
             <p className="mt-3 text-sm leading-relaxed text-muted sm:mt-4 sm:text-base md:text-lg">
-              Que vous lanciez un produit, accélériez votre acquisition ou
-              industrialisiez vos process internes, nous concevons une solution
-              claire, exécutable et orientée résultats.
+              {t.aboutHome.p2}
             </p>
           </Reveal>
 
           <Reveal delay={0.16}>
             <div className="mt-7 grid gap-2.5 sm:mt-9 sm:grid-cols-2 sm:gap-3">
-              {aboutContent.pillars.map(([title, text]) => (
+              {t.aboutHome.pillars.map(([title, text]) => (
                 <div
                   key={title}
                   className="group rounded-[3px] border border-line bg-surface p-4 transition-all duration-300 hover:border-brand/40 sm:p-5"
@@ -96,7 +92,7 @@ export default function About() {
           <Reveal delay={0.22}>
             <div className="mt-7 sm:mt-9">
               <Button href="#contact" variant="accent" className="w-full sm:w-auto">
-                Parler à un expert
+                {t.aboutHome.cta}
                 <ArrowUpRight size={16} />
               </Button>
             </div>

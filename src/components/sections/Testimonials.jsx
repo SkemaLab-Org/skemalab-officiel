@@ -2,17 +2,19 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Quote } from "lucide-react";
-import { testimonials } from "@/data/content";
+import { useI18n } from "@/components/I18nProvider";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import useCarousel from "@/hooks/useCarousel";
 
 export default function Testimonials() {
-  const { index, setIndex, reduceMotion } = useCarousel(testimonials.length, {
+  const { t } = useI18n();
+  const testimonialsList = t.testimonialsSection.list;
+  const { index, setIndex, reduceMotion } = useCarousel(testimonialsList.length, {
     intervalMs: 5600,
   });
 
-  const item = testimonials[index];
+  const item = testimonialsList[index];
 
   return (
     <section className="relative overflow-hidden bg-surface py-16 sm:py-24 lg:py-36">
@@ -23,8 +25,8 @@ export default function Testimonials() {
         <Reveal>
           <SectionHeading
             align="center"
-            eyebrow="Témoignages"
-            title="La confiance se construit sur les résultats."
+            eyebrow={t.testimonialsSection.eyebrow}
+            title={t.testimonialsSection.title}
           />
         </Reveal>
 
@@ -59,11 +61,11 @@ export default function Testimonials() {
         </Reveal>
 
         <div className="mt-6 flex items-center justify-center gap-1 sm:mt-8">
-          {testimonials.map((t, i) => (
+          {testimonialsList.map((entry, i) => (
             <button
-              key={t.name}
+              key={entry.name}
               type="button"
-              aria-label={`Témoignage de ${t.name}`}
+              aria-label={`${t.testimonialsSection.eyebrow} : ${entry.name}`}
               aria-pressed={i === index}
               onClick={() => setIndex(i)}
               className="flex h-11 w-11 touch-manipulation items-center justify-center"

@@ -1,6 +1,7 @@
-import { Poppins } from "next/font/google";
+import { Poppins, Cairo } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { I18nProvider } from "@/components/I18nProvider";
 import JsonLd from "@/components/seo/JsonLd";
 import { siteConfig } from "@/data/content";
 
@@ -8,6 +9,13 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const cairo = Cairo({
+  variable: "--font-cairo",
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -69,12 +77,13 @@ export const metadata = {
 };
 
 const themeInitScript = `(function(){try{var t=localStorage.getItem("skemalab-theme");var r=document.documentElement;if(t==="dark"){r.classList.add("dark");r.style.colorScheme="dark"}else{r.classList.remove("dark");r.style.colorScheme="light"}}catch(e){}})();`;
+const localeInitScript = `(function(){try{var l=localStorage.getItem("skemalab-locale")||"fr";var r=document.documentElement;r.setAttribute("lang",l);if(l==="ar"){r.setAttribute("dir","rtl");r.classList.add("rtl")}else{r.setAttribute("dir","ltr");r.classList.remove("rtl")}}catch(e){}})();`;
 
 export default function RootLayout({ children }) {
   return (
     <html
       lang="fr"
-      className={`${poppins.variable} h-full antialiased`}
+      className={`${poppins.variable} ${cairo.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full font-sans text-fg antialiased">
@@ -84,7 +93,14 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: themeInitScript }}
           suppressHydrationWarning
         />
-        <ThemeProvider>{children}</ThemeProvider>
+        <script
+          id="locale-init"
+          dangerouslySetInnerHTML={{ __html: localeInitScript }}
+          suppressHydrationWarning
+        />
+        <ThemeProvider>
+          <I18nProvider>{children}</I18nProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

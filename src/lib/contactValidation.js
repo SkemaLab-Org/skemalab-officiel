@@ -22,37 +22,38 @@ export function validateContactInput(body, { withMessages = false } = {}) {
   const service = String(body.service || "").trim();
   const message = String(body.message || "").trim();
 
-  const msg = (key, text) => {
-    if (withMessages) errors[key] = text;
+  // `withMessages` returns i18n codes (see `contactErrors` in the dictionaries);
+  // callers render them in the active locale.
+  const msg = (key, code) => {
+    if (withMessages) errors[key] = code;
     else errors[key] = true;
   };
 
-  if (!name) msg("name", "Le nom est requis.");
-  else if (name.length > CONTACT_LIMITS.name) msg("name", "Nom trop long.");
+  if (!name) msg("name", "nameRequired");
+  else if (name.length > CONTACT_LIMITS.name) msg("name", "nameTooLong");
 
-  if (!company) msg("company", "L’entreprise est requise.");
+  if (!company) msg("company", "companyRequired");
   else if (company.length > CONTACT_LIMITS.company)
-    msg("company", "Entreprise trop longue.");
+    msg("company", "companyTooLong");
 
-  if (!email) msg("email", "L’email est requis.");
+  if (!email) msg("email", "emailRequired");
   else if (!EMAIL_RE.test(email) || email.length > 200)
-    msg("email", "Format d’email invalide.");
+    msg("email", "emailInvalid");
 
-  if (!phone) msg("phone", "Le téléphone est requis.");
+  if (!phone) msg("phone", "phoneRequired");
   else if (phone.length < CONTACT_LIMITS.phoneMin)
-    msg("phone", "Numéro trop court.");
-  else if (phone.length > CONTACT_LIMITS.phone)
-    msg("phone", "Numéro trop long.");
+    msg("phone", "phoneTooShort");
+  else if (phone.length > CONTACT_LIMITS.phone) msg("phone", "phoneTooLong");
 
-  if (!service) msg("service", "Choisissez un service.");
+  if (!service) msg("service", "serviceRequired");
   else if (service.length > CONTACT_LIMITS.service)
-    msg("service", "Service invalide.");
+    msg("service", "serviceInvalid");
 
-  if (!message) msg("message", "Le message est requis.");
+  if (!message) msg("message", "messageRequired");
   else if (message.length < CONTACT_LIMITS.messageMin)
-    msg("message", "Message trop court (10 caractères min.).");
+    msg("message", "messageTooShort");
   else if (message.length > CONTACT_LIMITS.message)
-    msg("message", "Message trop long.");
+    msg("message", "messageTooLong");
 
   return {
     ok: Object.keys(errors).length === 0,

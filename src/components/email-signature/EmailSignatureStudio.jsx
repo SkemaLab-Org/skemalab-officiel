@@ -16,8 +16,6 @@ import {
   ChevronRight,
   ShieldCheck,
   Layers,
-  Calendar,
-  FileText,
   Building2,
 } from "lucide-react";
 import {
@@ -29,9 +27,9 @@ import {
 export default function EmailSignatureStudio() {
   const [activeTemplateId, setActiveTemplateId] = useState("executive");
   const [formData, setFormData] = useState({ ...TEAM_MEMBERS[0] });
-  const [useProdUrls, setUseProdUrls] = useState(true);
-  const [showBooking, setShowBooking] = useState(true);
-  const [showDisclaimer, setShowDisclaimer] = useState(false);
+  const [useProdUrls] = useState(true);
+  const [showBooking] = useState(true);
+  const [showDisclaimer] = useState(false);
   const [copiedRich, setCopiedRich] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
   const [previewMode, setPreviewMode] = useState("gmail"); // "gmail" | "clean"

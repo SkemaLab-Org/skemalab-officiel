@@ -354,6 +354,7 @@ html.dark .grid-bg {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-50%);
   }
@@ -367,6 +368,7 @@ html.dark .grid-bg {
   from {
     transform: scaleX(0);
   }
+
   to {
     transform: scaleX(1);
   }
@@ -399,4 +401,60 @@ html.dark .grid-bg {
     top: 1.5rem;
     bottom: 1.5rem;
   }
+}
+
+/* RTL Specific Styles (Arabic) */
+html[lang="ar"],
+html[dir="rtl"],
+html.rtl,
+[dir="rtl"] body {
+  font-family: var(--font-cairo), system-ui, -apple-system, sans-serif;
+}
+
+[dir="rtl"] .services-rail {
+  left: auto;
+  right: 1.15rem;
+}
+
+@media (min-width: 768px) {
+  [dir="rtl"] .services-rail {
+    left: auto;
+    right: 1.65rem;
+  }
+}
+
+[dir="rtl"] .nav-link::after {
+  transform-origin: right center;
+}
+
+[dir="rtl"] .nav-link-mobile::before {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .nav-link-mobile:hover,
+[dir="rtl"] .nav-link-mobile:focus-visible {
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+[dir="rtl"] .marquee-track {
+  animation: marquee-rtl 38s linear infinite;
+}
+
+[dir="rtl"] .marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(50%);
+  }
+}
+
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
 }

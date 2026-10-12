@@ -1,8 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { Code2, Megaphone, Workflow, ArrowUpRight } from "lucide-react";
-import { services } from "@/data/content";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { useI18n } from "@/components/I18nProvider";
 
 const icons = {
   dev: Code2,
@@ -11,6 +13,9 @@ const icons = {
 };
 
 export default function Services() {
+  const { t } = useI18n();
+  const services = t.servicesList;
+
   return (
     <section id="services" className="relative overflow-hidden bg-page py-16 sm:py-24 lg:py-36">
       <div className="pointer-events-none absolute inset-0 grid-bg opacity-40" />
@@ -19,14 +24,14 @@ export default function Services() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-8">
         <Reveal>
           <SectionHeading
-            eyebrow="Expertises"
+            eyebrow={t.servicesSection.eyebrow}
             title={
               <>
-                Trois leviers. Une seule ambition :{" "}
-                <span className="text-accent">votre croissance.</span>
+                {t.servicesSection.titlePart1}
+                <span className="text-accent">{t.servicesSection.titleHighlight}</span>
               </>
             }
-            description="Skemalab réunit développement, marketing digital et automatisation pour construire des systèmes qui convertissent, scalent et s’améliorent dans le temps."
+            description={t.servicesSection.description}
           />
         </Reveal>
 
@@ -35,7 +40,7 @@ export default function Services() {
 
           <div className="space-y-6 sm:space-y-8 md:space-y-10">
             {services.map((service, index) => {
-              const Icon = icons[service.id];
+              const Icon = icons[service.id] || Code2;
 
               return (
                 <Reveal key={service.id} delay={index * 0.08}>
@@ -83,8 +88,8 @@ export default function Services() {
                             href="#contact"
                             className="mt-6 inline-flex min-h-11 w-fit items-center gap-2 text-sm font-medium text-brand transition-all duration-300 group-hover:gap-3 sm:mt-8"
                           >
-                            En parler avec un expert
-                            <ArrowUpRight size={16} />
+                            {t.servicesSection.talkWithExpert}
+                            <ArrowUpRight size={16} className="rtl-flip" />
                           </a>
                         </div>
 

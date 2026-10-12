@@ -1,15 +1,19 @@
-import { clients } from "@/data/content";
+"use client";
+
+import { useI18n } from "@/components/I18nProvider";
 
 export default function ClientsMarquee() {
+  const { t } = useI18n();
+  const clients = t.clientsMarquee.clients;
   const row = [...clients, ...clients];
 
   return (
     <section
       className="relative overflow-hidden border-y border-line bg-page py-8 sm:py-10"
-      aria-label="Clients"
+      aria-label={t.clientsMarquee.headline}
     >
       <p className="relative mb-5 px-4 text-center text-[10px] uppercase tracking-[0.18em] text-muted text-balance sm:mb-7 sm:text-[11px] sm:tracking-[0.32em]">
-        Ils nous font confiance pour accélérer leur digital
+        {t.clientsMarquee.headline}
       </p>
       <ul className="sr-only">
         {clients.map((name) => (

@@ -1,8 +1,13 @@
-import { processSteps } from "@/data/content";
+"use client";
+
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { useI18n } from "@/components/I18nProvider";
 
 export default function Process() {
+  const { t, isRTL } = useI18n();
+  const processSteps = t.processSection.steps;
+
   return (
     <section id="method" className="relative overflow-hidden bg-surface py-16 sm:py-24 lg:py-36">
       <div className="pointer-events-none absolute inset-0 grid-bg opacity-40" />
@@ -11,9 +16,9 @@ export default function Process() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-8">
         <Reveal>
           <SectionHeading
-            eyebrow="Méthode"
-            title="Une approche claire, du diagnostic au ROI."
-            description="Moins de friction, plus de clarté. Chaque étape est conçue pour avancer vite sans sacrifier la qualité ni la vision business."
+            eyebrow={t.processSection.eyebrow}
+            title={t.processSection.title}
+            description={t.processSection.description}
           />
         </Reveal>
 
@@ -28,7 +33,11 @@ export default function Process() {
                     <span className="flex h-11 w-11 items-center justify-center rounded-[3px] bg-ink text-sm font-semibold text-mist transition-colors duration-500 group-hover:bg-brand dark:bg-mist dark:text-ink dark:group-hover:bg-brand dark:group-hover:text-white">
                       {step.step}
                     </span>
-                    <span className="h-[3px] w-8 origin-left scale-x-0 rounded-[3px] bg-brand transition-transform duration-500 group-hover:scale-x-100 sm:w-10" />
+                    <span
+                      className={`h-[3px] w-8 rounded-[3px] bg-brand transition-transform duration-500 group-hover:scale-x-100 sm:w-10 ${
+                        isRTL ? "origin-right scale-x-0" : "origin-left scale-x-0"
+                      }`}
+                    />
                   </div>
                   <h3 className="text-lg font-semibold tracking-tight text-fg sm:text-xl">
                     {step.title}
@@ -36,7 +45,11 @@ export default function Process() {
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
                     {step.text}
                   </p>
-                  <div className="absolute inset-x-0 bottom-0 h-[3px] origin-left scale-x-0 bg-brand transition-transform duration-500 group-hover:scale-x-100" />
+                  <div
+                    className={`absolute inset-x-0 bottom-0 h-[3px] bg-brand transition-transform duration-500 group-hover:scale-x-100 ${
+                      isRTL ? "origin-right scale-x-0" : "origin-left scale-x-0"
+                    }`}
+                  />
                 </div>
               </Reveal>
             ))}
