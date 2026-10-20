@@ -1,39 +1,53 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { aboutContent } from "@/data/content";
 import { useI18n } from "@/components/I18nProvider";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
+import { MoroccanZelligeLattice, LuxuryRibbonMotif, MoroccanCornerOrnament } from "@/components/ui/MoroccanPattern";
+import LuxuryPictogram from "@/components/ui/LuxuryPictogram";
 
 export default function About() {
-  const { t } = useI18n();
-  const ref = useRef(null);
-  const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], reduceMotion ? ["0%", "0%"] : ["-10%", "10%"]);
+  const { t, isRTL, locale } = useI18n();
 
   return (
-    <section id="agence" ref={ref} className="relative overflow-hidden bg-page py-16 sm:py-24 lg:py-36">
-      <div className="pointer-events-none absolute inset-0 grid-bg opacity-35" />
+    <section
+      id="agence"
+      className="relative overflow-hidden bg-page py-20 sm:py-28 lg:py-40"
+    >
+      {/* Moroccan Zellige Background Lattice */}
+      <MoroccanZelligeLattice
+        opacity={0.05}
+        strokeColor="#089587"
+        size={110}
+        fadeMask={true}
+      />
+      <div className="pointer-events-none absolute right-0 top-1/4 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
+      <div className="pointer-events-none absolute -left-20 bottom-10 h-80 w-80 rounded-full bg-accent/8 blur-[100px]" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 sm:gap-14 sm:px-8 lg:grid-cols-2 lg:gap-20">
+      {/* Static Luxury Ribbon Wave Motif (Non-animated, static positioning) */}
+      <div
+        className="pointer-events-none absolute -left-24 top-20 opacity-30 lg:opacity-45"
+        aria-hidden="true"
+      >
+        <LuxuryRibbonMotif width={650} height={380} opacity={0.5} />
+      </div>
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:gap-16 sm:px-8 lg:grid-cols-2 lg:gap-20">
+        {/* Left Visual Column with Moroccan Architectural Framing */}
         <Reveal>
-          <div className="relative mx-auto w-full max-w-md px-1 sm:max-w-none sm:px-3 lg:mx-0">
-            <div className="absolute inset-0 rounded-[3px] border border-brand/25 sm:-inset-3" />
-            <div className="absolute -bottom-3 -right-3 hidden h-20 w-20 rounded-[3px] bg-accent/90 sm:block sm:h-28 sm:w-28 md:-bottom-4 md:-right-4" />
-            <div className="absolute -left-3 -top-3 hidden h-14 w-14 rounded-[3px] bg-deep/90 sm:block sm:h-20 sm:w-20 md:-left-4 md:-top-4" />
+          <div className="relative mx-auto w-full max-w-md sm:max-w-none lg:mx-0">
+            {/* Outer Geometric Frame */}
+            <div className="absolute inset-0 rounded-[4px] border border-brand/30 sm:-inset-4" />
+            <div className="absolute -bottom-3 -right-3 hidden h-24 w-24 rounded-[3px] bg-accent/80 sm:block sm:h-28 sm:w-28 md:-bottom-4 md:-right-4" />
+            <div className="absolute -left-3 -top-3 hidden h-16 w-16 rounded-[3px] bg-deep/90 sm:block sm:h-20 sm:w-20 md:-left-4 md:-top-4" />
 
-            <div className="relative overflow-hidden rounded-[3px]">
+            <div className="relative overflow-hidden rounded-[4px] shadow-2xl">
               <div className="relative aspect-[5/6] overflow-hidden sm:aspect-[4/5]">
-                <motion.div className="absolute inset-[-14%]" style={{ y }}>
+                <div className="absolute inset-[-14%]">
                   <Image
                     src={aboutContent.image}
                     alt={t.aboutHome.imageAlt}
@@ -41,26 +55,58 @@ export default function About() {
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 45vw"
                   />
-                </motion.div>
-                <div className="absolute inset-0 bg-gradient-to-t from-page/80 via-transparent to-transparent" />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-page/90 via-page/20 to-transparent" />
               </div>
 
-              <div className="absolute bottom-3 left-3 right-3 rounded-[3px] border border-line bg-surface/90 p-3.5 backdrop-blur-xl sm:bottom-5 sm:left-5 sm:right-5 sm:p-5">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-accent sm:text-[11px] sm:tracking-[0.24em]">
-                  {t.aboutHome.promiseEyebrow}
-                </p>
+              {/* Moroccan Heritage Badge Stamp */}
+              <div className="absolute left-3 top-3 flex items-center gap-2 rounded-[3px] border border-white/30 bg-[#0f2e2a]/85 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] text-white shadow-md backdrop-blur-md sm:left-5 sm:top-5 sm:text-[11px]">
+                <span>🇲🇦</span>
+                <span>{locale === "ar" ? "أصالة مغربية · أفق دولي" : "Ancrage Marocain · Vision Globale"}</span>
+              </div>
+
+              {/* Bottom Promise Card */}
+              <div className="absolute bottom-3 left-3 right-3 rounded-[3px] border border-line bg-surface/95 p-4 shadow-lg backdrop-blur-xl sm:bottom-5 sm:left-5 sm:right-5 sm:p-5">
+                <div className="flex items-center gap-2 text-accent">
+                  <span className="h-1.5 w-1.5 rotate-45 bg-accent" />
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] sm:text-[11px] sm:tracking-[0.26em]">
+                    {t.aboutHome.promiseEyebrow}
+                  </p>
+                </div>
                 <p className="mt-1.5 text-xs leading-relaxed text-fg/90 sm:mt-2 sm:text-sm">
                   {t.aboutHome.promiseText}
                 </p>
               </div>
             </div>
+
+            {/* Floating Metric Badge */}
+            <div
+              className={`absolute -bottom-6 ${
+                isRTL ? "-left-4" : "-right-4"
+              } hidden rounded-[4px] border border-brand/40 bg-surface/95 p-4 shadow-[0_12px_32px_rgba(8,149,135,0.18)] backdrop-blur-xl sm:block`}
+            >
+              <div className="flex items-center gap-3">
+                <LuxuryPictogram type="morocco-seal" size="sm" glow={true} />
+                <div>
+                  <p className="font-mono text-base font-bold text-fg">Essaouira · Maroc</p>
+                  <p className="text-[10px] uppercase tracking-wider text-muted">
+                    {locale === "ar" ? "استوديو هندسي متكامل" : "Engineering Hub Europe & MENA"}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </Reveal>
 
+        {/* Right Content Column */}
         <div className="min-w-0">
           <Reveal>
             <SectionHeading
-              eyebrow={t.aboutHome.eyebrow}
+              eyebrow={
+                locale === "ar"
+                  ? "عن سكيما لاب · الهوية والرؤية"
+                  : t.aboutHome.eyebrow
+              }
               title={t.aboutHome.title}
             />
           </Reveal>
@@ -74,26 +120,37 @@ export default function About() {
             </p>
           </Reveal>
 
+          {/* Core Strategic Pillars Grid with Moroccan Corner Accents */}
           <Reveal delay={0.16}>
-            <div className="mt-7 grid gap-2.5 sm:mt-9 sm:grid-cols-2 sm:gap-3">
+            <div className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-2 sm:gap-4">
               {t.aboutHome.pillars.map(([title, text]) => (
                 <div
                   key={title}
-                  className="group rounded-[3px] border border-line bg-surface p-4 transition-all duration-300 hover:border-brand/40 sm:p-5"
+                  className="group relative overflow-hidden rounded-[4px] border border-line bg-surface p-4 shadow-sm transition-all duration-300 hover:border-brand/40 hover:shadow-md sm:p-5"
                 >
-                  <div className="mb-2.5 h-[2px] w-8 rounded-[3px] bg-brand transition-all duration-300 group-hover:w-12 sm:mb-3" />
-                  <p className="text-sm font-medium text-fg">{title}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">{text}</p>
+                  <MoroccanCornerOrnament
+                    className="absolute right-1 top-1 opacity-20 transition-opacity group-hover:opacity-60"
+                    size={20}
+                  />
+                  <div className="mb-2.5 flex items-center gap-2 sm:mb-3">
+                    <span className="h-1.5 w-1.5 rotate-45 rounded-[0.5px] bg-brand" />
+                    <div className="h-[2px] w-8 rounded-[1px] bg-brand transition-all duration-300 group-hover:w-12" />
+                  </div>
+                  <p className="text-sm font-semibold text-fg">{title}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted">{text}</p>
                 </div>
               ))}
             </div>
           </Reveal>
 
           <Reveal delay={0.22}>
-            <div className="mt-7 sm:mt-9">
+            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center">
               <Button href="#contact" variant="accent" className="w-full sm:w-auto">
                 {t.aboutHome.cta}
-                <ArrowUpRight size={16} />
+                <ArrowUpRight size={16} className="rtl-flip" />
+              </Button>
+              <Button href="/about" variant="ghost" className="w-full sm:w-auto">
+                {locale === "ar" ? "تعرف على قصة المؤسسين" : "Découvrir les fondateurs"}
               </Button>
             </div>
           </Reveal>

@@ -57,10 +57,10 @@ export default function OpenGraphImage() {
                 fontSize: "44px",
                 fontWeight: 800,
                 letterSpacing: "-0.03em",
-                color: "#10b981",
+                color: "#089587",
               }}
             >
-              lab
+              لاب
             </span>
           </div>
 
@@ -69,16 +69,16 @@ export default function OpenGraphImage() {
               display: "flex",
               alignItems: "center",
               padding: "8px 20px",
-              borderRadius: "9999px",
-              background: "rgba(255, 255, 255, 0.06)",
-              border: "1px solid rgba(255, 255, 255, 0.15)",
-              fontSize: "16px",
+              borderRadius: "4px",
+              background: "rgba(8, 149, 135, 0.15)",
+              border: "1px solid rgba(8, 149, 135, 0.4)",
+              fontSize: "15px",
               letterSpacing: "0.15em",
               textTransform: "uppercase",
-              color: "rgba(255, 255, 255, 0.85)",
+              color: "#ffffff",
             }}
           >
-            Studio Digital & IA
+            🇲🇦 Studio Digital Marocain · Essaouira
           </div>
         </div>
 
@@ -129,7 +129,7 @@ export default function OpenGraphImage() {
               display: "flex",
               gap: "24px",
               fontSize: "18px",
-              color: "#10b981",
+              color: "#089587",
               fontWeight: 600,
               letterSpacing: "0.08em",
             }}

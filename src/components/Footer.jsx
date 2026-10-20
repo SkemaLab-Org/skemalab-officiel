@@ -9,6 +9,7 @@ import {
   LinkedInIcon,
   WhatsAppIcon,
 } from "@/components/icons/SocialIcons";
+import { MoroccanZelligeLattice, LuxuryRibbonMotif } from "@/components/ui/MoroccanPattern";
 
 const socialLinks = [
   {
@@ -37,14 +38,27 @@ export default function Footer() {
 
   return (
     <footer className="brand-fusion-bg relative overflow-hidden text-mist">
+      {/* Design Pattern in Background */}
+      <MoroccanZelligeLattice
+        opacity={0.06}
+        strokeColor="#089587"
+        size={100}
+        fadeMask={true}
+      />
+
+      {/* Luxury Ribbon Motif in Footer Background */}
+      <div className="pointer-events-none absolute -right-20 -top-10 opacity-40 lg:opacity-55" aria-hidden="true">
+        <LuxuryRibbonMotif width={680} height={380} opacity={0.5} />
+      </div>
+
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:gap-12 sm:px-8 sm:py-16 lg:grid-cols-[1.5fr_1fr_1fr] lg:gap-14 lg:py-20">
-        <div>
-          <BrandMark className="h-7 sm:h-8" />
+        <div className="flex flex-col">
+          <BrandMark className="h-9 sm:h-10" />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65 sm:mt-5">
             {t.footer.description}
           </p>
 
-          <div className="mt-6 flex items-center gap-2.5 sm:mt-8">
+          <div className="mt-6 flex items-center gap-2.5 sm:mt-8 lg:mt-auto">
             {socialLinks.map(({ label, href, Icon, external }) => (
               <a
                 key={label}
@@ -53,16 +67,13 @@ export default function Footer() {
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
                 aria-label={label}
-                className="flex h-11 w-11 items-center justify-center rounded-[3px] border border-white/15 bg-white/5 text-white/85 transition-all duration-300 hover:border-brand hover:bg-brand hover:text-white"
+                className="flex h-11 w-11 items-center justify-center rounded-[3px] border border-white/15 bg-white/5 text-white/85 transition-all duration-300 hover:border-brand hover:bg-brand/20 hover:text-brand"
               >
                 <Icon className="h-[18px] w-[18px]" />
               </a>
             ))}
           </div>
 
-          <div className="mt-5 inline-flex items-center rounded-[3px] border border-white/12 bg-white/5 px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-white/55 sm:mt-6 sm:px-4 sm:text-[11px] sm:tracking-[0.2em]">
-            {t.footer.pills}
-          </div>
         </div>
 
         <div>
@@ -83,7 +94,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="flex flex-col">
           <p className="mb-4 text-[11px] uppercase tracking-[0.24em] text-white/45 sm:mb-5">
             {t.footer.contactTitle}
           </p>
@@ -112,6 +123,12 @@ export default function Footer() {
               <span className="block sm:inline">{contactInfo.locations[1]}</span>
             </li>
           </ul>
+
+          <div className="mt-auto pt-5 sm:pt-6">
+            <span className="inline-flex items-center rounded-[3px] border border-white/12 bg-white/5 px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-white/55 sm:px-4 sm:text-[11px] sm:tracking-[0.2em]">
+              {t.footer.pills}
+            </span>
+          </div>
         </div>
       </div>
 

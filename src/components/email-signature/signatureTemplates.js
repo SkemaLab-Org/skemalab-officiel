@@ -54,7 +54,7 @@ export const BRAND_CONFIG = {
   name: "SkemaLab Agency",
   tagline: "Build · Grow · Automate",
   logoUrl: "https://i.imgur.com/NSFMNT7.png",
-  localLogoUrl: "/logo.webp",
+  localLogoUrl: "/first-logo.png",
   brandColor: "#089587",
   brandAccent: "#0d655c",
   brandDark: "#0b0f0e",

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "framer-motion";
 import { useI18n } from "@/components/I18nProvider";
 import Reveal from "@/components/ui/Reveal";
+import { MoroccanZelligeLattice } from "@/components/ui/MoroccanPattern";
 
 function Counter({ value, suffix }) {
   const ref = useRef(null);
@@ -41,25 +42,44 @@ function Counter({ value, suffix }) {
 
 export default function Stats() {
   const { t } = useI18n();
+
   return (
-    <section className="relative overflow-hidden border-y border-line bg-surface">
+    <section className="relative overflow-hidden border-y border-line bg-surface py-4">
+      {/* Moroccan Geometric Subtle Texture */}
+      <MoroccanZelligeLattice
+        opacity={0.04}
+        strokeColor="#089587"
+        size={80}
+        fadeMask={false}
+      />
       <div className="absolute inset-0 gradient-mesh opacity-40" />
 
       <div className="relative mx-auto grid max-w-7xl sm:grid-cols-2 lg:grid-cols-4">
         {t.statsList.map((stat, index) => (
           <Reveal key={stat.label} delay={index * 0.07} className="h-full">
             <div
-              className={`group relative h-full border-b border-line px-5 py-8 last:border-b-0 sm:px-8 sm:py-12 lg:border-b-0 lg:py-14 ${
+              className={`group relative h-full border-b border-line px-6 py-9 last:border-b-0 sm:px-8 sm:py-12 lg:border-b-0 lg:py-14 ${
                 index % 2 === 0 ? "sm:border-r" : ""
               } ${index < t.statsList.length - 1 ? "lg:border-r lg:border-line" : "lg:border-r-0"}`}
             >
-              <p className="text-[clamp(2.1rem,7vw,3.75rem)] font-semibold leading-none tracking-tight text-fg transition-transform duration-500 group-hover:translate-x-1">
+              {/* Moroccan Micro Star Accent */}
+              <div className="mb-3 flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rotate-45 bg-brand opacity-60 transition-transform duration-300 group-hover:scale-125 group-hover:opacity-100" />
+                <span className="font-mono text-[10px] uppercase tracking-wider text-muted/60">
+                  KPI · 0{index + 1}
+                </span>
+              </div>
+
+              <p className="text-[clamp(2.2rem,6.5vw,3.8rem)] font-bold leading-none tracking-tight text-fg transition-transform duration-500 group-hover:translate-x-1">
                 <Counter value={stat.value} suffix={stat.suffix} />
               </p>
-              <p className="mt-3 max-w-none text-sm leading-snug text-muted sm:mt-4 sm:max-w-[12rem]">
+
+              <p className="mt-3 max-w-none text-sm font-medium leading-snug text-muted sm:mt-4 sm:max-w-[13rem]">
                 {stat.label}
               </p>
-              <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-brand transition-all duration-500 group-hover:w-full" />
+
+              {/* Glowing Bottom Line */}
+              <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-brand via-accent to-brand transition-all duration-500 group-hover:w-full" />
             </div>
           </Reveal>
         ))}

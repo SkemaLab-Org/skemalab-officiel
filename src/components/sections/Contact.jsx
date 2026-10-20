@@ -11,6 +11,7 @@ import {
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
+import { MoroccanZelligeLattice, MoroccanCornerOrnament } from "@/components/ui/MoroccanPattern";
 
 export default function Contact() {
   const { t } = useI18n();
@@ -88,8 +89,13 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-page py-16 sm:py-24 lg:py-36">
-      <div className="pointer-events-none absolute inset-0 grid-bg opacity-30" />
+    <section id="contact" className="relative overflow-hidden bg-page py-20 sm:py-28 lg:py-36">
+      <MoroccanZelligeLattice
+        opacity={0.04}
+        strokeColor="#089587"
+        size={100}
+        fadeMask={true}
+      />
       <div className="pointer-events-none absolute bottom-0 right-0 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
 
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 sm:gap-14 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
@@ -129,9 +135,14 @@ export default function Contact() {
           <form
             onSubmit={onSubmit}
             noValidate
-            className="relative overflow-hidden rounded-[3px] border border-line bg-surface p-5 shadow-[0_6px_20px_rgba(11,14,20,0.03)] sm:p-7 md:p-9 dark:shadow-[0_6px_20px_rgba(0,0,0,0.12)]"
+            className="relative overflow-hidden rounded-[4px] border border-line bg-surface p-6 shadow-xl sm:p-8 md:p-10 dark:shadow-2xl"
           >
-            <div className="absolute inset-x-0 top-0 h-[3px] bg-brand" />
+            <MoroccanCornerOrnament
+              className="absolute right-2 top-2 opacity-30"
+              size={26}
+              color="#089587"
+            />
+            <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-brand via-accent to-brand" />
 
             {status === "success" ? (
               <StatusPanel

@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import BrandMark from "@/components/BrandMark";
+import { LuxuryRibbonMotif } from "@/components/ui/MoroccanPattern";
 
 const LOAD_MS = 1100;
 const EXIT_MS = 380;
@@ -113,6 +114,9 @@ export default function Loader() {
           <div className="pointer-events-none absolute inset-0 grid-bg opacity-25" />
           <div className="pointer-events-none absolute -left-1/4 top-1/4 h-[50vmin] w-[50vmin] rounded-full bg-brand/20 blur-[100px]" />
           <div className="pointer-events-none absolute -right-1/4 bottom-1/4 h-[45vmin] w-[45vmin] rounded-full bg-accent/25 blur-[90px]" />
+          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-35">
+            <LuxuryRibbonMotif width={620} height={360} opacity={0.65} />
+          </div>
 
           <motion.div
             className="relative z-10 flex w-full max-w-md flex-col items-center px-6"

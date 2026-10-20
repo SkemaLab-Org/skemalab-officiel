@@ -251,10 +251,6 @@ export const aboutPage = {
     "Prêt à transformer votre présence digitale et à automatiser vos opérations avec nos fondateurs ?",
 };
 
-export const ctaContent = {
-  image:
-    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=70",
-};
 
 export const contactInfo = {
   email: "contact@skemalab.com",
