@@ -35,11 +35,14 @@ export default function OpenGraphImage() {
             width: "100%",
           }}
         >
+          {/* NOTE: satori (next/og) ne supporte pas l'arabe/RTL — voir issue vercel/next.js#74897.
+              Le mot « لاب » planterait le prerender au build (lookupType: 5 - substFormat: 3).
+              On garde donc la marque en latin « SkemaLab » ici. */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "8px",
+              gap: "0px",
             }}
           >
             <span
@@ -60,7 +63,7 @@ export default function OpenGraphImage() {
                 color: "#089587",
               }}
             >
-              لاب
+              Lab
             </span>
           </div>
 

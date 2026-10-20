@@ -1,6 +1,6 @@
 import Image from "next/image";
 import clsx from "clsx";
-import firstLogo from "@/assets/first-logo.png";
+import brandLogo from "@/assets/logo2.png";
 
 export default function BrandMark({
   className = "",
@@ -11,7 +11,7 @@ export default function BrandMark({
 }) {
   const mark = (
     <Image
-      src={firstLogo}
+      src={brandLogo}
       alt="SkemaLab — سكيما لاب"
       className={clsx(
         "w-auto object-contain transition-all duration-300 drop-shadow-[0_2px_12px_rgba(8,149,135,0.22)]",
@@ -37,4 +37,3 @@ export default function BrandMark({
     </a>
   );
 }
-
