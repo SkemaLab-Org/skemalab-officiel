@@ -8,7 +8,7 @@ export default function JsonLd() {
     name: siteConfig.name,
     legalName: siteConfig.legalName,
     url: siteConfig.url,
-    logo: `${siteConfig.url}/first-logo.png`,
+    logo: `${siteConfig.url}/logo2.png`,
     image: `${siteConfig.url}/opengraph-image`,
     description: siteConfig.description,
     email: contactInfo.email,

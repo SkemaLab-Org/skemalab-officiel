@@ -53,8 +53,8 @@ export const TEAM_MEMBERS = [
 export const BRAND_CONFIG = {
   name: "SkemaLab Agency",
   tagline: "Build · Grow · Automate",
-  logoUrl: "https://i.imgur.com/NSFMNT7.png",
-  localLogoUrl: "/first-logo.png",
+  logoUrl: "https://www.skemalab.com/logo2.png",
+  localLogoUrl: "/logo2.png",
   brandColor: "#089587",
   brandAccent: "#0d655c",
   brandDark: "#0b0f0e",
@@ -70,7 +70,8 @@ export const BRAND_CONFIG = {
 function generateExecutiveTemplate(data, options = {}) {
   const isProd = options.useProdUrls !== false;
   const avatarSrc = data.avatar || "https://i.imgur.com/t5DqN7J.jpeg";
-  const logoSrc = isProd ? (options.logoUrl || "https://i.imgur.com/NSFMNT7.png") : "https://i.imgur.com/NSFMNT7.png";
+  const logoSrc =
+    options.logoUrl || (isProd ? BRAND_CONFIG.logoUrl : BRAND_CONFIG.localLogoUrl);
   const showAddress = options.showAddress ?? true;
   const showDisclaimer = options.showDisclaimer ?? false;
 
@@ -232,7 +233,8 @@ function generateExecutiveTemplate(data, options = {}) {
 function generateModernStudioTemplate(data, options = {}) {
   const isProd = options.useProdUrls !== false;
   const avatarSrc = data.avatar || "https://i.imgur.com/t5DqN7J.jpeg";
-  const logoSrc = isProd ? (options.logoUrl || "https://i.imgur.com/NSFMNT7.png") : "https://i.imgur.com/NSFMNT7.png";
+  const logoSrc =
+    options.logoUrl || (isProd ? BRAND_CONFIG.logoUrl : BRAND_CONFIG.localLogoUrl);
   const showBooking = options.showBooking ?? true;
 
   return `<table cellpadding="0" cellspacing="0" border="0" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.4; color: #0b0f0e; border-collapse: collapse; max-width: 600px; background-color: #ffffff; border: 1px solid #d5e5e2; border-radius: 12px; box-shadow: 0 4px 16px rgba(15, 46, 42, 0.06);">
@@ -344,7 +346,8 @@ function generateModernStudioTemplate(data, options = {}) {
 function generateDarkExecutiveTemplate(data, options = {}) {
   const isProd = options.useProdUrls !== false;
   const avatarSrc = data.avatar || "https://i.imgur.com/t5DqN7J.jpeg";
-  const logoSrc = isProd ? (options.logoUrl || "https://i.imgur.com/NSFMNT7.png") : "https://i.imgur.com/NSFMNT7.png";
+  const logoSrc =
+    options.logoUrl || (isProd ? BRAND_CONFIG.logoUrl : BRAND_CONFIG.localLogoUrl);
 
   return `<table cellpadding="0" cellspacing="0" border="0" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.4; color: #ffffff; background-color: #0b0f0e; border: 1px solid #0f2e2a; border-radius: 12px; max-width: 600px; border-collapse: collapse; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);">
   <tr>

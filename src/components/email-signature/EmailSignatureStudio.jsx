@@ -63,10 +63,19 @@ export default function EmailSignatureStudio() {
   const activeTemplate =
     TEMPLATES.find((t) => t.id === activeTemplateId) || TEMPLATES[0];
 
-  // Render signature HTML string
+  // Render signature HTML string (absolute URLs — used for copy & export)
   const signatureHtml = activeTemplate.generator(formData, {
     useProdUrls,
     logoUrl: useProdUrls ? BRAND_CONFIG.logoUrl : BRAND_CONFIG.localLogoUrl,
+    showBooking,
+    showAddress: true,
+    showDisclaimer,
+  });
+
+  // Preview variant: local asset so the studio renders before /logo2.png is deployed
+  const previewHtml = activeTemplate.generator(formData, {
+    useProdUrls: false,
+    logoUrl: BRAND_CONFIG.localLogoUrl,
     showBooking,
     showAddress: true,
     showDisclaimer,
@@ -107,22 +116,29 @@ export default function EmailSignatureStudio() {
     }
   };
 
-  // Fallback copy by selecting DOM node
+  // Fallback copy by selecting a hidden node built from the export HTML
+  // (uses signatureHtml, not the preview, so relative /logo2.png never leaks into the copied signature)
   const copyViaDomSelection = () => {
-    if (!signaturePreviewRef.current) return;
+    if (typeof document === "undefined") return;
+    const host = document.createElement("div");
+    host.setAttribute("aria-hidden", "true");
+    host.style.cssText = "position:fixed;left:-9999px;top:0;opacity:0;";
+    host.innerHTML = signatureHtml;
+    document.body.appendChild(host);
     const range = document.createRange();
-    range.selectNode(signaturePreviewRef.current);
+    range.selectNode(host);
     const selection = window.getSelection();
     if (selection) {
       selection.removeAllRanges();
       selection.addRange(range);
       try {
         document.execCommand("copy");
-        selection.removeAllRanges();
       } catch (e) {
         console.error("execCommand copy error", e);
       }
+      selection.removeAllRanges();
     }
+    host.remove();
   };
 
   // Copy Raw HTML Code
@@ -551,7 +567,7 @@ export default function EmailSignatureStudio() {
                       <div className="pt-4 border-t border-dashed border-[#d3dedb] dark:border-[#1e3430]">
                         <div
                           ref={signaturePreviewRef}
-                          dangerouslySetInnerHTML={{ __html: signatureHtml }}
+                          dangerouslySetInnerHTML={{ __html: previewHtml }}
                           className="select-all overflow-x-auto py-2"
                         />
                       </div>
@@ -563,7 +579,7 @@ export default function EmailSignatureStudio() {
                 <div className="flex items-center justify-center p-6 sm:p-10 bg-white">
                   <div
                     ref={signaturePreviewRef}
-                    dangerouslySetInnerHTML={{ __html: signatureHtml }}
+                    dangerouslySetInnerHTML={{ __html: previewHtml }}
                     className="select-all overflow-x-auto"
                   />
                 </div>
