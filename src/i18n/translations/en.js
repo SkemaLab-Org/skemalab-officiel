@@ -470,7 +470,7 @@ export const en = {
         title: "Expansion & International Reference",
         subtitle: "The technology partner for ambitious companies",
         description:
-          "With over 40 major projects delivered, a 98% satisfaction rate and a solid international portfolio, SkemaLab has become the digital studio that turns technology into a lever of sovereignty and hyper-growth.",
+          "With over 40 major projects delivered, a 100% satisfaction rate and a solid international portfolio, SkemaLab has become the digital studio that turns technology into a lever of sovereignty and hyper-growth.",
         tag: "Full Speed Ahead",
         highlight: "40+ successful projects · Global strategic partner",
       },

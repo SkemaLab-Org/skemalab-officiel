@@ -468,7 +468,7 @@ export const fr = {
         title: "L'Expansion & La Référence Internationale",
         subtitle: "Le partenaire technologique des entreprises ambitieuses",
         description:
-          "Avec plus de 40 projets d'envergure livrés, un taux de satisfaction de 98% et un portefeuille international solide, SkemaLab s'impose comme le studio digital qui transforme la technologie en levier de souveraineté et d'hyper-croissance.",
+          "Avec plus de 40 projets d'envergure livrés, un taux de satisfaction de 100% et un portefeuille international solide, SkemaLab s'impose comme le studio digital qui transforme la technologie en levier de souveraineté et d'hyper-croissance.",
         tag: "Cap Futur",
         highlight: "40+ projets réussis · Partenaire stratégique global",
       },
