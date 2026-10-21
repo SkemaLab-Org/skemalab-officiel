@@ -142,15 +142,14 @@ export default function Services() {
                         </div>
 
                         {/* Image Showcase with Moroccan Brand Gradient */}
-                        <div className="relative min-h-[220px] overflow-hidden border-t border-line sm:min-h-[260px] lg:min-h-full lg:border-l lg:border-t-0">
+                        <div className="relative min-h-[220px] overflow-hidden border-t border-line bg-page sm:min-h-[260px] lg:min-h-full lg:border-l lg:border-t-0">
                           <Image
                             src={service.image}
                             alt={service.title}
                             fill
-                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                            className="object-fill"
                             sizes="(max-width: 1024px) 100vw, 40vw"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-surface/70 via-surface/15 to-transparent lg:bg-gradient-to-l lg:from-surface/40" />
 
                           {/* Moroccan Architectural Tag Overlay */}
                           <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">

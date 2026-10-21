@@ -2,16 +2,15 @@
 
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { aboutContent } from "@/data/content";
+import agencyImage from "@/assets/home-imgs/lagence.webp";
 import { useI18n } from "@/components/I18nProvider";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import { MoroccanZelligeLattice, LuxuryRibbonMotif, MoroccanCornerOrnament } from "@/components/ui/MoroccanPattern";
-import LuxuryPictogram from "@/components/ui/LuxuryPictogram";
 
 export default function About() {
-  const { t, isRTL, locale } = useI18n();
+  const { t, locale } = useI18n();
 
   return (
     <section
@@ -47,52 +46,13 @@ export default function About() {
 
             <div className="relative overflow-hidden rounded-[4px] shadow-2xl">
               <div className="relative aspect-[5/6] overflow-hidden sm:aspect-[4/5]">
-                <div className="absolute inset-[-14%]">
-                  <Image
-                    src={aboutContent.image}
-                    alt={t.aboutHome.imageAlt}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 45vw"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-page/90 via-page/20 to-transparent" />
-              </div>
-
-              {/* Moroccan Heritage Badge Stamp */}
-              <div className="absolute left-3 top-3 flex items-center gap-2 rounded-[3px] border border-white/30 bg-[#0f2e2a]/85 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] text-white shadow-md backdrop-blur-md sm:left-5 sm:top-5 sm:text-[11px]">
-                <span>🇲🇦</span>
-                <span>{locale === "ar" ? "أصالة مغربية · أفق دولي" : "Ancrage Marocain · Vision Globale"}</span>
-              </div>
-
-              {/* Bottom Promise Card */}
-              <div className="absolute bottom-3 left-3 right-3 rounded-[3px] border border-line bg-surface/95 p-4 shadow-lg backdrop-blur-xl sm:bottom-5 sm:left-5 sm:right-5 sm:p-5">
-                <div className="flex items-center gap-2 text-accent">
-                  <span className="h-1.5 w-1.5 rotate-45 bg-accent" />
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] sm:text-[11px] sm:tracking-[0.26em]">
-                    {t.aboutHome.promiseEyebrow}
-                  </p>
-                </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-fg/90 sm:mt-2 sm:text-sm">
-                  {t.aboutHome.promiseText}
-                </p>
-              </div>
-            </div>
-
-            {/* Floating Metric Badge */}
-            <div
-              className={`absolute -bottom-6 ${
-                isRTL ? "-left-4" : "-right-4"
-              } hidden rounded-[4px] border border-brand/40 bg-surface/95 p-4 shadow-[0_12px_32px_rgba(8,149,135,0.18)] backdrop-blur-xl sm:block`}
-            >
-              <div className="flex items-center gap-3">
-                <LuxuryPictogram type="morocco-seal" size="sm" glow={true} />
-                <div>
-                  <p className="font-mono text-base font-bold text-fg">Essaouira · Maroc</p>
-                  <p className="text-[10px] uppercase tracking-wider text-muted">
-                    {locale === "ar" ? "استوديو هندسي متكامل" : "Engineering Hub Europe & MENA"}
-                  </p>
-                </div>
+                <Image
+                  src={agencyImage}
+                  alt={t.aboutHome.imageAlt}
+                  fill
+                  className="object-fill"
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                />
               </div>
             </div>
           </div>

@@ -1,3 +1,12 @@
+import devArticleImage from "@/assets/home-imgs/dev-article.webp";
+import marketingArticleImage from "@/assets/home-imgs/marketing-article.webp";
+import automationArticleImage from "@/assets/home-imgs/automation-article.webp";
+import saasImage from "@/assets/home-imgs/saas-b2b.webp";
+import refonteImage from "@/assets/home-imgs/refonte-ecom.webp";
+import engineImage from "@/assets/home-imgs/engine-d'acquise.webp";
+import crmImage from "@/assets/home-imgs/automation-crm.webp";
+import dashboardImage from "@/assets/home-imgs/dashboard-data.webp";
+
 export const en = {
   meta: {
     title: "Skemalab | Web Development, Digital Marketing & Automation",
@@ -50,10 +59,7 @@ export const en = {
         "APIs, CRM & business systems",
         "Performance, security & maintenance",
       ],
-      image:
-        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600",
-      heroImage:
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=70",
+      image: devArticleImage,
       heroLabel: "01 — Build",
       heroHeadline: "Digital products that accelerate your business.",
       heroText:
@@ -72,9 +78,7 @@ export const en = {
         "Funnels & conversion",
       ],
       image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600",
-      heroImage:
-        "https://images.unsplash.com/photo-1543286386-2e659306cd6c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        marketingArticleImage,
       heroLabel: "02 — Grow",
       heroHeadline: "ROI-driven digital acquisition.",
       heroText:
@@ -93,9 +97,7 @@ export const en = {
         "Automated reporting",
       ],
       image:
-        "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1600",
-      heroImage:
-        "https://images.unsplash.com/photo-1698434156088-a80e7bcdd198?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        automationArticleImage,
       heroLabel: "03 — Automate",
       heroHeadline: "Smart workflows that free up your teams.",
       heroText:
@@ -171,36 +173,31 @@ export const en = {
         title: "B2B SaaS Platform",
         category: "Development",
         result: "+48% user activation",
-        image:
-          "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400",
+        image: saasImage,
       },
       {
         title: "E-commerce rebuild",
         category: "Web & UX",
         result: "+62% conversion rate",
-        image:
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1400",
+        image: refonteImage,
       },
       {
         title: "Acquisition engine",
         category: "Marketing",
         result: "3.2× qualified leads / month",
-        image:
-          "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1400",
+        image: engineImage,
       },
       {
         title: "CRM automation",
         category: "Workflows",
         result: "18h saved per week",
-        image:
-          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400",
+        image: crmImage,
       },
       {
         title: "Data dashboard",
         category: "AI & Data",
         result: "Real-time decisions",
-        image:
-          "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1400",
+        image: dashboardImage,
       },
     ],
   },
@@ -221,12 +218,12 @@ export const en = {
     promiseText:
       "No decorative projects. Digital systems that create measurable value.",
     cta: "Talk to an expert",
-    imageAlt: "Skemalab team collaborating",
+    imageAlt: "Skemalab, your digital growth partner",
     pillars: [
-      ["Mission", "Blend tech, marketing and automation to scale."],
-      ["Approach", "Precise diagnosis, fast execution, tracked ROI."],
-      ["Teams", "Product, design, growth & automation."],
-      ["Model", "Long-term partnership, not one-off delivery."],
+      [ "Mission", "Blend tech, marketing and automation to scale." ],
+      [ "Approach", "Precise diagnosis, fast execution, tracked ROI." ],
+      [ "Teams", "Product, design, growth & automation." ],
+      [ "Model", "Long-term partnership, not one-off delivery." ],
     ],
   },
 
@@ -365,21 +362,21 @@ export const en = {
         name: "Build",
         title: "Custom Development & SaaS",
         desc: "Web and mobile applications, Next.js architectures, business platforms and robust API integrations built to convert, scale and last.",
-        tags: ["Next.js", "React", "APIs & Microservices", "Cloud"],
+        tags: [ "Next.js", "React", "APIs & Microservices", "Cloud" ],
       },
       {
         num: "02",
         name: "Grow",
         title: "Digital Marketing & ROI Acquisition",
         desc: "Acquisition strategies focused on direct profitability: technical SEO, high-converting sales funnels, targeted campaigns and premium branding.",
-        tags: ["SEO / SEA", "Sales funnels", "Growth", "Data analytics"],
+        tags: [ "SEO / SEA", "Sales funnels", "Growth", "Data analytics" ],
       },
       {
         num: "03",
         name: "Automate",
         title: "Smart Workflows & AI Agents",
         desc: "Radical removal of repetitive tasks, interconnection of your SaaS tools and AI assistant integration to multiply productivity.",
-        tags: ["n8n & Make", "AI agents & LLMs", "Auto CRM", "24/7 Workflows"],
+        tags: [ "n8n & Make", "AI agents & LLMs", "Auto CRM", "24/7 Workflows" ],
       },
     ],
 

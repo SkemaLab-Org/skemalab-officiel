@@ -20,15 +20,12 @@ import {
 } from "lucide-react";
 import {
   TEAM_MEMBERS,
-  BRAND_CONFIG,
   TEMPLATES,
 } from "./signatureTemplates";
 
 export default function EmailSignatureStudio() {
   const [activeTemplateId, setActiveTemplateId] = useState("executive");
   const [formData, setFormData] = useState({ ...TEAM_MEMBERS[0] });
-  const [useProdUrls] = useState(true);
-  const [showBooking] = useState(true);
   const [showDisclaimer] = useState(false);
   const [copiedRich, setCopiedRich] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
@@ -63,82 +60,78 @@ export default function EmailSignatureStudio() {
   const activeTemplate =
     TEMPLATES.find((t) => t.id === activeTemplateId) || TEMPLATES[0];
 
-  // Render signature HTML string (absolute URLs — used for copy & export)
+  // Use one generated signature for the preview and every export path.
   const signatureHtml = activeTemplate.generator(formData, {
-    useProdUrls,
-    logoUrl: useProdUrls ? BRAND_CONFIG.logoUrl : BRAND_CONFIG.localLogoUrl,
-    showBooking,
-    showAddress: true,
-    showDisclaimer,
-  });
-
-  // Preview variant: local asset so the studio renders before /logo2.png is deployed
-  const previewHtml = activeTemplate.generator(formData, {
-    useProdUrls: false,
-    logoUrl: BRAND_CONFIG.localLogoUrl,
-    showBooking,
     showAddress: true,
     showDisclaimer,
   });
 
   // 1-Click Copy for Gmail (Rich HTML clipboard)
   const handleCopyForGmail = async () => {
+    let copied = false;
+
     try {
       if (typeof window !== "undefined" && window.navigator?.clipboard) {
         const blobHtml = new Blob([signatureHtml], { type: "text/html" });
         const plainText = `${formData.name}\n${formData.role} - SkemaLab\nEmail: ${formData.email}\nTél: ${formData.phone}\nWeb: ${formData.websiteUrl}\n${formData.tagline}`;
         const blobText = new Blob([plainText], { type: "text/plain" });
 
-        // Try standard modern ClipboardItem with HTML
         if (typeof ClipboardItem !== "undefined") {
           const item = new ClipboardItem({
             "text/html": blobHtml,
             "text/plain": blobText,
           });
           await navigator.clipboard.write([item]);
+          copied = true;
         } else {
-          // Fallback selection copy
-          copyViaDomSelection();
+          copied = copyViaDomSelection();
         }
       } else {
-        copyViaDomSelection();
+        copied = copyViaDomSelection();
       }
-
-      setCopiedRich(true);
-      flashStatus("Signature copiée avec succès ! Collez (Ctrl+V) dans Gmail.");
-      setTimeout(() => setCopiedRich(false), 4000);
     } catch (err) {
       console.warn("ClipboardItem write failed, using fallback selection copy", err);
-      copyViaDomSelection();
-      setCopiedRich(true);
-      flashStatus("✨ Signature copiée ! Vous pouvez la coller dans Gmail.");
-      setTimeout(() => setCopiedRich(false), 4000);
+      copied = copyViaDomSelection();
     }
+
+    if (!copied) {
+      flashStatus("La copie a échoué. Vérifiez les autorisations du presse-papiers de votre navigateur.");
+      return;
+    }
+
+    setCopiedRich(true);
+    flashStatus("Signature copiée avec succès ! Collez (Ctrl+V) dans Gmail.");
+    setTimeout(() => setCopiedRich(false), 4000);
   };
 
-  // Fallback copy by selecting a hidden node built from the export HTML
-  // (uses signatureHtml, not the preview, so relative /logo2.png never leaks into the copied signature)
+  // Fallback copy by selecting a temporary node built from the export HTML.
   const copyViaDomSelection = () => {
-    if (typeof document === "undefined") return;
+    if (typeof document === "undefined") return false;
     const host = document.createElement("div");
     host.setAttribute("aria-hidden", "true");
     host.style.cssText = "position:fixed;left:-9999px;top:0;opacity:0;";
     host.innerHTML = signatureHtml;
     document.body.appendChild(host);
     const range = document.createRange();
-    range.selectNode(host);
+    range.selectNodeContents(host);
     const selection = window.getSelection();
-    if (selection) {
+
+    if (!selection) {
+      host.remove();
+      return false;
+    }
+
+    try {
       selection.removeAllRanges();
       selection.addRange(range);
-      try {
-        document.execCommand("copy");
-      } catch (e) {
-        console.error("execCommand copy error", e);
-      }
+      return document.execCommand("copy");
+    } catch (error) {
+      console.error("Fallback signature copy failed", error);
+      return false;
+    } finally {
       selection.removeAllRanges();
+      host.remove();
     }
-    host.remove();
   };
 
   // Copy Raw HTML Code
@@ -150,6 +143,7 @@ export default function EmailSignatureStudio() {
       setTimeout(() => setCopiedCode(false), 3000);
     } catch (e) {
       console.error(e);
+      flashStatus("Impossible de copier le code HTML. Vérifiez les autorisations du presse-papiers.");
     }
   };
 
@@ -260,8 +254,6 @@ export default function EmailSignatureStudio() {
                       tagline: "Build · Grow · Automate",
                       avatar: "https://i.imgur.com/t5DqN7J.jpeg",
                       localAvatar: "https://i.imgur.com/t5DqN7J.jpeg",
-                      bookingUrl: "https://calendly.com",
-                      bookingLabel: "Réserver un appel",
                       address: "Essaouira, Maroc • International",
                     })
                   }
@@ -567,7 +559,7 @@ export default function EmailSignatureStudio() {
                       <div className="pt-4 border-t border-dashed border-[#d3dedb] dark:border-[#1e3430]">
                         <div
                           ref={signaturePreviewRef}
-                          dangerouslySetInnerHTML={{ __html: previewHtml }}
+                          dangerouslySetInnerHTML={{ __html: signatureHtml }}
                           className="select-all overflow-x-auto py-2"
                         />
                       </div>
@@ -579,7 +571,7 @@ export default function EmailSignatureStudio() {
                 <div className="flex items-center justify-center p-6 sm:p-10 bg-white">
                   <div
                     ref={signaturePreviewRef}
-                    dangerouslySetInnerHTML={{ __html: previewHtml }}
+                    dangerouslySetInnerHTML={{ __html: signatureHtml }}
                     className="select-all overflow-x-auto"
                   />
                 </div>

@@ -1,3 +1,12 @@
+import devArticleImage from "@/assets/home-imgs/dev-article.webp";
+import marketingArticleImage from "@/assets/home-imgs/marketing-article.webp";
+import automationArticleImage from "@/assets/home-imgs/automation-article.webp";
+import saasImage from "@/assets/home-imgs/saas-b2b.webp";
+import refonteImage from "@/assets/home-imgs/refonte-ecom.webp";
+import engineImage from "@/assets/home-imgs/engine-d'acquise.webp";
+import crmImage from "@/assets/home-imgs/automation-crm.webp";
+import dashboardImage from "@/assets/home-imgs/dashboard-data.webp";
+
 export const ar = {
   meta: {
     title: "سكيما لاب | تطوير الويب، التسويق الرقمي والأتمتة الذكية",
@@ -50,10 +59,7 @@ export const ar = {
         "أنظمة الربط البرمجي APIs وأنظمة CRM",
         "أعلى درجات الأداء، الأمان والصيانة",
       ],
-      image:
-        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600",
-      heroImage:
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=70",
+      image: devArticleImage,
       heroLabel: "01 — بناء (Build)",
       heroHeadline: "منتجات رقمية تسرّع نمو أعمالك ومبيعاتك.",
       heroText:
@@ -72,9 +78,7 @@ export const ar = {
         "مسارات التحويل ومضاعفة المبيعات (Funnels)",
       ],
       image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600",
-      heroImage:
-        "https://images.unsplash.com/photo-1543286386-2e659306cd6c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        marketingArticleImage,
       heroLabel: "02 — نمو (Grow)",
       heroHeadline: "استقطاب عملاء رقمي يركز على العائد المالي المباشر.",
       heroText:
@@ -93,9 +97,7 @@ export const ar = {
         "تقارير ولوحات بيانات مؤتمتة لحظياً",
       ],
       image:
-        "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1600",
-      heroImage:
-        "https://images.unsplash.com/photo-1698434156088-a80e7bcdd198?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        automationArticleImage,
       heroLabel: "03 — أتمتة (Automate)",
       heroHeadline: "مسارات عمل ذكية تحرر طاقات فريقك.",
       heroText:
@@ -171,36 +173,31 @@ export const ar = {
         title: "منصة SaaS موجهة للشركات (B2B)",
         category: "تطوير برمجي",
         result: "+48% في تفعيل المستخدمين",
-        image:
-          "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400",
+        image: saasImage,
       },
       {
         title: "تطوير شامل لمتجر إلكتروني",
         category: "ويب وتجربة مستخدم",
         result: "+62% في معدل التحويل والمبيعات",
-        image:
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1400",
+        image: refonteImage,
       },
       {
         title: "محرك رقمي لاستقطاب العملاء",
         category: "تسويق ونمو",
         result: "3.2× عملاء محتملين مؤهلين شهرياً",
-        image:
-          "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1400",
+        image: engineImage,
       },
       {
         title: "أتمتة شاملة لنظام إدارة العملاء (CRM)",
         category: "مسارات عمل مؤتمتة",
         result: "18 ساعة تم توفيرها أسبوعياً",
-        image:
-          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400",
+        image: crmImage,
       },
       {
         title: "لوحة تحكم ذكية للبيانات والتحليلات",
         category: "ذكاء اصطناعي وبيانات",
         result: "اتخاذ القرارات في الوقت الفعلي",
-        image:
-          "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1400",
+        image: dashboardImage,
       },
     ],
   },
@@ -221,12 +218,12 @@ export const ar = {
     promiseText:
       "لا نبتكر مجرد مشاريع شكلية، بل نبني أنظمة رقمية متكاملة تخلق قيمة تجارية وتشغيلية قابلة للقياس.",
     cta: "تحدث مع خبير متخصص",
-    imageAlt: "فريق سكيما لاب أثناء العمل المشترك",
+    imageAlt: "سكيما لاب، شريككم للنمو الرقمي",
     pillars: [
-      ["الرسالة", "دمج التكنولوجيا والتسويق والأتمتة لتوسيع نطاق الأعمال."],
-      ["المنهجية", "تشخيص دقيق، تنفيذ فائق السرعة، ومتابعة العائد الاستثماري."],
-      ["فريق العمل", "خبراء في بناء المنتجات، التصميم، النمو والأتمتة."],
-      ["النموذج", "شراكة استراتيجية طويلة الأمد وليست مجرد خدمات مؤقتة."],
+      [ "الرسالة", "دمج التكنولوجيا والتسويق والأتمتة لتوسيع نطاق الأعمال." ],
+      [ "المنهجية", "تشخيص دقيق، تنفيذ فائق السرعة، ومتابعة العائد الاستثماري." ],
+      [ "فريق العمل", "خبراء في بناء المنتجات، التصميم، النمو والأتمتة." ],
+      [ "النموذج", "شراكة استراتيجية طويلة الأمد وليست مجرد خدمات مؤقتة." ],
     ],
   },
 
@@ -364,21 +361,21 @@ export const ar = {
         name: "Build",
         title: "تطوير البرمجيات ومنصات SaaS مخصصة",
         desc: "تطبيقات ويب وهواتف ذكية، معماريات Next.js حديثة، منصات أعمال متطورة، وتكامل واجهات برمجية آمنة مصممة للتحويل والتوسع المستمر.",
-        tags: ["Next.js", "React", "APIs & Microservices", "Cloud"],
+        tags: [ "Next.js", "React", "APIs & Microservices", "Cloud" ],
       },
       {
         num: "02",
         name: "Grow",
         title: "التسويق الرقمي واستقطاب العملاء بعائد استثماري",
         desc: "استراتيجيات استقطاب عملاء موجهة مباشرة نحو الربحية: تحسين محركات البحث، مسارات مبيعات عالية التحويل، وحملات تسويقية متقدمة.",
-        tags: ["SEO / SEA", "مسارات المبيعات", "Growth", "تحليل البيانات"],
+        tags: [ "SEO / SEA", "مسارات المبيعات", "Growth", "تحليل البيانات" ],
       },
       {
         num: "03",
         name: "Automate",
         title: "مسارات عمل ذكية وروبوتات ذكاء اصطناعي",
         desc: "إلغاء جذري للمهام اليدوية المتكررة، ربط أدواتك السحابية معاً، ونشر روبوتات ذكاء اصطناعي لمضاعفة كفاءة وإنتاجية فريقك.",
-        tags: ["n8n & Make", "وكلاء الذكاء الاصطناعي", "أتمتة CRM", "مسارات 24/7"],
+        tags: [ "n8n & Make", "وكلاء الذكاء الاصطناعي", "أتمتة CRM", "مسارات 24/7" ],
       },
     ],
 

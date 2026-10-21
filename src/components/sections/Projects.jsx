@@ -94,20 +94,13 @@ export default function Projects() {
                 className="relative grid lg:grid-cols-[1.35fr_0.85fr]"
               >
                 <div className="relative min-h-[240px] overflow-hidden sm:min-h-[380px] lg:min-h-[480px]">
-                  <motion.div
-                    initial={reduceMotion ? false : { scale: 1.06 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute inset-0"
-                  >
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 60vw"
-                    />
-                  </motion.div>
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-fill"
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-page/90 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-surface/95" />
 
                   {/* Category Pill with Moroccan Accent */}
@@ -176,8 +169,8 @@ export default function Projects() {
                   src={item.image}
                   alt=""
                   fill
-                  className={`object-cover transition-all duration-500 ${
-                    i === index ? "opacity-100 scale-105" : "opacity-55 group-hover:opacity-85"
+                  className={`object-fill transition-opacity duration-500 ${
+                    i === index ? "opacity-100" : "opacity-55 group-hover:opacity-85"
                   }`}
                   sizes="200px"
                 />

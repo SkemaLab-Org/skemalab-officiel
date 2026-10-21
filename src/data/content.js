@@ -13,8 +13,6 @@ export const services = [
     ],
     image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600",
-    heroImage:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=70",
     heroLabel: "01 — Build",
     heroHeadline: "Des produits digitaux qui accélèrent votre business.",
     heroText:
@@ -34,8 +32,6 @@ export const services = [
     ],
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600",
-    heroImage:
-      "https://images.unsplash.com/photo-1543286386-2e659306cd6c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     heroLabel: "02 — Grow",
     heroHeadline: "Une acquisition digitale orientée ROI.",
     heroText:
@@ -55,8 +51,6 @@ export const services = [
     ],
     image:
       "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1600",
-    heroImage:
-      "https://images.unsplash.com/photo-1698434156088-a80e7bcdd198?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     heroLabel: "03 — Automate",
     heroHeadline: "Des workflows intelligents qui libèrent vos équipes.",
     heroText:
@@ -183,10 +177,10 @@ export const aboutContent = {
   image:
     "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400",
   pillars: [
-    ["Mission", "Allier tech, marketing et automation pour scaler."],
-    ["Approche", "Diagnostic précis, exécution rapide, ROI suivi."],
-    ["Équipes", "Produit, design, growth & automation."],
-    ["Modèle", "Partenariat long terme, pas livraison jetable."],
+    [ "Mission", "Allier tech, marketing et automation pour scaler." ],
+    [ "Approche", "Diagnostic précis, exécution rapide, ROI suivi." ],
+    [ "Équipes", "Produit, design, growth & automation." ],
+    [ "Modèle", "Partenariat long terme, pas livraison jetable." ],
   ],
 };
 
@@ -257,7 +251,7 @@ export const contactInfo = {
   phone: "+212 6 99 99 57 54",
   whatsapp: "212699995754",
   linkedin: "https://www.linkedin.com/company/skemalab",
-  locations: ["Essaouira", "Maroc"],
+  locations: [ "Essaouira", "Maroc" ],
 };
 
 export const siteConfig = {
