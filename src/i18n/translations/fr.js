@@ -204,7 +204,7 @@ export const fr = {
 
   statsList: [
     { value: 40, suffix: "+", label: "Projets livrés" },
-    { value: 98, suffix: "%", label: "Clients satisfaits" },
+    { value: 100, suffix: "%", label: "Clients satisfaits" },
     { value: 5, suffix: "h", label: "Économisées / jour en moyenne" },
     { value: 3, suffix: "×", label: "Accélération des process" },
   ],

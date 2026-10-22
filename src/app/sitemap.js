@@ -17,23 +17,23 @@ export default function sitemap() {
         },
       },
       images: [
-        `${baseUrl}/opengraph-image`,
-        `${baseUrl}/icon.png`,
+        `${ baseUrl }/opengraph-image`,
+        `${ baseUrl }/favicon.ico`,
       ],
     },
     {
-      url: `${baseUrl}/about`,
+      url: `${ baseUrl }/about`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.8,
       alternates: {
         languages: {
-          fr: `${baseUrl}/about`,
-          "x-default": `${baseUrl}/about`,
+          fr: `${ baseUrl }/about`,
+          "x-default": `${ baseUrl }/about`,
         },
       },
       images: [
-        `${baseUrl}/opengraph-image`,
+        `${ baseUrl }/opengraph-image`,
       ],
     },
   ];

@@ -204,7 +204,7 @@ export const en = {
 
   statsList: [
     { value: 40, suffix: "+", label: "Projects delivered" },
-    { value: 98, suffix: "%", label: "Satisfied clients" },
+    { value: 100, suffix: "%", label: "Satisfied clients" },
     { value: 5, suffix: "h", label: "Saved / day on average" },
     { value: 3, suffix: "×", label: "Process acceleration" },
   ],

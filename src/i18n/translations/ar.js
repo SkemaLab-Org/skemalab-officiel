@@ -204,7 +204,7 @@ export const ar = {
 
   statsList: [
     { value: 40, suffix: "+", label: "مشروعاً ناجحاً تم تسليمه" },
-    { value: 98, suffix: "%", label: "نسبة رضا عملائنا" },
+    { value: 100, suffix: "%", label: "نسبة رضا عملائنا" },
     { value: 5, suffix: "س", label: "ساعات موفرة يومياً في المتوسط" },
     { value: 3, suffix: "×", label: "مضاعفة سرعة إنجاز العمليات" },
   ],

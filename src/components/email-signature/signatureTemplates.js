@@ -45,7 +45,7 @@ export const TEAM_MEMBERS = [
 ];
 
 export const BRAND_CONFIG = {
-  logoUrl: "https://i.imgur.com/GR4uc50.png",
+  logoUrl: "https://i.imgur.com/10bcsyJ.png",
 };
 
 const DEFAULT_AVATAR_URL = "https://i.imgur.com/t5DqN7J.jpeg";
