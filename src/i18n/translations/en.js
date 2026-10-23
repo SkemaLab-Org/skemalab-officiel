@@ -128,6 +128,20 @@ export const en = {
     ],
   },
 
+  aboutIntro: {
+    eyebrow: "Skemalab · Independent digital studio",
+    title: "We turn ambitious ideas into",
+    highlight: "sustainable growth.",
+    description: "Skemalab is a digital studio based in Essaouira, bringing together business strategy, web development and intelligent automation. We build useful, elegant experiences and systems designed to deliver tangible results.",
+    secondary: "From the first conversation to launch, we support brands that want to move forward with clarity, high standards and a long-term vision.",
+    imageAlt: "Skemalab creative workspace",
+    imageCaption: "Essaouira · Morocco",
+    foundedBy: "Founded by",
+    founderStatus: "Chief Executive Officer & Business Strategy",
+    roleSuffix: "· Founder & CEO",
+    cta: "Discover our story",
+  },
+
   processSection: {
     eyebrow: "Method",
     title: "A clear approach, from diagnosis to ROI.",

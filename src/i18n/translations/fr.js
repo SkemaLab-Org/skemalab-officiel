@@ -128,6 +128,20 @@ export const fr = {
     ],
   },
 
+  aboutIntro: {
+    eyebrow: "Skemalab · Studio digital indépendant",
+    title: "Nous transformons les idées ambitieuses en",
+    highlight: "croissance durable.",
+    description: "Skemalab est un studio digital basé à Essaouira qui réunit stratégie business, développement web et automatisation intelligente. Nous concevons des expériences et des systèmes utiles, élégants et pensés pour produire des résultats concrets.",
+    secondary: "Du premier cadrage au déploiement, notre équipe accompagne les marques qui veulent avancer avec clarté, exigence et une vraie vision à long terme.",
+    imageAlt: "Espace de travail créatif de Skemalab",
+    imageCaption: "Essaouira · Maroc",
+    foundedBy: "Fondé par",
+    founderStatus: "Chief Executive Officer & Stratégie Business",
+    roleSuffix: "· Fondateur & CEO",
+    cta: "Découvrir notre histoire",
+  },
+
   processSection: {
     eyebrow: "Méthode",
     title: "Une approche claire, du diagnostic au ROI.",
