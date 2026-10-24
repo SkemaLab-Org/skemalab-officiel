@@ -47,6 +47,12 @@ export default function EmailSignatureStudio() {
       if (field === "whatsapp") {
         updated.whatsappClean = value.replace(/[^0-9]/g, "");
       }
+      if (field === "githubUrl") {
+        updated.github = value
+          .trim()
+          .replace(/^https?:\/\//i, "")
+          .replace(/\/+$/, "");
+      }
       return updated;
     });
   };
@@ -60,11 +66,19 @@ export default function EmailSignatureStudio() {
   const activeTemplate =
     TEMPLATES.find((t) => t.id === activeTemplateId) || TEMPLATES[0];
 
-  // Use one generated signature for the preview and every export path.
+  // Export HTML always uses absolute production URLs so pasted signatures keep
+  // working outside the site.
   const signatureHtml = activeTemplate.generator(formData, {
     showAddress: true,
     showDisclaimer,
   });
+
+  // The on-page preview resolves assets from this site, so a member whose photo
+  // is not deployed yet still renders instead of showing alt text.
+  const previewHtml = activeTemplate.generator(
+    { ...formData, avatar: formData.localAvatar || formData.avatar },
+    { showAddress: true, showDisclaimer },
+  );
 
   // 1-Click Copy for Gmail (Rich HTML clipboard)
   const handleCopyForGmail = async () => {
@@ -199,7 +213,7 @@ export default function EmailSignatureStudio() {
                 <span className="text-[11px] font-medium text-brand">Direction SkemaLab Agency</span>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-2.5">
+              <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
                 {TEAM_MEMBERS.map((member) => {
                   const isActive = formData.name === member.name;
                   return (
@@ -207,27 +221,29 @@ export default function EmailSignatureStudio() {
                       key={member.id}
                       type="button"
                       onClick={() => handleSelectMember(member)}
-                      className={`flex items-center gap-2.5 rounded-sm border p-2.5 text-left transition-all ${isActive
+                      aria-pressed={isActive}
+                      title={`${member.name} — ${member.shortRole}`}
+                      className={`flex items-center gap-2.5 rounded-sm border p-2.5 text-left transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:flex-col sm:gap-2 sm:px-2 sm:py-3 sm:text-center ${isActive
                         ? "border-brand bg-brand/10 shadow-sm"
                         : "border-line bg-page hover:border-brand/40 hover:bg-surface"
                         }`}
                     >
-                      <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-brand/40">
+                      <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-brand/40 sm:h-11 sm:w-11">
                         <Image
                           src={member.localAvatar}
                           alt={member.name}
                           fill
                           unoptimized
                           className="object-cover"
-                          sizes="40px"
+                          sizes="(min-width: 640px) 44px, 40px"
                         />
                       </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="truncate text-xs font-bold text-fg">
+                      <div className="min-w-0 flex-1 sm:w-full sm:flex-none">
+                        <div className="text-balance text-xs font-bold leading-tight text-fg">
                           {member.name}
                         </div>
-                        <div className="truncate text-[10px] text-muted">
-                          {member.id === "feissal-tarkaoui" ? "Fondateur & CEO" : "CTO & Systèmes"}
+                        <div className="mt-0.5 text-balance text-[10px] leading-tight text-muted">
+                          {member.shortRole}
                         </div>
                       </div>
                     </button>
@@ -407,6 +423,23 @@ export default function EmailSignatureStudio() {
                   />
                 </div>
 
+                {/* GitHub (optional) */}
+                <div>
+                  <label className="block text-xs font-semibold text-fg">
+                    Profil GitHub <span className="font-normal text-muted">(optionnel)</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.githubUrl || ""}
+                    onChange={(e) => handleInputChange("githubUrl", e.target.value)}
+                    className="mt-1 w-full rounded-sm border border-line bg-page px-3 py-2 text-xs font-medium text-fg focus:border-brand focus:outline-none"
+                    placeholder="https://github.com/votre-profil"
+                  />
+                  <p className="mt-1 text-[10.5px] leading-snug text-muted">
+                    Laissez vide pour masquer la ligne GitHub dans la signature.
+                  </p>
+                </div>
+
                 {/* Tagline / Slogan */}
                 <div>
                   <label className="block text-xs font-semibold text-fg">Devise / Slogan SkemaLab</label>
@@ -520,46 +553,46 @@ export default function EmailSignatureStudio() {
               {previewMode === "gmail" ? (
                 <div className="p-4 sm:p-6 bg-[#f4f7f6] dark:bg-[#070b0a]">
                   {/* Gmail Compose Window Frame */}
-                  <div className="overflow-hidden rounded-sm border border-[#d3dedb] dark:border-[#1e3430] bg-white dark:bg-[#0d1413] shadow-md">
+                  <div className="overflow-hidden rounded-sm border border-[#d3dedb] bg-white shadow-md">
                     {/* Header bar */}
-                    <div className="flex items-center justify-between border-b border-[#e5eeec] dark:border-[#1e3430] bg-[#eef5f3] dark:bg-[#121c1b] px-4 py-2.5">
+                    <div className="flex items-center justify-between border-b border-[#e5eeec] bg-[#eef5f3] px-4 py-2.5">
                       <div className="flex items-center gap-2">
                         <Building2 className="h-3.5 w-3.5 text-brand" />
-                        <span className="text-xs font-bold text-fg">Nouveau message — Gmail Enterprise</span>
+                        <span className="text-xs font-bold text-[#1B2B28]">Nouveau message — Gmail Enterprise</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <span className="h-2.5 w-2.5 rounded-full bg-[#cbd5e1] dark:bg-[#334155]" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-[#cbd5e1] dark:bg-[#334155]" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-[#cbd5e1] dark:bg-[#334155]" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#cbd5e1]" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#cbd5e1]" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#cbd5e1]" />
                       </div>
                     </div>
 
                     {/* Meta fields */}
-                    <div className="border-b border-[#eef5f3] dark:border-[#1e3430] px-4 py-2 text-xs text-muted">
-                      <span className="font-semibold text-fg">À :</span> direction@groupe-partenaire.com
+                    <div className="border-b border-[#eef5f3] px-4 py-2 text-xs text-[#5B6B66]">
+                      <span className="font-semibold text-[#1B2B28]">À :</span> direction@groupe-partenaire.com
                     </div>
-                    <div className="border-b border-[#eef5f3] dark:border-[#1e3430] px-4 py-2 text-xs text-muted">
-                      <span className="font-semibold text-fg">Objet :</span> Partenariat Stratégique &amp; Architecture Digitale — SkemaLab
+                    <div className="border-b border-[#eef5f3] px-4 py-2 text-xs text-[#5B6B66]">
+                      <span className="font-semibold text-[#1B2B28]">Objet :</span>{" "}Partenariat Stratégique &amp; Architecture Digitale — SkemaLab
                     </div>
 
                     {/* Email Body & Signature Container */}
                     <div className="p-5 sm:p-6 space-y-4">
-                      <p className="text-xs leading-relaxed text-fg">
+                      <p className="text-xs leading-relaxed text-[#1B2B28]">
                         Bonjour,<br /><br />
                         Nous avons le plaisir de vous transmettre la proposition d&apos;accompagnement stratégique et technique élaborée pour votre organisation.<br />
                         Restant à votre entière disposition pour convenir d&apos;un point d&apos;étape.
                       </p>
 
-                      <p className="text-xs text-fg">
+                      <p className="text-xs text-[#1B2B28]">
                         Excellente journée,<br />
                         <span className="font-bold">{formData.name}</span>
                       </p>
 
                       {/* THE RENDERED SIGNATURE IN EMAIL */}
-                      <div className="pt-4 border-t border-dashed border-[#d3dedb] dark:border-[#1e3430]">
+                      <div className="pt-4 border-t border-dashed border-[#d3dedb]">
                         <div
                           ref={signaturePreviewRef}
-                          dangerouslySetInnerHTML={{ __html: signatureHtml }}
+                          dangerouslySetInnerHTML={{ __html: previewHtml }}
                           className="select-all overflow-x-auto py-2"
                         />
                       </div>
@@ -571,7 +604,7 @@ export default function EmailSignatureStudio() {
                 <div className="flex items-center justify-center p-6 sm:p-10 bg-white">
                   <div
                     ref={signaturePreviewRef}
-                    dangerouslySetInnerHTML={{ __html: signatureHtml }}
+                    dangerouslySetInnerHTML={{ __html: previewHtml }}
                     className="select-all overflow-x-auto"
                   />
                 </div>

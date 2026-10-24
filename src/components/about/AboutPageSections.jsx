@@ -17,7 +17,7 @@ import {
   Target,
   Users,
 } from "lucide-react";
-import { LinkedInIcon } from "@/components/icons/SocialIcons";
+import { LinkedInIcon, GitHubIcon } from "@/components/icons/SocialIcons";
 import {
   aboutPage,
   aboutContent,
@@ -495,8 +495,31 @@ export function AboutTimeline() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* SECTION 3 : PRÉSENTATION DES FONDATEURS (Feissal Tarkaoui & Marouan Khadiri)*/
+/* SECTION 3 : PRÉSENTATION DE L'ÉQUIPE (Feissal, Marouan & Adam)              */
 /* -------------------------------------------------------------------------- */
+function FounderCta( { founder } ) {
+  if ( founder.id === "feissal-tarkaoui" ) {
+    return (
+      <CalendlyButton className="px-4 py-2 text-xs md:w-full">
+        Planifier un échange
+      </CalendlyButton>
+    );
+  }
+
+  return (
+    <Button
+      href="/#contact"
+      variant="ghost"
+      className="min-h-10 px-4 py-2 text-xs md:w-full"
+    >
+      { founder.id === "adam-khairi"
+        ? "Discuter de votre produit"
+        : "Échanger sur l’architecture" }
+      <ArrowUpRight size={ 14 } />
+    </Button>
+  );
+}
+
 export function AboutFounders() {
   return (
     <section
@@ -524,24 +547,32 @@ export function AboutFounders() {
         </Reveal>
 
         {/* Founders Grid */ }
-        <div className="mt-16 grid gap-10 sm:mt-20 lg:grid-cols-2 lg:gap-12">
+        <div className="mt-16 grid gap-8 sm:mt-20 md:grid-cols-2 xl:grid-cols-3 xl:gap-6">
           { founders.map( ( founder, i ) => (
-            <Reveal key={ founder.id } delay={ i * 0.15 }>
+            <Reveal
+              key={ founder.id }
+              delay={ i * 0.12 }
+              className={
+                i === founders.length - 1
+                  ? "md:col-span-2 md:mx-auto md:w-[calc(50%_-_1rem)] xl:col-span-1 xl:mx-0 xl:w-full"
+                  : ""
+              }
+            >
               <div className="group relative flex h-full flex-col overflow-hidden rounded-[4px] border border-line bg-surface transition-all duration-300 hover:border-brand/50 hover:shadow-2xl">
                 {/* Top Glowing Accent Line */ }
                 <div className="h-1.5 w-full bg-gradient-to-r from-brand via-accent to-deep" />
 
-                <div className="p-6 sm:p-10">
+                <div className="flex flex-1 flex-col p-6 sm:p-8 xl:p-7">
                   {/* Founder Profile Header */ }
-                  <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
+                  <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6 md:flex-col md:items-start">
                     {/* Photo with Glowing Frame */ }
-                    <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-[3px] border-2 border-brand/30 sm:h-36 sm:w-36">
+                    <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-[3px] border-2 border-brand/30 sm:h-32 sm:w-32 md:h-36 md:w-36">
                       <Image
                         src={ founder.image }
                         alt={ founder.name }
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 640px) 120px, 160px"
+                        sizes="(max-width: 640px) 112px, (max-width: 768px) 128px, 144px"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                     </div>
@@ -551,10 +582,10 @@ export function AboutFounders() {
                         { founder.role }
                       </div>
 
-                      <h3 className="mt-2 text-2xl font-bold tracking-tight text-fg sm:text-3xl">
+                      <h3 className="mt-2 text-2xl font-bold tracking-tight text-fg sm:text-3xl md:text-2xl">
                         { founder.name }
                       </h3>
-                      <p className="mt-0.5 text-xs font-medium uppercase tracking-wider text-accent sm:text-sm">
+                      <p className="mt-0.5 text-xs font-medium uppercase tracking-wider text-accent sm:text-sm md:text-xs">
                         { founder.title }
                       </p>
 
@@ -567,37 +598,40 @@ export function AboutFounders() {
                     </div>
                   </div>
 
-                  {/* Bio Paragraph */ }
-                  <p className="mt-6 text-sm leading-relaxed text-muted sm:text-base">
-                    { founder.bio }
-                  </p>
-
-                  {/* Founder Quote */ }
-                  <div className="mt-6 rounded-[3px] border-l-2 border-brand bg-page/90 p-4">
-                    <p className="text-xs italic leading-relaxed text-fg sm:text-sm">
-                      &ldquo;{ founder.quote }&rdquo;
+                  {/* Bio, Quote & Expertise (grows to align the CTA row) */ }
+                  <div className="mt-6 flex-1">
+                    {/* Bio Paragraph */ }
+                    <p className="text-sm leading-relaxed text-muted sm:text-base md:text-sm">
+                      { founder.bio }
                     </p>
-                  </div>
 
-                  {/* Expertise Tags */ }
-                  <div className="mt-6">
-                    <p className="text-[11px] font-semibold uppercase tracking-wider text-muted/90">
-                      Domaines d’intervention :
-                    </p>
-                    <div className="mt-2.5 flex flex-wrap gap-2">
-                      { founder.expertise.map( ( exp ) => (
-                        <span
-                          key={ exp }
-                          className="rounded-[2px] border border-line bg-page px-2.5 py-1 text-xs font-medium text-fg"
-                        >
-                          { exp }
-                        </span>
-                      ) ) }
+                    {/* Founder Quote */ }
+                    <div className="mt-6 rounded-[3px] border-l-2 border-brand bg-page/90 p-4">
+                      <p className="text-xs italic leading-relaxed text-fg sm:text-sm">
+                        &ldquo;{ founder.quote }&rdquo;
+                      </p>
+                    </div>
+
+                    {/* Expertise Tags */ }
+                    <div className="mt-6">
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-muted/90">
+                        Domaines d’intervention :
+                      </p>
+                      <div className="mt-2.5 flex flex-wrap gap-2 md:gap-1.5">
+                        { founder.expertise.map( ( exp ) => (
+                          <span
+                            key={ exp }
+                            className="max-w-full rounded-[2px] border border-line bg-page px-2.5 py-1 text-xs font-medium leading-snug text-fg md:px-2 md:py-0.5 md:text-[11px]"
+                          >
+                            { exp }
+                          </span>
+                        ) ) }
+                      </div>
                     </div>
                   </div>
 
                   {/* Founder Contact / Actions */ }
-                  <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
+                  <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6 md:mt-7 md:flex-col md:items-stretch md:gap-3">
                     <div className="flex items-center gap-2.5">
                       <a
                         href={ founder.social.linkedin }
@@ -608,6 +642,17 @@ export function AboutFounders() {
                       >
                         <LinkedInIcon className="h-4 w-4" />
                       </a>
+                      { founder.social.github && (
+                        <a
+                          href={ founder.social.github }
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={ `GitHub de ${ founder.name }` }
+                          className="flex h-10 w-10 items-center justify-center rounded-[3px] border border-line bg-page text-muted transition-colors hover:border-brand hover:bg-brand hover:text-white"
+                        >
+                          <GitHubIcon className="h-4 w-4" />
+                        </a>
+                      ) }
                       <a
                         href={ `mailto:${ founder.social.email }` }
                         aria-label={ `Email direct à ${ founder.name }` }
@@ -617,22 +662,8 @@ export function AboutFounders() {
                       </a>
                     </div>
 
-                    <div>
-                      { founder.id === "feissal-tarkaoui" ? (
-                        <CalendlyButton className="px-4 py-2 text-xs">
-                          Planifier un échange
-                          <Calendar size={ 14 } />
-                        </CalendlyButton>
-                      ) : (
-                        <Button
-                          href="/#contact"
-                          variant="ghost"
-                          className="min-h-10 px-4 py-2 text-xs"
-                        >
-                          Échanger sur l’architecture
-                          <ArrowUpRight size={ 14 } />
-                        </Button>
-                      ) }
+                    <div className="md:w-full">
+                      <FounderCta founder={ founder } />
                     </div>
                   </div>
                 </div>
