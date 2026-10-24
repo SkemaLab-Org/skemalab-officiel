@@ -40,8 +40,8 @@ export const TEAM_MEMBERS = [
     linkedin: "marouan-khadiri",
     linkedinUrl: "https://www.linkedin.com/in/marouan-khadiri/",
     tagline: "Build · Grow · Automate",
-    avatar: "https://www.skemalab.com/team/marouan_khadiri.jpg",
-    localAvatar: "/team/marouan_khadiri.jpg",
+    avatar: "https://www.skemalab.com/team/marouan_khadiri.webp",
+    localAvatar: "/team/marouan_khadiri.webp",
     address: "Essaouira, Maroc",
   },
   {
@@ -190,7 +190,7 @@ function buildContactItems( data, palette ) {
  * trailing entry spans the remaining columns instead of leaving a gap.
  */
 function renderContactGrid( items, palette ) {
-  if ( ! items.length ) {
+  if ( !items.length ) {
     return "";
   }
 
