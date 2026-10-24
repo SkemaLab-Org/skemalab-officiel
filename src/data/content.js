@@ -73,7 +73,7 @@ export const founders = [
     title: "Chief Executive Officer & Stratégie Business",
     bio: "Entrepreneur visionnaire et stratège digital, Feissal pilote la vision globale, le développement commercial et la stratégie produit de Skemalab. Fort d'une expertise aiguisée en croissance digitale, conversion et négociation, il veille à ce que chaque solution développée devienne un puissant moteur de rentabilité pour nos partenaires.",
     shortBio: "Stratège business, direction commerciale et accélération ROI.",
-    image: "/team/feissal_tarkaoui.jpg",
+    image: "/team/feissal_tarkaoui.webp",
     quote: "La technologie n’a de réelle valeur que si elle produit un impact financier et opérationnel mesurable pour l'entreprise.",
     expertise: [
       "Vision & Stratégie Business",
@@ -94,7 +94,7 @@ export const founders = [
     title: "Chief Technology Officer & Architecte Systèmes",
     bio: "Architecte logiciel et expert en automatisation avancée, Marouan conçoit les infrastructures techniques, les plateformes web haute performance et les systèmes de workflows intelligents chez Skemalab. Spécialiste Next.js, API & écosystèmes n8n / IA, il transforme la complexité technique en architectures fluides et scalables.",
     shortBio: "Architecture full-stack, automatisation des process et agents IA.",
-    image: "/team/marouan_khadiri.jpg",
+    image: "/team/marouan_khadiri.webp",
     quote: "Automatiser le répétitif et bâtir des architectures robustes pour libérer le potentiel humain et faire grandir les entreprises sans friction.",
     expertise: [
       "Architecture Logicielle & Next.js",
