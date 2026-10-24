@@ -120,8 +120,8 @@ export const founders = [
     quote: "Concevoir des logiciels performants et intégrer l'intelligence artificielle pour transformer les défis métier en solutions numériques concrètes.",
     expertise: [
       "Architecture Logicielle & APIs",
-      "Développement Web & Mobile",
-      "SaaS & CRM Sur-Mesure",
+      "Web, Mobile & SaaS",
+      "UI/UX Design",
       "Intégration IA & Agents",
     ],
     social: {
