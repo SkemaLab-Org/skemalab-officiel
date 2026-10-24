@@ -108,6 +108,31 @@ export const founders = [
     },
     focusArea: "Deep Tech, Architecture & IA",
   },
+  {
+    id: "adam-khairi",
+    name: "Adam Khairi",
+    role: "Lead Software Engineer",
+    title: "Lead Software Engineer & Solutions IA",
+    bio: "Ingénieur logiciel full-stack, Adam pilote l'architecture logicielle ainsi que le développement web, mobile et API de Skema Lab. Il conçoit des SaaS et CRM sur-mesure, automatise les processus métier via l'intégration d'agents et de solutions IA dans les workflows, et garantit la sécurité, la performance et la scalabilité des produits.",
+    shortBio: "Full-stack, mobile, backend et solutions IA.",
+    image: "/team/adam-khairi.jpg",
+    portrait: "/team/adam-khairi-portrait.jpg",
+    quote: "Concevoir des logiciels performants et intégrer l'intelligence artificielle pour transformer les défis métier en solutions numériques concrètes.",
+    expertise: [
+      "Architecture Logicielle & APIs",
+      "Développement Web & Mobile",
+      "Backend & Applications SaaS",
+      "Intégration IA & Solutions d'Intelligence Artificielle",
+      "Automatisation Intelligente & Agents IA",
+      "Performance, Sécurité & Scalabilité",
+    ],
+    social: {
+      linkedin: "https://www.linkedin.com/in/adam-khairi/",
+      github: "https://github.com/adamkhairi",
+      email: "khairiadam2@gmail.com",
+    },
+    focusArea: "Software Engineering & IA",
+  },
 ];
 
 export const timelineMilestones = [

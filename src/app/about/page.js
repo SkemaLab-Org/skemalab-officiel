@@ -11,14 +11,14 @@ import {
 export const metadata = {
   title: "À propos de SkemaLab | Studio Digital, Histoire & Fondateurs",
   description:
-    "Découvrez l'histoire de Skemalab, studio digital fondé par Feissal Tarkaoui (CEO) et Marouan Khadiri (CTO). Développement web Next.js, marketing ROI et automatisation intelligente.",
+    "Découvrez l'histoire de Skemalab, studio digital fondé par Feissal Tarkaoui (CEO), Marouan Khadiri (CTO) et Adam Khairi (Lead Software Engineer). Développement web Next.js, marketing ROI et automatisation intelligente.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
     title: "À propos de SkemaLab | Histoire, Vision & Fondateurs",
     description:
-      "L'alliance de la stratégie business et de l'ingénierie logicielle. Découvrez la genèse de Skemalab et ses fondateurs Feissal Tarkaoui & Marouan Khadiri.",
+      "L'alliance de la stratégie business, de l'ingénierie logicielle et de l'IA. Découvrez la genèse de Skemalab et son équipe : Feissal Tarkaoui, Marouan Khadiri & Adam Khairi.",
     url: "/about",
     images: [
       {
@@ -33,7 +33,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "À propos de SkemaLab | Studio Digital & Fondateurs",
     description:
-      "Découvrez la vision, l'histoire et les fondateurs de Skemalab : Feissal Tarkaoui (CEO) et Marouan Khadiri (CTO).",
+      "Découvrez la vision, l'histoire et les fondateurs de Skemalab : Feissal Tarkaoui (CEO), Marouan Khadiri (CTO) et Adam Khairi (Lead Software Engineer).",
     images: ["/opengraph-image"],
   },
 };
@@ -44,7 +44,7 @@ export default function AboutPage() {
     "@type": "AboutPage",
     name: "À propos de SkemaLab",
     description:
-      "Studio digital fondé par Feissal Tarkaoui et Marouan Khadiri spécialisé en développement web, marketing ROI et automatisation des workflows.",
+      "Studio digital fondé par Feissal Tarkaoui, Marouan Khadiri et Adam Khairi spécialisé en développement web, marketing ROI et automatisation des workflows.",
     mainEntity: {
       "@type": "Organization",
       name: "SkemaLab",
@@ -58,6 +58,11 @@ export default function AboutPage() {
           "@type": "Person",
           name: "Marouan Khadiri",
           jobTitle: "Chief Technology Officer",
+        },
+        {
+          "@type": "Person",
+          name: "Adam Khairi",
+          jobTitle: "Lead Software Engineer",
         },
       ],
     },
@@ -79,7 +84,7 @@ export default function AboutPage() {
       {/* Section 2: Notre Histoire (Timeline interactive & Genèse) */}
       <AboutTimeline />
 
-      {/* Section 3: Présentation des Fondateurs (Feissal Tarkaoui & Marouan Khadiri) */}
+      {/* Section 3: Présentation de l'Équipe (Feissal Tarkaoui, Marouan Khadiri & Adam Khairi) */}
       <AboutFounders />
 
       {/* Impact Stats */}
