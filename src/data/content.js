@@ -121,10 +121,8 @@ export const founders = [
     expertise: [
       "Architecture Logicielle & APIs",
       "Développement Web & Mobile",
-      "Backend & Applications SaaS",
-      "Intégration IA & Solutions d'Intelligence Artificielle",
-      "Automatisation Intelligente & Agents IA",
-      "Performance, Sécurité & Scalabilité",
+      "SaaS & CRM Sur-Mesure",
+      "Intégration IA & Agents",
     ],
     social: {
       linkedin: "https://www.linkedin.com/in/adam-khairi/",
