@@ -42,7 +42,7 @@ export default function AboutIntro() {
           <p className="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">{ copy.description }</p>
           <p className="mt-4 max-w-2xl text-sm leading-7 text-muted sm:text-base">{ copy.secondary }</p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-x-2 gap-y-3 border-t border-line pt-6 text-sm text-muted">
+          {/* <div className="mt-8 flex flex-wrap items-center gap-x-2 gap-y-3 border-t border-line pt-6 text-sm text-muted">
             <span>{ copy.foundedBy }</span>
             <span className="group/founder relative inline-flex">
               <button type="button" aria-describedby="founder-card" className="font-semibold text-fg underline decoration-brand/50 decoration-2 underline-offset-4 outline-none transition-colors hover:text-brand focus-visible:text-brand">
@@ -54,7 +54,7 @@ export default function AboutIntro() {
               </span>
             </span>
             <span>{ copy.roleSuffix }</span>
-          </div>
+          </div> */}
 
           {/* <a href="#" className="mt-8 inline-flex items-center gap-2 rounded-sm bg-deep px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
             { copy.cta }<ArrowUpRight size={ 16 } className="rtl-flip" />
