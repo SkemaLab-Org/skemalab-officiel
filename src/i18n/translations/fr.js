@@ -534,7 +534,7 @@ export const fr = {
     ],
 
     binomeBadge: "La Force du Binôme",
-    binomeTitle: "Pourquoi l’alliance Feissal × Marouan fait toute la différence.",
+    binomeTitle: "Pourquoi l’alliance Feissal, Marouan et Adam fait toute la différence.",
     binomeText:
       "Dans la plupart des agences traditionnelles, la stratégie commerciale et le développement technique ne se parlent pas. Chez SkemaLab, le CEO et le CTO collaborent main dans la main sur chaque projet.",
     binomePoints: [

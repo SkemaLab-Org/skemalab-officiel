@@ -682,7 +682,7 @@ export function AboutFounders() {
                   La Force du Binôme
                 </span>
                 <h3 className="mt-3 text-2xl font-bold tracking-tight text-fg sm:text-3xl">
-                  Pourquoi l’alliance Feissal × Marouan fait toute la différence.
+                  Pourquoi l’alliance Feissal, Marouan et Adam fait toute la différence.
                 </h3>
                 <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">
                   Dans la plupart des agences traditionnelles, la stratégie commerciale et le développement technique ne se parlent pas. Chez SkemaLab, le CEO et le CTO collaborent main dans la main sur chaque projet.
