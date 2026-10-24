@@ -129,7 +129,7 @@ export const founders = [
     social: {
       linkedin: "https://www.linkedin.com/in/adam-khairi/",
       github: "https://github.com/adamkhairi",
-      email: "khairiadam2@gmail.com",
+      email: "contact@skemalab.com",
     },
     focusArea: "Software Engineering & IA",
   },
