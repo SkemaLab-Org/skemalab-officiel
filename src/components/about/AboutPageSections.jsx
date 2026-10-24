@@ -10,14 +10,11 @@ import {
   Cpu,
   Quote,
   CheckCircle2,
-  Mail,
   Calendar,
   ChevronRight,
   Workflow,
-  Target,
   Users,
 } from "lucide-react";
-import { LinkedInIcon, GitHubIcon } from "@/components/icons/SocialIcons";
 import {
   aboutPage,
   aboutContent,
@@ -29,6 +26,7 @@ import {
 import Reveal from "@/components/ui/Reveal";
 import Button from "@/components/ui/Button";
 import CalendlyButton from "@/components/CalendlyButton";
+import { MoroccanZelligeLattice, MoroccanCornerOrnament } from "@/components/ui/MoroccanPattern";
 import clsx from "clsx";
 
 /* -------------------------------------------------------------------------- */
@@ -497,184 +495,117 @@ export function AboutTimeline() {
 /* -------------------------------------------------------------------------- */
 /* SECTION 3 : PRÉSENTATION DE L'ÉQUIPE (Feissal, Marouan & Adam)              */
 /* -------------------------------------------------------------------------- */
-function FounderCta( { founder } ) {
-  if ( founder.id === "feissal-tarkaoui" ) {
-    return (
-      <CalendlyButton className="px-4 py-2 text-xs md:w-full">
-        Planifier un échange
-      </CalendlyButton>
-    );
-  }
-
-  return (
-    <Button
-      href="/#contact"
-      variant="ghost"
-      className="min-h-10 px-4 py-2 text-xs md:w-full"
-    >
-      { founder.id === "adam-khairi"
-        ? "Discuter de votre produit"
-        : "Échanger sur l’architecture" }
-      <ArrowUpRight size={ 14 } />
-    </Button>
-  );
-}
-
 export function AboutFounders() {
+  const [ selectedFounderId, setSelectedFounderId ] = useState( founders[ 0 ]?.id ?? null );
+  const activeFounder = founders.find( ( founder ) => founder.id === selectedFounderId ) || founders[ 0 ];
+  const activeFounderNumber = String( Math.max( founders.findIndex( ( founder ) => founder.id === activeFounder.id ) + 1, 1 ) ).padStart( 2, "0" );
+
   return (
     <section
       id="fondateurs"
-      className="relative overflow-hidden bg-page py-20 sm:py-28 lg:py-36"
+      className="relative overflow-hidden bg-gradient-to-br from-[#193f39] via-[#214a43] to-[#183a35] py-20 text-white sm:py-28 lg:py-36"
     >
-      {/* Background glow effects */ }
-      <div className="pointer-events-none absolute right-10 top-1/4 h-96 w-96 rounded-full bg-brand/10 blur-[130px]" />
-      <div className="pointer-events-none absolute left-10 bottom-1/4 h-96 w-96 rounded-full bg-accent/10 blur-[130px]" />
+      <MoroccanZelligeLattice opacity={ 0.055 } strokeColor="#089587" size={ 118 } fadeMask />
+      <div className="pointer-events-none absolute right-10 top-1/4 h-96 w-96 rounded-full bg-brand/8 blur-[130px]" />
+      <div className="pointer-events-none absolute left-10 bottom-1/4 h-96 w-96 rounded-full bg-accent/8 blur-[130px]" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-8">
-        {/* Section Header */ }
-        <Reveal>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="eyebrow mx-auto justify-center text-brand">
-              03 — Direction &amp; Leadership
-            </p>
-            <h2 className="mt-4 text-[clamp(1.85rem,4.8vw,3.2rem)] font-bold leading-[1.12] tracking-tight text-fg">
-              Les esprits derrière <span className="text-brand">SkemaLab.</span>
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
-              Une complémentarité rare et décisive entre vision stratégique d’entreprise et excellence d’ingénierie logicielle.
-            </p>
+      <div className="relative mx-auto grid max-w-7xl gap-8 px-4 sm:px-8 lg:grid-cols-[0.88fr_1.12fr] lg:gap-10">
+        <Reveal className="text-center lg:col-span-2">
+          <p className="inline-flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-brand sm:text-xs">
+            <span className="h-1.5 w-1.5 rotate-45 bg-brand" />03 — Direction &amp; Leadership
+          </p>
+          <h2 className="mx-auto mt-3 max-w-3xl text-[clamp(1.7rem,3.5vw,2.8rem)] font-semibold leading-tight tracking-tight text-white">
+            Les esprits derrière <span className="text-brand">SkemaLab.</span>
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-white/70 sm:text-base">
+            Une équipe de stratèges et d’ingénieurs qui unit vision business, architecture technique et exécution produit.
+          </p>
+        </Reveal>
+
+        <Reveal className="flex flex-col justify-center py-2 lg:py-8">
+          <div className="relative border-y border-white/15 py-6 sm:py-8" aria-live="polite">
+            <div className="mb-5 flex items-center justify-between gap-4">
+              <p className="inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-brand">
+                <span className="h-1.5 w-1.5 rotate-45 bg-brand" />Profil de l’équipe
+              </p>
+              <span className="font-mono text-xs tracking-[0.16em] text-white/55">{ activeFounderNumber } <span className="text-white/30">/ { String( founders.length ).padStart( 2, "0" ) }</span></span>
+            </div>
+            <h3 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{ activeFounder.name }</h3>
+            <p className="mt-1 text-sm font-medium leading-6 text-white/60">{ activeFounder.title }</p>
+            <p className="mt-4 max-w-lg text-sm leading-7 text-white/75">{ activeFounder.shortBio }</p>
+
+            <div className="mt-6 grid grid-cols-2 gap-2.5 sm:gap-3">
+              <div className="min-w-0 border border-white/15 bg-white/[0.06] px-3.5 py-3 sm:px-4">
+                <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/50 sm:text-[10px]">Poste</p>
+                <p className="mt-1.5 truncate text-xs font-semibold text-brand sm:text-sm">{ activeFounder.role }</p>
+              </div>
+              <div className="min-w-0 border border-white/15 bg-white/[0.06] px-3.5 py-3 sm:px-4">
+                <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/50 sm:text-[10px]">Expertise</p>
+                <p className="mt-1.5 truncate text-xs font-semibold text-white/90 sm:text-sm">{ activeFounder.focusArea }</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <CalendlyButton className="min-h-12 rounded-full bg-brand px-6 font-semibold text-deep shadow-[0_8px_28px_rgba(8,149,135,0.18)] transition-all hover:-translate-y-0.5 hover:bg-white">
+              Réserver une consultation gratuite
+            </CalendlyButton>
+            <a
+              href={ activeFounder.social.linkedin }
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={ `Profil LinkedIn de ${ activeFounder.name }` }
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] text-white/80 transition-colors hover:border-brand hover:text-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="currentColor">
+                <path d="M5.2 3.5a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6ZM3.7 8.5h3v11h-3v-11Zm5 0h2.9V10h.1c.4-.8 1.4-1.8 3-1.8 3.2 0 3.8 2.1 3.8 4.8v6.5h-3v-5.8c0-1.4 0-3.1-1.9-3.1s-2.1 1.5-2.1 3v5.9h-3v-11Z" />
+              </svg>
+            </a>
           </div>
         </Reveal>
 
-        {/* Founders Grid */ }
-        <div className="mt-16 grid gap-8 sm:mt-20 md:grid-cols-2 xl:grid-cols-3 xl:gap-6">
-          { founders.map( ( founder, i ) => (
-            <Reveal
-              key={ founder.id }
-              delay={ i * 0.12 }
-              className={
-                i === founders.length - 1
-                  ? "md:col-span-2 md:mx-auto md:w-[calc(50%_-_1rem)] xl:col-span-1 xl:mx-0 xl:w-full"
-                  : ""
-              }
-            >
-              <div className="group relative flex h-full flex-col overflow-hidden rounded-[4px] border border-line bg-surface transition-all duration-300 hover:border-brand/50 hover:shadow-2xl">
-                {/* Top Glowing Accent Line */ }
-                <div className="h-1.5 w-full bg-gradient-to-r from-brand via-accent to-deep" />
-
-                <div className="flex flex-1 flex-col p-6 sm:p-8 xl:p-7">
-                  {/* Founder Profile Header */ }
-                  <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6 md:flex-col md:items-start">
-                    {/* Photo with Glowing Frame */ }
-                    <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-[3px] border-2 border-brand/30 sm:h-32 sm:w-32 md:h-36 md:w-36">
-                      <Image
-                        src={ founder.image }
-                        alt={ founder.name }
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 640px) 112px, (max-width: 768px) 128px, 144px"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                    </div>
-
-                    <div className="min-w-0">
-                      <div className="inline-flex items-center rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-[11px] font-semibold text-brand">
-                        { founder.role }
-                      </div>
-
-                      <h3 className="mt-2 text-2xl font-bold tracking-tight text-fg sm:text-3xl md:text-2xl">
-                        { founder.name }
-                      </h3>
-                      <p className="mt-0.5 text-xs font-medium uppercase tracking-wider text-accent sm:text-sm md:text-xs">
-                        { founder.title }
-                      </p>
-
-                      <div className="mt-3 flex items-center gap-2">
-                        <span className="inline-flex items-center gap-1 text-xs text-muted">
-                          <Target size={ 13 } className="text-brand" />
-                          { founder.focusArea }
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bio, Quote & Expertise (grows to align the CTA row) */ }
-                  <div className="mt-6 flex-1">
-                    {/* Bio Paragraph */ }
-                    <p className="text-sm leading-relaxed text-muted sm:text-base md:text-sm">
-                      { founder.bio }
-                    </p>
-
-                    {/* Founder Quote */ }
-                    <div className="mt-6 rounded-[3px] border-l-2 border-brand bg-page/90 p-4">
-                      <p className="text-xs italic leading-relaxed text-fg sm:text-sm">
-                        &ldquo;{ founder.quote }&rdquo;
-                      </p>
-                    </div>
-
-                    {/* Expertise Tags */ }
-                    <div className="mt-6">
-                      <p className="text-[11px] font-semibold uppercase tracking-wider text-muted/90">
-                        Domaines d’intervention :
-                      </p>
-                      <div className="mt-2.5 flex flex-wrap gap-2 md:gap-1.5">
-                        { founder.expertise.map( ( exp ) => (
-                          <span
-                            key={ exp }
-                            className="max-w-full rounded-[2px] border border-line bg-page px-2.5 py-1 text-xs font-medium leading-snug text-fg md:px-2 md:py-0.5 md:text-[11px]"
-                          >
-                            { exp }
-                          </span>
-                        ) ) }
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Founder Contact / Actions */ }
-                  <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6 md:mt-7 md:flex-col md:items-stretch md:gap-3">
-                    <div className="flex items-center gap-2.5">
-                      <a
-                        href={ founder.social.linkedin }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={ `LinkedIn de ${ founder.name }` }
-                        className="flex h-10 w-10 items-center justify-center rounded-[3px] border border-line bg-page text-muted transition-colors hover:border-brand hover:bg-brand hover:text-white"
-                      >
-                        <LinkedInIcon className="h-4 w-4" />
-                      </a>
-                      { founder.social.github && (
-                        <a
-                          href={ founder.social.github }
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={ `GitHub de ${ founder.name }` }
-                          className="flex h-10 w-10 items-center justify-center rounded-[3px] border border-line bg-page text-muted transition-colors hover:border-brand hover:bg-brand hover:text-white"
-                        >
-                          <GitHubIcon className="h-4 w-4" />
-                        </a>
-                      ) }
-                      <a
-                        href={ `mailto:${ founder.social.email }` }
-                        aria-label={ `Email direct à ${ founder.name }` }
-                        className="flex h-10 w-10 items-center justify-center rounded-[3px] border border-line bg-page text-muted transition-colors hover:border-brand hover:bg-brand hover:text-white"
-                      >
-                        <Mail size={ 16 } />
-                      </a>
-                    </div>
-
-                    <div className="md:w-full">
-                      <FounderCta founder={ founder } />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          ) ) }
-        </div>
-
+        <Reveal delay={ 0.12 } className="min-w-0">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:grid-rows-[18rem_18rem]">
+            { founders.map( ( founder ) => {
+              const isCeo = founder.id === "feissal-tarkaoui";
+              const selected = selectedFounderId === founder.id;
+              return (
+                <article
+                  key={ founder.id }
+                  className={ `relative isolate overflow-hidden border border-white/15 bg-deep ${ isCeo ? "h-[36.75rem] sm:row-span-2" : "h-[18rem]" }` }
+                >
+                  <button
+                    type="button"
+                    aria-label={ `Afficher le profil de ${ founder.name }` }
+                    aria-pressed={ selected }
+                    onClick={ () => setSelectedFounderId( founder.id ) }
+                    className="absolute inset-0 z-10 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-brand"
+                  />
+                  <Image
+                    src={ founder.image }
+                    alt={ founder.name }
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 35vw"
+                    className={ `object-cover object-center transition-[filter] duration-700 ${ selected ? "grayscale-0" : "grayscale contrast-125" }` }
+                  />
+                  <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-deep via-deep/10 to-transparent" />
+                  <span aria-hidden="true" className={ `pointer-events-none absolute inset-0 z-[2] bg-ink transition-opacity duration-500 ${ selected ? "opacity-0" : "opacity-60" }` } />
+                  <span className="pointer-events-none absolute inset-x-0 bottom-0 z-20 p-4 sm:p-5">
+                    <span className="mb-2 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-brand">
+                      <span className="h-1.5 w-1.5 rotate-45 bg-brand" />{ founder.role }
+                    </span>
+                    <span className="block text-2xl font-semibold tracking-tight text-white sm:text-3xl">{ founder.name }</span>
+                    <span className="mt-1 block max-w-sm text-xs leading-5 text-white/70 sm:text-sm">{ founder.title }</span>
+                  </span>
+                </article>
+              );
+            } ) }
+          </div>
+        </Reveal>
         {/* Dual Leadership Synergy Banner */ }
-        <Reveal delay={ 0.25 }>
-          <div className="mt-16 rounded-[4px] border border-brand/30 bg-surface p-8 shadow-xl sm:mt-20 sm:p-12 lg:p-14">
+        <Reveal delay={ 0.25 } className="lg:col-span-2">
+          <div className="relative mx-auto mt-16 max-w-7xl overflow-hidden rounded-[4px] border border-line bg-surface/90 p-8 shadow-xl backdrop-blur-sm sm:mt-20 sm:p-12 lg:p-14">
+            <MoroccanCornerOrnament className="pointer-events-none absolute right-3 top-3 text-brand/45" size={ 56 } />
             <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
               <div className="lg:col-span-7">
                 <span className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-3 py-1 font-mono text-xs font-semibold text-brand">
