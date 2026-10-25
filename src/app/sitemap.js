@@ -22,14 +22,14 @@ export default function sitemap() {
       ],
     },
     {
-      url: `${ baseUrl }/about`,
+      url: `${ baseUrl }/our-story`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.8,
       alternates: {
         languages: {
-          fr: `${ baseUrl }/about`,
-          "x-default": `${ baseUrl }/about`,
+          fr: `${ baseUrl }/our-story`,
+          "x-default": `${ baseUrl }/our-story`,
         },
       },
       images: [

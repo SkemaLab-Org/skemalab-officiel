@@ -1,21 +1,9 @@
-import devArticleImage from "@/assets/home-imgs/dev-article.webp";
-import marketingArticleImage from "@/assets/home-imgs/marketing-article.webp";
-import automationArticleImage from "@/assets/home-imgs/automation-article.webp";
-import saasImage from "@/assets/home-imgs/saas-b2b.webp";
-import refonteImage from "@/assets/home-imgs/refonte-ecom.webp";
-import engineImage from "@/assets/home-imgs/engine-d'acquise.webp";
-import crmImage from "@/assets/home-imgs/automation-crm.webp";
-import dashboardImage from "@/assets/home-imgs/dashboard-data.webp";
-
 export const ar = {
   meta: {
     title: "سكيما لاب | تطوير الويب، التسويق الرقمي والأتمتة الذكية",
     titleTemplate: "%s | Skemalab",
     description:
       "سكيما لاب هو استوديو رقمي موجه نحو تحقيق النتائج: تطوير مواقع وتطبيقات مخصصة، تسويق رقمي يركز على العائد الاستثماري، وأتمتة مسارات العمل (n8n، Make، الذكاء الاصطناعي) لتسريع نمو أعمالك.",
-    aboutTitle: "عن سكيما لاب | الاستوديو الرقمي، القصة والمؤسسون",
-    aboutDescription:
-      "اكتشف قصة سكيما لاب، الاستوديو الرقمي الذي أسسه فيصل الشرقاوي (الرئيس التنفيذي) ومروان الخضيري (المدير التقني). تطوير مواقع حديثة بـ Next.js، تسويق موجه نحو العائد وأتمتة ذكية.",
   },
 
   common: {
@@ -59,7 +47,6 @@ export const ar = {
         "أنظمة الربط البرمجي APIs وأنظمة CRM",
         "أعلى درجات الأداء، الأمان والصيانة",
       ],
-      image: devArticleImage,
       heroLabel: "01 — بناء (Build)",
       heroHeadline: "منتجات رقمية تسرّع نمو أعمالك ومبيعاتك.",
       heroText:
@@ -77,8 +64,6 @@ export const ar = {
         "إدارة شبكات التواصل والحملات الإعلانية",
         "مسارات التحويل ومضاعفة المبيعات (Funnels)",
       ],
-      image:
-        marketingArticleImage,
       heroLabel: "02 — نمو (Grow)",
       heroHeadline: "استقطاب عملاء رقمي يركز على العائد المالي المباشر.",
       heroText:
@@ -96,8 +81,6 @@ export const ar = {
         "أتمتة إدارة العملاء والبريد واستقطاب الفرص",
         "تقارير ولوحات بيانات مؤتمتة لحظياً",
       ],
-      image:
-        automationArticleImage,
       heroLabel: "03 — أتمتة (Automate)",
       heroHeadline: "مسارات عمل ذكية تحرر طاقات فريقك.",
       heroText:
@@ -112,20 +95,6 @@ export const ar = {
     description:
       "يجمع سكيما لاب بين البرمجة، التسويق الرقمي والأتمتة لبناء منظومات متكاملة تحول الزوار إلى عملاء، تتوسع بسهولة وتتطور باستمرار.",
     talkWithExpert: "تحدث مع خبير متخصص",
-  },
-
-  clientsMarquee: {
-    headline: "يثقون بنا لتسريع تحولهم الرقمي ونموهم",
-    clients: [
-      "Northline",
-      "Atlas Retail",
-      "Pulse Finance",
-      "Orion Santé",
-      "Vertex Logistique",
-      "Maison Clarisse",
-      "Nova Media",
-      "Helix Legal",
-    ],
   },
 
   aboutIntro: {
@@ -172,46 +141,41 @@ export const ar = {
   },
 
   projectsSection: {
-    eyebrow: "إنجازاتنا",
-    title: "مشاريع صممت لتحقيق أعلى درجات الأداء.",
+    eyebrow: "من الفكرة إلى الأثر",
+    title: "مهما كان هدفك، نبني الحل الذي يساعدك على الوصول إليه.",
     description:
-      "كل إنجاز نقدمه يجمع بين روعة التصميم، القوة البرمجية والأثر المالي الفعلي — نتائج واقعية مثبتة بالأرقام.",
-    measuredImpact: "الأثر المحقق",
-    summary:
-      "التصميم، البرمجة والتطوير المستمر — مع خطة عمل واضحة ومؤشرات نجاح دقيقة محددة منذ اليوم الأول.",
-    similarProject: "طلب مشروع مماثل",
-    prevLabel: "المشروع السابق",
-    nextLabel: "المشروع التالي",
+      "منتج رقمي، جذب العملاء، الأتمتة أو اتخاذ قرارات أفضل: نجمع الخبرات المناسبة لتحويل احتياجاتك إلى تقدم ملموس.",
+    similarProject: "لنتحدث عن هدفك",
     list: [
       {
-        title: "منصة SaaS موجهة للشركات (B2B)",
-        category: "تطوير برمجي",
-        result: "+48% في تفعيل المستخدمين",
-        image: saasImage,
+        goal: "حوّل فكرتك إلى واقع",
+        category: "منتج رقمي",
+        description: "نصمم موقعاً أو منصة أو تطبيقاً يلبي احتياجات مستخدميك ويواكب نمو أعمالك.",
       },
       {
-        title: "تطوير شامل لمتجر إلكتروني",
-        category: "ويب وتجربة مستخدم",
-        result: "+62% في معدل التحويل والمبيعات",
-        image: refonteImage,
+        goal: "الوصول إلى العملاء المناسبين",
+        category: "جذب العملاء والنمو",
+        description: "نختار قنوات التسويق المناسبة لزيادة الانتشار وجذب العملاء المحتملين وتحويلهم.",
       },
       {
-        title: "محرك رقمي لاستقطاب العملاء",
-        category: "تسويق ونمو",
-        result: "3.2× عملاء محتملين مؤهلين شهرياً",
-        image: engineImage,
+        goal: "وفّر وقتك كل يوم",
+        category: "الأتمتة",
+        description: "نؤتمت المهام المتكررة ونربط تدفق المعلومات بين أدواتك.",
       },
       {
-        title: "أتمتة شاملة لنظام إدارة العملاء (CRM)",
-        category: "مسارات عمل مؤتمتة",
-        result: "18 ساعة تم توفيرها أسبوعياً",
-        image: crmImage,
+        goal: "اتخذ قرارات أوضح",
+        category: "البيانات والتحليلات",
+        description: "نجمع بياناتك ونتابع المؤشرات التي تساعدك على تحديد خطواتك القادمة.",
       },
       {
-        title: "لوحة تحكم ذكية للبيانات والتحليلات",
-        category: "ذكاء اصطناعي وبيانات",
-        result: "اتخاذ القرارات في الوقت الفعلي",
-        image: dashboardImage,
+        goal: "بسّط تجربة عملائك",
+        category: "تجربة المستخدم",
+        description: "نجعل كل تفاعل أكثر سهولة، من أول تواصل وحتى إنجاز المطلوب.",
+      },
+      {
+        goal: "طوّر منظومتك الرقمية",
+        category: "التكامل والأنظمة",
+        description: "نربط أدواتك الحالية ونطوّر المكونات التي تحتاجها عملياتك اليومية.",
       },
     ],
   },
@@ -238,31 +202,6 @@ export const ar = {
       [ "المنهجية", "تشخيص دقيق، تنفيذ فائق السرعة، ومتابعة العائد الاستثماري." ],
       [ "فريق العمل", "خبراء في بناء المنتجات، التصميم، النمو والأتمتة." ],
       [ "النموذج", "شراكة استراتيجية طويلة الأمد وليست مجرد خدمات مؤقتة." ],
-    ],
-  },
-
-  testimonialsSection: {
-    eyebrow: "آراء شركائنا",
-    title: "الثقة تبنى بالنتائج الملموسة.",
-    list: [
-      {
-        quote:
-          "حوّل سكيما لاب موقعنا التعريفي إلى ماكينة حقيقية لجلب العملاء والفرص التجارية. النتائج ملموسة ودقيقة بدون مصطلحات معقدة لا طائل منها.",
-        name: "سارة بنعلي",
-        role: "مديرة التسويق، FinTech",
-      },
-      {
-        quote:
-          "منظومة الأتمتة التي بنوها خفضت أوقات معالجة الطلبات إلى النصف. بات فريق عملنا يركز أخيراً على المهام ذات القيمة المضافة الحقيقية.",
-        name: "يوسف العمراني",
-        role: "مدير العمليات، قطاع التجزئة",
-      },
-      {
-        quote:
-          "شريك عمل استثنائي: رؤية تجارية ثاقبة، تنفيذ تقني متين ومتابعة تفصيلية. أطلقنا MVP لمنصتنا خلال 8 أسابيع فقط بنجاح باهر.",
-        name: "كاميل دوبون",
-        role: "مؤسسة شركة ناشئة في مرحلة نمو سريع",
-      },
     ],
   },
 
@@ -569,4 +508,5 @@ export const ar = {
     closingBtn1: "حجز مكالمة استكشافية",
     closingBtn2: "إرسال رسالة مباشرة",
   },
+
 };

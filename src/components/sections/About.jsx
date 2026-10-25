@@ -109,7 +109,7 @@ export default function About() {
                 {t.aboutHome.cta}
                 <ArrowUpRight size={16} className="rtl-flip" />
               </Button>
-              <Button href="/about" variant="ghost" className="w-full sm:w-auto">
+              <Button href="/our-story" variant="ghost" className="w-full sm:w-auto">
                 {locale === "ar" ? "تعرف على قصة المؤسسين" : "Découvrir les fondateurs"}
               </Button>
             </div>

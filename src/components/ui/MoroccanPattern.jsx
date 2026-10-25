@@ -11,8 +11,11 @@ export function MoroccanZelligeLattice( {
   strokeWidth = 1,
   size = 96,
   fadeMask = true,
+  idPrefix,
 } ) {
-  const patternId = `moroccan-zellige-${ size }`;
+  const patternId = idPrefix ? `${ idPrefix }-zellige-${ size }` : `moroccan-zellige-${ size }`;
+  const maskId = idPrefix ? `${ idPrefix }-radial-mask` : "radial-mask-elem";
+  const gradientId = idPrefix ? `${ idPrefix }-radial-gradient` : "pattern-radial-mask";
 
   return (
     <div
@@ -78,7 +81,7 @@ export function MoroccanZelligeLattice( {
           </pattern>
 
           { fadeMask && (
-            <radialGradient id="pattern-radial-mask" cx="50%" cy="50%" r="50%">
+            <radialGradient id={ gradientId } cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#fff" stopOpacity="1" />
               <stop offset="60%" stopColor="#fff" stopOpacity="0.8" />
               <stop offset="100%" stopColor="#fff" stopOpacity="0.8" />
@@ -90,11 +93,11 @@ export function MoroccanZelligeLattice( {
           width="100%"
           height="100%"
           fill={ `url(#${ patternId })` }
-          mask={ fadeMask ? "url(#radial-mask-elem)" : undefined }
+          mask={ fadeMask ? `url(#${ maskId })` : undefined }
         />
         { fadeMask && (
-          <mask id="radial-mask-elem">
-            <rect width="100%" height="100%" fill="url(#pattern-radial-mask)" />
+          <mask id={ maskId }>
+            <rect width="100%" height="100%" fill={ `url(#${ gradientId })` } />
           </mask>
         ) }
       </svg>

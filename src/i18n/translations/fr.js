@@ -1,21 +1,9 @@
-import devArticleImage from "@/assets/home-imgs/dev-article.webp";
-import marketingArticleImage from "@/assets/home-imgs/marketing-article.webp";
-import automationArticleImage from "@/assets/home-imgs/automation-article.webp";
-import saasImage from "@/assets/home-imgs/saas-b2b.webp";
-import refonteImage from "@/assets/home-imgs/refonte-ecom.webp";
-import engineImage from "@/assets/home-imgs/engine-d'acquise.webp";
-import crmImage from "@/assets/home-imgs/automation-crm.webp";
-import dashboardImage from "@/assets/home-imgs/dashboard-data.webp";
-
 export const fr = {
   meta: {
     title: "Skemalab | Développement Web, Marketing Digital & Automatisation",
     titleTemplate: "%s | Skemalab",
     description:
       "Skemalab est un studio digital orienté résultats : développement web & mobile sur mesure, marketing digital ROI et automatisation de workflows (n8n, Make, IA) pour propulser votre croissance.",
-    aboutTitle: "À propos de SkemaLab | Studio Digital, Histoire & Fondateurs",
-    aboutDescription:
-      "Découvrez l'histoire de Skemalab, studio digital fondé par Feissal Tarkaoui (CEO) et Marouan Khadiri (CTO). Développement web Next.js, marketing ROI et automatisation intelligente.",
   },
 
   common: {
@@ -59,7 +47,6 @@ export const fr = {
         "APIs, CRM & systèmes métiers",
         "Performance, sécurité & maintenance",
       ],
-      image: devArticleImage,
       heroLabel: "01 — Build",
       heroHeadline: "Des produits digitaux qui accélèrent votre business.",
       heroText:
@@ -77,8 +64,6 @@ export const fr = {
         "Social media & campagnes",
         "Funnels & conversion",
       ],
-      image:
-        marketingArticleImage,
       heroLabel: "02 — Grow",
       heroHeadline: "Une acquisition digitale orientée ROI.",
       heroText:
@@ -96,8 +81,6 @@ export const fr = {
         "CRM, email & prospection",
         "Reporting automatisé",
       ],
-      image:
-        automationArticleImage,
       heroLabel: "03 — Automate",
       heroHeadline: "Des workflows intelligents qui libèrent vos équipes.",
       heroText:
@@ -112,20 +95,6 @@ export const fr = {
     description:
       "Skemalab réunit développement, marketing digital et automatisation pour construire des systèmes qui convertissent, scalent et s’améliorent dans le temps.",
     talkWithExpert: "En parler avec un expert",
-  },
-
-  clientsMarquee: {
-    headline: "Ils nous font confiance pour accélérer leur digital",
-    clients: [
-      "Northline",
-      "Atlas Retail",
-      "Pulse Finance",
-      "Orion Santé",
-      "Vertex Logistique",
-      "Maison Clarisse",
-      "Nova Media",
-      "Helix Legal",
-    ],
   },
 
   aboutIntro: {
@@ -172,46 +141,41 @@ export const fr = {
   },
 
   projectsSection: {
-    eyebrow: "Réalisations",
-    title: "Des projets pensés pour performer.",
+    eyebrow: "De l’idée à l’impact",
+    title: "Quel que soit votre objectif, construisons la solution pour l’atteindre.",
     description:
-      "Chaque livraison allie design, technique et impact business — des résultats concrets, pas des slides.",
-    measuredImpact: "Impact mesuré",
-    summary:
-      "Conception, build et optimisation — livrés avec une feuille de route claire et des indicateurs de succès définis dès le départ.",
-    similarProject: "Projet similaire",
-    prevLabel: "Projet précédent",
-    nextLabel: "Projet suivant",
+      "Produit digital, acquisition, automatisation ou pilotage : nous réunissons les bonnes expertises pour transformer vos enjeux en avancées concrètes.",
+    similarProject: "Parlons de votre objectif",
     list: [
       {
-        title: "Plateforme SaaS B2B",
-        category: "Développement",
-        result: "+48% d’activation utilisateurs",
-        image: saasImage,
+        goal: "Donner vie à une idée",
+        category: "Produit digital",
+        description: "Concevoir un site, une plateforme ou une application pensée pour vos utilisateurs et prête à évoluer.",
       },
       {
-        title: "Refonte e-commerce",
-        category: "Web & UX",
-        result: "+62% de taux de conversion",
-        image: refonteImage,
+        goal: "Attirer les bons clients",
+        category: "Acquisition & croissance",
+        description: "Déployer les bons leviers marketing pour gagner en visibilité, générer des prospects et convertir.",
       },
       {
-        title: "Engine d’acquisition",
-        category: "Marketing",
-        result: "3,2× leads qualifiés / mois",
-        image: engineImage,
+        goal: "Libérer du temps au quotidien",
+        category: "Automatisation",
+        description: "Automatiser les tâches répétitives et faire circuler l’information entre vos outils.",
       },
       {
-        title: "Automatisation CRM",
-        category: "Workflows",
-        result: "18h / semaine économisées",
-        image: crmImage,
+        goal: "Décider avec clarté",
+        category: "Data & pilotage",
+        description: "Rassembler vos données et suivre les indicateurs qui éclairent vos prochaines décisions.",
       },
       {
-        title: "Dashboard data",
-        category: "IA & Data",
-        result: "Décisions en temps réel",
-        image: dashboardImage,
+        goal: "Simplifier le parcours client",
+        category: "Expérience utilisateur",
+        description: "Rendre chaque interaction plus fluide, du premier contact jusqu’à l’action.",
+      },
+      {
+        goal: "Faire évoluer votre écosystème",
+        category: "Intégrations & systèmes",
+        description: "Connecter vos outils existants et développer les briques adaptées à vos opérations.",
       },
     ],
   },
@@ -238,31 +202,6 @@ export const fr = {
       [ "Approche", "Diagnostic précis, exécution rapide, ROI suivi." ],
       [ "Équipes", "Produit, design, growth & automation." ],
       [ "Modèle", "Partenariat long terme, pas livraison jetable." ],
-    ],
-  },
-
-  testimonialsSection: {
-    eyebrow: "Témoignages",
-    title: "La confiance se construit sur les résultats.",
-    list: [
-      {
-        quote:
-          "Skemalab a transformé notre site vitrine en véritable machine d’acquisition. Les résultats sont concrets, mesurables, sans jargon inutile.",
-        name: "Sara Benali",
-        role: "Directrice Marketing, FinTech",
-      },
-      {
-        quote:
-          "Leur stack d’automatisation a réduit nos délais de traitement de moitié. Nos équipes se concentrent enfin sur la valeur ajoutée.",
-        name: "Youssef Amrani",
-        role: "COO, Retail",
-      },
-      {
-        quote:
-          "Un partenaire rare : vision business, exécution technique solide et suivi rigoureux. On a livré un MVP SaaS en 8 semaines.",
-        name: "Camille Dupont",
-        role: "Fondatrice, Scale-up",
-      },
     ],
   },
 
@@ -570,4 +509,5 @@ export const fr = {
     closingBtn1: "Planifier un appel découverte",
     closingBtn2: "Envoyer un message",
   },
+
 };

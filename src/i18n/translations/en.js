@@ -1,21 +1,9 @@
-import devArticleImage from "@/assets/home-imgs/dev-article.webp";
-import marketingArticleImage from "@/assets/home-imgs/marketing-article.webp";
-import automationArticleImage from "@/assets/home-imgs/automation-article.webp";
-import saasImage from "@/assets/home-imgs/saas-b2b.webp";
-import refonteImage from "@/assets/home-imgs/refonte-ecom.webp";
-import engineImage from "@/assets/home-imgs/engine-d'acquise.webp";
-import crmImage from "@/assets/home-imgs/automation-crm.webp";
-import dashboardImage from "@/assets/home-imgs/dashboard-data.webp";
-
 export const en = {
   meta: {
     title: "Skemalab | Web Development, Digital Marketing & Automation",
     titleTemplate: "%s | Skemalab",
     description:
       "Skemalab is a results-driven digital studio: custom web & mobile development, ROI-focused digital marketing and workflow automation (n8n, Make, AI) to power your growth.",
-    aboutTitle: "About SkemaLab | Digital Studio, Story & Founders",
-    aboutDescription:
-      "Discover the story of Skemalab, the digital studio founded by Feissal Tarkaoui (CEO) and Marouan Khadiri (CTO). Next.js web development, ROI marketing and smart automation.",
   },
 
   common: {
@@ -59,7 +47,6 @@ export const en = {
         "APIs, CRM & business systems",
         "Performance, security & maintenance",
       ],
-      image: devArticleImage,
       heroLabel: "01 — Build",
       heroHeadline: "Digital products that accelerate your business.",
       heroText:
@@ -77,8 +64,6 @@ export const en = {
         "Social media & campaigns",
         "Funnels & conversion",
       ],
-      image:
-        marketingArticleImage,
       heroLabel: "02 — Grow",
       heroHeadline: "ROI-driven digital acquisition.",
       heroText:
@@ -96,8 +81,6 @@ export const en = {
         "CRM, email & outreach",
         "Automated reporting",
       ],
-      image:
-        automationArticleImage,
       heroLabel: "03 — Automate",
       heroHeadline: "Smart workflows that free up your teams.",
       heroText:
@@ -112,20 +95,6 @@ export const en = {
     description:
       "Skemalab combines development, digital marketing and automation to build systems that convert, scale and improve over time.",
     talkWithExpert: "Talk to an expert",
-  },
-
-  clientsMarquee: {
-    headline: "They trust us to accelerate their digital growth",
-    clients: [
-      "Northline",
-      "Atlas Retail",
-      "Pulse Finance",
-      "Orion Santé",
-      "Vertex Logistique",
-      "Maison Clarisse",
-      "Nova Media",
-      "Helix Legal",
-    ],
   },
 
   aboutIntro: {
@@ -172,46 +141,41 @@ export const en = {
   },
 
   projectsSection: {
-    eyebrow: "Projects",
-    title: "Projects built to perform.",
+    eyebrow: "From idea to impact",
+    title: "Whatever your goal, let’s build the right way to get there.",
     description:
-      "Every delivery combines design, engineering and business impact — concrete results, not slide decks.",
-    measuredImpact: "Measured impact",
-    summary:
-      "Design, build and optimization — delivered with a clear roadmap and success metrics defined from day one.",
-    similarProject: "Similar project",
-    prevLabel: "Previous project",
-    nextLabel: "Next project",
+      "Digital products, customer acquisition, automation or better decision-making: we bring the right expertise together to turn your needs into progress.",
+    similarProject: "Let’s talk about your goal",
     list: [
       {
-        title: "B2B SaaS Platform",
-        category: "Development",
-        result: "+48% user activation",
-        image: saasImage,
+        goal: "Bring an idea to life",
+        category: "Digital product",
+        description: "Build a website, platform or app around your users and ready to grow with your business.",
       },
       {
-        title: "E-commerce rebuild",
-        category: "Web & UX",
-        result: "+62% conversion rate",
-        image: refonteImage,
+        goal: "Reach the right customers",
+        category: "Acquisition & growth",
+        description: "Use the right marketing channels to grow your reach, generate leads and convert them.",
       },
       {
-        title: "Acquisition engine",
-        category: "Marketing",
-        result: "3.2× qualified leads / month",
-        image: engineImage,
+        goal: "Free up time every day",
+        category: "Automation",
+        description: "Automate repetitive tasks and keep information flowing across your tools.",
       },
       {
-        title: "CRM automation",
-        category: "Workflows",
-        result: "18h saved per week",
-        image: crmImage,
+        goal: "Make clearer decisions",
+        category: "Data & insights",
+        description: "Bring your data together and track the signals that guide your next move.",
       },
       {
-        title: "Data dashboard",
-        category: "AI & Data",
-        result: "Real-time decisions",
-        image: dashboardImage,
+        goal: "Make the customer journey easier",
+        category: "User experience",
+        description: "Make every interaction smoother, from the first touchpoint through to action.",
+      },
+      {
+        goal: "Make your digital ecosystem work better",
+        category: "Integrations & systems",
+        description: "Connect the tools you already use and build the pieces your operations need.",
       },
     ],
   },
@@ -238,31 +202,6 @@ export const en = {
       [ "Approach", "Precise diagnosis, fast execution, tracked ROI." ],
       [ "Teams", "Product, design, growth & automation." ],
       [ "Model", "Long-term partnership, not one-off delivery." ],
-    ],
-  },
-
-  testimonialsSection: {
-    eyebrow: "Testimonials",
-    title: "Trust is built on results.",
-    list: [
-      {
-        quote:
-          "Skemalab turned our brochure site into a real acquisition machine. The results are concrete and measurable, with zero useless jargon.",
-        name: "Sara Benali",
-        role: "Marketing Director, FinTech",
-      },
-      {
-        quote:
-          "Their automation stack halved our processing times. Our teams can finally focus on high-value work.",
-        name: "Youssef Amrani",
-        role: "COO, Retail",
-      },
-      {
-        quote:
-          "A rare partner: business vision, solid technical execution and rigorous follow-up. We shipped a SaaS MVP in 8 weeks.",
-        name: "Camille Dupont",
-        role: "Founder, Scale-up",
-      },
     ],
   },
 
@@ -572,4 +511,5 @@ export const en = {
     closingBtn1: "Schedule a discovery call",
     closingBtn2: "Send a message",
   },
+
 };

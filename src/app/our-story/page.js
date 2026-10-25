@@ -13,13 +13,13 @@ export const metadata = {
   description:
     "Découvrez l'histoire de Skemalab, studio digital fondé par Feissal Tarkaoui (CEO), Marouan Khadiri (CTO) et Adam Khairi (Lead Software Engineer). Développement web Next.js, marketing ROI et automatisation intelligente.",
   alternates: {
-    canonical: "/about",
+    canonical: "/our-story",
   },
   openGraph: {
     title: "À propos de SkemaLab | Histoire, Vision & Fondateurs",
     description:
       "L'alliance de la stratégie business, de l'ingénierie logicielle et de l'IA. Découvrez la genèse de Skemalab et son équipe : Feissal Tarkaoui, Marouan Khadiri & Adam Khairi.",
-    url: "/about",
+    url: "/our-story",
     images: [
       {
         url: "/opengraph-image",

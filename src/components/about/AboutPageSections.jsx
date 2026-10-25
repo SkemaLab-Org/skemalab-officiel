@@ -26,6 +26,7 @@ import {
 import Reveal from "@/components/ui/Reveal";
 import Button from "@/components/ui/Button";
 import CalendlyButton from "@/components/CalendlyButton";
+import { useI18n } from "@/components/I18nProvider";
 import { MoroccanZelligeLattice, MoroccanCornerOrnament } from "@/components/ui/MoroccanPattern";
 import clsx from "clsx";
 
@@ -33,6 +34,9 @@ import clsx from "clsx";
 /* 1. HERO SECTION                                                            */
 /* -------------------------------------------------------------------------- */
 export function AboutHero() {
+  const { t } = useI18n();
+  const copy = t.aboutPage;
+
   return (
     <section className="relative flex min-h-[90svh] items-end overflow-hidden pb-16 pt-32 sm:pb-24 sm:pt-40">
       {/* Background Image & Overlay */ }
@@ -54,32 +58,32 @@ export function AboutHero() {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-8">
         <Reveal>
           <div className="inline-flex items-center rounded-sm border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-white/90 backdrop-blur-md">
-            Studio Digital d’Excellence · Essaouira &amp; International
+            { copy.heroBadge }
           </div>
         </Reveal>
 
         <Reveal delay={ 0.08 }>
           <h1 className="mt-5 max-w-4xl text-[clamp(2.2rem,6.5vw,4.5rem)] font-bold leading-[1.05] tracking-tight text-white">
-            L’ingénierie digitale &amp; l’intelligence opérationnelle pour{ " " }
+            { copy.heroH1Part1 }{ " " }
             <span className="bg-gradient-to-r from-brand via-white to-brand bg-clip-text text-transparent">
-              accélérer votre business.
+              { copy.heroH1Highlight }
             </span>
           </h1>
         </Reveal>
 
         <Reveal delay={ 0.16 }>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg md:text-xl">
-            { aboutPage.headline }
+            { copy.heroHeadline }
           </p>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/70 sm:text-base">
-            { aboutPage.lead }
+            { copy.heroLead }
           </p>
         </Reveal>
 
         <Reveal delay={ 0.24 }>
           <div className="mt-8 flex flex-wrap items-center gap-4 sm:mt-10">
             <Button href="#histoire" variant="primary" className="w-full sm:w-auto">
-              Découvrir notre histoire
+              { copy.heroCta1 }
               <ChevronRight size={ 16 } />
             </Button>
             <Button
@@ -87,7 +91,7 @@ export function AboutHero() {
               variant="ghost"
               className="w-full border-white/20 bg-white/10 text-white hover:border-brand hover:bg-brand/20 hover:text-white sm:w-auto"
             >
-              Rencontrer les fondateurs
+              { copy.heroCta2 }
               <Users size={ 16 } />
             </Button>
           </div>
@@ -98,19 +102,19 @@ export function AboutHero() {
           <div className="mt-12 grid grid-cols-2 gap-3 border-t border-white/15 pt-8 sm:grid-cols-4 sm:gap-6">
             <div className="rounded-[3px] border border-white/10 bg-white/5 p-3.5 backdrop-blur-sm">
               <p className="text-2xl font-bold text-white sm:text-3xl">40+</p>
-              <p className="mt-1 text-xs text-white/70">Projets livrés avec succès</p>
+              <p className="mt-1 text-xs text-white/70">{ copy.strip1 }</p>
             </div>
             <div className="rounded-[3px] border border-white/10 bg-white/5 p-3.5 backdrop-blur-sm">
               <p className="text-2xl font-bold text-brand sm:text-3xl">100%</p>
-              <p className="mt-1 text-xs text-white/70">Clients satisfaits</p>
+              <p className="mt-1 text-xs text-white/70">{ copy.strip2 }</p>
             </div>
             <div className="rounded-[3px] border border-white/10 bg-white/5 p-3.5 backdrop-blur-sm">
               <p className="text-2xl font-bold text-white sm:text-3xl">3×</p>
-              <p className="mt-1 text-xs text-white/70">Accélération des process</p>
+              <p className="mt-1 text-xs text-white/70">{ copy.strip3 }</p>
             </div>
             <div className="rounded-[3px] border border-white/10 bg-white/5 p-3.5 backdrop-blur-sm">
               <p className="text-2xl font-bold text-brand sm:text-3xl">18h</p>
-              <p className="mt-1 text-xs text-white/70">Économisées / sem. en moy.</p>
+              <p className="mt-1 text-xs text-white/70">{ copy.strip4 }</p>
             </div>
           </div>
         </Reveal>

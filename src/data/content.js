@@ -1,60 +1,21 @@
 export const services = [
   {
-    id: "dev",
     title: "Développement informatique",
     subtitle: "Produits digitaux sur mesure",
     description:
       "Sites, plateformes et applications conçus pour performer : architecture propre, UX précise, intégrations API et déploiement sécurisé.",
-    points: [
-      "Sites corporate & plateformes web",
-      "Applications web & mobile",
-      "APIs, CRM & systèmes métiers",
-      "Performance, sécurité & maintenance",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600",
-    heroLabel: "01 — Build",
-    heroHeadline: "Des produits digitaux qui accélèrent votre business.",
-    heroText:
-      "Sites, plateformes et applications sur mesure — pensés pour convertir, scaler et durer.",
   },
   {
-    id: "marketing",
     title: "Digital marketing",
     subtitle: "Croissance mesurable",
     description:
       "Des stratégies d’acquisition et de marque orientées ROI : SEO, contenu, paid media et tunnels de conversion alignés sur vos objectifs business.",
-    points: [
-      "SEO / SEA & acquisition",
-      "Branding & contenu",
-      "Social media & campagnes",
-      "Funnels & conversion",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600",
-    heroLabel: "02 — Grow",
-    heroHeadline: "Une acquisition digitale orientée ROI.",
-    heroText:
-      "SEO, campagnes et contenus alignés sur vos objectifs — pour attirer, convertir et fidéliser.",
   },
   {
-    id: "automation",
     title: "Automatisation & workflows",
     subtitle: "Opérations intelligentes",
     description:
       "Nous éliminons les tâches répétitives et connectons vos outils pour gagner du temps, réduire les erreurs et accélérer vos équipes.",
-    points: [
-      "Workflows n8n / Make / Zapier",
-      "Assistants & agents IA",
-      "CRM, email & prospection",
-      "Reporting automatisé",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1600",
-    heroLabel: "03 — Automate",
-    heroHeadline: "Des workflows intelligents qui libèrent vos équipes.",
-    heroText:
-      "Automatisez vos process, connectez vos outils et gagnez des heures chaque semaine.",
   },
 ];
 
