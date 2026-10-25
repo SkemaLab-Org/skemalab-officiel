@@ -578,6 +578,9 @@ export function AboutFounders() {
                     type="button"
                     aria-label={ `Afficher le profil de ${ founder.name }` }
                     aria-pressed={ selected }
+                    onPointerEnter={ () => setSelectedFounderId( founder.id ) }
+                    onPointerDown={ () => setSelectedFounderId( founder.id ) }
+                    onFocus={ () => setSelectedFounderId( founder.id ) }
                     onClick={ () => setSelectedFounderId( founder.id ) }
                     className="absolute inset-0 z-10 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-brand"
                   />
