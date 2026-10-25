@@ -1,41 +1,60 @@
 "use client";
 
-import Image from "next/image";
-import devBackground from "@/assets/home-imgs/dev-bg.webp";
-import marketingBackground from "@/assets/home-imgs/marketing-bg.webp";
-import automationBackground from "@/assets/home-imgs/automation-bg.webp";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { useI18n } from "@/components/I18nProvider";
 import LuxuryPictogram from "@/components/ui/LuxuryPictogram";
 
-const serviceBackgrounds = {
-  dev: devBackground,
-  marketing: marketingBackground,
-  automation: automationBackground,
-};
+const AUTO_PLAY_DURATION = 5000;
 
 export default function Services() {
-  const { t, locale } = useI18n();
+  const { t, locale, isRTL } = useI18n();
   const services = t.servicesList;
+  const [activeIndex, setActiveIndex] = useState(0);
+  const tabRefs = useRef([]);
+  const activeService = services[activeIndex] || services[0];
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveIndex((index) => (index + 1) % services.length);
+    }, AUTO_PLAY_DURATION);
+
+    return () => window.clearInterval(interval);
+  }, [services.length]);
+
+  const selectTab = (index, focus = false) => {
+    setActiveIndex(index);
+    if (focus) tabRefs.current[index]?.focus();
+  };
+
+  const handleTabKeyDown = (event, index) => {
+    let nextIndex;
+
+    if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+      nextIndex = (index + 1) % services.length;
+    } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+      nextIndex = (index - 1 + services.length) % services.length;
+    } else if (event.key === "Home") {
+      nextIndex = 0;
+    } else if (event.key === "End") {
+      nextIndex = services.length - 1;
+    }
+
+    if (nextIndex !== undefined) {
+      event.preventDefault();
+      selectTab(nextIndex, true);
+    }
+  };
 
   return (
     <section
       id="services"
-      className="relative overflow-hidden bg-page py-20 sm:py-28 lg:py-40"
+      className="relative overflow-hidden bg-page py-20 sm:py-28 lg:py-36"
     >
       <div className="pointer-events-none absolute -right-24 top-32 h-96 w-96 rounded-full bg-brand/10 blur-[120px]" />
       <div className="pointer-events-none absolute -left-20 bottom-24 h-80 w-80 rounded-full bg-accent/10 blur-[100px]" />
-
-      {/* Static Bilingual Moroccan Watermark in Background (No parallax) */ }
-      <div
-        className="pointer-events-none absolute left-0 right-0 top-16 select-none overflow-hidden text-center opacity-[0.035] dark:opacity-[0.05]"
-        aria-hidden="true"
-      >
-        <span className="font-sans text-[clamp(4rem,14vw,11rem)] font-black uppercase tracking-[0.25em] text-fg">
-          { locale === "ar" ? "خدمات سكيما لاب" : "SKEMALAB · SERVICES" }
-        </span>
-      </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-8">
         <Reveal>
@@ -47,96 +66,170 @@ export default function Services() {
             }
             title={
               <>
-                { t.servicesSection.titlePart1 }
-                <span className="text-accent">{ t.servicesSection.titleHighlight }</span>
+                {t.servicesSection.titlePart1}
+                <span className="text-accent">{t.servicesSection.titleHighlight}</span>
               </>
             }
-            description={ t.servicesSection.description }
+            description={t.servicesSection.description}
           />
         </Reveal>
 
-        <div className="relative mt-12 sm:mt-16 md:mt-24 md:pl-2">
-          {/* Vertical Architectural Guide Rail */ }
-          <div className="services-rail" aria-hidden />
+        <div className="mt-12 grid gap-6 sm:mt-16 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-10 xl:gap-14">
+          <Reveal>
+            <div
+              role="tablist"
+              aria-label={t.servicesSection.eyebrow}
+              aria-orientation="vertical"
+              className="flex gap-3 overflow-x-auto pb-2 lg:flex-col lg:justify-center lg:gap-0 lg:overflow-visible lg:pb-0"
+            >
+              {services.map((service, index) => {
+                const isActive = index === activeIndex;
 
-          <div className="space-y-8 sm:space-y-10 md:space-y-14">
-            { services.map( ( service, index ) => {
-              return (
-                <Reveal key={ service.id } delay={ index * 0.08 }>
-                  <article className="group relative grid grid-cols-[2.4rem_minmax(0,1fr)] gap-3.5 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-5 md:grid-cols-[3.6rem_minmax(0,1fr)] md:gap-8">
-                    {/* Moroccan Step Octagram Medallion */ }
-                    <div className="relative z-10 flex flex-col items-center pt-6 sm:pt-8">
-                      <div className="relative flex h-10 w-10 items-center justify-center rounded-[3px] border border-line bg-surface text-xs font-semibold text-fg shadow-sm transition-all duration-500 group-hover:scale-105 group-hover:border-brand group-hover:bg-brand group-hover:text-white sm:h-12 sm:w-12 sm:text-sm md:h-14 md:w-14">
-                        <span className="font-mono">0{ index + 1 }</span>
-                        {/* Micro Moroccan 8-star indicator */ }
-                        <span className="absolute -bottom-1 h-1 w-1 rotate-45 bg-brand opacity-0 transition-opacity group-hover:opacity-100" />
-                      </div>
-                    </div>
-
-                    {/* Luxury Service Card */ }
-                    <div className="relative min-w-0 overflow-hidden rounded-xl border border-line bg-surface/90 shadow-[0_4px_20px_rgba(11,15,14,0.03)] transition-all duration-500 group-hover:border-brand/40 group-hover:shadow-[0_16px_44px_rgba(8,149,135,0.12)] dark:bg-surface/75 dark:group-hover:shadow-[0_16px_44px_rgba(0,0,0,0.3)]">
-                      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-                        <Image
-                          src={ serviceBackgrounds[ service.id ] }
-                          alt=""
-                          fill
-                          sizes="(max-width: 768px) 100vw, 80vw"
-                          className={ `object-cover opacity-[0.2] saturate-[0.75] transition-all duration-700 group-hover:scale-[1.025] group-hover:opacity-[0.28] dark:opacity-[0.24] dark:group-hover:opacity-[0.32] ${ locale === "ar" ? "object-[35%_center]" : "object-[65%_center]" }` }
+                return (
+                  <button
+                    key={service.id}
+                    ref={(element) => {
+                      tabRefs.current[index] = element;
+                    }}
+                    id={`service-tab-${service.id}`}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-controls="service-panel"
+                    tabIndex={isActive ? 0 : -1}
+                    onClick={() => selectTab(index)}
+                    onKeyDown={(event) => handleTabKeyDown(event, index)}
+                    className={`group relative flex min-w-[235px] flex-1 items-start gap-3.5 overflow-hidden rounded-[4px] border px-4 py-4 text-start transition-all duration-300 sm:min-w-[270px] sm:px-5 sm:py-5 lg:min-w-0 lg:flex-none lg:rounded-none lg:border-x-0 lg:border-b-0 lg:border-t lg:px-6 lg:py-6 lg:first:border-t-0 ${
+                      isActive
+                        ? "border-brand/35 bg-brand/[0.07] shadow-[0_8px_28px_rgba(8,149,135,0.12)] ring-1 ring-brand/10"
+                        : "border-line/70 bg-surface/50 hover:border-brand/25 hover:bg-surface lg:bg-transparent"
+                    }`}
+                  >
+                    {isActive && (
+                      <>
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-y-0 start-0 w-[3px] bg-brand/15"
                         />
-                        <div className={ `absolute inset-0 ${ locale === "ar" ? "bg-gradient-to-r" : "bg-gradient-to-l" } from-[#0D655C]/30 via-surface/90 to-surface dark:from-[#061D1A]/35 dark:via-surface/90 dark:to-surface` } />
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#089587]/[0.035] via-transparent to-[#C5A880]/[0.045]" />
-                      </div>
-                      <div className="relative z-10 flex flex-col justify-between p-5 sm:p-7 md:p-9 lg:p-11">
-                        <div>
-                          {/* Pictogram & Subtitle Header */ }
-                          <div className="mb-4 flex flex-wrap items-center gap-3 sm:mb-6 sm:gap-4">
-                            <LuxuryPictogram
-                              type={ service.id }
-                              size="md"
-                              glow={ false }
-                            />
-                            <div>
-                              <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-accent sm:text-[11px] sm:tracking-[0.26em]">
-                                { service.subtitle }
-                              </span>
-                              <span className="font-mono text-[11px] text-muted">
-                                { service.heroLabel }
-                              </span>
-                            </div>
-                          </div>
+                        <motion.span
+                          key={`service-progress-${activeIndex}`}
+                          aria-hidden="true"
+                          className="absolute inset-y-0 start-0 w-[3px] origin-top bg-brand"
+                          initial={{ scaleY: 0 }}
+                          animate={{ scaleY: 1 }}
+                          transition={{
+                            duration: AUTO_PLAY_DURATION / 1000,
+                            ease: "linear",
+                          }}
+                        />
+                      </>
+                    )}
 
-                          <h3 className="text-xl font-semibold tracking-tight text-fg sm:text-2xl md:text-[1.95rem]">
-                            { service.title }
-                          </h3>
-                          <p className="mt-3 text-sm leading-relaxed text-muted sm:text-[0.98rem]">
-                            { service.description }
-                          </p>
+                    <span className={`mt-0.5 shrink-0 rounded-[3px] px-1.5 py-1 font-mono text-[11px] font-medium tracking-[0.12em] transition-colors sm:text-xs ${isActive ? "bg-brand/12 text-brand" : "text-muted"}`}>
+                      {service.heroLabel}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span
+                        className={`block text-[11px] font-medium leading-snug transition-colors sm:text-xs ${
+                          isActive ? "text-accent" : "text-muted"
+                        }`}
+                      >
+                        {service.subtitle}
+                      </span>
+                      <span
+                        className={`mt-1.5 block text-sm font-semibold leading-snug transition-colors sm:text-base ${
+                          isActive ? "text-fg" : "text-fg/75 group-hover:text-fg"
+                        }`}
+                      >
+                        {service.title}
+                      </span>
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className={`mt-1 h-1.5 w-1.5 shrink-0 rotate-45 bg-accent transition-opacity ${
+                        isActive ? "opacity-100" : "opacity-0"
+                      }`}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          </Reveal>
 
-                          {/* Service Capabilities Grid */ }
-                          <ul className="mt-6 grid gap-2.5 sm:mt-8 sm:grid-cols-2 sm:gap-3">
-                            { service.points.map( ( point ) => (
-                              <li
-                                key={ point }
-                                className="flex items-start gap-2.5 rounded-[3px] border border-transparent bg-page/75 px-3 py-2.5 text-sm text-fg/90 transition-all duration-300 group-hover:border-line sm:px-3.5"
-                              >
-                                {/* Moroccan diamond bullet */ }
-                                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rotate-45 rounded-[0.5px] bg-brand" />
-                                <span className="min-w-0 font-medium">{ point }</span>
-                              </li>
-                            ) ) }
-                          </ul>
-                        </div>
+          <Reveal delay={0.08}>
+            <div
+              id="service-panel"
+              role="tabpanel"
+              aria-labelledby={`service-tab-${activeService.id}`}
+              tabIndex={0}
+              className="relative isolate min-h-[410px] overflow-hidden rounded-[4px] border border-line bg-surface p-5 shadow-[0_12px_40px_rgba(11,15,14,0.045)] outline-none transition-shadow focus-visible:ring-2 focus-visible:ring-brand/50 sm:p-7 md:p-9 lg:min-h-[450px] lg:p-10"
+            >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -end-24 -top-28 -z-10 h-80 w-80 rounded-full bg-brand/10 blur-[95px]"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -bottom-28 -start-16 -z-10 h-64 w-64 rounded-full bg-accent/10 blur-[90px]"
+              />
 
-                      </div>
-
-                      {/* Active Hover Accent Strip */ }
-                      <div className="h-[3px] w-full origin-left scale-x-0 bg-gradient-to-r from-brand via-accent to-brand transition-transform duration-500 group-hover:scale-x-100" />
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={activeService.id}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.24, ease: "easeOut" }}
+                  className="flex h-full min-h-[360px] flex-col"
+                  dir={isRTL ? "rtl" : "ltr"}
+                >
+                  <div className="flex items-center gap-4">
+                    <LuxuryPictogram type={activeService.id} size="md" glow={false} />
+                    <div>
+                      <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-accent sm:text-[11px] sm:tracking-[0.24em]">
+                        {activeService.subtitle}
+                      </span>
+                      <span className="mt-1 block font-mono text-[11px] text-muted">
+                        {activeService.heroLabel}
+                      </span>
                     </div>
-                  </article>
-                </Reveal>
-              );
-            } ) }
-          </div>
+                  </div>
+
+                  <div className="mt-7 sm:mt-9">
+                    <h3 className="text-2xl font-semibold tracking-tight text-fg sm:text-3xl md:text-4xl">
+                      {activeService.title}
+                    </h3>
+                    <p className="mt-3 max-w-2xl text-base font-medium leading-relaxed text-brand sm:mt-4 sm:text-lg">
+                      {activeService.heroHeadline}
+                    </p>
+                    <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+                      {activeService.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-auto pt-7 sm:pt-9">
+                    <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted sm:text-[11px]">
+                      {locale === "ar" ? "ما نقدمه" : locale === "en" ? "What we deliver" : "Nos expertises"}
+                    </p>
+                    <ul className="grid gap-2 sm:grid-cols-2 sm:gap-2.5">
+                      {activeService.points.map((point) => (
+                        <li
+                          key={point}
+                          className="flex min-h-11 items-start gap-2.5 rounded-[3px] border border-line/70 bg-page/70 px-3 py-2.5 text-sm leading-relaxed text-fg/90"
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="mt-1.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-brand"
+                          />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
