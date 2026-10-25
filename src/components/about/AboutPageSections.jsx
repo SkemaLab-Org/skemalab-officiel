@@ -605,7 +605,9 @@ export function AboutFounders() {
             } ) }
           </div>
         </Reveal>
-        {/* Dual Leadership Synergy Banner */ }
+        {/*
+          Section « La Force du Binôme » masquée temporairement.
+          Pour la réactiver, retirer le commentaire autour du bloc <Reveal> ci-dessous.
         <Reveal delay={ 0.25 } className="lg:col-span-2">
           <div className="relative mx-auto mt-16 max-w-7xl overflow-hidden rounded-[4px] border border-line bg-surface/90 p-8 shadow-xl backdrop-blur-sm sm:mt-20 sm:p-12 lg:p-14">
             <MoroccanCornerOrnament className="pointer-events-none absolute right-3 top-3 text-brand/45" size={ 56 } />
@@ -668,6 +670,7 @@ export function AboutFounders() {
             </div>
           </div>
         </Reveal>
+        */}
       </div>
     </section>
   );
