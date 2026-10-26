@@ -81,7 +81,7 @@ export default function Projects() {
   return (
     <section
       id="projets"
-      className="relative overflow-hidden bg-page py-20 sm:py-28 lg:py-36"
+      className="relative overflow-hidden bg-page py-16 sm:py-24 lg:py-36"
     >
       <div className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-accent/[0.07] blur-[120px]" />
       <div className="pointer-events-none absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-brand/[0.07] blur-[110px]" />
@@ -96,7 +96,7 @@ export default function Projects() {
         </Reveal>
 
         <Reveal delay={ 0.08 }>
-          <div className="mt-10 sm:mt-14 lg:mt-16">
+          <div className="mt-8 sm:mt-12 lg:mt-16">
             <div
               role="region"
               aria-roledescription={ copy.role }
@@ -118,7 +118,7 @@ export default function Projects() {
                   animate={ { opacity: 1, x: 0 } }
                   exit={ { opacity: 0, x: visualDirection * -34 } }
                   transition={ { duration: 0.32, ease: [ 0.22, 1, 0.36, 1 ] } }
-                  className="relative isolate grid min-h-[390px] h-full grid-cols-1 items-center gap-5 p-5 sm:min-h-[410px] sm:p-8 md:grid-cols-[1fr_0.42fr] md:gap-8 md:p-10 lg:min-h-[440px] lg:p-14"
+                  className="relative isolate grid min-h-[390px] h-full grid-cols-1 items-center gap-4 p-4 sm:min-h-[410px] sm:gap-5 sm:p-8 md:grid-cols-[1fr_0.42fr] md:gap-8 md:p-10 lg:min-h-[440px] lg:p-14"
                   dir={ isRTL ? "rtl" : "ltr" }
                 >
                   <div className="relative z-10 max-w-3xl">
@@ -132,20 +132,20 @@ export default function Projects() {
                       </span>
                     </div>
 
-                    <h3 className="mt-6 max-w-3xl text-[clamp(2rem,5.8vw,4.5rem)] font-semibold leading-[1.04] tracking-tight text-fg sm:mt-8">
+                    <h3 className="mt-5 max-w-3xl text-[clamp(1.75rem,5.8vw,4.5rem)] font-semibold leading-[1.04] tracking-tight text-fg sm:mt-8">
                       { activeGoal.goal }
                     </h3>
-                    <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted sm:mt-6 sm:text-base md:text-lg">
+                    <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:mt-6 sm:text-base md:text-lg">
                       { activeGoal.description }
                     </p>
 
-                    <div className="mt-8 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.14em] text-brand/80 sm:mt-10">
+                    <div className="mt-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.14em] text-brand/80 sm:mt-10">
                       <span className="h-px w-10 bg-brand/50" />
                       <span className="font-mono tracking-[0.12em]">SKEMALAB</span>
                     </div>
                   </div>
 
-                  <div className="pointer-events-none relative z-10 mx-auto flex h-32 w-32 items-center justify-center sm:h-40 sm:w-40 md:h-52 md:w-52">
+                  <div className="pointer-events-none relative z-10 mx-auto flex h-24 w-24 items-center justify-center sm:h-32 sm:w-32 md:h-40 md:w-40 lg:h-52 lg:w-52">
                     <div className="absolute inset-0 rotate-45 rounded-[28px] border border-brand/15 bg-brand/[0.035]" />
                     <div className="absolute inset-[12%] rotate-45 rounded-[20px] border border-accent/15" />
                     <div className="relative flex h-[58%] w-[58%] rotate-45 items-center justify-center rounded-[14px] border border-brand/20 bg-surface/90 text-brand shadow-[0_12px_36px_rgba(8,149,135,0.12)]">
