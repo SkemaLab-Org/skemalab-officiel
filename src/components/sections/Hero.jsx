@@ -225,7 +225,6 @@ export default function Hero() {
                     </div>
                     <p className="text-xs leading-snug text-white/55">
                       <span className="font-medium text-white/80">{ item.title }</span>
-                      <span className="block mt-1 line-clamp-2">{ item.description }</span>
                     </p>
                   </div>
 
