@@ -27,11 +27,35 @@ export const en = {
   ],
 
   hero: {
+    eyebrow: "Consulting · Software Engineering & Automation",
     ctaPrimary: "Start a project",
     ctaSecondary: "View services",
     prevSlide: "Previous slide",
     nextSlide: "Next slide",
     selectService: "Choose a service",
+    pillars: [
+      {
+        id: "dev",
+        label: "Build",
+        title: "Software Engineering & ERP",
+        description:
+          "Business platforms, ERP and CRM systems, and custom applications built to support your organization’s growth.",
+      },
+      {
+        id: "marketing",
+        label: "Grow",
+        title: "Performance Marketing",
+        description:
+          "A data-led acquisition strategy with return on investment tracked continuously.",
+      },
+      {
+        id: "automation",
+        label: "Automate",
+        title: "Automation & Intelligence",
+        description:
+          "Connected processes, repetitive tasks removed and teams focused on creating value.",
+      },
+    ],
   },
 
   servicesList: [
@@ -98,11 +122,11 @@ export const en = {
   },
 
   aboutIntro: {
-    eyebrow: "Skemalab · Independent digital studio",
-    title: "We turn ambitious ideas into",
-    highlight: "sustainable growth.",
-    description: "Skemalab is a digital studio based in Essaouira, bringing together business strategy, web development and intelligent automation. We build useful, elegant experiences and systems designed to deliver tangible results.",
-    secondary: "From the first conversation to launch, we support brands that want to move forward with clarity, high standards and a long-term vision.",
+    eyebrow: "Skemalab · Digital engineering and transformation partner",
+    title: "We build digital systems for",
+    highlight: "ambitious businesses.",
+    description: "Based in Essaouira, Skemalab is a digital firm bringing together consulting, software engineering, ERP and intelligent automation. We build robust, secure platforms designed to deliver tangible results.",
+    secondary: "From audit to production, our teams support organizations aiming to scale with rigor, transparency and a long-term vision.",
     imageAlt: "Skemalab creative workspace",
     imageCaption: "Essaouira · Morocco",
     foundedBy: "Founded by",

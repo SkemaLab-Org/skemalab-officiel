@@ -13,7 +13,7 @@ const SLIDE_MS = 6500;
 
 export default function Hero() {
   const { t, isRTL } = useI18n();
-  const services = t.servicesList;
+  const pillars = t.hero.pillars;
 
   const [ paused, setPaused ] = useState( false );
   const {
@@ -24,14 +24,14 @@ export default function Hero() {
     reduceMotion,
     onTouchStart,
     onTouchEnd,
-  } = useCarousel( services.length, { intervalMs: SLIDE_MS, paused } );
+  } = useCarousel( pillars.length, { intervalMs: SLIDE_MS, paused } );
 
-  const slide = services[ index ] || services[ 0 ];
+  const pillar = pillars[ index ] || pillars[ 0 ];
 
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] items-end overflow-hidden text-mist"
+      className="relative flex min-h-[100svh] items-center overflow-hidden text-mist"
       style={ {
         backgroundColor: "#0b332c",
       } }
@@ -83,24 +83,24 @@ export default function Hero() {
       {/* =========================================================================
           HERO CONTENT CONTAINER (Static position, no parallax)
           ========================================================================= */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-28 sm:px-8 sm:pb-16 sm:pt-36 lg:pb-24">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-20 pt-24 sm:px-8 sm:pb-24 sm:pt-28 lg:pb-24 lg:pt-28">
         {/* Restored Original Clean Badge & Tagline (Erased Disponibilité Projets 2026) */ }
-        <div className="mb-5 flex flex-wrap items-center gap-2 sm:mb-8 sm:gap-3">
+        <div className="mb-2 flex flex-wrap items-center gap-2 sm:mb-3 sm:gap-3">
           {/* <h1 className="rounded-[3px] border border-white/20 bg-surface/85 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-fg backdrop-blur-md sm:px-3 sm:py-1.5 sm:text-[11px] sm:tracking-[0.22em]">
             Skema<span className="text-brand">lab</span>
           </h1> */}
           <span className="hidden text-[11px] font-medium uppercase tracking-[0.22em] text-white/95 drop-shadow-[0_1px_6px_rgba(11,15,14,0.45)] sm:inline">
-            { t.common.tagline }
+            { t.hero.eyebrow }
           </span>
         </div>
 
         {/* Hero Grid: Main Presentation Card (Left) + Slide Controller (Right) */ }
-        <div className="grid items-end gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:gap-12">
+        <div className="grid items-center gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:gap-12">
           {/* Main Slide Presentation Card */ }
           <div className="relative w-full min-w-0">
             <AnimatePresence mode="wait">
               <motion.div
-                key={ slide.id }
+                key={ pillar.id }
                 initial={ reduceMotion ? false : { opacity: 0, y: 20 } }
                 animate={ { opacity: 1, y: 0 } }
                 exit={ reduceMotion ? { opacity: 0 } : { opacity: 0, y: -16 } }
@@ -116,37 +116,19 @@ export default function Hero() {
                 <div className="flex items-center gap-2.5">
                   <span className="inline-block h-2 w-2 rotate-45 rounded-[1px] bg-[#089587]" />
                   <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#089587] sm:text-xs">
-                    { slide.heroLabel }
+                    { String( index + 1 ).padStart( 2, "0" ) } / { String( pillars.length ).padStart( 2, "0" ) } · { pillar.label }
                   </p>
                 </div>
 
-                {/* Subtitle / Service Name */ }
-                <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-[#c5a880] sm:mt-4 sm:text-xs">
-                  { slide.title }
-                </p>
-
                 {/* Headline */ }
                 <p className="mt-2 text-[clamp(1.65rem,5.2vw,3.2rem)] font-bold leading-[1.14] tracking-tight text-white sm:mt-3">
-                  { slide.heroHeadline }
+                  { pillar.title }
                 </p>
 
                 {/* Supporting Text */ }
                 <p className="mt-3.5 max-w-xl text-sm leading-relaxed text-white/80 sm:mt-5 sm:text-base md:text-lg">
-                  { slide.heroText }
+                  { pillar.description }
                 </p>
-
-                {/* Pillars Micro-Pills */ }
-                <div className="mt-5 flex flex-wrap items-center gap-2 sm:mt-6">
-                  { slide.points?.slice( 0, 3 ).map( ( pt ) => (
-                    <span
-                      key={ pt }
-                      className="inline-flex items-center gap-1.5 rounded-[3px] border border-white/12 bg-white/8 px-2.5 py-1 text-xs text-white/90"
-                    >
-                      <span className="h-1 w-1 rounded-full bg-[#089587]" />
-                      { pt }
-                    </span>
-                  ) ) }
-                </div>
 
                 {/* Action CTA Buttons */ }
                 <div className="mt-7 flex w-full flex-col gap-3 sm:mt-8 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
@@ -171,7 +153,7 @@ export default function Hero() {
           </div>
 
           {/* Right Controller: Service Cards & Progress Indicators */ }
-          <div className="flex w-full min-w-0 flex-col justify-end gap-4 lg:items-end lg:gap-5">
+          <div className="flex w-full min-w-0 flex-col justify-center gap-4 lg:items-end lg:gap-5">
             {/* Carousel Counter & Arrow Navigation */ }
             <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-start lg:self-end">
               <div className="flex items-center gap-2 sm:gap-3">
@@ -195,7 +177,7 @@ export default function Hero() {
               <span className="font-mono text-sm text-white/70" aria-hidden="true">
                 <span className="font-semibold text-white">{ String( index + 1 ).padStart( 2, "0" ) }</span>
                 <span className="mx-1 text-white/35">/</span>
-                { String( services.length ).padStart( 2, "0" ) }
+                { String( pillars.length ).padStart( 2, "0" ) }
               </span>
             </div>
 
@@ -205,7 +187,7 @@ export default function Hero() {
               role="group"
               aria-label={ t.hero.selectService }
             >
-              { services.map( ( item, i ) => (
+              { pillars.map( ( item, i ) => (
                 <button
                   key={ item.id }
                   type="button"
@@ -217,7 +199,7 @@ export default function Hero() {
                     : "border-white/12 bg-[#0c3630]/65 hover:border-white/25 hover:bg-[#0f4039]/75 backdrop-blur-md"
                     }` }
                 >
-                  {/* Service Luxury Pictogram (color preserved on hover) */ }
+                  {/* Pillar pictogram */ }
                   <LuxuryPictogram
                     type={ item.id }
                     size="sm"
@@ -225,7 +207,7 @@ export default function Hero() {
                     className="shrink-0"
                   />
 
-                  {/* Service Text Information */ }
+                  {/* Pillar label, title and description */ }
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
                       <span
@@ -238,11 +220,12 @@ export default function Hero() {
                         className={ `truncate text-sm font-semibold tracking-wide ${ i === index ? "text-white" : "text-white/75"
                           }` }
                       >
-                        { item.title }
+                        { item.label }
                       </p>
                     </div>
-                    <p className="truncate text-xs text-white/50">
-                      { item.subtitle }
+                    <p className="text-xs leading-snug text-white/55">
+                      <span className="font-medium text-white/80">{ item.title }</span>
+                      <span className="block mt-1 line-clamp-2">{ item.description }</span>
                     </p>
                   </div>
 

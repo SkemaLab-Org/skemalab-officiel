@@ -27,11 +27,35 @@ export const fr = {
   ],
 
   hero: {
+    eyebrow: "Conseil, Ingénierie logicielle & Automatisation",
     ctaPrimary: "Lancer un projet",
     ctaSecondary: "Voir le service",
     prevSlide: "Slide précédent",
     nextSlide: "Slide suivant",
     selectService: "Choisir un service",
+    pillars: [
+      {
+        id: "dev",
+        label: "Build",
+        title: "Ingénierie logicielle & ERP",
+        description:
+          "Plateformes métiers, ERP, CRM et applications sur mesure, conçus pour soutenir la croissance de votre organisation.",
+      },
+      {
+        id: "marketing",
+        label: "Grow",
+        title: "Marketing de performance",
+        description:
+          "Une stratégie d’acquisition pilotée par la donnée, avec un retour sur investissement suivi en continu.",
+      },
+      {
+        id: "automation",
+        label: "Automate",
+        title: "Automatisation & Intelligence",
+        description:
+          "Vos processus connectés, vos tâches répétitives supprimées, vos équipes concentrées sur la valeur.",
+      },
+    ],
   },
 
   servicesList: [
@@ -98,11 +122,11 @@ export const fr = {
   },
 
   aboutIntro: {
-    eyebrow: "Skemalab · Studio digital indépendant",
-    title: "Nous transformons les idées ambitieuses en",
-    highlight: "croissance durable.",
-    description: "Skemalab est un studio digital basé à Essaouira qui réunit stratégie business, développement web et automatisation intelligente. Nous concevons des expériences et des systèmes utiles, élégants et pensés pour produire des résultats concrets.",
-    secondary: "Du premier cadrage au déploiement, notre équipe accompagne les marques qui veulent avancer avec clarté, exigence et une vraie vision à long terme.",
+    eyebrow: "Skemalab · Partenaire d’ingénierie et de transformation digitale",
+    title: "Nous bâtissons les systèmes digitaux des entreprises",
+    highlight: "ambitieuses.",
+    description: "Skemalab est une firme digitale basée à Essaouira qui réunit conseil, ingénierie logicielle, ERP et automatisation intelligente. Nous concevons des plateformes robustes, sécurisées et pensées pour produire des résultats concrets.",
+    secondary: "De l’audit à la mise en production, nos équipes accompagnent les organisations qui visent l’échelle, avec rigueur, transparence et une vision à long terme.",
     imageAlt: "Espace de travail créatif de Skemalab",
     imageCaption: "Essaouira · Maroc",
     foundedBy: "Fondé par",
