@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import BrandMark from "@/components/BrandMark";
 import { LuxuryRibbonMotif } from "@/components/ui/MoroccanPattern";

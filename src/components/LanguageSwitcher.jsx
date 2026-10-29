@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { Check } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useI18n } from "@/components/I18nProvider";
 import clsx from "clsx";
 
