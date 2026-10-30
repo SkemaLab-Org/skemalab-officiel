@@ -1,252 +1,135 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
-import {
-  ArrowUpRight,
-  BarChart3,
-  ChevronLeft,
-  ChevronRight,
-  Code2,
-  Globe2,
-  MousePointer2,
-  TrendingUp,
-  Workflow,
-} from "lucide-react";
+import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
 import { useI18n } from "@/components/I18nProvider";
-import Reveal from "@/components/ui/Reveal";
-import SectionHeading from "@/components/ui/SectionHeading";
-import { MoroccanZelligeLattice } from "@/components/ui/MoroccanPattern";
-
-const AUTO_PLAY_DURATION = 4000;
-const GOAL_ICONS = [ Code2, TrendingUp, Workflow, BarChart3, Globe2, MousePointer2 ];
-const CAROUSEL_COPY = {
-  ar: {
-    carousel: "أهدافنا",
-    controls: "التنقل بين الأهداف",
-    previous: "الهدف السابق",
-    next: "الهدف التالي",
-    goTo: "انتقل إلى الهدف",
-    role: "عارض",
-    slide: ( current, total ) => `عرض الهدف ${ current } من ${ total }`,
-  },
-  en: {
-    carousel: "Our goals",
-    controls: "Goal navigation",
-    previous: "Previous goal",
-    next: "Next goal",
-    goTo: "Go to goal",
-    role: "carousel",
-    slide: ( current, total ) => `Showing goal ${ current } of ${ total }`,
-  },
-  fr: {
-    carousel: "Nos objectifs",
-    controls: "Navigation des objectifs",
-    previous: "Objectif précédent",
-    next: "Objectif suivant",
-    goTo: "Aller à l’objectif",
-    role: "carrousel",
-    slide: ( current, total ) => `Objectif ${ current } sur ${ total }`,
-  },
-};
+import SectionHeader from "@/components/ui/SectionHeader";
+import Spotlight from "@/components/ui/Spotlight";
+import Reveal from "@/components/motion/Reveal";
+import Button from "@/components/ui/Button";
+import { DURATION, EASE } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 export default function Projects() {
-  const { t, isRTL, locale } = useI18n();
-  const goals = t.projectsSection.list;
-  const [ activeIndex, setActiveIndex ] = useState( 0 );
-  const [ direction, setDirection ] = useState( 1 );
-  const activeGoal = goals[ activeIndex ] || goals[ 0 ];
-  const ActiveIcon = GOAL_ICONS[ activeIndex % GOAL_ICONS.length ];
-  const copy = CAROUSEL_COPY[ locale ] || CAROUSEL_COPY.fr;
-
-  useEffect( () => {
-    const timeout = window.setTimeout( () => {
-      setDirection( 1 );
-      setActiveIndex( ( index ) => ( index + 1 ) % goals.length );
-    }, AUTO_PLAY_DURATION );
-
-    return () => window.clearTimeout( timeout );
-  }, [ activeIndex, goals.length ] );
-
-  const showSlide = ( index, movement ) => {
-    setDirection( movement );
-    setActiveIndex( ( index + goals.length ) % goals.length );
-  };
-
-  const nextSlide = () => showSlide( activeIndex + 1, 1 );
-  const previousSlide = () => showSlide( activeIndex - 1, -1 );
-  const slideLabel = copy.slide( activeIndex + 1, goals.length );
-  const visualDirection = isRTL ? -direction : direction;
+  const { t } = useI18n();
+  const copy = t.projectsSection;
+  const goals = copy.list;
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeGoal = goals[activeIndex] || goals[0];
+  const reduce = useReducedMotion();
 
   return (
-    <section
-      id="projets"
-      className="relative overflow-hidden bg-page py-16 sm:py-24 lg:py-36"
-    >
-      <div className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-accent/[0.07] blur-[120px]" />
-      <div className="pointer-events-none absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-brand/[0.07] blur-[110px]" />
+    <section id="projets" className="section-y relative overflow-hidden bg-page">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-32 top-1/4 h-[24rem] w-[24rem] rounded-full bg-brand/7 blur-[140px]"
+      />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-8">
+      <div className="shell relative">
         <Reveal>
-          <SectionHeading
-            eyebrow={ t.projectsSection.eyebrow }
-            title={ t.projectsSection.title }
-            description={ t.projectsSection.description }
+          <SectionHeader
+            label={copy.eyebrow}
+            index="04"
+            title={copy.title}
+            description={copy.description}
           />
         </Reveal>
 
-        <Reveal delay={ 0.08 }>
-          <div className="mt-8 sm:mt-12 lg:mt-16">
+        <div className="mt-12 grid gap-8 sm:mt-16 lg:grid-cols-[0.92fr_1.08fr] lg:items-start lg:gap-14">
+          <Reveal>
             <div
-              role="region"
-              aria-roledescription={ copy.role }
-              aria-label={ copy.carousel }
-              className="relative isolate min-h-[390px] overflow-hidden rounded-[4px] border border-line bg-surface shadow-[0_16px_52px_rgba(11,15,14,0.06)] sm:min-h-[410px] lg:min-h-[440px]"
+              role="group"
+              aria-label={copy.eyebrow}
+              className="border-t border-line"
             >
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_10%_0%,rgba(8,149,135,0.11),transparent_48%),linear-gradient(135deg,rgba(8,149,135,0.035),transparent_62%)]"
-              />
-
-              <AnimatePresence mode="wait" initial={ false }>
-                <motion.article
-                  key={ activeGoal.goal }
-                  role="group"
-                  aria-roledescription={ locale === "en" ? "slide" : locale === "ar" ? "شريحة" : "diapositive" }
-                  aria-label={ slideLabel }
-                  initial={ { opacity: 0, x: visualDirection * 42 } }
-                  animate={ { opacity: 1, x: 0 } }
-                  exit={ { opacity: 0, x: visualDirection * -34 } }
-                  transition={ { duration: 0.32, ease: [ 0.22, 1, 0.36, 1 ] } }
-                  className="relative isolate grid min-h-[390px] h-full grid-cols-1 items-center gap-4 p-4 sm:min-h-[410px] sm:gap-5 sm:p-8 md:grid-cols-[1fr_0.42fr] md:gap-8 md:p-10 lg:min-h-[440px] lg:p-14"
-                  dir={ isRTL ? "rtl" : "ltr" }
-                >
-                  <div className="relative z-10 max-w-3xl">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="inline-flex items-center gap-2 rounded-[4px] border border-brand/20 bg-brand/[0.07] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-accent sm:text-[11px]">
-                        <span className="h-1.5 w-1.5 rotate-45 bg-brand" />
-                        { activeGoal.category }
-                      </span>
-                      <span className="font-mono text-xs tracking-[0.12em] text-muted">
-                        { String( activeIndex + 1 ).padStart( 2, "0" ) } / { String( goals.length ).padStart( 2, "0" ) }
-                      </span>
-                    </div>
-
-                    <h3 className="mt-5 max-w-3xl text-[clamp(1.75rem,5.8vw,4.5rem)] font-semibold leading-[1.04] tracking-tight text-fg sm:mt-8">
-                      { activeGoal.goal }
-                    </h3>
-                    <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:mt-6 sm:text-base md:text-lg">
-                      { activeGoal.description }
-                    </p>
-
-                    <div className="mt-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.14em] text-brand/80 sm:mt-10">
-                      <span className="h-px w-10 bg-brand/50" />
-                      <span className="font-mono tracking-[0.12em]">SKEMALAB</span>
-                    </div>
-                  </div>
-
-                  <div className="pointer-events-none relative z-10 mx-auto flex h-24 w-24 items-center justify-center sm:h-32 sm:w-32 md:h-40 md:w-40 lg:h-52 lg:w-52">
-                    <div className="absolute inset-0 rotate-45 rounded-[28px] border border-brand/15 bg-brand/[0.035]" />
-                    <div className="absolute inset-[12%] rotate-45 rounded-[20px] border border-accent/15" />
-                    <div className="relative flex h-[58%] w-[58%] rotate-45 items-center justify-center rounded-[14px] border border-brand/20 bg-surface/90 text-brand shadow-[0_12px_36px_rgba(8,149,135,0.12)]">
-                      <span className="-rotate-45">
-                        <ActiveIcon size={ 38 } strokeWidth={ 1.45 } />
-                      </span>
-                    </div>
-                    <span aria-hidden="true" className="absolute -end-3 -top-4 font-mono text-6xl font-semibold tracking-tighter text-brand/[0.11] sm:text-7xl md:text-8xl">
-                      { String( activeIndex + 1 ).padStart( 2, "0" ) }
-                    </span>
-                  </div>
-
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 z-0 opacity-40"
-                  >
-                    <MoroccanZelligeLattice
-                      idPrefix={ `goal-slide-${ activeIndex }` }
-                      opacity={ 0.3 }
-                      strokeColor="#089587"
-                      strokeWidth={ 0.7 }
-                      size={ 108 }
-                      fadeMask
-                    />
-                  </div>
-                </motion.article>
-              </AnimatePresence>
-            </div>
-
-            <div className="mt-5 flex flex-wrap items-center justify-between gap-4 sm:mt-6">
-              <div role="group" aria-label={ copy.controls } className="flex items-center gap-2">
-                { goals.map( ( goal, index ) => (
+              {goals.map((goal, index) => {
+                const active = index === activeIndex;
+                return (
                   <button
-                    key={ goal.goal }
+                    key={goal.goal}
                     type="button"
-                    aria-label={ `${ copy.goTo } ${ index + 1 }` }
-                    aria-current={ activeIndex === index ? "step" : undefined }
-                    onClick={ () => showSlide( index, index >= activeIndex ? 1 : -1 ) }
-                    className="group flex h-8 items-center justify-center px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60"
+                    aria-pressed={active}
+                    onClick={() => setActiveIndex(index)}
+                    className={cn(
+                      "group flex w-full items-center gap-4 border-b border-line py-4 text-start transition-colors duration-300 sm:py-5",
+                      active ? "text-fg" : "text-muted hover:text-fg",
+                    )}
                   >
                     <span
-                      className={ `relative block h-[3px] overflow-hidden rounded-full transition-all duration-300 ${ activeIndex === index
-                        ? "w-9 bg-brand"
-                        : "w-4 bg-line group-hover:w-6 group-hover:bg-brand/50"
-                        }` }
+                      className={cn(
+                        "label-mono w-6 shrink-0 transition-colors",
+                        active ? "text-accent" : "text-muted",
+                      )}
                     >
-                      { activeIndex === index && (
-                        <motion.span
-                          key={ `slide-progress-${ activeIndex }` }
-                          aria-hidden="true"
-                          className="absolute inset-0 origin-left rounded-full bg-accent"
-                          initial={ { scaleX: 0 } }
-                          animate={ { scaleX: 1 } }
-                          transition={ { duration: AUTO_PLAY_DURATION / 1000, ease: "linear" } }
-                          style={ { transformOrigin: isRTL ? "right center" : "left center" } }
-                        />
-                      ) }
+                      {String(index + 1).padStart(2, "0")}
                     </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-medium leading-snug sm:text-base">
+                        {goal.goal}
+                      </span>
+                      <span className="mt-0.5 block text-xs text-muted">
+                        {goal.category}
+                      </span>
+                    </span>
+                    <ArrowUpRight
+                      size={16}
+                      aria-hidden="true"
+                      className={cn(
+                        "shrink-0 transition-all duration-300 rtl-flip",
+                        active
+                          ? "text-accent"
+                          : "text-muted group-hover:text-muted",
+                      )}
+                    />
                   </button>
-                ) ) }
-              </div>
-
-              <div className="flex items-center gap-3">
-                <span className="min-w-[92px] text-end font-mono text-xs tracking-[0.12em] text-muted">
-                  { slideLabel }
-                </span>
-                <button
-                  type="button"
-                  aria-label={ copy.previous }
-                  onClick={ previousSlide }
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-[4px] border border-line bg-surface text-fg transition-colors hover:border-brand/40 hover:bg-brand/[0.06] hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60"
-                >
-                  <ChevronLeft size={ 18 } className="rtl-flip" />
-                </button>
-                <button
-                  type="button"
-                  aria-label={ copy.next }
-                  onClick={ nextSlide }
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-[4px] border border-line bg-surface text-fg transition-colors hover:border-brand/40 hover:bg-brand/[0.06] hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60"
-                >
-                  <ChevronRight size={ 18 } className="rtl-flip" />
-                </button>
-              </div>
+                );
+              })}
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
 
-        <Reveal delay={ 0.12 }>
-          <div className="mt-8 flex justify-center sm:mt-10">
-            <a
-              href="#contact"
-              className="group inline-flex min-h-12 items-center gap-3 rounded-[4px] bg-brand px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(8,149,135,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent hover:shadow-[0_12px_30px_rgba(8,149,135,0.28)]"
+          <Reveal delay={0.08} className="lg:sticky lg:top-28">
+            <Spotlight
+              className="relative min-h-[24rem] overflow-hidden rounded-lg border border-line bg-surface p-6 sm:min-h-[26rem] sm:p-10 lg:p-12"
+              aria-live="polite"
             >
-              <span>{ t.projectsSection.similarProject }</span>
-              <ArrowUpRight
-                size={ 16 }
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl-flip"
-              />
-            </a>
-          </div>
-        </Reveal>
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute bottom-5 end-7 font-display text-[4.5rem] leading-none tracking-tighter text-fg/[0.06] sm:text-[5.5rem]"
+              >
+                {String(activeIndex + 1).padStart(2, "0")}
+              </span>
+
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={activeGoal.goal}
+                  initial={reduce ? false : { opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduce ? { opacity: 0 } : { opacity: 0, y: -10 }}
+                  transition={{ duration: DURATION.base, ease: EASE.out }}
+                  className="relative flex h-full flex-col"
+                >
+                  <span className="inline-flex w-fit items-center gap-2 rounded-full border border-line-strong px-3 py-1.5">
+                    <span className="h-1.5 w-1.5 rotate-45 bg-accent" aria-hidden="true" />
+                    <span className="label-mono text-muted">{activeGoal.category}</span>
+                  </span>
+
+                  <h3 className="display-md mt-8 max-w-[20ch]">{activeGoal.goal}</h3>
+                  <p className="mt-4 max-w-md text-sm leading-relaxed text-muted sm:text-base">
+                    {activeGoal.description}
+                  </p>
+
+                  <div className="mt-auto pt-10">
+                    <Button href="#contact" size="sm">
+                      {copy.similarProject}
+                      <ArrowUpRight size={15} className="rtl-flip" />
+                    </Button>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </Spotlight>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

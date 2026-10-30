@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import SiteShell from "@/components/SiteShell";
 import Hero from "@/components/sections/Hero";
 import AboutIntro from "@/components/sections/AboutIntro";
 import Services from "@/components/sections/Services";
@@ -10,11 +9,12 @@ import About from "@/components/sections/About";
 import CTA from "@/components/sections/CTA";
 import Contact from "@/components/sections/Contact";
 
-const Loader = dynamic( () => import( "@/components/Loader" ) );
+const Loader = dynamic(() => import("@/components/Loader"));
 
 export default function Home() {
   return (
-    <SiteShell showLoader loader={ <Loader /> }>
+    <>
+      <Loader />
       <Hero />
       <AboutIntro />
       <Services />
@@ -24,6 +24,6 @@ export default function Home() {
       <About />
       <CTA />
       <Contact />
-    </SiteShell>
+    </>
   );
 }

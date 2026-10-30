@@ -18,10 +18,14 @@
   --color-brand: var(--brand);
   --color-brand-deep: var(--brand-deep);
   --color-accent: var(--accent);
+  /* Accent that must stay legible on always-dark brand surfaces (hero, CTA,
+     header, footer) regardless of the active theme. */
+  --color-accent-bright: #3ad9bf;
   --color-on-brand: var(--on-brand);
   --color-cream: var(--cream);
   --color-ink: var(--ink);
   --color-deep: var(--deep);
+  --color-danger: var(--danger);
 
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-bricolage), var(--font-manrope), ui-sans-serif,
@@ -54,6 +58,7 @@
   --cream: #f2ede2;
   --ink: #07110e;
   --deep: #0a2b24;
+  --danger: #ff9d8d;
   --selection: #3ad9bf;
   --selection-fg: #04120e;
 }
@@ -74,6 +79,7 @@ html:not(.dark) {
   --cream: #fffdf7;
   --ink: #081c17;
   --deep: #0f2e2a;
+  --danger: #b42318;
   --selection: #0b7a6b;
   --selection-fg: #fffdf7;
 }
@@ -250,6 +256,11 @@ html:not(.dark) {
   padding-top: 0.9rem;
 }
 
+/* Same rail on an always-dark surface. */
+@utility ledger-rule--ink {
+  border-top-color: rgba(242, 237, 226, 0.16);
+}
+
 /* ==========================================================================
    Components
    ========================================================================== */
@@ -276,7 +287,7 @@ html:not(.dark) {
 }
 
 .field[aria-invalid="true"] {
-  border-color: #f08a7a;
+  border-color: var(--danger);
 }
 
 select.field {
@@ -367,6 +378,16 @@ select.field {
 @keyframes beam-spin {
   to {
     --beam-angle: 360deg;
+  }
+}
+
+/* Hero rail timer — resets on every slide change. */
+@keyframes rail-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 

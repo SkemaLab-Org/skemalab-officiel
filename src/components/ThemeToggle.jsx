@@ -1,8 +1,8 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import clsx from "clsx";
 import { useTheme } from "@/components/ThemeProvider";
+import { cn } from "@/lib/utils";
 
 export default function ThemeToggle({ className = "" }) {
   const { theme, toggleTheme } = useTheme();
@@ -14,16 +14,15 @@ export default function ThemeToggle({ className = "" }) {
       onClick={toggleTheme}
       aria-label={isDark ? "Activer le mode clair" : "Activer le mode sombre"}
       title={isDark ? "Mode clair" : "Mode sombre"}
-      className={clsx(
-        "flex h-11 w-11 items-center justify-center rounded-[3px] border transition-all duration-300",
-        className ||
-          "border-line bg-surface text-fg hover:border-brand hover:text-brand",
+      className={cn(
+        "flex h-11 w-11 items-center justify-center rounded-md border border-cream/20 text-cream/80 transition-colors hover:border-accent-bright hover:text-accent-bright",
+        className,
       )}
     >
       {isDark ? (
-        <Sun size={17} strokeWidth={1.75} />
+        <Sun size={17} strokeWidth={1.75} aria-hidden="true" />
       ) : (
-        <Moon size={17} strokeWidth={1.75} />
+        <Moon size={17} strokeWidth={1.75} aria-hidden="true" />
       )}
     </button>
   );
