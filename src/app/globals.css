@@ -125,10 +125,37 @@ img {
 
 .gradient-mesh {
   background:
-    radial-gradient(ellipse 70% 55% at 12% 35%, rgba(8, 149, 135, 0.2), transparent 58%),
-    radial-gradient(ellipse 55% 45% at 88% 18%, rgba(13, 101, 92, 0.16), transparent 52%),
-    radial-gradient(ellipse 50% 40% at 55% 95%, rgba(15, 46, 42, 0.12), transparent 55%);
-  filter: drop-shadow(0 0 48px rgba(8, 149, 135, 0.08));
+    radial-gradient(ellipse 70% 55% at 12% 35%, rgba(8, 149, 135, 0.22), transparent 58%),
+    radial-gradient(ellipse 55% 45% at 88% 18%, rgba(13, 101, 92, 0.18), transparent 52%),
+    radial-gradient(ellipse 50% 40% at 55% 95%, rgba(15, 46, 42, 0.14), transparent 55%);
+  filter: drop-shadow(0 0 50px rgba(8, 149, 135, 0.1));
+}
+
+.bento-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card:hover {
+  border-color: rgba(8, 149, 135, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px -15px rgba(8, 149, 135, 0.15);
+}
+
+.glass-panel {
+  background: rgba(15, 46, 42, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+html:not(.dark) .glass-panel {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(8, 149, 135, 0.16);
 }
 
 /* Fusion soft light — #0F2E2A / #0D655C / #089587 (style logo) */
