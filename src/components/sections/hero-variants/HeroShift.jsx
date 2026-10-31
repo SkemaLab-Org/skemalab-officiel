@@ -109,11 +109,11 @@ export default function HeroShift({ locale = "fr" }) {
           />
         </div>
 
-        <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-5 pb-16 pt-32 sm:px-8 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-5 pb-16 pt-32 sm:px-8 md:grid-cols-[1fr_1.1fr] md:gap-10 lg:gap-16">
           <div>
             <p className="text-sm text-cream/65">{t.tagline}</p>
 
-            <div aria-live="polite" className="mt-5 min-h-[17rem] lg:min-h-[20rem]">
+            <div aria-live="polite" className="mt-5 min-h-[16rem] lg:min-h-[18rem]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={key}

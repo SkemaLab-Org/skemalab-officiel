@@ -109,7 +109,7 @@ export default function HeroTriptych({ locale = "fr" }) {
             </div>
           </div>
 
-          <div className="flex h-[34rem] flex-col overflow-hidden rounded-lg border border-cream/15 lg:h-[26rem] lg:flex-row">
+          <div className="flex h-[34rem] flex-col overflow-hidden rounded-lg border border-cream/15 md:h-[32rem] lg:h-[clamp(20rem,44vh,26rem)] lg:flex-row">
             {SERVICE_KEYS.map((key, index) => {
               const on = key === active;
               return (
@@ -171,7 +171,7 @@ export default function HeroTriptych({ locale = "fr" }) {
                   <div
                     id={`tri-${key}`}
                     className={cn(
-                      "absolute inset-0 p-6 transition-opacity duration-300 lg:min-w-[28rem] lg:p-8",
+                      "absolute inset-0 flex flex-col p-6 transition-opacity duration-300 lg:min-w-[28rem] lg:p-8",
                       on ? "opacity-100 delay-150" : "pointer-events-none opacity-0",
                     )}
                   >
@@ -183,7 +183,7 @@ export default function HeroTriptych({ locale = "fr" }) {
                       {t.services[key].text}
                     </p>
                     {on && (
-                      <div className="absolute bottom-6 end-6 w-36 lg:bottom-8 lg:end-8 lg:w-56">
+                      <div className="mt-auto self-end w-36 pt-4 lg:w-56">
                         <Specimen serviceKey={key} />
                       </div>
                     )}
