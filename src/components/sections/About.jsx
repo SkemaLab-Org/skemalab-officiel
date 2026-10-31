@@ -1,119 +1,99 @@
 "use client";
 
 import Image from "next/image";
+import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
-import agencyImage from "@/assets/home-imgs/lagence.webp";
 import { useI18n } from "@/components/I18nProvider";
-import Reveal from "@/components/ui/Reveal";
-import SectionHeading from "@/components/ui/SectionHeading";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Reveal from "@/components/motion/Reveal";
+import Parallax from "@/components/motion/Parallax";
 import Button from "@/components/ui/Button";
-import { MoroccanZelligeLattice, LuxuryRibbonMotif, MoroccanCornerOrnament } from "@/components/ui/MoroccanPattern";
+import { DURATION, EASE, VIEWPORT } from "@/lib/motion";
+import agencyImage from "@/assets/home-imgs/lagence.webp";
 
 export default function About() {
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
+  const copy = t.aboutHome;
+  const reduce = useReducedMotion();
 
   return (
-    <section
-      id="agence"
-      className="relative overflow-hidden bg-page py-20 sm:py-28 lg:py-40"
-    >
-      {/* Moroccan Zellige Background Lattice */}
-      <MoroccanZelligeLattice
-        opacity={0.05}
-        strokeColor="#089587"
-        size={110}
-        fadeMask={true}
-      />
-      <div className="pointer-events-none absolute right-0 top-1/4 h-96 w-96 rounded-full bg-brand/8 blur-[120px]" />
-      <div className="pointer-events-none absolute -left-20 bottom-10 h-80 w-80 rounded-full bg-accent/8 blur-[100px]" />
-
-      {/* Static Luxury Ribbon Wave Motif (Non-animated, static positioning) */}
+    <section id="agence" className="section-y relative overflow-hidden bg-surface">
       <div
-        className="pointer-events-none absolute -left-24 top-20 opacity-30 lg:opacity-45"
         aria-hidden="true"
-      >
-        <LuxuryRibbonMotif width={650} height={380} opacity={0.5} />
-      </div>
+        className="pointer-events-none absolute -left-40 bottom-0 h-[28rem] w-[28rem] rounded-full bg-accent/6 blur-[150px]"
+      />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:gap-16 sm:px-8 lg:grid-cols-2 lg:gap-20">
-        {/* Left Visual Column with Moroccan Architectural Framing */}
+      <div className="shell relative">
         <Reveal>
-          <div className="relative mx-auto w-full max-w-md sm:max-w-none lg:mx-0">
-            {/* Outer Geometric Frame */}
-            <div className="absolute inset-0 rounded-[4px] border border-brand/30 sm:-inset-4" />
-            <div className="absolute -bottom-3 -right-3 hidden h-24 w-24 rounded-[3px] bg-accent/80 sm:block sm:h-28 sm:w-28 md:-bottom-4 md:-right-4" />
-            <div className="absolute -left-3 -top-3 hidden h-16 w-16 rounded-[3px] bg-deep/90 sm:block sm:h-20 sm:w-20 md:-left-4 md:-top-4" />
-
-            <div className="relative overflow-hidden rounded-[4px] shadow-2xl">
-              <div className="relative aspect-[5/6] overflow-hidden sm:aspect-[4/5]">
-                <Image
-                  src={agencyImage}
-                  alt={t.aboutHome.imageAlt}
-                  fill
-                  className="object-fill"
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                />
-              </div>
-            </div>
-          </div>
+          <SectionHeader
+            label={copy.eyebrow}
+            index="05"
+            title={copy.title}
+            description={copy.p1}
+          />
         </Reveal>
 
-        {/* Right Content Column */}
-        <div className="min-w-0">
-          <Reveal>
-            <SectionHeading
-              eyebrow={
-                locale === "ar"
-                  ? "عن سكيما لاب · الهوية والرؤية"
-                  : t.aboutHome.eyebrow
-              }
-              title={t.aboutHome.title}
-            />
-          </Reveal>
+        <div className="mt-12 grid gap-10 sm:mt-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div className="min-w-0">
+            <motion.div
+              initial={reduce ? false : { clipPath: "inset(0 0 100% 0)" }}
+              whileInView={reduce ? undefined : { clipPath: "inset(0 0 0% 0)" }}
+              viewport={VIEWPORT}
+              transition={{ duration: DURATION.slow, ease: EASE.out }}
+              className="relative aspect-[4/5] overflow-hidden rounded-lg border border-line bg-deep sm:aspect-[5/5]"
+            >
+              <Parallax offset={30} className="h-full">
+                <Image
+                  src={agencyImage}
+                  alt={copy.imageAlt}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  className="scale-[1.1] object-cover"
+                />
+              </Parallax>
+            </motion.div>
 
-          <Reveal delay={0.1}>
-            <p className="mt-5 text-sm leading-relaxed text-muted sm:mt-6 sm:text-base md:text-lg">
-              {t.aboutHome.p1}
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-muted sm:mt-4 sm:text-base md:text-lg">
-              {t.aboutHome.p2}
-            </p>
-          </Reveal>
+            <div className="mt-6 border-s-2 border-accent ps-5">
+              <p className="label-mono text-accent">{copy.promiseEyebrow}</p>
+              <p className="mt-2 max-w-md font-display text-xl leading-snug tracking-tight text-fg sm:text-2xl">
+                {copy.promiseText}
+              </p>
+            </div>
+          </div>
 
-          {/* Core Strategic Pillars Grid with Moroccan Corner Accents */}
-          <Reveal delay={0.16}>
-            <div className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-2 sm:gap-4">
-              {t.aboutHome.pillars.map(([title, text]) => (
-                <div
-                  key={title}
-                  className="group relative overflow-hidden rounded-[4px] border border-line bg-surface p-4 shadow-sm transition-all duration-300 hover:border-brand/40 hover:shadow-md sm:p-5"
-                >
-                  <MoroccanCornerOrnament
-                    className="absolute right-1 top-1 opacity-20 transition-opacity group-hover:opacity-60"
-                    size={20}
-                  />
-                  <div className="mb-2.5 flex items-center gap-2 sm:mb-3">
-                    <span className="h-1.5 w-1.5 rotate-45 rounded-[0.5px] bg-brand" />
-                    <div className="h-[2px] w-8 rounded-[1px] bg-brand transition-all duration-300 group-hover:w-12" />
+          <div className="min-w-0">
+            <Reveal>
+              <p className="max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+                {copy.p2}
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.08}>
+              <dl className="mt-8 border-t border-line">
+                {copy.pillars.map(([term, value]) => (
+                  <div
+                    key={term}
+                    className="grid gap-1 border-b border-line py-4 sm:grid-cols-[0.36fr_1fr] sm:items-baseline sm:gap-6"
+                  >
+                    <dt className="label-mono text-muted">{term}</dt>
+                    <dd className="text-sm leading-relaxed text-fg/85">{value}</dd>
                   </div>
-                  <p className="text-sm font-semibold text-fg">{title}</p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted">{text}</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
+                ))}
+              </dl>
+            </Reveal>
 
-          <Reveal delay={0.22}>
-            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center">
-              <Button href="#contact" variant="accent" className="w-full sm:w-auto">
-                {t.aboutHome.cta}
-                <ArrowUpRight size={16} className="rtl-flip" />
-              </Button>
-              <Button href="/our-story" variant="ghost" className="w-full sm:w-auto">
-                {locale === "ar" ? "تعرف على قصة المؤسسين" : "Découvrir les fondateurs"}
-              </Button>
-            </div>
-          </Reveal>
+            <Reveal delay={0.14}>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Button href="#contact">
+                  {copy.cta}
+                  <ArrowUpRight size={16} className="rtl-flip" />
+                </Button>
+                <Button href="/our-story" variant="secondary">
+                  {t.aboutIntro.cta}
+                </Button>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>

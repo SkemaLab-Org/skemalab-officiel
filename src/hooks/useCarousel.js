@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "motion/react";
 
 export default function useCarousel(length, { intervalMs = 6500, paused = false } = {}) {
   const [index, setIndex] = useState(0);

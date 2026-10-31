@@ -1,6 +1,6 @@
-# Skemalab
+# SkemaLab
 
-One-page marketing site for **Skemalab** — développement informatique, marketing digital et automatisation de workflows.
+One-page marketing site for **SkemaLab** — développement informatique, marketing digital et automatisation de workflows.
 
 ## Stack
 

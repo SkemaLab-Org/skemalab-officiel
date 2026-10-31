@@ -1,4 +1,3 @@
-import SiteShell from "@/components/SiteShell";
 import EmailSignatureStudio from "@/components/email-signature/EmailSignatureStudio";
 
 export const metadata = {
@@ -18,8 +17,6 @@ export const metadata = {
 
 export default function EmailSignaturePage() {
   return (
-    <SiteShell>
-      <EmailSignatureStudio />
-    </SiteShell>
+    <EmailSignatureStudio />
   );
 }

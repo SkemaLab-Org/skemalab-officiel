@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import BrandMark from "@/components/BrandMark";
 import { LuxuryRibbonMotif } from "@/components/ui/MoroccanPattern";
@@ -99,7 +99,7 @@ export default function Loader() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="brand-fusion-bg fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-[130] flex flex-col items-center justify-center overflow-hidden bg-[#07110e] text-cream"
           initial={{ opacity: 1 }}
           exit={{
             opacity: 0,
@@ -111,9 +111,9 @@ export default function Loader() {
           aria-hidden="true"
           role="presentation"
         >
-          <div className="pointer-events-none absolute inset-0 grid-bg opacity-25" />
+          <div className="zellige pointer-events-none absolute inset-0 opacity-25" />
           <div className="pointer-events-none absolute -left-1/4 top-1/4 h-[50vmin] w-[50vmin] rounded-full bg-brand/20 blur-[100px]" />
-          <div className="pointer-events-none absolute -right-1/4 bottom-1/4 h-[45vmin] w-[45vmin] rounded-full bg-accent/25 blur-[90px]" />
+          <div className="pointer-events-none absolute -right-1/4 bottom-1/4 h-[45vmin] w-[45vmin] rounded-full bg-accent-bright/25 blur-[90px]" />
           <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-35">
             <LuxuryRibbonMotif width={620} height={360} opacity={0.65} />
           </div>
@@ -125,7 +125,7 @@ export default function Loader() {
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           >
             <motion.p
-              className="mb-5 text-[10px] uppercase tracking-[0.42em] text-white/50 sm:text-[11px]"
+              className="mb-5 text-[10px] uppercase tracking-[0.42em] text-cream/65 sm:text-[11px]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.15, duration: 0.45 }}
@@ -142,27 +142,27 @@ export default function Loader() {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <BrandMark as="span" className="h-10 sm:h-12" />
+              <BrandMark as="span" tone="dark" className="h-10 sm:h-12" />
             </motion.div>
 
             <motion.div
-              className="mt-7 h-px w-14 origin-center bg-brand/80 sm:mt-8 sm:w-16"
+              className="mt-7 h-px w-14 origin-center bg-accent-bright/80 sm:mt-8 sm:w-16"
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
               transition={{ delay: 0.35, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             />
 
             <div className="mt-10 w-full max-w-[16rem] sm:mt-12 sm:max-w-[18rem]">
-              <div className="mb-3 flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-white/45 sm:text-[11px]">
+              <div className="mb-3 flex items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-cream/65 sm:text-[11px]">
                 <span className="truncate">{stageLabel(progress)}</span>
-                <span className="tabular-nums text-white/70">
+                <span className="tabular-nums text-cream/70">
                   {String(progress).padStart(2, "0")}%
                 </span>
               </div>
 
-              <div className="relative h-[2px] overflow-hidden rounded-full bg-white/10">
+              <div className="relative h-[2px] overflow-hidden rounded-full bg-cream/10">
                 <motion.div
-                  className="absolute inset-y-0 left-0 rounded-full bg-brand shadow-[0_0_16px_rgba(8,149,135,0.55)]"
+                  className="absolute inset-y-0 left-0 rounded-full bg-accent-bright shadow-[0_0_16px_rgba(58,217,191,0.45)]"
                   initial={false}
                   animate={{ width: `${progress}%` }}
                   transition={{ duration: 0.12, ease: "linear" }}
@@ -172,7 +172,7 @@ export default function Loader() {
           </motion.div>
 
           <motion.p
-            className="absolute bottom-8 left-0 right-0 text-center text-[10px] uppercase tracking-[0.28em] text-white/30 sm:bottom-10"
+            className="absolute bottom-8 left-0 right-0 text-center text-[10px] uppercase tracking-[0.28em] text-cream/65 sm:bottom-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.5 }}

@@ -1,35 +1,21 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { contactInfo } from "@/data/content";
 import BrandMark from "@/components/BrandMark";
+import Marquee from "@/components/motion/Marquee";
 import { useI18n } from "@/components/I18nProvider";
-import {
-  GmailIcon,
-  LinkedInIcon,
-  WhatsAppIcon,
-} from "@/components/icons/SocialIcons";
-import { MoroccanZelligeLattice, LuxuryRibbonMotif } from "@/components/ui/MoroccanPattern";
+import { GmailIcon, LinkedInIcon, WhatsAppIcon } from "@/components/icons/SocialIcons";
 
 const socialLinks = [
-  {
-    label: "LinkedIn",
-    href: contactInfo.linkedin,
-    Icon: LinkedInIcon,
-    external: true,
-  },
+  { label: "LinkedIn", href: contactInfo.linkedin, Icon: LinkedInIcon, external: true },
   {
     label: "WhatsApp",
     href: `https://wa.me/${contactInfo.whatsapp}`,
     Icon: WhatsAppIcon,
     external: true,
   },
-  {
-    label: "Gmail",
-    href: `mailto:${contactInfo.email}`,
-    Icon: GmailIcon,
-    external: false,
-  },
+  { label: "Email", href: `mailto:${contactInfo.email}`, Icon: GmailIcon, external: false },
 ];
 
 export default function Footer() {
@@ -37,107 +23,122 @@ export default function Footer() {
   const navLinks = t.nav;
 
   return (
-    <footer className="brand-fusion-bg relative overflow-hidden text-mist">
-      {/* Design Pattern in Background */}
-      <MoroccanZelligeLattice
-        opacity={0.06}
-        strokeColor="#089587"
-        size={100}
-        fadeMask={true}
-      />
+    <footer className="relative overflow-hidden bg-[#07110e] text-cream">
+      <div className="pointer-events-none absolute inset-0 zellige opacity-25" />
+      <div className="pointer-events-none absolute -left-40 top-0 h-[30rem] w-[30rem] rounded-full bg-brand/15 blur-[140px]" />
 
-      {/* Luxury Ribbon Motif in Footer Background */}
-      <div className="pointer-events-none absolute -right-20 -top-10 opacity-40 lg:opacity-55" aria-hidden="true">
-        <LuxuryRibbonMotif width={680} height={380} opacity={0.5} />
+      <div className="relative border-b border-cream/10">
+        <Marquee duration={64} className="py-7 sm:py-9">
+          <div className="flex items-center gap-8 pr-8 sm:gap-12 sm:pr-12">
+            {[0, 1, 2].map((copy) => (
+              <span key={copy} className="flex items-center gap-8 sm:gap-12">
+                <span className="font-display text-[clamp(2.6rem,7vw,6rem)] leading-none tracking-tight text-cream">
+                  Skemalab
+                </span>
+                <span className="h-2 w-2 rotate-45 bg-accent-bright" aria-hidden="true" />
+                <span className="font-display text-[clamp(2.6rem,7vw,6rem)] leading-none tracking-tight text-cream/65">
+                  Build · Grow · Automate
+                </span>
+                <span className="h-2 w-2 rotate-45 bg-accent-bright/40" aria-hidden="true" />
+              </span>
+            ))}
+          </div>
+        </Marquee>
       </div>
 
-      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:gap-12 sm:px-8 sm:py-16 lg:grid-cols-[1.5fr_1fr_1fr] lg:gap-14 lg:py-20">
-        <div className="flex flex-col">
-          <BrandMark className="h-9 sm:h-10" />
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65 sm:mt-5">
-            {t.footer.description}
-          </p>
-
-          <div className="mt-6 flex items-center gap-2.5 sm:mt-8 lg:mt-auto">
+      <div className="relative shell grid gap-12 py-14 sm:py-16 lg:grid-cols-[1.5fr_0.8fr_1fr] lg:gap-16 lg:py-20">
+        <div className="max-w-sm">
+          <BrandMark className="h-9" tone="dark" />
+          <p className="mt-6 text-sm leading-relaxed text-cream/65">{t.footer.description}</p>
+          <div className="mt-8 flex items-center gap-2">
             {socialLinks.map(({ label, href, Icon, external }) => (
               <a
                 key={label}
                 href={href}
-                {...(external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
+                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 aria-label={label}
-                className="flex h-11 w-11 items-center justify-center rounded-[3px] border border-white/15 bg-white/5 text-white/85 transition-all duration-300 hover:border-brand hover:bg-brand/20 hover:text-brand"
+                className="flex h-11 w-11 items-center justify-center rounded-md border border-cream/15 text-cream/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-bright hover:text-accent-bright"
               >
                 <Icon className="h-[18px] w-[18px]" />
               </a>
             ))}
           </div>
-
         </div>
 
-        <div>
-          <p className="mb-4 text-[11px] uppercase tracking-[0.24em] text-white/45 sm:mb-5">
-            {t.footer.navTitle}
-          </p>
-          <ul className="space-y-1">
+        <nav aria-label="Pied de page">
+          <p className="label-mono text-cream/65">{t.footer.navTitle}</p>
+          <ul className="mt-5 space-y-1">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="inline-flex min-h-11 items-center text-sm text-white/85 transition-colors hover:text-brand"
+                  className="inline-flex min-h-10 items-center text-sm text-cream/70 transition-colors hover:text-accent-bright"
                 >
                   {link.label}
                 </a>
               </li>
             ))}
+            <li>
+              <a
+                href="/our-story"
+                className="inline-flex min-h-10 items-center text-sm text-cream/70 transition-colors hover:text-accent-bright"
+              >
+                {t.aboutIntro.cta}
+              </a>
+            </li>
           </ul>
-        </div>
+        </nav>
 
-        <div className="flex flex-col">
-          <p className="mb-4 text-[11px] uppercase tracking-[0.24em] text-white/45 sm:mb-5">
-            {t.footer.contactTitle}
-          </p>
-          <ul className="space-y-1 text-sm">
+        <div>
+          <p className="label-mono text-cream/65">{t.footer.contactTitle}</p>
+          <ul className="mt-5 space-y-3 text-sm">
             <li>
               <a
                 href={`mailto:${contactInfo.email}`}
-                className="inline-flex min-h-11 max-w-full items-center gap-2 break-all text-white/90 transition-colors hover:text-brand"
+                className="link-underline max-w-full break-all text-cream/85 hover:text-accent-bright"
               >
                 {contactInfo.email}
-                <ArrowUpRight size={14} className="shrink-0 rtl-flip" />
               </a>
             </li>
             <li>
               <a
                 href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
-                className="inline-flex min-h-11 items-center gap-2 text-white/90 transition-colors hover:text-brand"
+                className="link-underline text-cream/85 hover:text-accent-bright"
               >
                 <span dir="ltr">{contactInfo.phone}</span>
-                <ArrowUpRight size={14} className="shrink-0 rtl-flip" />
               </a>
             </li>
-            <li className="pt-2 text-white/50">
-              <span className="block sm:inline">{contactInfo.locations[0]}</span>
-              <span className="hidden sm:inline"> · </span>
-              <span className="block sm:inline">{contactInfo.locations[1]}</span>
-            </li>
+            <li className="text-cream/65">{contactInfo.locations.join(" · ")}</li>
           </ul>
 
-          <div className="mt-auto pt-5 sm:pt-6">
-            <span className="inline-flex items-center rounded-[3px] border border-white/12 bg-white/5 px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-white/55 sm:px-4 sm:text-[11px] sm:tracking-[0.2em]">
-              {t.footer.pills}
-            </span>
+          <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-cream/15 px-3 py-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-bright" aria-hidden="true" />
+            <span className="label-mono text-cream/65">{t.footer.pills}</span>
           </div>
         </div>
       </div>
 
-      <div className="relative border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-3 px-4 py-5 text-xs text-white/45 sm:flex-row sm:items-center sm:px-8 sm:py-6">
-          <p>© {new Date().getFullYear()} {t.common.copyright}</p>
-          <p className="tracking-wide">{t.common.tagline}</p>
+      <div className="relative border-t border-cream/10">
+        <div className="shell flex flex-col items-start justify-between gap-3 py-5 text-xs text-cream/65 sm:flex-row sm:items-center">
+          <p>
+            © {new Date().getFullYear()} {t.common.copyright}
+          </p>
+          <div className="flex items-center gap-5">
+            <p className="tracking-wide">{t.common.tagline}</p>
+            <a
+              href="#top"
+              className="inline-flex items-center gap-1.5 text-cream/65 transition-colors hover:text-accent-bright"
+            >
+              <ArrowUp size={13} aria-hidden="true" />
+              <span className="sr-only">Retour en haut</span>
+            </a>
+          </div>
         </div>
       </div>
+
+      <span className="sr-only">
+        <ArrowUpRight aria-hidden="true" />
+      </span>
     </footer>
   );
 }
