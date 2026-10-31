@@ -26,7 +26,7 @@ export default function Parallax({
   return (
     <div ref={ref} className={cn("relative", className)} {...rest}>
       <motion.div
-        className="h-full w-full"
+        className="relative h-full w-full"
         style={reduce ? undefined : axis === "y" ? { y: distance } : { x: distance }}
       >
         {children}

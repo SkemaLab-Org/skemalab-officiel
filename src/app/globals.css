@@ -41,6 +41,15 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Brand palette aliases for the hero variants (`bg-sk-night`, `text-sk-mint`,
+   …). Static values, so they stay identical in both themes. */
+@theme {
+  --color-sk-night: #0b0f0e;
+  --color-sk-forest: #0f2e2a;
+  --color-sk-teal: #089587;
+  --color-sk-mint: #5eead4;
+}
+
 /* Dark is the brand mode (default). Light stays available via the toggle. */
 :root {
   color-scheme: dark;
