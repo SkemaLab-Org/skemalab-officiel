@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import { useReducedMotion, useScroll } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useI18n } from "@/components/I18nProvider";
 import IntroStage from "@/components/IntroStage";
 import RibbonField from "@/components/canvas/RibbonField";
@@ -35,6 +35,9 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.15]);
+
   const headline = t.hero.headline;
   const words = useMemo(
     () =>
@@ -61,7 +64,7 @@ export default function Hero() {
     <>
       {intro ? <IntroStage onDone={() => setRevealed(true)} /> : null}
 
-      <div ref={containerRef} className="relative h-[170vh] w-full">
+      <div ref={containerRef} className="relative h-[180vh] w-full">
         <section
           aria-labelledby="hero-title"
           className="sticky top-0 isolate flex h-svh w-full flex-col overflow-hidden bg-page text-fg"
@@ -77,7 +80,10 @@ export default function Hero() {
             className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_42%,rgba(244,240,231,0.45)_100%)] dark:bg-[radial-gradient(ellipse_at_50%_45%,transparent_32%,rgba(7,17,14,0.62)_100%)]"
           />
 
-          <div className="shell relative flex flex-1 flex-col justify-end pb-8 pt-24 sm:pb-10 sm:pt-28">
+          <motion.div
+            style={{ y: reduce ? 0 : contentY, opacity: reduce ? 1 : contentOpacity }}
+            className="shell relative flex flex-1 flex-col justify-end pb-8 pt-24 sm:pb-10 sm:pt-28"
+          >
             <div
               style={contentStyle(0)}
               className="flex flex-col gap-2 border-b border-line pb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
@@ -175,7 +181,7 @@ export default function Hero() {
                 </a>
               ))}
             </nav>
-          </div>
+          </motion.div>
         </section>
       </div>
     </>
