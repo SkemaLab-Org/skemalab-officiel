@@ -11,6 +11,7 @@ import {
   useState,
 } from "react";
 import { createPortal } from "react-dom";
+import { useRouter } from "next/navigation";
 import { ArrowUpRight, X } from "lucide-react";
 import { bookingCta } from "@/data/content";
 import {
@@ -39,6 +40,7 @@ export function CalendlyProvider({ children }) {
   const [iframeReady, setIframeReady] = useState(false);
   const [iframeError, setIframeError] = useState(false);
   const url = getCalendlyUrl();
+  const router = useRouter();
 
   useEffect(() => {
     scheduleCalendlyWarmup();
@@ -52,7 +54,7 @@ export function CalendlyProvider({ children }) {
   const openBooking = useCallback(
     (triggerEl) => {
       if (!url) {
-        window.location.href = "/#contact";
+        router.push("/#contact");
         return;
       }
       if (triggerEl instanceof HTMLElement) triggerRef.current = triggerEl;
@@ -65,7 +67,7 @@ export function CalendlyProvider({ children }) {
       }
       queueMicrotask(() => closeBtnRef.current?.focus());
     },
-    [url, iframeSrc],
+    [url, iframeSrc, router],
   );
 
   useEffect(() => {
@@ -114,19 +116,19 @@ export function CalendlyProvider({ children }) {
               aria-labelledby={titleId}
               className={
                 open
-                  ? "brand-fusion-bg relative z-10 flex max-h-[92svh] w-full max-w-3xl translate-y-0 flex-col overflow-hidden rounded-t-[12px] border border-white/10 opacity-100 shadow-[0_24px_80px_rgba(0,0,0,0.45)] transition-[opacity,transform] duration-200 ease-out sm:rounded-[12px]"
-                  : "brand-fusion-bg relative z-10 flex max-h-[92svh] w-full max-w-3xl translate-y-4 flex-col overflow-hidden rounded-t-[12px] border border-white/10 opacity-0 sm:rounded-[12px]"
+                  ? "relative z-10 flex max-h-[92svh] w-full max-w-3xl translate-y-0 flex-col overflow-hidden rounded-t-lg border border-cream/10 bg-[#07110e] text-cream opacity-100 shadow-[0_24px_80px_rgba(0,0,0,0.45)] transition-[opacity,transform] duration-200 ease-out sm:rounded-lg"
+                  : "relative z-10 flex max-h-[92svh] w-full max-w-3xl translate-y-4 flex-col overflow-hidden rounded-t-lg border border-cream/10 bg-[#07110e] text-cream opacity-0 sm:rounded-lg"
               }
             >
-              <div className="relative z-10 flex shrink-0 items-center justify-between gap-4 border-b border-white/10 px-4 py-3.5 sm:px-5">
+              <div className="relative z-10 flex shrink-0 items-center justify-between gap-4 border-b border-cream/10 px-4 py-3.5 sm:px-5">
                 <div>
                   <p
                     id={titleId}
-                    className="text-sm font-medium tracking-wide text-white"
+                    className="text-sm font-medium tracking-wide text-cream"
                   >
                     {bookingCta.label}
                   </p>
-                  <p className="mt-0.5 text-xs text-white/55">
+                  <p className="mt-0.5 text-xs text-cream/65">
                     {bookingCta.subtitle}
                   </p>
                 </div>
@@ -136,7 +138,7 @@ export function CalendlyProvider({ children }) {
                   onClick={closeBooking}
                   aria-label="Fermer la fenêtre"
                   tabIndex={open ? 0 : -1}
-                  className="flex h-10 w-10 items-center justify-center rounded-[3px] border border-white/15 bg-white/5 text-white transition-colors hover:border-brand hover:text-brand"
+                  className="flex h-10 w-10 items-center justify-center rounded-md border border-cream/15 text-cream/80 transition-colors hover:border-accent-bright hover:text-accent-bright"
                 >
                   <X size={18} />
                 </button>
@@ -150,14 +152,14 @@ export function CalendlyProvider({ children }) {
                 )}
                 {iframeError && (
                   <div className="flex h-full min-h-[320px] flex-col items-center justify-center gap-4 px-6 text-center">
-                    <p className="text-sm text-fg">
+                    <p className="text-sm text-ink">
                       Impossible de charger Calendly.
                     </p>
                     <a
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm font-medium text-brand hover:underline"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-[#0b7a6b] hover:underline"
                       tabIndex={open ? 0 : -1}
                     >
                       Ouvrir dans un nouvel onglet

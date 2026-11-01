@@ -28,8 +28,12 @@ export const en = {
 
   hero: {
     eyebrow: "Consulting · Software Engineering & Automation",
+    headline: "Systems that grow your business.",
+    subheading:
+      "We build your custom software, run your acquisition and automate your operations.",
     ctaPrimary: "Start a project",
     ctaSecondary: "View services",
+    ctaAll: "View all services",
     prevSlide: "Previous slide",
     nextSlide: "Next slide",
     selectService: "Choose a service",

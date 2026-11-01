@@ -3,14 +3,14 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { Check } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useI18n } from "@/components/I18nProvider";
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
 
 function FlagIcon({ loc, className = "h-3.5 w-5" }) {
   if (!loc.flagImg) {
     return (
-      <span className={clsx("leading-none", className)} role="img" aria-label={loc.name}>
+      <span className={cn("leading-none", className)} role="img" aria-label={loc.name}>
         {loc.flag}
       </span>
     );
@@ -20,8 +20,8 @@ function FlagIcon({ loc, className = "h-3.5 w-5" }) {
       role="img"
       aria-label={loc.name}
       style={{ backgroundImage: `url(${loc.flagImg})` }}
-      className={clsx(
-        "block shrink-0 rounded-[2px] bg-cover bg-center ring-1 ring-black/15",
+      className={cn(
+        "block shrink-0 rounded-[2px] bg-cover bg-center ring-1 ring-cream/20",
         className,
       )}
     />
@@ -54,16 +54,15 @@ export default function LanguageSwitcher({ className = "", isMobile = false }) {
     });
   }, []);
 
-  // Close when clicking outside, on scroll or resize
   useEffect(() => {
-    if (!open) return;
-    const handleClickOutside = (e) => {
-      const inTrigger = containerRef.current?.contains(e.target);
-      const inList = listRef.current?.contains(e.target);
+    if (!open) return undefined;
+    const handleClickOutside = (event) => {
+      const inTrigger = containerRef.current?.contains(event.target);
+      const inList = listRef.current?.contains(event.target);
       if (!inTrigger && !inList) setOpen(false);
     };
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") setOpen(false);
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setOpen(false);
     };
     const handleReposition = () => updatePos();
 
@@ -90,10 +89,8 @@ export default function LanguageSwitcher({ className = "", isMobile = false }) {
     return (
       <div className="w-full">
         <div className="mb-2 flex items-center justify-between">
-          <span className="text-[11px] uppercase tracking-[0.22em] text-muted">
-            {isRTL ? "اللغة" : "Langue"}
-          </span>
-          <span className="flex items-center gap-1.5 font-mono text-xs text-brand font-medium">
+          <span className="label-mono text-cream/65">{isRTL ? "اللغة" : "Langue"}</span>
+          <span className="flex items-center gap-1.5 text-xs text-accent-bright">
             <FlagIcon loc={current} className="h-3 w-[18px]" />
             {current.short}
           </span>
@@ -109,13 +106,13 @@ export default function LanguageSwitcher({ className = "", isMobile = false }) {
                 type="button"
                 disabled={!isEnabled}
                 onClick={() => handleSelect(loc.code, isEnabled)}
-                className={clsx(
-                  "relative flex min-h-12 items-center justify-between rounded-[3px] border px-3 py-2 text-sm transition-all",
+                className={cn(
+                  "flex min-h-12 items-center justify-between rounded-md border px-3 py-2 text-sm transition-colors",
                   isSelected
-                    ? "border-brand bg-brand/10 text-brand font-semibold shadow-sm"
+                    ? "border-accent-bright/60 bg-accent-bright/10 text-accent-bright"
                     : isEnabled
-                    ? "border-line bg-surface text-fg hover:border-brand/40"
-                    : "cursor-not-allowed border-line/40 bg-surface/30 opacity-60 text-muted"
+                      ? "border-cream/15 text-cream/75 hover:border-accent-bright/50 hover:text-cream"
+                      : "cursor-not-allowed border-cream/10 text-cream/65",
                 )}
               >
                 <span className="flex items-center gap-2">
@@ -124,9 +121,9 @@ export default function LanguageSwitcher({ className = "", isMobile = false }) {
                 </span>
 
                 {isSelected ? (
-                  <Check size={14} className="text-brand shrink-0" />
+                  <Check size={14} className="shrink-0" />
                 ) : !isEnabled ? (
-                  <span className="rounded-[2px] bg-line/50 px-1.5 py-0.5 text-[9px] font-mono text-muted">
+                  <span className="text-[9px] uppercase tracking-wider">
                     {isRTL ? loc.badgeAr : loc.badge}
                   </span>
                 ) : null}
@@ -142,70 +139,64 @@ export default function LanguageSwitcher({ className = "", isMobile = false }) {
     open && pos
       ? createPortal(
           <motion.div
-              ref={listRef}
-              initial={{ opacity: 0, y: 6, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.16 }}
-              role="listbox"
-              dir={isRTL ? "rtl" : "ltr"}
-              style={{
-                position: "fixed",
-                top: pos.top ?? undefined,
-                bottom: pos.bottom ?? undefined,
-                ...(isRTL
-                  ? { left: pos.left }
-                  : { right: pos.right }),
-              }}
-              className="w-48 rounded-[3px] border border-line bg-surface p-1.5 shadow-xl backdrop-blur-xl z-[110]"
-            >
-              <div className="space-y-1">
-                {Object.values(locales).map((loc) => {
-                  const isSelected = loc.code === locale;
-                  const isEnabled = loc.enabled;
+            ref={listRef}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.18 }}
+            role="listbox"
+            dir={isRTL ? "rtl" : "ltr"}
+            style={{
+              position: "fixed",
+              top: pos.top ?? undefined,
+              bottom: pos.bottom ?? undefined,
+              ...(isRTL ? { left: pos.left } : { right: pos.right }),
+            }}
+            className="z-[110] w-48 rounded-md border border-cream/15 bg-[#0b1b16] p-1.5 text-cream shadow-2xl"
+          >
+            {Object.values(locales).map((loc) => {
+              const isSelected = loc.code === locale;
+              const isEnabled = loc.enabled;
 
-                  return (
-                    <button
-                      key={loc.code}
-                      type="button"
-                      role="option"
-                      aria-selected={isSelected}
-                      aria-label={loc.name}
-                      disabled={!isEnabled}
-                      onClick={() => handleSelect(loc.code, isEnabled)}
-                      className={clsx(
-                        "flex w-full items-center justify-between rounded-[2px] px-2.5 py-2 text-xs transition-colors",
-                        isSelected
-                          ? "bg-brand/10 font-semibold text-brand"
-                          : isEnabled
-                          ? "text-fg hover:bg-page hover:text-brand"
-                          : "cursor-not-allowed opacity-50 text-muted"
-                      )}
-                    >
-                      <span className="flex items-center gap-2.5">
-                        <FlagIcon loc={loc} className="h-3.5 w-5" />
-                        <span className="font-mono text-xs tracking-wide">
-                          {loc.short}
-                        </span>
-                      </span>
+              return (
+                <button
+                  key={loc.code}
+                  type="button"
+                  role="option"
+                  aria-selected={isSelected}
+                  aria-label={loc.name}
+                  disabled={!isEnabled}
+                  onClick={() => handleSelect(loc.code, isEnabled)}
+                  className={cn(
+                    "flex w-full items-center justify-between rounded-sm px-2.5 py-2 text-xs transition-colors",
+                    isSelected
+                      ? "bg-accent-bright/10 text-accent-bright"
+                      : isEnabled
+                        ? "text-cream/70 hover:bg-cream/5 hover:text-cream"
+                        : "cursor-not-allowed text-cream/65",
+                  )}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <FlagIcon loc={loc} className="h-3.5 w-5" />
+                    <span className="tracking-wide">{loc.short}</span>
+                  </span>
 
-                      {isSelected ? (
-                        <Check size={14} className="text-brand shrink-0" />
-                      ) : !isEnabled ? (
-                        <span className="rounded-[2px] border border-line bg-page px-1.5 py-0.5 text-[9px] font-mono text-muted">
-                          {isRTL ? loc.badgeAr : loc.badge}
-                        </span>
-                      ) : null}
-                    </button>
-                  );
-                })}
-              </div>
+                  {isSelected ? (
+                    <Check size={14} className="shrink-0" />
+                  ) : !isEnabled ? (
+                    <span className="text-[9px] uppercase tracking-wider">
+                      {isRTL ? loc.badgeAr : loc.badge}
+                    </span>
+                  ) : null}
+                </button>
+              );
+            })}
           </motion.div>,
           document.body,
         )
       : null;
 
   return (
-    <div ref={containerRef} className={clsx("relative", className)}>
+    <div ref={containerRef} className={cn("relative", className)}>
       <button
         ref={buttonRef}
         type="button"
@@ -213,9 +204,10 @@ export default function LanguageSwitcher({ className = "", isMobile = false }) {
         aria-expanded={open}
         aria-haspopup="listbox"
         aria-label={isRTL ? "تغيير اللغة" : "Changer de langue"}
-        className="flex h-11 items-center justify-center rounded-[3px] border border-line bg-surface/85 px-3 backdrop-blur-md transition-all hover:border-brand"
+        className="flex h-11 items-center justify-center gap-2 rounded-md border border-cream/20 px-3 text-cream/80 transition-colors hover:border-accent-bright hover:text-accent-bright"
       >
         <FlagIcon loc={current} className="h-4 w-[22px]" />
+        <span className="label-mono hidden xl:block">{current.short}</span>
       </button>
 
       {dropdown}

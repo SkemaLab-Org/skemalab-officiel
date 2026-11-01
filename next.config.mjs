@@ -2,7 +2,7 @@
 const nextConfig = {
   // Fewer legacy polyfills for modern browsers (PageSpeed "Legacy JavaScript")
   experimental: {
-    optimizePackageImports: ["lucide-react", "framer-motion"],
+    optimizePackageImports: ["lucide-react", "motion"],
   },
   images: {
     formats: ["image/avif", "image/webp"],

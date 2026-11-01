@@ -1,21 +1,27 @@
-import { Poppins, Cairo } from "next/font/google";
+import { Bricolage_Grotesque, Manrope, Cairo } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { I18nProvider } from "@/components/I18nProvider";
+import SmoothScroll from "@/components/SmoothScroll";
+import SiteShell from "@/components/SiteShell";
 import JsonLd from "@/components/seo/JsonLd";
 import { siteConfig } from "@/data/content";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const display = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
   display: "swap",
 });
 
-const cairo = Cairo({
+const sans = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const arabic = Cairo({
   variable: "--font-cairo",
   subsets: ["arabic", "latin"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -76,17 +82,28 @@ export const metadata = {
   },
 };
 
-const themeInitScript = `(function(){try{var t=localStorage.getItem("skemalab-theme");var r=document.documentElement;if(t==="dark"){r.classList.add("dark");r.style.colorScheme="dark"}else{r.classList.remove("dark");r.style.colorScheme="light"}}catch(e){}})();`;
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  colorScheme: "dark light",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#07110e" },
+    { media: "(prefers-color-scheme: light)", color: "#f4f0e7" },
+  ],
+};
+
+const themeInitScript = `(function(){try{var t=localStorage.getItem("skemalab-theme");var r=document.documentElement;if(t==="light"){r.classList.remove("dark");r.style.colorScheme="light"}else{r.classList.add("dark");r.style.colorScheme="dark"}}catch(e){}})();`;
 const localeInitScript = `(function(){try{var l=localStorage.getItem("skemalab-locale")||"fr";var r=document.documentElement;r.setAttribute("lang",l);if(l==="ar"){r.setAttribute("dir","rtl");r.classList.add("rtl")}else{r.setAttribute("dir","ltr");r.classList.remove("rtl")}}catch(e){}})();`;
 
 export default function RootLayout({ children }) {
   return (
     <html
       lang="fr"
-      className={`${poppins.variable} ${cairo.variable} h-full antialiased`}
+      dir="ltr"
+      className={`dark ${display.variable} ${sans.variable} ${arabic.variable} antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full font-sans text-fg antialiased">
+      <body className="min-h-svh bg-page font-sans text-fg antialiased">
         <JsonLd />
         <script
           id="theme-init"
@@ -99,7 +116,10 @@ export default function RootLayout({ children }) {
           suppressHydrationWarning
         />
         <ThemeProvider>
-          <I18nProvider>{children}</I18nProvider>
+          <I18nProvider>
+            <SmoothScroll />
+            <SiteShell>{children}</SiteShell>
+          </I18nProvider>
         </ThemeProvider>
       </body>
     </html>

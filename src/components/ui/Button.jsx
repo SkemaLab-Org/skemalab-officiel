@@ -1,47 +1,71 @@
-import clsx from "clsx";
+import { cva } from "class-variance-authority";
+import { Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const variants = {
-  primary:
-    "bg-brand text-white hover:bg-accent shadow-[0_6px_16px_rgba(8,149,135,0.22)]",
-  accent:
-    "bg-accent text-white hover:bg-deep shadow-[0_6px_16px_rgba(13,101,92,0.22)]",
-  ghost:
-    "bg-surface/50 text-fg border border-line hover:border-brand hover:bg-brand/5 hover:text-brand",
-};
+const buttonVariants = cva(
+  "inline-flex touch-manipulation items-center justify-center gap-2 rounded-md text-center font-medium transition-[color,background-color,border-color,transform,opacity] duration-300 ease-out-expo disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        primary: "bg-brand text-on-brand hover:bg-accent",
+        secondary:
+          "border border-line-strong bg-transparent text-fg hover:border-accent hover:text-accent",
+        ghost: "bg-transparent text-muted hover:text-fg",
+        light: "bg-cream text-ink hover:bg-accent hover:text-on-brand",
+        outlineLight:
+          "border border-cream/30 bg-cream/5 text-cream backdrop-blur-sm hover:border-accent hover:text-accent",
+      },
+      size: {
+        sm: "min-h-10 px-4 py-2 text-[13px]",
+        md: "min-h-12 px-6 py-3 text-sm",
+        lg: "min-h-14 px-8 py-3.5 text-[15px]",
+        icon: "h-11 w-11",
+      },
+    },
+    defaultVariants: { variant: "primary", size: "md" },
+  },
+);
 
 export default function Button({
   children,
   href,
   variant = "primary",
-  className = "",
+  size = "md",
+  className,
   type,
   onClick,
   disabled = false,
+  loading = false,
   ...rest
 }) {
-  const classes = clsx(
-    "inline-flex min-h-11 items-center justify-center gap-2.5 px-5 py-3 text-[13px] font-medium tracking-[0.04em] transition-all duration-300 rounded-[3px] touch-manipulation hover:-translate-y-0.5 active:translate-y-0 sm:px-7 sm:py-3.5 disabled:pointer-events-none disabled:opacity-60",
-    variants[variant],
-    className,
+  const classes = cn(buttonVariants({ variant, size }), className);
+  const content = (
+    <>
+      {loading ? <Loader2 size={16} className="animate-spin" aria-hidden="true" /> : null}
+      {children}
+    </>
   );
 
-  if (type === "submit" || type === "button") {
+  if (href) {
     return (
-      <button
-        type={type}
-        onClick={onClick}
-        disabled={disabled}
-        className={classes}
-        {...rest}
-      >
-        {children}
-      </button>
+      <a href={href} onClick={onClick} className={classes} {...rest}>
+        {content}
+      </a>
     );
   }
 
   return (
-    <a href={href || "/#contact"} onClick={onClick} className={classes} {...rest}>
-      {children}
-    </a>
+    <button
+      type={type || "button"}
+      onClick={onClick}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
+      className={classes}
+      {...rest}
+    >
+      {content}
+    </button>
   );
 }
+
+export { buttonVariants };

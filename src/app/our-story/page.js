@@ -1,12 +1,9 @@
-import SiteShell from "@/components/SiteShell";
-import {
-  AboutHero,
-  AboutIdentity,
-  AboutTimeline,
-  AboutFounders,
-  AboutNumbers,
-  AboutClosing,
-} from "@/components/about/AboutPageSections";
+import AboutHero from "@/components/about/AboutHero";
+import Identity from "@/components/about/Identity";
+import Timeline from "@/components/about/Timeline";
+import Founders from "@/components/about/Founders";
+import Stats from "@/components/sections/Stats";
+import Closing from "@/components/about/Closing";
 
 export const metadata = {
   title: "À propos de SkemaLab | Studio Digital, Histoire & Fondateurs",
@@ -69,29 +66,18 @@ export default function AboutPage() {
   };
 
   return (
-    <SiteShell>
+    <>
       <script
         type="application/ld+json"
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* Hero */}
       <AboutHero />
-
-      {/* Section 1: About SkemaLab (Identité, Vision & 3 Piliers) */}
-      <AboutIdentity />
-
-      {/* Section 2: Notre Histoire (Timeline interactive & Genèse) */}
-      <AboutTimeline />
-
-      {/* Section 3: Présentation de l'Équipe (Feissal Tarkaoui, Marouan Khadiri & Adam Khairi) */}
-      <AboutFounders />
-
-      {/* Impact Stats */}
-      <AboutNumbers />
-
-      {/* Call to Action */}
-      <AboutClosing />
-    </SiteShell>
+      <Identity />
+      <Timeline />
+      <Founders />
+      <Stats />
+      <Closing />
+    </>
   );
 }

@@ -11,7 +11,7 @@ import {
 } from "react";
 
 const ThemeContext = createContext({
-  theme: "light",
+  theme: "dark",
   toggleTheme: () => {},
 });
 
@@ -23,11 +23,11 @@ function applyThemeClass(next) {
 
 function getStoredTheme() {
   try {
-    return window.localStorage.getItem("skemalab-theme") === "dark"
-      ? "dark"
-      : "light";
+    return window.localStorage.getItem("skemalab-theme") === "light"
+      ? "light"
+      : "dark";
   } catch {
-    return "light";
+    return "dark";
   }
 }
 
@@ -43,7 +43,7 @@ export function ThemeProvider({ children }) {
   const stored = useSyncExternalStore(
     subscribeTheme,
     getStoredTheme,
-    () => "light",
+    () => "dark",
   );
   const [override, setOverride] = useState(null);
   const theme = override ?? stored;
