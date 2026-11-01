@@ -8,7 +8,7 @@ import { useTheme } from "@/components/ThemeProvider";
  * Generated light for the hero: three ribbons drawn in the browser.
  *
  * Runs a fragment shader with additive bloom for both dark and light modes,
- * reacting dynamically to page scroll (scroll-pinned/scroll-driven interaction).
+ * reacting dynamically to scroll progress (scroll-pinned interaction).
  */
 
 const TINTS = {
@@ -253,7 +253,7 @@ function create2DRenderer(canvas, theme) {
   };
 }
 
-export default function RibbonField({ className = "" }) {
+export default function RibbonField({ className = "", scrollProgress }) {
   const wrapRef = useRef(null);
   const { theme } = useTheme();
   const reduce = useReducedMotion();
@@ -274,8 +274,6 @@ export default function RibbonField({ className = "" }) {
     let canvas = makeCanvas();
     let renderer = createWebGLRenderer(canvas, theme);
 
-    // A failed WebGL attempt can claim the element's context mode, so the 2D
-    // fallback gets a fresh canvas rather than the same one.
     if (!renderer) {
       canvas.remove();
       canvas = makeCanvas();
@@ -292,8 +290,12 @@ export default function RibbonField({ className = "" }) {
     let inView = true;
     let mounted = true;
 
-    const getScrollTime = () =>
-      elapsed + (typeof window !== "undefined" ? window.scrollY * 0.0025 : 0);
+    const getScrollFactor = () => {
+      if (scrollProgress && typeof scrollProgress.get === "function") {
+        return scrollProgress.get() * 8.0;
+      }
+      return typeof window !== "undefined" ? window.scrollY * 0.0025 : 0;
+    };
 
     const resize = () => {
       const rect = wrap.getBoundingClientRect();
@@ -309,7 +311,7 @@ export default function RibbonField({ className = "" }) {
       }
 
       renderer.resize(pixelWidth, pixelHeight);
-      renderer.draw(getScrollTime());
+      renderer.draw(elapsed + getScrollFactor());
     };
 
     const shouldRun = () => mounted && inView && !document.hidden && !reduce;
@@ -319,7 +321,7 @@ export default function RibbonField({ className = "" }) {
       if (!shouldRun()) return;
       if (last) elapsed += Math.min((now - last) / 1000, 0.1);
       last = now;
-      renderer.draw(getScrollTime());
+      renderer.draw(elapsed + getScrollFactor());
       raf = requestAnimationFrame(tick);
     };
 
@@ -361,13 +363,23 @@ export default function RibbonField({ className = "" }) {
       else start();
     };
 
-    const onScroll = () => {
-      if (!shouldRun()) return;
-      renderer.draw(getScrollTime());
+    let unsubScroll = () => {};
+    if (scrollProgress && typeof scrollProgress.onChange === "function") {
+      unsubScroll = scrollProgress.onChange((latest) => {
+        if (shouldRun()) {
+          renderer.draw(elapsed + latest * 8.0);
+        }
+      });
+    }
+
+    const onScrollFallback = () => {
+      if (!scrollProgress && shouldRun()) {
+        renderer.draw(elapsed + getScrollFactor());
+      }
     };
 
     window.addEventListener("resize", resize);
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", onScrollFallback, { passive: true });
     document.addEventListener("visibilitychange", onVisibility);
 
     const onContextLost = (event) => {
@@ -403,14 +415,15 @@ export default function RibbonField({ className = "" }) {
       stop();
       observer?.disconnect();
       intersection?.disconnect();
+      unsubScroll();
       window.removeEventListener("resize", resize);
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", onScrollFallback);
       document.removeEventListener("visibilitychange", onVisibility);
       canvas.removeEventListener("webglcontextlost", onContextLost);
       renderer.dispose();
       canvas.remove();
     };
-  }, [theme, reduce]);
+  }, [theme, reduce, scrollProgress]);
 
   return (
     <div
