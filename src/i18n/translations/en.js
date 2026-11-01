@@ -137,6 +137,7 @@ export const en = {
     founderStatus: "Chief Executive Officer & Business Strategy",
     roleSuffix: "· Founder & CEO",
     cta: "Discover our story",
+    comingSoon: "Coming soon!",
   },
 
   processSection: {
@@ -538,6 +539,98 @@ export const en = {
       "Whether it's building your new platform, structuring your acquisition funnels or automating your processes with AI — we are listening.",
     closingBtn1: "Schedule a discovery call",
     closingBtn2: "Send a message",
+  },
+
+  home: {
+    introLine: "build · grow · automate",
+    heroMetaLeft: "Digital studio · Essaouira",
+    heroMetaRight: "Engineering · Growth · Automation",
+    heroScroll: "Scroll",
+    about: {
+      eyebrow: "The studio",
+      title: "One studio. One system. One standard.",
+      lede: "Strategy, engineering and automation in the same team: every decision turns into a measurable outcome.",
+      statement:
+        "We don't add tools. We install systems that work for you.",
+      body: "Based in Essaouira, we work with ambitious companies: business platforms, data-led acquisition, automated workflows. A short team, short cycles and a clear read on return on investment.",
+      factsLabel: "Studio sheet",
+      facts: [
+        [ "Studio", "Digital · Essaouira" ],
+        [ "Fields", "Product · Growth · Automation" ],
+        [ "Languages", "French · English · العربية" ],
+        [ "Coordinates", "31.5085° N · 9.7700° W" ],
+      ],
+      ctaStory: "Read our story",
+      ctaContact: "Talk to an expert",
+      principles: [
+        {
+          title: "System before tool",
+          text: "Every piece is designed for the others: site, acquisition, data and automation move together.",
+        },
+        {
+          title: "Proof before promise",
+          text: "We measure what we ship, then we decide. Numbers replace hunches.",
+        },
+        {
+          title: "Durable before spectacular",
+          text: "Simple foundations, documented and built to carry the next years.",
+        },
+      ],
+    },
+    engines: {
+      eyebrow: "The system",
+      title: "Four engines. One system.",
+      lede: "Each lever works on its own. Together they form a measurable growth machine.",
+      note: "Build · Grow · Automate · Measure",
+      list: [
+        {
+          key: "build",
+          label: "Build",
+          title: "Platforms & software",
+          text: "Websites, applications and business systems built to convert, scale and last.",
+        },
+        {
+          key: "grow",
+          label: "Grow",
+          title: "Acquisition & brand",
+          text: "SEO, content and campaigns driven by data and aligned with return on investment.",
+        },
+        {
+          key: "automate",
+          label: "Automate",
+          title: "Workflows & AI",
+          text: "Your tools connected, repetitive tasks removed, your teams focused on value.",
+        },
+        {
+          key: "measure",
+          label: "Measure",
+          title: "Data & steering",
+          text: "Dashboards, tracking and signal reading to decide fast, with no blind spots.",
+        },
+      ],
+    },
+    spectrum: {
+      eyebrow: "The proof",
+      title: "One channel amplified. The whole system measured.",
+      lede: "We concentrate effort where the return is strongest, without losing sight of the other signals.",
+      activeLabel: "Active channel",
+      activeName: "SEO / Acquisition",
+      readoutLabel: "Measured ROI",
+      readoutValue: "3.4×",
+      channels: [
+        { key: "seo", name: "SEO / Acquisition", value: "3.4×" },
+        { key: "content", name: "Content & brand", value: "2.6×" },
+        { key: "automation", name: "Automation", value: "4.1×" },
+        { key: "data", name: "Data & steering", value: "3.8×" },
+      ],
+      legend: "72 signals tracked · 1 lever amplified",
+      live: "Live",
+    },
+    stats: {
+      eyebrow: "The proof",
+      title: "Results, not promises.",
+      lede: "Every engagement is steered by the same indicators: time saved, revenue generated, friction removed.",
+    },
   },
 
 };

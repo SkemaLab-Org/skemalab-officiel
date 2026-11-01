@@ -137,6 +137,7 @@ export const fr = {
     founderStatus: "Chief Executive Officer & Stratégie Business",
     roleSuffix: "· Fondateur & CEO",
     cta: "Découvrir notre histoire",
+    comingSoon: "À venir !",
   },
 
   processSection: {
@@ -536,6 +537,98 @@ export const fr = {
       "Que ce soit pour créer votre nouvelle plateforme, structurer vos tunnels d’acquisition ou automatiser vos process avec l’IA, nous sommes à votre écoute.",
     closingBtn1: "Planifier un appel découverte",
     closingBtn2: "Envoyer un message",
+  },
+
+  home: {
+    introLine: "construire · croître · automatiser",
+    heroMetaLeft: "Studio digital",
+    heroMetaRight: "Ingénierie · Growth",
+    heroScroll: "Défiler",
+    about: {
+      eyebrow: "Le studio",
+      title: "Un studio. Un système. Une exigence.",
+      lede: "Stratégie, ingénierie et automatisation dans la même équipe : chaque décision se traduit en résultat mesurable.",
+      statement:
+        "Nous n'ajoutons pas des outils. Nous installons des systèmes qui travaillent pour vous.",
+      body: "Basés à Essaouira, nous travaillons avec des entreprises ambitieuses : plateformes métiers, acquisition pilotée par la donnée, workflows automatisés. Une équipe courte, des cycles courts, une lecture claire du retour sur investissement.",
+      factsLabel: "Fiche studio",
+      facts: [
+        [ "Studio", "Digital · Essaouira" ],
+        [ "Terrains", "Produit · Growth · Automatisation" ],
+        [ "Langues", "Français · English · العربية" ],
+        [ "Coordonnées", "31.5085° N · 9.7700° W" ],
+      ],
+      ctaStory: "Découvrir notre histoire",
+      ctaContact: "Parler à un expert",
+      principles: [
+        {
+          title: "Système avant outil",
+          text: "Chaque brique est pensée pour les autres : le site, l'acquisition, la donnée et l'automatisation avancent ensemble.",
+        },
+        {
+          title: "Preuve avant promesse",
+          text: "Nous mesurons ce que nous livrons, puis nous décidons. Les chiffres remplacent les intuitions.",
+        },
+        {
+          title: "Durable avant spectaculaire",
+          text: "Des bases simples à maintenir, documentées et faites pour traverser les prochaines années.",
+        },
+      ],
+    },
+    engines: {
+      eyebrow: "Le système",
+      title: "Quatre moteurs. Un seul système.",
+      lede: "Chaque levier fonctionne seul. Ensemble, ils composent une machine de croissance mesurable.",
+      note: "Build · Grow · Automate · Measure",
+      list: [
+        {
+          key: "build",
+          label: "Build",
+          title: "Plateformes & logiciels",
+          text: "Sites, applications et systèmes métiers conçus pour convertir, scaler et durer.",
+        },
+        {
+          key: "grow",
+          label: "Grow",
+          title: "Acquisition & marque",
+          text: "SEO, contenu et campagnes pilotés par la donnée, alignés sur le retour sur investissement.",
+        },
+        {
+          key: "automate",
+          label: "Automate",
+          title: "Workflows & IA",
+          text: "Vos outils connectés, vos tâches répétitives supprimées, vos équipes recentrées sur la valeur.",
+        },
+        {
+          key: "measure",
+          label: "Measure",
+          title: "Data & pilotage",
+          text: "Tableaux de bord, tracking et lecture des signaux pour décider vite, sans angle mort.",
+        },
+      ],
+    },
+    spectrum: {
+      eyebrow: "La preuve",
+      title: "Un canal amplifié. Tout le système mesuré.",
+      lede: "Nous concentrons l'effort là où le retour est le plus fort, sans jamais perdre de vue les autres signaux.",
+      activeLabel: "Canal actif",
+      activeName: "SEO / Acquisition",
+      readoutLabel: "ROI mesuré",
+      readoutValue: "3.4×",
+      channels: [
+        { key: "seo", name: "SEO / Acquisition", value: "3.4×" },
+        { key: "content", name: "Contenu & marque", value: "2.6×" },
+        { key: "automation", name: "Automatisation", value: "4.1×" },
+        { key: "data", name: "Data & pilotage", value: "3.8×" },
+      ],
+      legend: "72 signaux suivis · 1 levier amplifié",
+      live: "Live",
+    },
+    stats: {
+      eyebrow: "Les preuves",
+      title: "Des résultats, pas des promesses.",
+      lede: "Chaque mission est pilotée par les mêmes indicateurs : temps gagné, revenus générés, friction supprimée.",
+    },
   },
 
 };

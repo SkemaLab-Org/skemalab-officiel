@@ -1,120 +1,102 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { useI18n } from "@/components/I18nProvider";
-import { founders, contactInfo } from "@/data/content";
-import SectionHeader from "@/components/ui/SectionHeader";
 import Reveal from "@/components/motion/Reveal";
-import Parallax from "@/components/motion/Parallax";
 import Button from "@/components/ui/Button";
-import { DURATION, EASE, VIEWPORT } from "@/lib/motion";
 import aboutImage from "@/assets/home-imgs/home-about.webp";
 
 export default function AboutIntro() {
-  const { t } = useI18n();
+  const { t, isRTL } = useI18n();
   const copy = t.aboutIntro;
-  const reduce = useReducedMotion();
 
   return (
-    <section id="skemalab" className="section-y relative overflow-hidden bg-surface">
+    <section id="skemalab" className="relative overflow-hidden bg-surface text-fg">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-40 top-0 h-[30rem] w-[30rem] rounded-full bg-brand/8 blur-[150px]"
+        className="pointer-events-none absolute -right-48 top-1/2 h-[34rem] w-[34rem] -translate-y-1/2 rounded-full bg-brand/8 blur-[150px]"
       />
-
-      <div className="shell relative">
-        <Reveal>
-          <SectionHeader
-            label={copy.eyebrow}
-            index="01"
-            title={
-              <>
-                {copy.title}{" "}
-                <span className="text-accent">{copy.highlight}</span>
-              </>
-            }
-            description={copy.description}
-            action={
-              <Button href="/our-story" variant="secondary" size="sm">
-                {copy.cta}
-                <ArrowUpRight size={15} className="rtl-flip" />
-              </Button>
-            }
-          />
-        </Reveal>
-
-        <div className="mt-12 grid gap-10 sm:mt-16 lg:grid-cols-[0.92fr_1.08fr] lg:items-start lg:gap-16">
-          <motion.figure
-            initial={reduce ? false : { clipPath: "inset(0 0 100% 0)" }}
-            whileInView={reduce ? undefined : { clipPath: "inset(0 0 0% 0)" }}
-            viewport={VIEWPORT}
-            transition={{ duration: DURATION.slow, ease: EASE.out }}
-            className="relative m-0 overflow-hidden rounded-lg border border-line bg-deep"
-          >
-            <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[5/5]">
-              <Parallax offset={26} className="h-full">
-                <Image
-                  src={aboutImage}
-                  alt={copy.imageAlt}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 42vw"
-                  className="scale-[1.08] object-cover"
-                />
-              </Parallax>
+      <div className="shell relative z-10 py-16 sm:py-24 lg:py-32">
+        <div
+          className="grid items-center gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 xl:grid-cols-[1.2fr_0.8fr] xl:gap-16"
+          dir="ltr"
+        >
+          <Reveal className="relative min-w-0">
+            <figure className="group relative m-0 px-2 py-5 sm:px-4 sm:py-8">
               <span
                 aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-t from-[#07110e] via-transparent to-transparent opacity-70"
+                className="pointer-events-none absolute inset-5 -rotate-[2.8deg] border border-[#c5a880]/70 bg-[#c5a880]/[0.04] shadow-[0_24px_70px_rgba(0,0,0,0.2)] transition-transform duration-700 ease-out group-hover:-translate-x-1 group-hover:translate-y-1 group-hover:-rotate-[1.2deg] sm:inset-8"
               />
-            </div>
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-3 rotate-[1.8deg] border border-cream/35 bg-cream/[0.025] transition-transform duration-700 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:rotate-[0.6deg] sm:inset-6"
+              />
+              <div className="relative -rotate-[0.5deg] border border-cream/25 bg-[#07110e] p-2 shadow-[0_30px_90px_rgba(0,0,0,0.32)] transition-transform duration-700 ease-out group-hover:-translate-y-0.5 group-hover:rotate-0 sm:p-3">
+                <Image
+                  src={ aboutImage }
+                  alt={ copy.imageAlt }
+                  width={ 2304 }
+                  height={ 1536 }
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="block h-auto w-full"
+                />
+                <figcaption className="flex items-center justify-between gap-4 border-t border-cream/15 px-2 pb-1 pt-3 sm:px-3 sm:pt-4">
+                  <span className="label-mono text-cream/75">{ copy.imageCaption }</span>
+                  <span className="flex items-center gap-2 label-mono text-cream/55">
+                    <span
+                      aria-hidden="true"
+                      className="h-1.5 w-1.5 rotate-45 bg-[#c5a880]"
+                    />
+                    SKEMALAB
+                  </span>
+                </figcaption>
+              </div>
+            </figure>
+          </Reveal>
 
-            <figcaption className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 sm:inset-x-6 sm:bottom-6">
-              <span className="inline-flex items-center gap-2.5 rounded-md border border-cream/20 bg-[#07110e]/70 px-3 py-2 backdrop-blur-md">
-                <span className="h-1.5 w-1.5 rotate-45 bg-accent-bright" aria-hidden="true" />
-                <span className="label-mono text-cream/80">{copy.imageCaption}</span>
-              </span>
-              <span className="label-mono text-cream/65">{t.aboutPage.scopeValue}</span>
-            </figcaption>
-          </motion.figure>
+          <div className="flex min-w-0 flex-col justify-center" dir={ isRTL ? "rtl" : "ltr" }>
+            <Reveal>
+              <div className="flex items-center gap-3">
+                <span className="h-px w-9 bg-accent" aria-hidden="true" />
+                <p className="label-mono text-accent">{ copy.eyebrow }</p>
+              </div>
+              <h2 className="mt-6 max-w-[18ch] text-balance font-display text-[clamp(2.15rem,3.4vw,3.75rem)] font-medium leading-[1.08] tracking-[-0.035em] rtl:max-w-none rtl:leading-[1.2] rtl:tracking-normal">
+                { copy.title } <span className="text-accent">{ copy.highlight }</span>
+              </h2>
+            </Reveal>
 
-          <div className="min-w-0">
-            <Reveal delay={0.08}>
-              <p className="max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-                {copy.secondary}
+            <Reveal delay={ 0.1 }>
+              <p className="mt-6 max-w-[38rem] text-base leading-[1.8] text-muted sm:text-lg">
+                { copy.description }
               </p>
             </Reveal>
 
-            <Reveal delay={0.14}>
-              <dl className="mt-8 border-t border-line">
-                {[
-                  [copy.foundedBy, `${founders[0].name} · ${copy.founderStatus}`],
-                  [t.aboutPage.hqLabel, contactInfo.locations.join(" · ")],
-                  [t.aboutPage.scopeLabel, t.aboutPage.scopeValue],
-                ].map(([term, value]) => (
-                  <div
-                    key={term}
-                    className="grid gap-1 border-b border-line py-4 sm:grid-cols-[0.4fr_1fr] sm:items-baseline sm:gap-6"
-                  >
-                    <dt className="label-mono text-muted">{term}</dt>
-                    <dd className="text-sm leading-relaxed text-fg">{value}</dd>
-                  </div>
-                ))}
-              </dl>
+            <Reveal delay={ 0.16 }>
+              <p className="mt-5 max-w-[38rem] border-s border-line-strong ps-5 text-sm leading-[1.8] text-muted sm:mt-6 sm:text-base">
+                { copy.secondary }
+              </p>
             </Reveal>
 
-            <Reveal delay={0.2}>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Button href="/our-story" size="md">
-                  {copy.cta}
-                  <ArrowUpRight size={16} className="rtl-flip" />
-                </Button>
-                <a
-                  href="#services"
-                  className="link-underline min-h-11 text-sm text-muted transition-colors hover:text-fg"
-                >
-                  {t.hero.ctaSecondary}
-                </a>
+            <Reveal delay={ 0.22 }>
+              <div className="mt-8 flex items-center gap-4 sm:mt-10">
+                <div className="group relative inline-flex">
+                  <Button
+                    disabled
+                    variant="secondary"
+                    size="md"
+                    className="disabled:pointer-events-auto disabled:opacity-100"
+                  >
+                    { copy.cta }
+                    <ArrowUpRight size={ 16 } className="rtl-flip" aria-hidden="true" />
+                  </Button>
+                  <span
+                    role="tooltip"
+                    className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 translate-y-1 rounded-sm border border-accent/30 bg-surface-2 px-3 py-1.5 label-mono whitespace-nowrap text-accent opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+                  >
+                    { copy.comingSoon }
+                  </span>
+                </div>
               </div>
             </Reveal>
           </div>

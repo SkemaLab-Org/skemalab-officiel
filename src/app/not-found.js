@@ -28,17 +28,17 @@ export default function NotFound() {
         <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Link
             href="/"
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-brand px-6 text-sm font-medium text-on-brand transition-colors hover:bg-brand-deep"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-brand px-6 text-sm font-medium text-on-brand transition-colors hover:bg-brand-deep"
           >
-            <ArrowLeft size={16} aria-hidden="true" className="rtl-flip" />
+            <ArrowLeft size={ 16 } aria-hidden="true" className="rtl-flip" />
             Retour à l’accueil
           </Link>
           <Link
             href="/#contact"
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-line-strong px-6 text-sm text-fg transition-colors hover:border-accent hover:text-accent"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-line-strong px-6 text-sm text-fg transition-colors hover:border-accent hover:text-accent"
           >
             Nous contacter
-            <ArrowUpRight size={16} aria-hidden="true" className="rtl-flip" />
+            <ArrowUpRight size={ 16 } aria-hidden="true" className="rtl-flip" />
           </Link>
         </div>
       </div>

@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView, useReducedMotion } from "motion/react";
+import { useInView } from "motion/react";
+import usePrefersReducedMotion from "@/lib/usePrefersReducedMotion";
 import { cn } from "@/lib/utils";
 
 /** Number ticker that counts up once, when the value enters the viewport. */
@@ -11,10 +12,11 @@ export default function CountUp({
   duration = 1600,
   className,
   suffixClassName = "text-accent",
+  leadingClassName,
 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-15% 0px" });
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const [display, setDisplay] = useState(reduce ? value : 0);
 
   useEffect(() => {
@@ -36,9 +38,19 @@ export default function CountUp({
     return () => cancelAnimationFrame(frame);
   }, [inView, reduce, value, duration]);
 
+  const shown = reduce ? value : display;
+  const text = String(shown);
+
   return (
     <span ref={ref} className={cn("tabular-nums", className)}>
-      {display}
+      {leadingClassName ? (
+        <>
+          <span className={leadingClassName}>{text.slice(0, 1)}</span>
+          {text.slice(1)}
+        </>
+      ) : (
+        text
+      )}
       {suffix ? <span className={suffixClassName}>{suffix}</span> : null}
     </span>
   );

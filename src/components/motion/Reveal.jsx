@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import usePrefersReducedMotion from "@/lib/usePrefersReducedMotion";
 import { DURATION, EASE, VIEWPORT } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -17,7 +18,7 @@ export default function Reveal({
   className,
   ...rest
 }) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const Component = motion[as] || motion.div;
 
   if (reduce) {
@@ -45,7 +46,7 @@ export default function Reveal({
 
 /** Horizontal rule that draws itself in on scroll. */
 export function RevealRule({ className = "", delay = 0 }) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
 
   if (reduce) {
     return <div aria-hidden="true" className={cn("h-px w-full bg-line", className)} />;

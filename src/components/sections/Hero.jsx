@@ -12,48 +12,16 @@ import {
 } from "motion/react";
 import { useI18n } from "@/components/I18nProvider";
 import Button from "@/components/ui/Button";
+import {
+  LuxuryRibbonMotif,
+  MoroccanZelligeLattice,
+} from "@/components/ui/MoroccanPattern";
 import { cn } from "@/lib/utils";
 
 const SWEEP = [0.65, 0, 0.25, 1];
 
 const H1 =
   "col-start-1 row-start-1 max-w-[15ch] text-balance font-display text-[clamp(2.75rem,7.2vw,7.5rem)] font-medium leading-[0.98] tracking-[-0.035em] rtl:max-w-none rtl:leading-[1.25] rtl:tracking-normal";
-
-/** Flowing lines, kept as a quiet texture behind the headline. */
-const WAVES = [
-  "M620 600 C900 650 980 220 1440 300",
-  "M640 635 C930 665 1040 255 1440 345",
-  "M660 670 C960 680 1100 290 1440 390",
-  "M680 705 C990 700 1150 325 1440 435",
-];
-
-const lineGrid = (color, size = 64) => ({
-  backgroundImage: `linear-gradient(to right, ${color} 1px, transparent 1px), linear-gradient(to bottom, ${color} 1px, transparent 1px)`,
-  backgroundSize: `${size}px ${size}px`,
-});
-
-function Waves({ stroke, style }) {
-  return (
-    <motion.svg
-      aria-hidden="true"
-      viewBox="0 0 1440 900"
-      preserveAspectRatio="xMaxYMid slice"
-      className="absolute inset-0 size-full max-md:hidden rtl:-scale-x-100"
-      style={style}
-    >
-      {WAVES.map((d) => (
-        <path
-          key={d}
-          d={d}
-          fill="none"
-          stroke={stroke}
-          strokeWidth={1}
-          vectorEffect="non-scaling-stroke"
-        />
-      ))}
-    </motion.svg>
-  );
-}
 
 export default function Hero() {
   const { t, isRTL } = useI18n();
@@ -112,6 +80,7 @@ export default function Hero() {
   return (
     <MotionConfig reducedMotion="user">
       <section
+        data-zellige="custom"
         dir={isRTL ? "rtl" : "ltr"}
         aria-labelledby="hero-title"
         onPointerMove={move}
@@ -120,23 +89,45 @@ export default function Hero() {
       >
         <div aria-hidden="true" className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[radial-gradient(60%_55%_at_20%_45%,rgba(8,149,135,0.2),transparent)] rtl:-scale-x-100" />
-          <div
-            className="absolute inset-0"
-            style={lineGrid("rgba(242,237,226,0.045)")}
+          <MoroccanZelligeLattice
+            idPrefix="hero-zellige"
+            opacity={0.55}
+            strokeColor="rgba(197,168,128,0.3)"
+            strokeWidth={0.9}
+            size={112}
+            fadeMask={false}
           />
-          <Waves stroke="rgba(58,217,191,0.16)" />
+          <LuxuryRibbonMotif
+            fill
+            idPrefix="hero-ribbon"
+            opacity={0.72}
+            className="max-md:hidden rtl:-scale-x-100"
+          />
           <motion.div
             className="absolute inset-0"
             style={{
-              ...lineGrid("rgba(58,217,191,0.3)"),
               maskImage: gridLit,
               WebkitMaskImage: gridLit,
             }}
-          />
-          <Waves
-            stroke="#3ad9bf"
-            style={{ maskImage: gridLit, WebkitMaskImage: gridLit }}
-          />
+          >
+            <MoroccanZelligeLattice
+              idPrefix="hero-zellige-lit"
+              opacity={0.95}
+              strokeColor="rgba(58,217,191,0.68)"
+              strokeWidth={0.9}
+              size={112}
+              fadeMask={false}
+            />
+          </motion.div>
+          <motion.div
+            className="absolute inset-0 max-md:hidden rtl:-scale-x-100"
+            style={{
+              maskImage: gridLit,
+              WebkitMaskImage: gridLit,
+            }}
+          >
+            <LuxuryRibbonMotif fill idPrefix="hero-ribbon-lit" opacity={1} />
+          </motion.div>
         </div>
 
         <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 pb-12 pt-32 sm:px-8">
@@ -198,10 +189,12 @@ export default function Hero() {
             <a
               key={pillar.id}
               href="#services"
-              className="group border-t border-cream/15 py-5 transition-colors hover:border-accent-bright"
+              className="group relative py-5 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent-bright after:transition-transform after:duration-300 hover:after:scale-x-100 focus-visible:after:scale-x-100"
             >
-              <span className="block text-lg font-semibold">{pillar.label}</span>
-              <span className="mt-1 block text-sm text-cream/65 transition-colors group-hover:text-cream/85">
+              <span className="block text-lg font-semibold transition-colors group-hover:text-accent-bright group-focus-visible:text-accent-bright">
+                {pillar.label}
+              </span>
+              <span className="mt-1 block text-sm text-cream/65 transition-colors group-hover:text-accent-bright group-focus-visible:text-accent-bright">
                 {pillar.title}
               </span>
             </a>

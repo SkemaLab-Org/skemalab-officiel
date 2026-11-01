@@ -3,7 +3,7 @@ import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex touch-manipulation items-center justify-center gap-2 rounded-md text-center font-medium transition-[color,background-color,border-color,transform,opacity] duration-300 ease-out-expo disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex touch-manipulation items-center justify-center gap-2 rounded-sm text-center font-medium transition-[color,background-color,border-color,transform,opacity] duration-300 ease-out-expo disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -26,7 +26,7 @@ const buttonVariants = cva(
   },
 );
 
-export default function Button({
+export default function Button( {
   children,
   href,
   variant = "primary",
@@ -37,33 +37,33 @@ export default function Button({
   disabled = false,
   loading = false,
   ...rest
-}) {
-  const classes = cn(buttonVariants({ variant, size }), className);
+} ) {
+  const classes = cn( buttonVariants( { variant, size } ), className );
   const content = (
     <>
-      {loading ? <Loader2 size={16} className="animate-spin" aria-hidden="true" /> : null}
-      {children}
+      { loading ? <Loader2 size={ 16 } className="animate-spin" aria-hidden="true" /> : null }
+      { children }
     </>
   );
 
-  if (href) {
+  if ( href ) {
     return (
-      <a href={href} onClick={onClick} className={classes} {...rest}>
-        {content}
+      <a href={ href } onClick={ onClick } className={ classes } { ...rest }>
+        { content }
       </a>
     );
   }
 
   return (
     <button
-      type={type || "button"}
-      onClick={onClick}
-      disabled={disabled || loading}
-      aria-busy={loading || undefined}
-      className={classes}
-      {...rest}
+      type={ type || "button" }
+      onClick={ onClick }
+      disabled={ disabled || loading }
+      aria-busy={ loading || undefined }
+      className={ classes }
+      { ...rest }
     >
-      {content}
+      { content }
     </button>
   );
 }
