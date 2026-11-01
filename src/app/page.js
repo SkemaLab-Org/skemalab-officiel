@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { HeroShowcase } from "@/components/sections/hero-variants";
+import Hero from "@/components/sections/Hero";
 import AboutIntro from "@/components/sections/AboutIntro";
 import Services from "@/components/sections/Services";
 import Process from "@/components/sections/Process";
@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <Loader />
-      <HeroShowcase />
+      <Hero />
       <AboutIntro />
       <Services />
       <Process />

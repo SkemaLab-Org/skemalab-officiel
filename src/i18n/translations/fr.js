@@ -28,8 +28,12 @@ export const fr = {
 
   hero: {
     eyebrow: "Conseil, Ingénierie logicielle & Automatisation",
+    headline: "Des systèmes qui font grandir votre entreprise.",
+    subheading:
+      "Nous développons vos logiciels sur mesure, pilotons votre acquisition et automatisons vos opérations.",
     ctaPrimary: "Lancer un projet",
     ctaSecondary: "Voir le service",
+    ctaAll: "Voir les services",
     prevSlide: "Slide précédent",
     nextSlide: "Slide suivant",
     selectService: "Choisir un service",

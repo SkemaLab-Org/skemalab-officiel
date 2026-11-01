@@ -390,16 +390,6 @@ select.field {
   }
 }
 
-/* Hero rail timer — resets on every slide change. */
-@keyframes rail-fill {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
 /* Slow ambient drift — transform only, paused offscreen by JS */
 .drift {
   animation: drift 26s var(--ease-out-expo) infinite alternate;
