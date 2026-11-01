@@ -15,7 +15,7 @@ export default function ThemeToggle({ className = "", onDark = true }) {
       aria-label={isDark ? "Activer le mode clair" : "Activer le mode sombre"}
       title={isDark ? "Mode clair" : "Mode sombre"}
       className={cn(
-        "flex h-11 w-11 items-center justify-center rounded-md border transition-colors",
+        "flex h-11 w-11 items-center justify-center rounded-none border transition-colors",
         onDark
           ? "border-cream/20 text-cream/80 hover:border-accent-bright hover:text-accent-bright"
           : "border-line-strong text-muted hover:border-accent hover:text-accent dark:border-cream/20 dark:text-cream/80 dark:hover:border-accent-bright dark:hover:text-accent-bright",

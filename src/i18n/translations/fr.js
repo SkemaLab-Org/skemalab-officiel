@@ -16,6 +16,7 @@ export const fr = {
     copyright: "Skemalab. Tous droits réservés.",
     bookingCta: "Demander RDV",
     bookingSubtitle: "Choisissez un créneau disponible",
+    backToTop: "Retour en haut",
   },
 
   nav: [
@@ -28,6 +29,7 @@ export const fr = {
 
   hero: {
     eyebrow: "Conseil, Ingénierie logicielle & Automatisation",
+    location: "Essaouira · Maroc",
     headline: "Des systèmes qui font grandir votre entreprise.",
     subheading:
       "Nous développons vos logiciels sur mesure, pilotons votre acquisition et automatisons vos opérations.",
@@ -123,6 +125,7 @@ export const fr = {
     description:
       "Skemalab réunit développement, marketing digital et automatisation pour construire des systèmes qui convertissent, scalent et s’améliorent dans le temps.",
     talkWithExpert: "En parler avec un expert",
+    tileCta: "En parler",
   },
 
   aboutIntro: {
@@ -174,6 +177,8 @@ export const fr = {
     description:
       "Produit digital, acquisition, automatisation ou pilotage : nous réunissons les bonnes expertises pour transformer vos enjeux en avancées concrètes.",
     similarProject: "Parlons de votre objectif",
+    signalCaption: "Un levier actif · le reste continue",
+    signalReadout: "5H / JOUR",
     list: [
       {
         goal: "Donner vie à une idée",
@@ -215,8 +220,48 @@ export const fr = {
     { value: 3, suffix: "×", label: "Accélération des process" },
   ],
 
+  faqSection: {
+    eyebrow: "FAQ",
+    title: "Les questions qu’on nous pose avant de commencer.",
+    description:
+      "Délais, collaboration, outillage, mesure du ROI : des réponses concrètes, sans détour.",
+    items: [
+      {
+        question: "Combien de temps prend un projet ?",
+        answer:
+          "Un site ou une application vitrine se livre généralement en 4 à 6 semaines. Une plateforme métier ou un ERP demande plutôt 2 à 4 mois, selon le périmètre. Dans tous les cas, un premier jalon fonctionnel est visible dès les deux premières semaines, et le calendrier est révisé à chaque cycle.",
+      },
+      {
+        question: "Pouvez-vous travailler avec notre équipe interne ?",
+        answer:
+          "Oui. Nous nous intégrons à votre organisation — vos développeurs, votre marketing, vos opérations — avec des points de synchronisation courts et un accès partagé aux livrables. À la fin du projet, votre équipe conserve le code, la documentation et les accès.",
+      },
+      {
+        question: "Quels outils d’automatisation utilisez-vous ?",
+        answer:
+          "Nous choisissons l’outil selon votre existant : n8n pour les workflows auto-hébergés et les intégrations techniques, Make ou Zapier pour des scénarios rapides, et des agents IA lorsque le traitement demande de comprendre du contenu. L’objectif reste le même : supprimer les tâches répétitives sans ajouter de dépendance inutile.",
+      },
+      {
+        question: "Comment mesurez-vous le retour sur investissement ?",
+        answer:
+          "Nous définissons les indicateurs avant de construire : conversions, coût d’acquisition, leads qualifiés, heures économisées. Ils sont instrumentés dans votre analytics et revus régulièrement pour ajuster ce qui doit l’être.",
+      },
+      {
+        question: "Assurez-vous la maintenance et l’évolution ?",
+        answer:
+          "Oui. Chaque livraison peut se prolonger par un accompagnement : corrections, mises à jour de sécurité, nouvelles fonctionnalités et surveillance des workflows. Vous restez propriétaire de votre système.",
+      },
+      {
+        question: "Dans quelles langues travaillez-vous ?",
+        answer:
+          "Nous travaillons en français, en anglais et en arabe, à l’écrit comme à l’oral. Les interfaces que nous livrons peuvent être multilingues, avec une prise en charge native du sens de lecture droite à gauche.",
+      },
+    ],
+  },
+
   aboutHome: {
     eyebrow: "L’agence",
+    sectionLabel: "Studio",
     title: "Votre partenaire de croissance digitale.",
     p1: "Skemalab accompagne les entreprises ambitieuses dans leur transformation digitale. Nous allions stratégie business, excellence technique et automatisation intelligente pour bâtir des leviers de performance durables.",
     p2: "Que vous lanciez un produit, accélériez votre acquisition ou industrialisiez vos process internes, nous concevons une solution claire, exécutable et orientée résultats.",
@@ -225,6 +270,8 @@ export const fr = {
       "Pas de projets décoratifs. Des systèmes digitaux qui créent de la valeur mesurable.",
     cta: "Parler à un expert",
     imageAlt: "L’agence Skemalab, partenaire de croissance digitale",
+    secondImageAlt: "Atelier de travail de l’équipe Skemalab",
+    secondImageCaption: "Atelier · Méthode & delivery",
     pillars: [
       [ "Mission", "Allier tech, marketing et automation pour scaler." ],
       [ "Approche", "Diagnostic précis, exécution rapide, ROI suivi." ],

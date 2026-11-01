@@ -1,4 +1,9 @@
-import { Bricolage_Grotesque, Manrope, Cairo } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Manrope,
+  Cairo,
+  JetBrains_Mono,
+} from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { I18nProvider } from "@/components/I18nProvider";
@@ -22,6 +27,13 @@ const sans = Manrope({
 const arabic = Cairo({
   variable: "--font-cairo",
   subsets: ["arabic", "latin"],
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  weight: ["300", "400"],
   display: "swap",
 });
 
@@ -100,7 +112,7 @@ export default function RootLayout({ children }) {
     <html
       lang="fr"
       dir="ltr"
-      className={`dark ${display.variable} ${sans.variable} ${arabic.variable} antialiased`}
+      className={`dark ${display.variable} ${sans.variable} ${arabic.variable} ${mono.variable} antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-svh bg-page font-sans text-fg antialiased">

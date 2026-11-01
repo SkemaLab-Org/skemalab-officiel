@@ -16,6 +16,7 @@ export const en = {
     copyright: "Skemalab. All rights reserved.",
     bookingCta: "Book a call",
     bookingSubtitle: "Pick an available slot",
+    backToTop: "Back to top",
   },
 
   nav: [
@@ -28,6 +29,7 @@ export const en = {
 
   hero: {
     eyebrow: "Consulting · Software Engineering & Automation",
+    location: "Essaouira · Morocco",
     headline: "Systems that grow your business.",
     subheading:
       "We build your custom software, run your acquisition and automate your operations.",
@@ -123,6 +125,7 @@ export const en = {
     description:
       "Skemalab combines development, digital marketing and automation to build systems that convert, scale and improve over time.",
     talkWithExpert: "Talk to an expert",
+    tileCta: "Talk about it",
   },
 
   aboutIntro: {
@@ -174,6 +177,8 @@ export const en = {
     description:
       "Digital products, customer acquisition, automation or better decision-making: we bring the right expertise together to turn your needs into progress.",
     similarProject: "Let’s talk about your goal",
+    signalCaption: "One active lever · the rest keeps moving",
+    signalReadout: "5H / DAY",
     list: [
       {
         goal: "Bring an idea to life",
@@ -215,8 +220,48 @@ export const en = {
     { value: 3, suffix: "×", label: "Process acceleration" },
   ],
 
+  faqSection: {
+    eyebrow: "FAQ",
+    title: "The questions we get before starting.",
+    description:
+      "Timelines, collaboration, tooling, ROI: concrete answers, no detours.",
+    items: [
+      {
+        question: "How long does a project take?",
+        answer:
+          "A marketing site or a showcase app usually ships in 4 to 6 weeks. A business platform or an ERP is closer to 2 to 4 months, depending on scope. Either way, a working first milestone is visible within the first two weeks, and the schedule is revised at every cycle.",
+      },
+      {
+        question: "Can you work alongside our in-house team?",
+        answer:
+          "Yes. We plug into your organisation — developers, marketing, operations — with short sync points and shared access to deliverables. At the end of the project, your team keeps the code, the documentation and the access.",
+      },
+      {
+        question: "Which automation tools do you use?",
+        answer:
+          "We pick the tool that fits what you already run: n8n for self-hosted workflows and technical integrations, Make or Zapier for fast scenarios, and AI agents when the work needs to understand content. The goal is always the same: remove repetitive tasks without adding pointless dependencies.",
+      },
+      {
+        question: "How do you measure return on investment?",
+        answer:
+          "We define the indicators before building: conversions, acquisition cost, qualified leads, hours saved. They are instrumented in your analytics and reviewed regularly so we adjust what needs adjusting.",
+      },
+      {
+        question: "Do you handle maintenance and evolution?",
+        answer:
+          "Yes. Every delivery can extend into an ongoing engagement: fixes, security updates, new features and workflow monitoring. You remain the owner of your system.",
+      },
+      {
+        question: "Which languages do you work in?",
+        answer:
+          "We work in French, English and Arabic, written and spoken. The interfaces we ship can be multilingual, with native right-to-left support.",
+      },
+    ],
+  },
+
   aboutHome: {
     eyebrow: "The agency",
+    sectionLabel: "Studio",
     title: "Your digital growth partner.",
     p1: "Skemalab supports ambitious companies through their digital transformation. We combine business strategy, technical excellence and smart automation to build durable performance levers.",
     p2: "Whether you are launching a product, accelerating acquisition or industrializing internal processes, we design a clear, executable, results-oriented solution.",
@@ -225,6 +270,8 @@ export const en = {
       "No decorative projects. Digital systems that create measurable value.",
     cta: "Talk to an expert",
     imageAlt: "Skemalab, your digital growth partner",
+    secondImageAlt: "The Skemalab team at work",
+    secondImageCaption: "Workshop · Method & delivery",
     pillars: [
       [ "Mission", "Blend tech, marketing and automation to scale." ],
       [ "Approach", "Precise diagnosis, fast execution, tracked ROI." ],

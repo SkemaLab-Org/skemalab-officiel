@@ -15,6 +15,7 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
+  --color-line-soft: var(--line-soft);
   --color-brand: var(--brand);
   --color-brand-deep: var(--brand-deep);
   --color-accent: var(--accent);
@@ -31,6 +32,8 @@
   --font-display: var(--font-bricolage), var(--font-manrope), ui-sans-serif,
     sans-serif;
   --font-arabic: var(--font-cairo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo,
+    monospace;
 
   --radius-xs: 4px;
   --radius-sm: 8px;
@@ -60,6 +63,7 @@
   --muted: #a2b8b1;
   --line: rgba(242, 237, 226, 0.12);
   --line-strong: rgba(242, 237, 226, 0.26);
+  --line-soft: rgba(242, 237, 226, 0.06);
   --brand: #17a08c;
   --brand-deep: #0d6d60;
   --accent: #3ad9bf;
@@ -81,6 +85,7 @@ html:not(.dark) {
   --muted: #4a625b;
   --line: rgba(8, 28, 23, 0.14);
   --line-strong: rgba(8, 28, 23, 0.28);
+  --line-soft: rgba(8, 28, 23, 0.06);
   --brand: #0b7a6b;
   --brand-deep: #085e52;
   --accent: #0a6b5e;
@@ -247,12 +252,27 @@ html:not(.dark) {
 }
 
 @utility label-mono {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-weight: 300;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
+}
+
+/* Arabic does not take Latin uppercase or tracking. */
+[dir="rtl"] .label-mono {
+  font-family: var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Landing display voice: light grotesque, optical tracking, tight leading. */
+@utility landing-display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
 }
 
 /* Hairline that carries the section label — replaces the generic kicker. */
@@ -314,6 +334,73 @@ select.field {
 .field option {
   background: var(--surface);
   color: var(--fg);
+}
+
+/* Editorial photography is the only bitmap on the landing page. It is
+   desaturated and tinted so it reads as part of the generated-light system. */
+.photo-duotone {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.photo-duotone img {
+  filter: grayscale(1) contrast(1.04) brightness(0.82);
+}
+
+html:not(.dark) .photo-duotone img {
+  filter: grayscale(1) contrast(1.04) brightness(0.95);
+}
+
+.photo-duotone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--brand);
+  mix-blend-mode: color;
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+/* Native FAQ rows with a CSS-only plus that collapses to a minus. */
+.faq-item summary {
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-plus {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  width: 13px;
+  height: 13px;
+}
+
+.faq-plus::before,
+.faq-plus::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+
+.faq-plus::before {
+  inset-inline: 0;
+  top: 6px;
+  height: 1px;
+}
+
+.faq-plus::after {
+  inset-block: 0;
+  inset-inline-start: 6px;
+  width: 1px;
+  transition: transform 0.2s var(--ease-out-expo);
+}
+
+.faq-item[open] .faq-plus::after {
+  transform: scaleY(0);
 }
 
 /* Animated link underline */

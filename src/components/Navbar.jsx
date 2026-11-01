@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 const CalendlyButton = dynamic(() => import("@/components/CalendlyButton"), {
   ssr: false,
   loading: () => (
-    <span className="inline-flex min-h-11 items-center justify-center rounded-md bg-brand px-5 text-[13px] font-medium text-on-brand opacity-80">
+    <span className="inline-flex min-h-11 items-center justify-center rounded-none bg-brand px-5 text-[13px] font-medium text-on-brand opacity-80">
       RDV
     </span>
   ),
@@ -31,7 +31,7 @@ const FOCUSABLE =
 // cream-on-dark treatment there regardless of the active theme; every other
 // route follows the theme through the `dark` class so it matches before
 // hydration.
-const DARK_HERO_ROUTES = new Set(["/", "/our-story"]);
+const DARK_HERO_ROUTES = new Set(["/our-story"]);
 
 export default function Navbar() {
   const { t } = useI18n();
@@ -190,20 +190,19 @@ export default function Navbar() {
                 role="dialog"
                 aria-modal="true"
                 aria-label={t.common.menuLabel}
-                className="fixed inset-0 z-[95] flex flex-col bg-[#07110e] text-cream lg:hidden"
+                className="fixed inset-0 z-[95] flex flex-col bg-page text-fg lg:hidden"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.25 }}
               >
-                <div className="pointer-events-none absolute inset-0 zellige opacity-30" />
-                <div className="relative flex h-16 shrink-0 items-center justify-between border-b border-cream/10 px-5">
+                <div className="relative flex h-16 shrink-0 items-center justify-between border-b border-line px-5">
                   <BrandMark onClick={closeMenu} className="h-7" />
                   <button
                     ref={closeButtonRef}
                     type="button"
                     aria-label={t.common.closeMenu}
-                    className="flex h-11 w-11 items-center justify-center rounded-md border border-cream/20 text-cream transition-colors hover:border-accent-bright hover:text-accent-bright"
+                    className="flex h-11 w-11 items-center justify-center rounded-none border border-line-strong text-fg transition-colors hover:border-accent hover:text-accent"
                     onClick={closeMenu}
                   >
                     <X size={18} />
@@ -217,20 +216,20 @@ export default function Navbar() {
                         key={link.href}
                         href={link.href}
                         onClick={closeMenu}
-                        className="group flex min-h-16 items-center justify-between gap-4 border-b border-cream/10 py-4"
+                        className="group flex min-h-16 items-center justify-between gap-4 border-b border-line py-4"
                         initial={{ opacity: 0, y: 14 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.05 + index * 0.05, ease: EASE.out, duration: 0.45 }}
                       >
                         <span className="flex items-baseline gap-4">
-                          <span className="label-mono text-cream/65">0{index + 1}</span>
-                          <span className="font-display text-3xl tracking-tight text-cream">
+                          <span className="label-mono text-muted">0{index + 1}</span>
+                          <span className="font-display text-3xl tracking-tight text-fg">
                             {link.label}
                           </span>
                         </span>
                         <ArrowUpRight
                           size={20}
-                          className="shrink-0 text-cream/65 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-bright rtl-flip"
+                          className="shrink-0 text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent rtl-flip"
                         />
                       </motion.a>
                     ))}
@@ -240,14 +239,14 @@ export default function Navbar() {
                     <LanguageSwitcher isMobile />
                   </div>
 
-                  <div className="mt-auto space-y-4 border-t border-cream/10 pt-6">
+                  <div className="mt-auto space-y-4 border-t border-line pt-6">
                     <CalendlyButton
-                      className="w-full"
+                      className="w-full rounded-none"
                       onBeforeOpen={closeMenu}
                     >
                       {t.common.bookingCta}
                     </CalendlyButton>
-                    <p className="text-center text-xs text-cream/65">{t.common.tagline}</p>
+                    <p className="text-center text-xs text-muted">{t.common.tagline}</p>
                   </div>
                 </div>
               </motion.div>
@@ -288,7 +287,7 @@ export default function Navbar() {
             />
             <span
               className={cn(
-                "label-mono hidden xl:block",
+                "label-mono hidden whitespace-nowrap xl:block",
                 darkSurface ? "text-cream/65" : "text-muted dark:text-cream/65",
               )}
             >
@@ -305,7 +304,7 @@ export default function Navbar() {
                   href={link.href}
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
-                    "relative px-3 py-2 text-[13px] tracking-[0.01em] transition-colors duration-300",
+                    "label-mono relative px-3 py-2 transition-colors duration-300",
                     darkSurface
                       ? isActive
                         ? "text-cream"
@@ -319,7 +318,10 @@ export default function Navbar() {
                   {isActive ? (
                     <motion.span
                       layoutId="nav-active"
-                      className="absolute inset-x-2 -bottom-0.5 h-px bg-accent-bright"
+                      className={cn(
+                        "absolute inset-x-2 -bottom-0.5 h-px",
+                        darkSurface ? "bg-accent-bright" : "bg-accent dark:bg-accent-bright",
+                      )}
                       transition={{ duration: 0.4, ease: EASE.out }}
                     />
                   ) : null}
@@ -331,7 +333,7 @@ export default function Navbar() {
           <div className="hidden items-center gap-2 lg:flex">
             <LanguageSwitcher onDark={darkSurface} />
             <ThemeToggle onDark={darkSurface} />
-            <CalendlyButton className="min-h-10 px-4 py-2 text-[13px]">
+            <CalendlyButton className="min-h-10 rounded-none px-4 py-2 text-[13px]">
               {t.common.bookingCta}
             </CalendlyButton>
           </div>
@@ -345,7 +347,7 @@ export default function Navbar() {
               aria-expanded={open}
               aria-controls={MENU_ID}
               className={cn(
-                "flex h-11 w-11 items-center justify-center rounded-md border transition-colors",
+                "flex h-11 w-11 items-center justify-center rounded-none border transition-colors",
                 darkSurface
                   ? "border-cream/20 text-cream hover:border-accent-bright hover:text-accent-bright"
                   : "border-line-strong text-fg hover:border-accent hover:text-accent dark:border-cream/20 dark:text-cream dark:hover:border-accent-bright dark:hover:text-accent-bright",

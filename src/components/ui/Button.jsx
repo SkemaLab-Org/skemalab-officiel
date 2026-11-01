@@ -12,6 +12,8 @@ const buttonVariants = cva(
           "border border-line-strong bg-transparent text-fg hover:border-accent hover:text-accent",
         ghost: "bg-transparent text-muted hover:text-fg",
         light: "bg-cream text-ink hover:bg-accent hover:text-on-brand",
+        outline:
+          "border border-line-strong bg-transparent text-fg hover:border-accent hover:text-accent dark:border-cream/30 dark:text-cream dark:hover:border-accent-bright dark:hover:text-accent-bright",
         outlineLight:
           "border border-cream/30 bg-cream/5 text-cream backdrop-blur-sm hover:border-accent hover:text-accent",
       },

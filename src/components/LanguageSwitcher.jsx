@@ -93,8 +93,8 @@ export default function LanguageSwitcher({
     return (
       <div className="w-full">
         <div className="mb-2 flex items-center justify-between">
-          <span className="label-mono text-cream/65">{isRTL ? "اللغة" : "Langue"}</span>
-          <span className="flex items-center gap-1.5 text-xs text-accent-bright">
+          <span className="label-mono text-muted">{isRTL ? "اللغة" : "Langue"}</span>
+          <span className="flex items-center gap-1.5 text-xs text-accent">
             <FlagIcon loc={current} className="h-3 w-[18px]" />
             {current.short}
           </span>
@@ -111,12 +111,12 @@ export default function LanguageSwitcher({
                 disabled={!isEnabled}
                 onClick={() => handleSelect(loc.code, isEnabled)}
                 className={cn(
-                  "flex min-h-12 items-center justify-between rounded-md border px-3 py-2 text-sm transition-colors",
+                  "flex min-h-12 items-center justify-between rounded-none border px-3 py-2 text-sm transition-colors",
                   isSelected
-                    ? "border-accent-bright/60 bg-accent-bright/10 text-accent-bright"
+                    ? "border-accent/60 bg-accent/10 text-accent"
                     : isEnabled
-                      ? "border-cream/15 text-cream/75 hover:border-accent-bright/50 hover:text-cream"
-                      : "cursor-not-allowed border-cream/10 text-cream/65",
+                      ? "border-line-strong text-muted hover:border-accent/50 hover:text-fg"
+                      : "cursor-not-allowed border-line text-muted/70",
                 )}
               >
                 <span className="flex items-center gap-2">
@@ -155,7 +155,7 @@ export default function LanguageSwitcher({
               bottom: pos.bottom ?? undefined,
               ...(isRTL ? { left: pos.left } : { right: pos.right }),
             }}
-            className="z-[110] w-48 rounded-md border border-cream/15 bg-[#0b1b16] p-1.5 text-cream shadow-2xl"
+            className="z-[110] w-48 rounded-none border border-line-strong bg-surface p-1.5 text-fg shadow-none"
           >
             {Object.values(locales).map((loc) => {
               const isSelected = loc.code === locale;
@@ -171,12 +171,12 @@ export default function LanguageSwitcher({
                   disabled={!isEnabled}
                   onClick={() => handleSelect(loc.code, isEnabled)}
                   className={cn(
-                    "flex w-full items-center justify-between rounded-sm px-2.5 py-2 text-xs transition-colors",
+                    "flex w-full items-center justify-between rounded-none px-2.5 py-2 text-xs transition-colors",
                     isSelected
-                      ? "bg-accent-bright/10 text-accent-bright"
+                      ? "bg-accent/10 text-accent"
                       : isEnabled
-                        ? "text-cream/70 hover:bg-cream/5 hover:text-cream"
-                        : "cursor-not-allowed text-cream/65",
+                        ? "text-muted hover:bg-line-soft hover:text-fg"
+                        : "cursor-not-allowed text-muted/70",
                   )}
                 >
                   <span className="flex items-center gap-2.5">
@@ -209,7 +209,7 @@ export default function LanguageSwitcher({
         aria-haspopup="listbox"
         aria-label={isRTL ? "تغيير اللغة" : "Changer de langue"}
         className={cn(
-          "flex h-11 items-center justify-center gap-2 rounded-md border px-3 transition-colors",
+          "flex h-11 items-center justify-center gap-2 rounded-none border px-3 transition-colors",
           onDark
             ? "border-cream/20 text-cream/80 hover:border-accent-bright hover:text-accent-bright"
             : "border-line-strong text-muted hover:border-accent hover:text-accent dark:border-cream/20 dark:text-cream/80 dark:hover:border-accent-bright dark:hover:text-accent-bright",

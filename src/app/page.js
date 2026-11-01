@@ -1,27 +1,23 @@
-import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
-import AboutIntro from "@/components/sections/AboutIntro";
 import Services from "@/components/sections/Services";
 import Process from "@/components/sections/Process";
 import Projects from "@/components/sections/Projects";
 import Stats from "@/components/sections/Stats";
-import About from "@/components/sections/About";
+import Studio from "@/components/sections/Studio";
+import FAQ from "@/components/sections/FAQ";
 import CTA from "@/components/sections/CTA";
 import Contact from "@/components/sections/Contact";
-
-const Loader = dynamic(() => import("@/components/Loader"));
 
 export default function Home() {
   return (
     <>
-      <Loader />
       <Hero />
-      <AboutIntro />
       <Services />
       <Process />
       <Projects />
       <Stats />
-      <About />
+      <Studio />
+      <FAQ />
       <CTA />
       <Contact />
     </>

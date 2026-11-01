@@ -16,7 +16,6 @@ import { contactInfo } from "@/data/content";
 import { useI18n } from "@/components/I18nProvider";
 import { CONTACT_LIMITS } from "@/lib/contactValidation";
 import { createContactSchema } from "@/lib/contactSchema";
-import SectionHeader from "@/components/ui/SectionHeader";
 import Reveal from "@/components/motion/Reveal";
 import Button from "@/components/ui/Button";
 import { DURATION, EASE } from "@/lib/motion";
@@ -105,21 +104,23 @@ export default function Contact() {
   const busy = isSubmitting || status === "sending";
 
   return (
-    <section id="contact" className="section-y relative overflow-hidden bg-page">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-40 bottom-0 h-[30rem] w-[30rem] rounded-full bg-brand/8 blur-[150px]"
-      />
-
-      <div className="shell relative grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+    <section id="contact" className="section-y bg-surface">
+      <div className="shell grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="min-w-0">
           <Reveal>
-            <SectionHeader
-              label={copy.eyebrow}
-              index="06"
-              title={copy.title}
-              description={copy.description}
-            />
+            <div className="flex items-center gap-4">
+              <span className="label-mono shrink-0 text-muted">
+                08 · {copy.eyebrow}
+              </span>
+              <span aria-hidden="true" className="h-px flex-1 bg-line" />
+            </div>
+
+            <h2 className="landing-display mt-8 max-w-[16ch] text-[clamp(2rem,4.2vw,3.2rem)] text-fg">
+              {copy.title}
+            </h2>
+            <p className="mt-5 max-w-[42ch] text-[15px] leading-[1.7] text-muted">
+              {copy.description}
+            </p>
           </Reveal>
 
           <Reveal delay={0.1}>
@@ -150,12 +151,8 @@ export default function Contact() {
             onSubmit={handleSubmit(onSubmit)}
             noValidate
             aria-busy={busy}
-            className="relative overflow-hidden rounded-lg border border-line bg-surface p-6 sm:p-8 lg:p-10"
+            className="border-t border-line pt-8"
           >
-            <span
-              aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/70 to-transparent"
-            />
 
             {status === "success" ? (
               <StatusPanel
@@ -279,7 +276,13 @@ export default function Contact() {
                 </div>
 
                 <div className="pt-1 sm:col-span-2">
-                  <Button type="submit" size="md" loading={busy} disabled={busy}>
+                  <Button
+                    type="submit"
+                    size="md"
+                    className="rounded-none"
+                    loading={busy}
+                    disabled={busy}
+                  >
                     {busy ? copy.submitting : copy.submitBtn}
                     {!busy ? <ArrowUpRight size={16} className="rtl-flip" /> : null}
                   </Button>
@@ -335,7 +338,7 @@ function FieldError({ id, message }) {
 function ContactRow({ icon: Icon, label, value, href }) {
   const content = (
     <>
-      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-line text-accent transition-colors group-hover:border-accent">
+      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-none border border-line text-muted transition-colors group-hover:border-accent group-hover:text-fg">
         <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
       </span>
       <span className="min-w-0 flex-1">
@@ -385,9 +388,9 @@ function StatusPanel({ variant = "success", eyebrow, title, text, resetLabel, on
         size={34}
         strokeWidth={1.5}
         aria-hidden="true"
-        className={variant === "success" ? "text-accent" : "text-danger"}
+        className={variant === "success" ? "text-fg" : "text-danger"}
       />
-      <p className="label-mono mt-6 text-accent">{eyebrow}</p>
+      <p className="label-mono mt-6 text-muted">{eyebrow}</p>
       <h3 className="mt-3 font-display text-2xl tracking-tight sm:text-3xl">{title}</h3>
       <p className="mt-3 max-w-md text-sm leading-relaxed text-muted">{text}</p>
       <button

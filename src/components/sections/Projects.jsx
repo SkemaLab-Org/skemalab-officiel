@@ -4,8 +4,8 @@ import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { useI18n } from "@/components/I18nProvider";
-import SectionHeader from "@/components/ui/SectionHeader";
-import Spotlight from "@/components/ui/Spotlight";
+import BandHeader from "@/components/ui/BandHeader";
+import SpectrumField from "@/components/canvas/SpectrumField";
 import Reveal from "@/components/motion/Reveal";
 import Button from "@/components/ui/Button";
 import { DURATION, EASE } from "@/lib/motion";
@@ -20,23 +20,25 @@ export default function Projects() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="projets" className="section-y relative overflow-hidden bg-page">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-32 top-1/4 h-[24rem] w-[24rem] rounded-full bg-brand/7 blur-[140px]"
-      />
-
-      <div className="shell relative">
+    <section id="projets" className="section-y bg-page">
+      <div className="shell">
         <Reveal>
-          <SectionHeader
+          <BandHeader
+            index="03"
             label={copy.eyebrow}
-            index="04"
             title={copy.title}
             description={copy.description}
           />
         </Reveal>
 
-        <div className="mt-12 grid gap-8 sm:mt-16 lg:grid-cols-[0.92fr_1.08fr] lg:items-start lg:gap-14">
+        <Reveal delay={0.06} className="mt-12 sm:mt-16">
+          <SpectrumField
+            caption={copy.signalCaption}
+            readout={copy.signalReadout}
+          />
+        </Reveal>
+
+        <div className="mt-14 grid gap-10 sm:mt-20 min-[900px]:grid-cols-[0.95fr_1.05fr] min-[900px]:items-start min-[900px]:gap-14">
           <Reveal>
             <div
               role="group"
@@ -59,7 +61,7 @@ export default function Projects() {
                     <span
                       className={cn(
                         "label-mono w-6 shrink-0 transition-colors",
-                        active ? "text-accent" : "text-muted",
+                        active ? "text-fg" : "text-muted",
                       )}
                     >
                       {String(index + 1).padStart(2, "0")}
@@ -76,10 +78,10 @@ export default function Projects() {
                       size={16}
                       aria-hidden="true"
                       className={cn(
-                        "shrink-0 transition-all duration-300 rtl-flip",
+                        "shrink-0 transition-transform duration-300 rtl-flip",
                         active
-                          ? "text-accent"
-                          : "text-muted group-hover:text-muted",
+                          ? "text-fg group-hover:-translate-y-0.5"
+                          : "text-muted",
                       )}
                     />
                   </button>
@@ -88,14 +90,14 @@ export default function Projects() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.08} className="lg:sticky lg:top-28">
-            <Spotlight
-              className="relative min-h-[24rem] overflow-hidden rounded-lg border border-line bg-surface p-6 sm:min-h-[26rem] sm:p-10 lg:p-12"
+          <Reveal delay={0.08}>
+            <div
               aria-live="polite"
+              className="relative min-h-[22rem] overflow-hidden border border-line bg-page p-6 sm:min-h-[24rem] sm:p-10"
             >
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute bottom-5 end-7 font-display text-[4.5rem] leading-none tracking-tighter text-fg/[0.06] sm:text-[5.5rem]"
+                className="pointer-events-none absolute bottom-5 end-7 font-display text-[4.5rem] font-light leading-none tracking-[-0.05em] text-fg/[0.06] sm:text-[5.5rem]"
               >
                 {String(activeIndex + 1).padStart(2, "0")}
               </span>
@@ -109,25 +111,26 @@ export default function Projects() {
                   transition={{ duration: DURATION.base, ease: EASE.out }}
                   className="relative flex h-full flex-col"
                 >
-                  <span className="inline-flex w-fit items-center gap-2 rounded-full border border-line-strong px-3 py-1.5">
-                    <span className="h-1.5 w-1.5 rotate-45 bg-accent" aria-hidden="true" />
-                    <span className="label-mono text-muted">{activeGoal.category}</span>
+                  <span className="label-mono text-muted">
+                    {activeGoal.category}
                   </span>
 
-                  <h3 className="display-md mt-8 max-w-[20ch]">{activeGoal.goal}</h3>
-                  <p className="mt-4 max-w-md text-sm leading-relaxed text-muted sm:text-base">
+                  <h3 className="landing-display mt-6 max-w-[20ch] text-[clamp(1.6rem,2.6vw,2.2rem)] text-fg">
+                    {activeGoal.goal}
+                  </h3>
+                  <p className="mt-4 max-w-[38ch] text-sm leading-[1.7] text-muted">
                     {activeGoal.description}
                   </p>
 
                   <div className="mt-auto pt-10">
-                    <Button href="#contact" size="sm">
+                    <Button href="#contact" size="sm" className="rounded-none">
                       {copy.similarProject}
                       <ArrowUpRight size={15} className="rtl-flip" />
                     </Button>
                   </div>
                 </motion.div>
               </AnimatePresence>
-            </Spotlight>
+            </div>
           </Reveal>
         </div>
       </div>

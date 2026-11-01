@@ -4,7 +4,6 @@ import { ArrowUpRight } from "lucide-react";
 import { contactInfo } from "@/data/content";
 import { useI18n } from "@/components/I18nProvider";
 import Reveal from "@/components/motion/Reveal";
-import Magnetic from "@/components/motion/Magnetic";
 import Button from "@/components/ui/Button";
 
 export default function CTA() {
@@ -12,43 +11,37 @@ export default function CTA() {
   const banner = t.ctaBanner;
 
   return (
-    <section className="relative bg-page py-16 sm:py-20 lg:py-24">
+    <section className="border-y border-line bg-page py-20 sm:py-24 lg:py-28">
       <div className="shell">
         <Reveal>
-          <div className="beam-frame relative isolate overflow-hidden rounded-lg bg-[#07110e] px-6 py-16 text-cream sm:px-12 sm:py-24">
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-              <div className="zellige absolute inset-0 opacity-30" />
-              <div className="absolute -left-24 top-0 h-[24rem] w-[24rem] rounded-full bg-brand/20 blur-[130px]" />
-              <div className="absolute -right-16 bottom-0 h-[20rem] w-[20rem] rounded-full bg-accent-bright/12 blur-[120px]" />
-            </div>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="label-mono text-muted">{banner.eyebrow}</p>
 
-            <div className="relative mx-auto max-w-3xl text-center">
-              <p className="label-mono text-accent-bright">{banner.eyebrow}</p>
+            <h2 className="landing-display mx-auto mt-6 max-w-[16ch] text-[clamp(2.4rem,7vw,5.4rem)] text-fg">
+              {banner.headline}
+            </h2>
 
-              <h2 className="display-lg mx-auto mt-6 max-w-[24ch] text-cream">
-                {banner.headline}
-              </h2>
+            <p className="mx-auto mt-6 max-w-[46ch] text-[15px] leading-[1.7] text-muted">
+              {banner.description}
+            </p>
 
-              <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-cream/65 sm:text-base">
-                {banner.description}
-              </p>
-
-              <div className="mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <Magnetic className="w-full justify-center sm:w-auto">
-                  <Button href="#contact" size="lg" className="w-full sm:w-auto">
-                    {banner.ctaPrimary}
-                    <ArrowUpRight size={17} className="rtl-flip" />
-                  </Button>
-                </Magnetic>
-                <Button
-                  href={`mailto:${contactInfo.email}`}
-                  variant="outlineLight"
-                  size="lg"
-                  className="w-full sm:w-auto"
-                >
-                  {banner.ctaSecondary}
-                </Button>
-              </div>
+            <div className="mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-4">
+              <Button
+                href="#contact"
+                size="lg"
+                className="w-full rounded-none sm:w-auto"
+              >
+                {banner.ctaPrimary}
+                <ArrowUpRight size={17} className="rtl-flip" />
+              </Button>
+              <Button
+                href={`mailto:${contactInfo.email}`}
+                variant="outline"
+                size="lg"
+                className="w-full rounded-none sm:w-auto"
+              >
+                {banner.ctaSecondary}
+              </Button>
             </div>
           </div>
         </Reveal>
