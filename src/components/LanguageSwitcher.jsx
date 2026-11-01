@@ -28,7 +28,11 @@ function FlagIcon({ loc, className = "h-3.5 w-5" }) {
   );
 }
 
-export default function LanguageSwitcher({ className = "", isMobile = false }) {
+export default function LanguageSwitcher({
+  className = "",
+  isMobile = false,
+  onDark = true,
+}) {
   const { locale, setLocale, locales, isRTL } = useI18n();
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState(null);
@@ -204,7 +208,12 @@ export default function LanguageSwitcher({ className = "", isMobile = false }) {
         aria-expanded={open}
         aria-haspopup="listbox"
         aria-label={isRTL ? "تغيير اللغة" : "Changer de langue"}
-        className="flex h-11 items-center justify-center gap-2 rounded-md border border-cream/20 px-3 text-cream/80 transition-colors hover:border-accent-bright hover:text-accent-bright"
+        className={cn(
+          "flex h-11 items-center justify-center gap-2 rounded-md border px-3 transition-colors",
+          onDark
+            ? "border-cream/20 text-cream/80 hover:border-accent-bright hover:text-accent-bright"
+            : "border-line-strong text-muted hover:border-accent hover:text-accent dark:border-cream/20 dark:text-cream/80 dark:hover:border-accent-bright dark:hover:text-accent-bright",
+        )}
       >
         <FlagIcon loc={current} className="h-4 w-[22px]" />
         <span className="label-mono hidden xl:block">{current.short}</span>

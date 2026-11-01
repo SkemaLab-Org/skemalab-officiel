@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <section className="relative flex min-h-svh items-center overflow-hidden bg-[#07110e] text-cream">
+    <section className="relative flex min-h-svh items-center overflow-hidden bg-page text-fg">
       <div aria-hidden="true" className="zellige absolute inset-0 opacity-30" />
       <div
         aria-hidden="true"
@@ -11,16 +11,16 @@ export default function NotFound() {
       />
 
       <div className="shell relative py-28">
-        <div className="ledger-rule ledger-rule--ink max-w-xl">
-          <span className="label-mono text-cream/65">Erreur 404</span>
-          <span className="label-mono text-cream/65">Skemalab</span>
+        <div className="ledger-rule max-w-xl">
+          <span className="label-mono text-muted">Erreur 404</span>
+          <span className="label-mono text-muted">Skemalab</span>
         </div>
 
-        <h1 className="display-xl mt-8 max-w-[16ch] text-cream">
-          Cette page n’existe <span className="text-accent-bright">pas encore.</span>
+        <h1 className="display-xl mt-8 max-w-[16ch] text-fg">
+          Cette page n’existe <span className="text-accent">pas encore.</span>
         </h1>
 
-        <p className="mt-6 max-w-md text-sm leading-relaxed text-cream/65 sm:text-base">
+        <p className="mt-6 max-w-md text-sm leading-relaxed text-muted sm:text-base">
           Le lien que vous avez suivi est introuvable. Revenez à l’accueil ou
           écrivez-nous pour parler de votre projet.
         </p>
@@ -35,7 +35,7 @@ export default function NotFound() {
           </Link>
           <Link
             href="/#contact"
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-cream/25 px-6 text-sm text-cream transition-colors hover:border-accent-bright hover:text-accent-bright"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-line-strong px-6 text-sm text-fg transition-colors hover:border-accent hover:text-accent"
           >
             Nous contacter
             <ArrowUpRight size={16} aria-hidden="true" className="rtl-flip" />

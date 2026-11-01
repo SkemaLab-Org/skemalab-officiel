@@ -27,15 +27,31 @@ const SECTION_IDS = ["services", "method", "projets", "agence", "contact"];
 const FOCUSABLE =
   'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
+// Pages whose hero is an always-dark brand surface. The header keeps its
+// cream-on-dark treatment there regardless of the active theme; every other
+// route follows the theme through the `dark` class so it matches before
+// hydration.
+const DARK_HERO_ROUTES = new Set(["/", "/our-story"]);
+
 export default function Navbar() {
   const { t } = useI18n();
   const pathname = usePathname();
   const navLinks = t.nav;
+  const darkSurface = DARK_HERO_ROUTES.has(pathname);
 
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
+  const [trackedPathname, setTrackedPathname] = useState(pathname);
+
+  // A new route starts at the top, so the header must be available again.
+  // Adjusting state during render is React's recommended pattern for reacting
+  // to a prop change without an extra effect pass.
+  if (trackedPathname !== pathname) {
+    setTrackedPathname(pathname);
+    setHidden(false);
+  }
   const menuButtonRef = useRef(null);
   const panelRef = useRef(null);
   const closeButtonRef = useRef(null);
@@ -49,14 +65,39 @@ export default function Navbar() {
 
   useEffect(() => {
     let last = window.scrollY;
+    let direction = 0;
     let frame = 0;
+
+    // The header only hides once the visitor has committed to scrolling down,
+    // and only reappears after a clear upward intent. Without this hysteresis
+    // trackpad jitter and iOS rubber-banding make it peek in and out.
+    const HIDE_AFTER = 180;
+    const DIRECTION_THRESHOLD = 10;
 
     const onScroll = () => {
       if (frame) return;
       frame = requestAnimationFrame(() => {
-        const y = window.scrollY;
+        const y = Math.max(0, window.scrollY);
+        const delta = y - last;
+
         setScrolled(y > 24);
-        setHidden(y > last && y > 180);
+
+        if (y <= 24) {
+          direction = 0;
+          setHidden(false);
+        } else if (delta !== 0) {
+          direction =
+            Math.sign(delta) === Math.sign(direction)
+              ? direction + delta
+              : delta;
+
+          if (direction > DIRECTION_THRESHOLD && y > HIDE_AFTER) {
+            setHidden(true);
+          } else if (direction < -DIRECTION_THRESHOLD) {
+            setHidden(false);
+          }
+        }
+
         last = y;
         frame = 0;
       });
@@ -220,9 +261,12 @@ export default function Navbar() {
     <>
       <motion.header
         className={cn(
-          "fixed inset-x-0 top-0 z-[80] text-cream transition-colors duration-500",
+          "fixed inset-x-0 top-0 z-[80] will-change-transform transition-colors duration-300",
+          darkSurface ? "text-cream" : "text-fg dark:text-cream",
           scrolled
-            ? "border-b border-cream/10 bg-[#07110e]/85 backdrop-blur-xl"
+            ? darkSurface
+              ? "border-b border-cream/10 bg-[#07110e]/85 backdrop-blur-xl"
+              : "border-b border-line bg-page/85 backdrop-blur-xl dark:border-cream/10 dark:bg-[#07110e]/85"
             : "bg-transparent",
         )}
         animate={{ y: hidden && !open ? "-100%" : "0%" }}
@@ -230,9 +274,24 @@ export default function Navbar() {
       >
         <div className="shell flex h-16 items-center justify-between gap-4 lg:h-20">
           <div className="flex items-center gap-5">
-            <BrandMark className="h-7 lg:h-8" priority />
-            <span className="hidden h-5 w-px bg-cream/15 xl:block" aria-hidden="true" />
-            <span className="label-mono hidden text-cream/65 xl:block">
+            <BrandMark
+              tone={darkSurface ? "dark" : "auto"}
+              className="h-7 lg:h-8"
+              priority
+            />
+            <span
+              className={cn(
+                "hidden h-5 w-px xl:block",
+                darkSurface ? "bg-cream/15" : "bg-line dark:bg-cream/15",
+              )}
+              aria-hidden="true"
+            />
+            <span
+              className={cn(
+                "label-mono hidden xl:block",
+                darkSurface ? "text-cream/65" : "text-muted dark:text-cream/65",
+              )}
+            >
               {t.common.tagline}
             </span>
           </div>
@@ -247,7 +306,13 @@ export default function Navbar() {
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
                     "relative px-3 py-2 text-[13px] tracking-[0.01em] transition-colors duration-300",
-                    isActive ? "text-cream" : "text-cream/65 hover:text-cream",
+                    darkSurface
+                      ? isActive
+                        ? "text-cream"
+                        : "text-cream/65 hover:text-cream"
+                      : isActive
+                        ? "text-fg dark:text-cream"
+                        : "text-muted hover:text-fg dark:text-cream/65 dark:hover:text-cream",
                   )}
                 >
                   {link.label}
@@ -264,22 +329,27 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <LanguageSwitcher />
-            <ThemeToggle />
+            <LanguageSwitcher onDark={darkSurface} />
+            <ThemeToggle onDark={darkSurface} />
             <CalendlyButton className="min-h-10 px-4 py-2 text-[13px]">
               {t.common.bookingCta}
             </CalendlyButton>
           </div>
 
           <div className="flex items-center gap-2 lg:hidden">
-            <ThemeToggle />
+            <ThemeToggle onDark={darkSurface} />
             <button
               ref={menuButtonRef}
               type="button"
               aria-label={t.common.openMenu}
               aria-expanded={open}
               aria-controls={MENU_ID}
-              className="flex h-11 w-11 items-center justify-center rounded-md border border-cream/20 text-cream transition-colors hover:border-accent-bright hover:text-accent-bright"
+              className={cn(
+                "flex h-11 w-11 items-center justify-center rounded-md border transition-colors",
+                darkSurface
+                  ? "border-cream/20 text-cream hover:border-accent-bright hover:text-accent-bright"
+                  : "border-line-strong text-fg hover:border-accent hover:text-accent dark:border-cream/20 dark:text-cream dark:hover:border-accent-bright dark:hover:text-accent-bright",
+              )}
               onClick={() => setOpen(true)}
             >
               <Menu size={18} />
@@ -289,7 +359,10 @@ export default function Navbar() {
 
         <motion.div
           aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 h-px origin-left bg-accent-bright/70"
+          className={cn(
+            "absolute inset-x-0 bottom-0 h-px origin-left",
+            darkSurface ? "bg-accent-bright/70" : "bg-accent/80 dark:bg-accent-bright/70",
+          )}
           style={{ scaleX: progress }}
         />
       </motion.header>
