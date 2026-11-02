@@ -12,7 +12,7 @@ export default function CTA() {
 	const banner = t.ctaBanner;
 
 	return (
-		<section className="relative bg-[#07110e] py-20 text-cream sm:py-24 lg:py-28">
+		<section className="relative isolate zellige-spot zellige-spot--center zellige-spot--large bg-[#07110e] py-20 text-cream sm:py-24 lg:py-28">
 			{/* Ambient glows */}
 			<div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
 				<div className="absolute -left-24 top-0 h-[32rem] w-[32rem] rounded-full bg-brand/15 blur-[140px]" />
@@ -28,14 +28,16 @@ export default function CTA() {
 						<span aria-hidden="true" className="pointer-events-none absolute left-3 bottom-3 text-[11px] text-muted/30 font-mono">+</span>
 						<span aria-hidden="true" className="pointer-events-none absolute right-3 bottom-3 text-[11px] text-muted/30 font-mono">+</span>
 
-						<div className="inline-flex items-center gap-2 mb-4">
+						<div className="mb-4 inline-flex items-center gap-3">
+							<span className="section-index border-accent-bright/40 bg-accent-bright/10 text-accent-bright" aria-hidden="true">07</span>
+							<span className="h-4 w-px bg-accent-bright/60" aria-hidden="true" />
 							<span className="status-dot shrink-0" aria-hidden="true" />
 							<span className="label-mono text-accent-bright tracking-widest">
 								{banner.eyebrow}
 							</span>
 						</div>
 
-						<h2 className="display-lg mx-auto mt-4 max-w-[24ch] text-cream">
+						<h2 className="section-title mx-auto mt-4 max-w-[24ch] text-cream">
 							{banner.headline}
 						</h2>
 

@@ -123,21 +123,146 @@ html:not(.dark) {
     -webkit-font-smoothing: antialiased;
     overflow-x: clip;
   }
-/* Moroccan Zellige background lattice across the whole body */
+/* Subtle global zellige layer; the pointer lamp adds a brighter local reveal. */
 body::before {
   position: fixed;
   z-index: 0;
   inset: 0;
   background-image: url("/moroccan-zellige.svg");
   background-repeat: repeat;
-  background-size: 128px 128px;
-  opacity: 0.16;
+  background-size: 176px 176px;
+  opacity: 0.1;
   pointer-events: none;
   content: "";
 }
 
 html:not(.dark) body::before {
-  opacity: 0.42;
+  opacity: 0.06;
+}
+
+/* Alternating, lightly translucent section planes soften the global pattern. */
+main section.bg-page {
+  background-color: color-mix(in srgb, var(--page) 91%, transparent);
+}
+
+main section.bg-surface {
+  background-color: color-mix(in srgb, var(--surface) 91%, transparent);
+}
+
+#services-stage .pin {
+  background-color: color-mix(in srgb, var(--page) 91%, transparent);
+}
+
+#engine .pin {
+  background-color: color-mix(in srgb, var(--surface) 91%, transparent);
+}
+
+#field .pin,
+#claim .pin {
+  background-color: color-mix(in srgb, var(--page) 91%, transparent);
+}
+
+/* Small zellige pockets: visible green light, kept beneath each section's content. */
+.zellige-spot {
+  --zellige-x: 82%;
+  --zellige-y: 30%;
+  --zellige-tile: 176px;
+  --zellige-glow-size: 17rem 12rem;
+  --zellige-mask-size: clamp(11rem, 22vw, 20rem) clamp(9rem, 16vw, 15rem);
+  --zellige-opacity: 0.48;
+  position: relative;
+  isolation: isolate;
+}
+
+.zellige-spot::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    radial-gradient(
+      ellipse var(--zellige-glow-size) at var(--zellige-x) var(--zellige-y),
+      color-mix(in srgb, var(--accent) 28%, transparent),
+      transparent 72%
+    ),
+    url("/moroccan-zellige.svg");
+  background-position: center, var(--zellige-x) var(--zellige-y);
+  background-repeat: no-repeat;
+  background-size: 100% 100%, var(--zellige-tile) var(--zellige-tile);
+  filter: drop-shadow(0 0 28px color-mix(in srgb, var(--accent) 20%, transparent));
+  opacity: var(--zellige-opacity);
+  pointer-events: none;
+  content: "";
+  mask-image: radial-gradient(
+    ellipse var(--zellige-mask-size) at var(--zellige-x) var(--zellige-y),
+    #000 0 46%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse var(--zellige-mask-size) at var(--zellige-x) var(--zellige-y),
+    #000 0 46%,
+    transparent 100%
+  );
+}
+
+.zellige-spot--top-start {
+  --zellige-x: 17%;
+  --zellige-y: 23%;
+}
+
+.zellige-spot--top-end {
+  --zellige-x: 84%;
+  --zellige-y: 25%;
+}
+
+.zellige-spot--mid-start {
+  --zellige-x: 12%;
+  --zellige-y: 54%;
+}
+
+.zellige-spot--mid-end {
+  --zellige-x: 89%;
+  --zellige-y: 48%;
+}
+
+.zellige-spot--bottom-start {
+  --zellige-x: 19%;
+  --zellige-y: 78%;
+}
+
+.zellige-spot--bottom-end {
+  --zellige-x: 82%;
+  --zellige-y: 78%;
+}
+
+.zellige-spot--center {
+  --zellige-x: 52%;
+  --zellige-y: 76%;
+}
+
+.zellige-spot--large {
+  --zellige-tile: 208px;
+  --zellige-glow-size: 22rem 16rem;
+  --zellige-mask-size: clamp(14rem, 28vw, 25rem) clamp(11rem, 20vw, 18rem);
+  --zellige-opacity: 0.56;
+}
+
+.zellige-spot--small {
+  --zellige-tile: 144px;
+  --zellige-glow-size: 13rem 9rem;
+  --zellige-mask-size: clamp(9rem, 17vw, 15rem) clamp(7rem, 13vw, 11rem);
+  --zellige-opacity: 0.4;
+}
+
+[dir="rtl"] .zellige-spot--top-start,
+[dir="rtl"] .zellige-spot--mid-start,
+[dir="rtl"] .zellige-spot--bottom-start {
+  --zellige-x: 83%;
+}
+
+[dir="rtl"] .zellige-spot--top-end,
+[dir="rtl"] .zellige-spot--mid-end,
+[dir="rtl"] .zellige-spot--bottom-end {
+  --zellige-x: 17%;
 }
 
 
@@ -244,6 +369,140 @@ html:not(.dark) body::before {
   }
 }
 
+.storyline-section {
+  min-height: 100svh;
+}
+
+/* Our Story · pinned hero, following the home page's scroll-stage pattern. */
+.story-hero-stage {
+  height: 280svh;
+  --p: 0;
+}
+
+.story-hero-pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: #07110e;
+}
+
+.story-hero-content {
+  transform: translateY(calc(var(--p) * -14vh)) scale(calc(1 - var(--p) * 0.3));
+  transform-origin: 0 100%;
+  opacity: calc(1 - var(--p) * 1.15);
+}
+
+#story-hero .story-hero-content h1 {
+  max-width: 24ch;
+  font-size: clamp(2.7rem, 6.2vw, 5.5rem);
+}
+
+[dir="rtl"] .story-hero-content {
+  transform-origin: 100% 100%;
+}
+
+.story-hero-content .ledger-rule {
+  transform: translateX(calc(var(--p) * -6vw));
+  opacity: calc(1 - var(--p) * 2);
+}
+
+[dir="rtl"] .story-hero-content .ledger-rule {
+  transform: translateX(calc(var(--p) * 6vw));
+}
+
+.story-hero-alt {
+  position: absolute;
+  inset-inline: 0;
+  bottom: clamp(32px, 6vw, 72px);
+  z-index: 3;
+  margin-inline: auto;
+  opacity: calc((var(--p) - 0.46) * 2.6);
+  transform: translateY(calc(26px - var(--p) * 26px));
+  pointer-events: none;
+}
+
+.story-hero-meter {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 4;
+  height: 2px;
+  background: rgba(242, 237, 226, 0.12);
+}
+
+.story-hero-meter i {
+  display: block;
+  width: calc(var(--p) * 100%);
+  height: 100%;
+  background: var(--accent-bright);
+  box-shadow: 0 0 14px rgba(58, 217, 191, 0.5);
+}
+
+@media (max-width: 899px) {
+  .story-hero-stage {
+    height: 200svh;
+  }
+
+  .storyline-section {
+    height: auto !important;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 340px) {
+  #story-hero .story-hero-content h1 {
+    margin-top: 1.25rem;
+    font-size: 1.9rem;
+  }
+
+  #story-hero .story-hero-content p.mt-7 {
+    margin-top: 1.25rem;
+  }
+
+  #story-hero .story-hero-content p.mt-3 {
+    margin-top: 0.5rem;
+  }
+
+  #story-hero .story-hero-content .mt-9 {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-hero-stage {
+    height: auto !important;
+  }
+
+  .story-hero-pin {
+    position: relative;
+    height: auto;
+    min-height: 88svh;
+    padding-bottom: 2rem;
+  }
+
+  .story-hero-content,
+  .story-hero-content .ledger-rule {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .story-hero-alt {
+    position: relative;
+    bottom: auto;
+    opacity: 1;
+    transform: none;
+    padding-bottom: 2rem;
+  }
+
+  .story-hero-meter {
+    display: none;
+  }
+}
+
 @utility display-xl {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 7.4vw, 6rem);
@@ -258,6 +517,30 @@ html:not(.dark) body::before {
   font-weight: 500;
   line-height: 1.02;
   letter-spacing: -0.03em;
+}
+
+@utility section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.15rem, 5vw, 4rem);
+  font-weight: 450;
+  line-height: 0.99;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+@utility section-index {
+  display: inline-grid;
+  width: 2.15rem;
+  height: 2.15rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
 }
 
 @utility display-md {
@@ -292,19 +575,13 @@ html:not(.dark) body::before {
   letter-spacing: -0.045em;
 }
 
-/* Hairline that carries the section label — replaces the generic kicker. */
+/* Quiet label row shared by section headers, without a decorative rule. */
 @utility ledger-rule {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  border-top: 1px solid var(--line);
-  padding-top: 0.9rem;
-}
-
-/* Same rail on an always-dark surface. */
-@utility ledger-rule--ink {
-  border-top-color: rgba(242, 237, 226, 0.16);
+  min-height: 1rem;
 }
 
 /* ==========================================================================

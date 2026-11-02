@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
+import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
@@ -15,6 +16,7 @@ import { useI18n } from "@/components/I18nProvider";
  */
 export default function SiteShell({ children }) {
 	const { t } = useI18n();
+	const pathname = usePathname();
 	const { scrollYProgress } = useScroll();
 	const scaleX = useSpring(scrollYProgress, {
 		stiffness: 140,
@@ -67,8 +69,11 @@ export default function SiteShell({ children }) {
 				<main id="main" className="flex-1">
 					<PageTransition>{children}</PageTransition>
 				</main>
-				<Footer />
-				<aside aria-label={t.common.contactShortcut || "Contact rapide"}>
+				<Footer animate={pathname === "/our-story"} />
+				<aside
+					aria-label={t.common.contactShortcut || "Contact rapide"}
+					className={pathname === "/our-story" ? "hidden min-[900px]:block" : undefined}
+				>
 					<WhatsAppFloat />
 				</aside>
 			</div>

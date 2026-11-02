@@ -13,24 +13,20 @@ export default function BandHeader({
 }) {
 	return (
 		<header className={cn("w-full", className)}>
-			<div className="flex items-center gap-4">
-				<div className="label-mono flex items-center gap-2 shrink-0">
+			<div className="flex min-h-4 items-center gap-4">
+				<div className="label-mono flex items-center gap-3 shrink-0 text-accent">
 					{index ? (
-						<span className="font-mono text-accent font-medium tracking-wider">
+						<span className="section-index" aria-hidden="true">
 							{index}
 						</span>
 					) : null}
-					{index ? <span className="text-muted/40" aria-hidden="true">/</span> : null}
-					<span className="text-fg/80">{label}</span>
+					<span className="h-4 w-px bg-accent/50" aria-hidden="true" />
+					<span className="text-fg/75">{label}</span>
 				</div>
-				<span
-					aria-hidden="true"
-					className="h-px flex-1 bg-gradient-to-r from-line via-line-soft to-transparent"
-				/>
 			</div>
 
-			<div className="mt-8 grid gap-6 sm:mt-10 min-[820px]:grid-cols-[1.25fr_0.75fr] min-[820px]:items-end min-[820px]:gap-12">
-				<h2 className="landing-display max-w-[20ch] text-[clamp(2rem,4.6vw,3.6rem)] text-fg">
+			<div className="mt-7 grid gap-6 sm:mt-9 min-[820px]:grid-cols-[1.25fr_0.75fr] min-[820px]:items-end min-[820px]:gap-12">
+				<h2 className="section-title max-w-[22ch] text-fg">
 					{title}
 				</h2>
 				{description ? (

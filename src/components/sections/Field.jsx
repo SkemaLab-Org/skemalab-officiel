@@ -129,7 +129,7 @@ export default function Field() {
 
 	return (
 		<section className="stage" id="field">
-			<div className="pin">
+				<div className="pin zellige-spot zellige-spot--mid-start zellige-spot--small">
 				<div className="field-in">
 					<div className="field-head">
 						<h2 className="font-display font-light text-fg">{title}</h2>

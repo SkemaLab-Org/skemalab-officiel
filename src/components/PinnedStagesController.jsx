@@ -61,6 +61,10 @@ export default function PinnedStagesController() {
 			if (servicesEl) {
 				servicesEl.style.setProperty("--p", stageP(servicesEl).toFixed(4));
 			}
+
+			document.querySelectorAll("[data-scroll-stage]").forEach((stage) => {
+				stage.style.setProperty("--p", stageP(stage).toFixed(4));
+			});
 		}
 
 		function onScroll() {

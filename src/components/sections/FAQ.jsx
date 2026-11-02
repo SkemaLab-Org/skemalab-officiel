@@ -9,7 +9,7 @@ export default function FAQ() {
 	const copy = t.faqSection;
 
 	return (
-		<section id="faq" className="section-y bg-page">
+		<section id="faq" className="section-y bg-surface zellige-spot zellige-spot--top-start zellige-spot--large">
 			<div className="shell">
 				<Reveal>
 					<BandHeader

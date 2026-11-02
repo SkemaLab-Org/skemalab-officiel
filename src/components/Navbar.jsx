@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import BrandMark from "@/components/BrandMark";
@@ -288,14 +289,6 @@ export default function Navbar() {
 							className="h-7 lg:h-8"
 							priority
 						/>
-						<span
-							className={ cn(
-								"label-mono hidden whitespace-nowrap xl:block",
-								darkSurface ? "text-cream/65" : "text-muted dark:text-cream/65",
-							) }
-						>
-
-						</span>
 					</div>
 
 					<nav
@@ -303,14 +296,16 @@ export default function Navbar() {
 						aria-label="Principale"
 					>
 						{ navLinks.map( ( link ) => {
-							const isActive = pathname === "/" && active === link.href;
+							const isActive =
+								( pathname === "/" && active === link.href ) ||
+								( pathname === "/our-story" && link.href === "/our-story" );
 							return (
-								<a
+								<Link
 									key={ link.href }
 									href={ link.href }
 									aria-current={ isActive ? "true" : undefined }
 									className={ cn(
-										"label-mono relative px-3 py-2 transition-colors duration-300",
+										"label-mono relative whitespace-nowrap px-2 py-2 transition-colors duration-300 xl:px-3",
 										darkSurface
 											? isActive
 												? "text-cream"
@@ -333,7 +328,7 @@ export default function Navbar() {
 											transition={ { duration: 0.4, ease: EASE.out } }
 										/>
 									) : null }
-								</a>
+								</Link>
 							);
 						} ) }
 					</nav>

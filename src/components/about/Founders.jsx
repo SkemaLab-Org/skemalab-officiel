@@ -6,173 +6,154 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { useI18n } from "@/components/I18nProvider";
 import { founders } from "@/data/content";
-import SectionHeader from "@/components/ui/SectionHeader";
 import Reveal from "@/components/motion/Reveal";
 import CalendlyButton from "@/components/CalendlyButton";
 import { DURATION, EASE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 export default function Founders() {
-	const { t } = useI18n();
+	const { t, isRTL } = useI18n();
 	const copy = t.aboutPage;
-	const [ activeId, setActiveId ] = useState( founders[ 0 ].id );
 	const reduce = useReducedMotion();
-	const active =
-		founders.find( ( founder ) => founder.id === activeId ) || founders[ 0 ];
+	const profiles = founders
+		.map((founder) => ({
+			...founder,
+			...copy.foundersList.find((profile) => profile.id === founder.id),
+		}))
+		.filter((profile) => profile.name);
+	const [activeId, setActiveId] = useState(profiles[0]?.id);
+	const active = profiles.find((profile) => profile.id === activeId) || profiles[0];
+
+	if (!active) return null;
 
 	return (
 		<section
 			id="fondateurs"
-			className="section-y relative overflow-hidden bg-page"
+			className="section-y relative isolate overflow-hidden bg-[#07110e] text-cream zellige-spot zellige-spot--center zellige-spot--large"
 		>
-			<div
-				aria-hidden="true"
-				className="pointer-events-none absolute -right-32 top-1/4 h-[28rem] w-[28rem] rounded-full bg-brand/8 blur-[150px]"
-			/>
+			<div aria-hidden="true" className="pointer-events-none absolute -end-40 top-0 h-[34rem] w-[34rem] rounded-full bg-accent-bright/8 blur-[150px]" />
 
 			<div className="shell relative">
-				<Reveal>
-					<SectionHeader
-						label={ copy.foundersEyebrow }
-						title={
-							<>
-								{ copy.foundersTitlePart1 }
-								<span className="text-accent">
-									{ copy.foundersTitleHighlight }
-								</span>
-							</>
-						}
-						description={ copy.foundersSubtitle }
-					/>
-				</Reveal>
-
-				<div className="mt-12 grid gap-10 sm:mt-16 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16">
-					<Reveal>
-						<div className="relative aspect-[4/5] overflow-hidden rounded-none border border-line bg-deep shadow-[0_4px_30px_rgba(0,0,0,0.25)]">
-							<AnimatePresence initial={ false }>
-								<motion.div
-									key={ active.id }
-									initial={ reduce ? false : { opacity: 0, scale: 1.03 } }
-									animate={ { opacity: 1, scale: 1 } }
-									exit={ { opacity: 0 } }
-									transition={ { duration: DURATION.base, ease: EASE.out } }
-									className="absolute inset-0"
-								>
-									<Image
-										src={ active.image }
-										alt={ active.name }
-										fill
-										sizes="(max-width: 1024px) 100vw, 44vw"
-										className="object-cover object-center"
-									/>
-								</motion.div>
-							</AnimatePresence>
-
-							<span
-								aria-hidden="true"
-								className="absolute inset-0 bg-gradient-to-t from-[#07110e] via-[#07110e]/25 to-transparent"
-							/>
-
-							<div className="absolute inset-x-5 bottom-5 sm:inset-x-7 sm:bottom-7">
-								<p className="label-mono text-accent">{ active.role }</p>
-								<p className="mt-2 font-display text-2xl leading-none tracking-tight text-cream sm:text-3xl">
-									{ active.name }
-								</p>
-							</div>
-						</div>
-					</Reveal>
-
+				<div className="grid items-start gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-16">
 					<div className="min-w-0">
-						<div
-							className="space-y-1"
-							role="group"
-							aria-label={ copy.foundersEyebrow }
-						>
-							{ founders.map( ( founder, index ) => {
-								const isActive = founder.id === active.id;
-								return (
-									<button
-										key={ founder.id }
-										type="button"
-										aria-pressed={ isActive }
-										onClick={ () => setActiveId( founder.id ) }
-										className={ cn(
-											"group flex w-full items-baseline gap-4 border-b border-line px-3 py-4 text-start transition-all duration-300 sm:px-4",
-											isActive
-												? "border-accent bg-surface-2/45 text-fg shadow-[inset_2px_0_0_0_var(--accent)]"
-												: "text-muted hover:bg-surface-2/20 hover:text-fg",
-										) }
-									>
-										<span
-											className={ cn(
-												"label-mono w-6 shrink-0 font-mono",
-												isActive ? "text-accent font-semibold" : "text-muted",
-											) }
-										>
-											{ String( index + 1 ).padStart( 2, "0" ) }
-										</span>
-										<span className="min-w-0 flex-1">
-											<span className="block font-display text-xl leading-tight tracking-tight sm:text-2xl">
-												{ founder.name }
-											</span>
-											<span className="mt-0.5 block text-xs text-muted">
-												{ founder.role }
-											</span>
-										</span>
-										<ArrowUpRight
-											size={ 16 }
-											aria-hidden="true"
-											className={ cn(
-												"shrink-0 transition-transform duration-200 rtl-flip",
-												isActive
-													? "text-accent translate-x-0.5 -translate-y-0.5"
-													: "text-muted/60 group-hover:text-fg",
-											) }
-										/>
-									</button>
-								);
-							} ) }
-						</div>
+						<Reveal>
+							<p className="label-mono text-accent-bright">{copy.foundersEyebrow}</p>
+							<h2 className="section-title mt-6 max-w-[12ch] text-cream">
+								{copy.foundersTitlePart1}
+								<span className="text-accent-bright">{copy.foundersTitleHighlight}</span>
+							</h2>
+							<p className="mt-5 max-w-xl text-sm leading-relaxed text-cream/65 sm:text-base">
+								{copy.foundersSubtitle}
+							</p>
+							<p className="label-mono mt-7 text-accent-bright/75">
+								{copy.teamHoverHint}
+							</p>
+						</Reveal>
 
-						<AnimatePresence mode="wait" initial={ false }>
+						<AnimatePresence mode="wait" initial={false}>
 							<motion.div
-								key={ active.id }
-								initial={ reduce ? false : { opacity: 0, y: 10 } }
-								animate={ { opacity: 1, y: 0 } }
-								exit={ reduce ? { opacity: 0 } : { opacity: 0, y: -8 } }
-								transition={ { duration: DURATION.fast, ease: EASE.out } }
-								className="mt-6 border border-line bg-surface p-6 sm:p-7 shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
+								key={active.id}
+								initial={reduce ? false : { opacity: 0, y: 12 }}
+								animate={{ opacity: 1, y: 0 }}
+								exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
+								transition={{ duration: DURATION.fast, ease: EASE.out }}
+								className="mt-10 border-s border-accent/50 ps-5 sm:ps-6"
 								aria-live="polite"
 							>
-								<p className="label-mono text-accent font-mono">{ active.title }</p>
-								<p className="mt-3 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
-									{ active.shortBio }
+								<p className="label-mono text-accent-bright">{active.role}</p>
+								<h3 className="mt-3 font-display text-xl leading-tight text-cream sm:text-2xl">
+									{active.title}
+								</h3>
+								<p className="mt-4 max-w-xl text-sm leading-relaxed text-cream/70 sm:text-base">
+									{active.bio}
 								</p>
-								<p className="mt-4 text-sm text-fg/85">
-									<span className="label-mono me-2 text-muted">
-										{ copy.foundersList[ 0 ].expertiseLabel }
+								<p className="mt-5 text-sm leading-relaxed text-accent-bright/90">
+									{active.quote}
+								</p>
+								<div className="mt-6 flex flex-wrap items-center gap-4">
+									<span className="text-xs leading-relaxed text-cream/55 sm:text-sm">
+										<span className="label-mono me-2 text-cream/45">
+											{copy.foundersList[0].expertiseLabel}
+										</span>
+										{active.focusArea}
 									</span>
-									{ active.focusArea }
-								</p>
+								</div>
+								<div className="mt-7 flex flex-wrap items-center gap-3">
+									<CalendlyButton className="min-h-11 px-4 text-sm">
+										{active.ctaBtn}
+									</CalendlyButton>
+									{active.social?.linkedin ? (
+										<a
+											href={active.social.linkedin}
+											target="_blank"
+											rel="noopener noreferrer"
+											aria-label={`${active.name} · LinkedIn`}
+											className="inline-flex h-11 items-center gap-2 border border-cream/20 px-4 text-sm text-cream/70 transition-colors hover:border-accent-bright hover:text-accent-bright"
+										>
+											LinkedIn <ArrowUpRight size={14} className={cn(isRTL && "rtl-flip")} aria-hidden="true" />
+										</a>
+									) : null}
+								</div>
 							</motion.div>
 						</AnimatePresence>
-
-						<div className="mt-8 flex flex-wrap items-center gap-3">
-							<CalendlyButton className="min-h-12 px-5 text-sm">
-								{ copy.foundersList[ 0 ].ctaBtn }
-							</CalendlyButton>
-							<a
-								href={ active.social.linkedin }
-								target="_blank"
-								rel="noopener noreferrer"
-								aria-label={ `Profil LinkedIn de ${ active.name }` }
-								className="inline-flex h-12 items-center gap-2 rounded-none border border-line-strong px-4 text-sm text-muted transition-colors hover:border-accent hover:text-accent hover:bg-surface-2/30"
-							>
-								LinkedIn
-								<ArrowUpRight size={ 14 } aria-hidden="true" />
-							</a>
-						</div>
 					</div>
+
+					<Reveal delay={0.08} className="min-w-0">
+						<div className="team-mosaic grid grid-cols-2 gap-3 md:grid-cols-[1.08fr_0.92fr] md:grid-rows-2 md:h-[clamp(30rem,42vw,38rem)]">
+							{profiles.map((profile, index) => {
+								const isActive = profile.id === active.id;
+								return (
+									<motion.button
+										key={profile.id}
+										type="button"
+										initial={reduce ? false : { opacity: 0, y: 26 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										viewport={{ once: true, amount: 0.25 }}
+										whileHover={reduce ? undefined : { y: -5 }}
+										transition={{ duration: 0.55, delay: reduce ? 0 : index * 0.08, ease: EASE.out }}
+										aria-pressed={isActive}
+										aria-label={`${profile.name}, ${profile.role}`}
+										onMouseEnter={() => setActiveId(profile.id)}
+										onFocus={() => setActiveId(profile.id)}
+										onClick={() => setActiveId(profile.id)}
+										className={cn(
+											"group relative aspect-[4/5] min-h-0 overflow-hidden border bg-surface text-start transition-[border-color,box-shadow] duration-500 md:aspect-auto",
+											index === 0 && "md:row-span-2",
+											isActive
+												? "border-accent-bright/80 shadow-[0_0_32px_rgba(58,217,191,0.18)]"
+												: "border-cream/10 hover:border-accent-bright/50",
+										)}
+									>
+										<Image
+											src={profile.image}
+											alt={profile.name}
+											fill
+											sizes="(max-width: 768px) 48vw, 28vw"
+											priority={index === 0}
+											className={cn(
+												"object-cover object-center transition-[filter,transform] duration-700 ease-out group-hover:scale-[1.03]",
+												isActive
+													? "grayscale-0 saturate-100"
+													: "grayscale saturate-0 brightness-[0.72] group-hover:grayscale-0 group-hover:saturate-100 group-hover:brightness-100",
+											)}
+										/>
+										<span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#07110e]/90 via-[#07110e]/10 to-transparent" />
+										<span className="absolute inset-x-4 bottom-4 sm:inset-x-5 sm:bottom-5">
+											<span className={cn("block font-display text-lg leading-tight sm:text-xl", isActive ? "text-cream" : "text-cream/80")}>
+												{profile.name}
+											</span>
+											<span className="mt-1 block text-xs text-cream/60 sm:text-sm">
+												{profile.role}
+											</span>
+										</span>
+										{isActive ? (
+											<span aria-hidden="true" className="absolute end-4 top-4 h-2 w-2 rounded-full bg-accent-bright shadow-[0_0_14px_rgba(58,217,191,0.85)]" />
+										) : null}
+									</motion.button>
+								);
+							})}
+						</div>
+					</Reveal>
 				</div>
 			</div>
 		</section>

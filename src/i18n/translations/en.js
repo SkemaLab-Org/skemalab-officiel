@@ -25,6 +25,7 @@ export const en = {
 		{ href: "/#projets", label: "Projects" },
 		{ href: "/#agence", label: "Agency" },
 		{ href: "/#contact", label: "Contact" },
+		{ href: "/our-story", label: "Our story" },
 	],
 
 	hero: {
@@ -65,7 +66,6 @@ export const en = {
 		altEyebrow: "No templates, no compromises",
 		altHeadline:
 			"Every line of code, campaign, and workflow is engineered specifically for your business ROI.",
-		scrollHint: "Scroll",
 	},
 
 	servicesList: [
@@ -243,6 +243,11 @@ export const en = {
 		],
 	},
 
+	statsSection: {
+		eyebrow: "Key figures",
+		title: "Results you can measure.",
+		description: "We measure the value created through shipped projects, time saved and stronger operations.",
+	},
 	statsList: [
 		{ value: 40, suffix: "+", label: "Projects delivered" },
 		{ value: 100, suffix: "%", label: "Satisfied clients" },
@@ -303,10 +308,10 @@ export const en = {
 		secondImageAlt: "The Skemalab team at work",
 		secondImageCaption: "Workshop · Method & delivery",
 		pillars: [
-			["Mission", "Blend tech, marketing and automation to scale."],
-			["Approach", "Precise diagnosis, fast execution, tracked ROI."],
-			["Teams", "Product, design, growth & automation."],
-			["Model", "Long-term partnership, not one-off delivery."],
+			[ "Mission", "Blend tech, marketing and automation to scale." ],
+			[ "Approach", "Precise diagnosis, fast execution, tracked ROI." ],
+			[ "Teams", "Product, design, growth & automation." ],
+			[ "Model", "Long-term partnership, not one-off delivery." ],
 		],
 	},
 
@@ -390,15 +395,18 @@ export const en = {
 		heroLead:
 			"Skemalab designs, builds and automates high-performing digital ecosystems that generate immediate and lasting business value.",
 		heroCta1: "Discover our story",
-		heroCta2: "Meet the founders",
+		heroCta2: "Meet the team",
 		strip1: "Projects successfully delivered",
 		strip2: "Satisfied clients",
 		strip3: "Process acceleration",
 		strip4: "Saved / week on average",
 
-		identityEyebrow: "01 — Our Identity & Vision",
-		identityTitlePart1: "Reconciling code, growth and automation into one ",
-		identityTitleHighlight: "single system.",
+		identityEyebrow: "Skemalab · Digital Transformation Partner",
+		identityTitle: "We build digital systems for ambitious businesses.",
+		identityBody: [
+			"Skemalab is a digital firm based in Essaouira, bringing together consulting, software engineering, ERP and intelligent automation. We design robust, secure platforms built to deliver tangible results.",
+			"From audit to production, our teams support organizations aiming to scale with rigor, transparency and a long-term vision.",
+		],
 		hqLabel: "HQ & R&D",
 		scopeLabel: "Reach",
 		scopeValue: "Europe · MENA · International",
@@ -419,21 +427,21 @@ export const en = {
 				name: "Build",
 				title: "Custom Development & SaaS",
 				desc: "Web and mobile applications, Next.js architectures, business platforms and robust API integrations built to convert, scale and last.",
-				tags: ["Next.js", "React", "APIs & Microservices", "Cloud"],
+				tags: [ "Next.js", "React", "APIs & Microservices", "Cloud" ],
 			},
 			{
 				num: "02",
 				name: "Grow",
 				title: "Digital Marketing & ROI Acquisition",
 				desc: "Acquisition strategies focused on direct profitability: technical SEO, high-converting sales funnels, targeted campaigns and premium branding.",
-				tags: ["SEO / SEA", "Sales funnels", "Growth", "Data analytics"],
+				tags: [ "SEO / SEA", "Sales funnels", "Growth", "Data analytics" ],
 			},
 			{
 				num: "03",
 				name: "Automate",
 				title: "Smart Workflows & AI Agents",
 				desc: "Radical removal of repetitive tasks, interconnection of your SaaS tools and AI assistant integration to multiply productivity.",
-				tags: ["n8n & Make", "AI agents & LLMs", "Auto CRM", "24/7 Workflows"],
+				tags: [ "n8n & Make", "AI agents & LLMs", "Auto CRM", "24/7 Workflows" ],
 			},
 		],
 
@@ -465,6 +473,7 @@ export const en = {
 		timelineEyebrow: "02 — Our History & Origin",
 		timelineTitlePart1: "How the idea of SkemaLab was born: ",
 		timelineTitleHighlight: "from vision to reality.",
+		timelineDescription: "In Essaouira, Feissal Tarkaoui and Marouan Khadiri joined their expertise to build a studio where technology directly serves growth.",
 		timelineSubtitlePart1: "See how ",
 		timelineSubtitlePart2: " (CEO) and ",
 		timelineSubtitlePart3:
@@ -533,7 +542,8 @@ export const en = {
 			},
 		],
 
-		foundersEyebrow: "03 — Leadership",
+		foundersEyebrow: "03 — The SkemaLab team",
+		teamHoverHint: "Hover or select a portrait to explore each profile",
 		foundersTitlePart1: "The minds behind ",
 		foundersTitleHighlight: "SkemaLab.",
 		foundersSubtitle:
@@ -545,7 +555,7 @@ export const en = {
 				name: "Feissal Tarkaoui",
 				role: "Founder & CEO",
 				title: "Chief Executive Officer & Business Strategy",
-				bio: "Visionary entrepreneur and digital strategist, Feissal steers Skemalab's overall vision, commercial development and product strategy. With sharpened expertise in digital growth, conversion and negotiation, he ensures every solution we build becomes a powerful profitability engine for our partners.",
+				bio: "Feissal leads Skemalab’s strategy and business growth.",
 				quote:
 					"Technology only has real value when it produces measurable financial and operational impact for the business.",
 				expertiseLabel: "Areas of expertise:",
@@ -563,7 +573,7 @@ export const en = {
 				name: "Marouan Khadiri",
 				role: "CTO",
 				title: "Chief Technology Officer & Systems Architect",
-				bio: "Software architect and advanced automation expert, Marouan designs the technical infrastructure, high-performance web platforms and smart workflow systems at Skemalab. A Next.js, API and n8n / AI specialist, he turns technical complexity into fluid, scalable architectures.",
+				bio: "Marouan designs Skemalab’s software architecture and automations.",
 				quote:
 					"Automate the repetitive and build robust architectures to unlock human potential and grow businesses without friction.",
 				expertiseLabel: "Areas of expertise:",
@@ -575,6 +585,17 @@ export const en = {
 				],
 				focusArea: "Deep Tech, Architecture & AI",
 				ctaBtn: "Discuss the architecture",
+			},
+			{
+				id: "adam-khairi",
+				name: "Adam Khairi",
+				role: "Lead Software Engineer",
+				title: "Software Engineer & AI Solutions",
+				bio: "Adam builds web and mobile products from architecture to interface, and integrates AI solutions around real user needs.",
+				quote: "The best technology makes the experience feel simple and useful.",
+				expertiseLabel: "Areas of expertise:",
+				focusArea: "Software Engineering & AI",
+				ctaBtn: "Connect with Adam",
 			},
 		],
 

@@ -45,7 +45,7 @@ export default function Services() {
 	/* ── Flat layout: mobile (<900 px) + reduced-motion ── */
 	const flatCards = ( desktopVisible = false ) => (
 		<section
-			className={ `section-y bg-page ${ desktopVisible ? "" : "min-[900px]:hidden" }` }
+			className={ `section-y bg-page zellige-spot zellige-spot--top-end zellige-spot--large ${ desktopVisible ? "" : "min-[900px]:hidden" }` }
 		>
 			<div className="shell">
 				<BandHeader
@@ -120,18 +120,20 @@ export default function Services() {
 
 			{/* Desktop pinned scroll-through — hidden on mobile */ }
 			<section className="stage hidden min-[900px]:block" id="services-stage">
-				<div className="pin">
+				<div className="pin zellige-spot zellige-spot--bottom-start zellige-spot--large">
 					<div className="wrap w-full max-w-6xl mx-auto px-6 sm:px-8">
-						<div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 pb-4">
-							<div className="flex items-center gap-3">
-								<span className="label-mono font-mono text-accent font-semibold tracking-wider">01</span>
-								<span className="label-mono text-fg/80">{ copy.eyebrow }</span>
-							</div>
-							<h2 className="font-display text-xl sm:text-2xl font-light tracking-[-0.02em] text-fg">
-								{ copy.titlePart1 }
-								<span className="text-accent">{ copy.titleHighlight }</span>
-							</h2>
-						</div>
+						<BandHeader
+							className="mb-7"
+							index="01"
+							label={ copy.eyebrow }
+							title={
+								<>
+									{ copy.titlePart1 }
+									<span className="text-accent">{ copy.titleHighlight }</span>
+								</>
+							}
+							description={ copy.description }
+						/>
 
 						<div className="grid grid-cols-3 gap-px border-y border-line bg-line">
 							{ services.map( ( service, index ) => {

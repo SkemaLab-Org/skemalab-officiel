@@ -18,7 +18,7 @@ export default function Statement() {
 
 	return (
 		<section className="stage" id="claim">
-			<div className="pin">
+			<div className="pin zellige-spot zellige-spot--bottom-end">
 				<div className="claim-in">
 					<h2 className="font-display">
 						{quote}

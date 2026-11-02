@@ -104,20 +104,19 @@ export default function Contact() {
   const busy = isSubmitting || status === "sending";
 
   return (
-    <section id="contact" className="section-y bg-surface">
+    <section id="contact" className="section-y bg-page zellige-spot zellige-spot--bottom-end zellige-spot--large">
       <div className="shell grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="min-w-0">
           <Reveal>
-            <div className="flex items-center gap-4">
-              <div className="label-mono flex items-center gap-2 shrink-0">
-                <span className="font-mono text-accent font-semibold">08</span>
-                <span className="text-muted/40" aria-hidden="true">/</span>
-                <span className="text-fg/80">{ copy.eyebrow }</span>
+            <div className="flex min-h-4 items-center gap-3">
+              <div className="label-mono flex items-center gap-3 shrink-0 text-accent">
+                <span className="section-index" aria-hidden="true">08</span>
+                <span className="h-4 w-px bg-accent/50" aria-hidden="true" />
+                <span className="text-fg/75">{ copy.eyebrow }</span>
               </div>
-              <span aria-hidden="true" className="h-px flex-1 bg-gradient-to-r from-line via-line-soft to-transparent" />
             </div>
 
-            <h2 className="landing-display mt-8 max-w-[16ch] text-[clamp(2rem,4.2vw,3.2rem)] text-fg">
+            <h2 className="section-title mt-7 max-w-[16ch] text-fg">
               { copy.title }
             </h2>
             <p className="mt-5 max-w-[42ch] text-[15px] leading-[1.7] text-muted">

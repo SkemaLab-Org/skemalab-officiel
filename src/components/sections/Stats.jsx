@@ -3,17 +3,24 @@
 import { useI18n } from "@/components/I18nProvider";
 import CountUp from "@/components/motion/CountUp";
 import Reveal from "@/components/motion/Reveal";
+import BandHeader from "@/components/ui/BandHeader";
 
 export default function Stats() {
 	const { t } = useI18n();
 
 	return (
 		<section
-			aria-label={ t.statsList.map( ( stat ) => stat.label ).join( ", " ) }
-			className="bg-page py-12 sm:py-16"
+			aria-label={ t.statsSection.title }
+			className="bg-surface zellige-spot zellige-spot--bottom-start zellige-spot--small py-12 sm:py-16"
 		>
 			<div className="shell">
-				<div className="grid grid-cols-2 text-center gap-px border-y border-line bg-line min-[1000px]:grid-cols-4">
+				<BandHeader
+					index="04"
+					label={ t.statsSection.eyebrow }
+					title={ t.statsSection.title }
+					description={ t.statsSection.description }
+				/>
+				<div className="mt-10 grid grid-cols-2 text-center gap-px border-y border-line bg-line sm:mt-12 min-[1000px]:grid-cols-4">
 					{ t.statsList.map( ( stat, index ) => (
 						<Reveal
 							key={ stat.label }
@@ -22,10 +29,7 @@ export default function Stats() {
 						>
 							<div className="flex h-full flex-col justify-between gap-4 px-4 py-6 transition-colors duration-300 group-hover:bg-surface-2/35 sm:gap-8 sm:px-6 sm:py-10 min-[1000px]:px-8 min-[1000px]:py-12">
 								<span className="label-mono text-muted flex items-center justify-center gap-1.5">
-									<span className="text-accent font-mono font-medium">
-										{ String( index + 1 ).padStart( 2, "0" ) }
-									</span>
-									<span className="text-muted/40">/</span>
+									<span className="h-1.5 w-1.5 bg-accent" aria-hidden="true" />
 									<span>KPI</span>
 								</span>
 

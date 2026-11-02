@@ -19,7 +19,7 @@ export default function Projects() {
 	const reduce = useReducedMotion();
 
 	return (
-		<section id="projets" className="section-y bg-page">
+		<section id="projets" className="section-y bg-page zellige-spot zellige-spot--top-end zellige-spot--large">
 			<div className="shell">
 				<Reveal>
 					<BandHeader

@@ -23,8 +23,8 @@ export default function Home() {
 			<Statement />
 
 			{/* Normal bands */}
-			<Stats />
 			<Projects />
+			<Stats />
 			<Studio />
 			<FAQ />
 			<CTA />

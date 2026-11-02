@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { ArrowUp } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import { contactInfo } from "@/data/content";
 import { useI18n } from "@/components/I18nProvider";
 import {
@@ -31,21 +32,31 @@ const socialLinks = [
 	},
 ];
 
-export default function Footer() {
+export default function Footer({ animate = false }) {
 	const { t } = useI18n();
+	const reduce = useReducedMotion();
+	const FooterElement = animate ? motion.footer : "footer";
+	const motionProps = animate && !reduce
+		? {
+				initial: { opacity: 0, y: 56 },
+				whileInView: { opacity: 1, y: 0 },
+				viewport: { once: true, amount: 0.14 },
+				transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+			}
+		: {};
 	const navLinks = t.nav;
 	const linkClass =
 		"inline-flex min-h-9 items-center text-[13px] text-[#a2b8b1] transition-colors hover:text-[#3ad9bf]";
 
 	return (
-		<footer className="border-t border-[rgba(242,237,226,0.1)] bg-[#07110e] text-[#f2ede2]">
+		<FooterElement {...motionProps} className="bg-[#07110e] text-[#f2ede2]">
 			<div className="shell grid gap-12 py-14 sm:py-16 lg:grid-cols-[1.4fr_0.7fr_1fr] lg:gap-16">
 				<div className="max-w-sm">
 					<Image
 						src="/logo2.png"
 						alt="SkemaLab"
-						width={160}
-						height={40}
+						width={ 160 }
+						height={ 40 }
 						className="h-10 w-auto object-contain"
 					/>
 
@@ -131,6 +142,6 @@ export default function Footer() {
 					</div>
 				</div>
 			</div>
-		</footer>
+		</FooterElement>
 	);
 }

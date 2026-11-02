@@ -1,46 +1,28 @@
 "use client";
 
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useI18n } from "@/components/I18nProvider";
 import Reveal from "@/components/motion/Reveal";
 import Button from "@/components/ui/Button";
 
-const STRIP = [
-  { value: "40+", key: "strip1" },
-  { value: "100%", key: "strip2" },
-  { value: "3×", key: "strip3" },
-  { value: "18h", key: "strip4" },
-];
-
 export default function AboutHero() {
   const { t } = useI18n();
   const copy = t.aboutPage;
-
   return (
-    <section className="relative isolate overflow-hidden bg-[#07110e] text-cream">
-      <Image
-        src="/team/lab_concept.jpg"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover opacity-45"
-      />
+    <section id="story-hero" data-scroll-stage className="story-hero-stage relative isolate bg-[#07110e] text-cream">
+      <div className="story-hero-pin zellige-spot zellige-spot--top-end zellige-spot--small">
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(to_top,#07110e_8%,rgba(7,17,14,0.82)_46%,rgba(7,17,14,0.55)_100%)]"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_78%_28%,rgba(58,217,191,0.14),transparent_42%),linear-gradient(135deg,#0b1b16_0%,#07110e_60%)]"
       />
-      <div aria-hidden="true" className="zellige absolute inset-0 opacity-25" />
-
-      <div className="shell relative flex min-h-[88svh] flex-col justify-end pb-12 pt-28 sm:pb-16 sm:pt-32">
-        <div className="ledger-rule ledger-rule--ink">
+      <div className="story-hero-content shell relative z-10 flex min-h-svh flex-col justify-end pb-10 pt-24 sm:pb-12 sm:pt-24">
+        <div className="ledger-rule">
           <span className="label-mono text-cream/65">{copy.heroBadge}</span>
           <span className="label-mono text-cream/65">Skemalab · About</span>
         </div>
 
         <Reveal>
-          <h1 className="display-xl mt-8 max-w-[19ch] text-cream">
+          <h1 className="display-xl mt-8 text-cream">
             {copy.heroH1Part1}
             <span className="text-accent-bright">{copy.heroH1Highlight}</span>
           </h1>
@@ -71,20 +53,12 @@ export default function AboutHero() {
             </Button>
           </div>
         </Reveal>
-
-        <Reveal delay={0.26}>
-          <dl className="mt-12 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-cream/15 pt-7 sm:grid-cols-4">
-            {STRIP.map((item) => (
-              <div key={item.key}>
-                <dt className="sr-only">{copy[item.key]}</dt>
-                <dd className="font-display text-3xl leading-none tracking-tight text-cream sm:text-4xl">
-                  {item.value}
-                </dd>
-                <p className="mt-2 text-xs leading-snug text-cream/65">{copy[item.key]}</p>
-              </div>
-            ))}
-          </dl>
-        </Reveal>
+      </div>
+      <div aria-hidden="true" className="story-hero-alt shell">
+        <p className="label-mono mb-4 text-accent-bright">Skemalab · Essaouira</p>
+        <p className="max-w-[25ch] font-display text-[clamp(1.8rem,4.2vw,3.4rem)] font-light leading-[1.06] tracking-[-0.035em] text-cream">{copy.heroLead}</p>
+      </div>
+      <div aria-hidden="true" className="story-hero-meter"><i /></div>
       </div>
     </section>
   );

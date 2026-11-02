@@ -36,7 +36,7 @@ export default function Studio() {
 	];
 
 	return (
-		<section id="agence" className="section-y bg-surface">
+		<section id="agence" className="section-y bg-page zellige-spot zellige-spot--mid-end zellige-spot--large">
 			<span id="skemalab" aria-hidden="true" className="block h-0" />
 
 			<div className="shell">

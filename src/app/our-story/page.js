@@ -2,35 +2,34 @@ import AboutHero from "@/components/about/AboutHero";
 import Identity from "@/components/about/Identity";
 import Timeline from "@/components/about/Timeline";
 import Founders from "@/components/about/Founders";
-import Stats from "@/components/sections/Stats";
-import Closing from "@/components/about/Closing";
+import PinnedStagesController from "@/components/PinnedStagesController";
 
 export const metadata = {
-  title: "À propos de SkemaLab | Studio Digital, Histoire & Fondateurs",
+  title: "À propos de SkemaLab | Notre histoire & notre équipe",
   description:
-    "Découvrez l'histoire de Skemalab, studio digital fondé par Feissal Tarkaoui (CEO), Marouan Khadiri (CTO) et Adam Khairi (Lead Software Engineer). Développement web Next.js, marketing ROI et automatisation intelligente.",
+    "Découvrez la vision, l'histoire et l'équipe de SkemaLab, studio digital basé à Essaouira.",
   alternates: {
     canonical: "/our-story",
   },
   openGraph: {
-    title: "À propos de SkemaLab | Histoire, Vision & Fondateurs",
+    title: "À propos de SkemaLab | Histoire & équipe",
     description:
-      "L'alliance de la stratégie business, de l'ingénierie logicielle et de l'IA. Découvrez la genèse de Skemalab et son équipe : Feissal Tarkaoui, Marouan Khadiri & Adam Khairi.",
+      "Découvrez l'histoire de Skemalab, sa vision et les personnes qui construisent ses solutions digitales.",
     url: "/our-story",
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "À propos de Skemalab — Studio Digital & Fondateurs",
+        alt: "À propos de Skemalab — Notre histoire et notre équipe",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "À propos de SkemaLab | Studio Digital & Fondateurs",
+    title: "À propos de SkemaLab | Histoire & équipe",
     description:
-      "Découvrez la vision, l'histoire et les fondateurs de Skemalab : Feissal Tarkaoui (CEO), Marouan Khadiri (CTO) et Adam Khairi (Lead Software Engineer).",
+      "Découvrez la vision, l'histoire et l'équipe de SkemaLab, studio digital basé à Essaouira.",
     images: ["/opengraph-image"],
   },
 };
@@ -67,6 +66,7 @@ export default function AboutPage() {
 
   return (
     <>
+      <PinnedStagesController />
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -76,8 +76,6 @@ export default function AboutPage() {
       <Identity />
       <Timeline />
       <Founders />
-      <Stats />
-      <Closing />
     </>
   );
 }

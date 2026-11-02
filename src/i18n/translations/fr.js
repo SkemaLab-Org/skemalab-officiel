@@ -25,6 +25,7 @@ export const fr = {
 		{ href: "/#projets", label: "Projets" },
 		{ href: "/#agence", label: "Agence" },
 		{ href: "/#contact", label: "Contact" },
+		{ href: "/our-story", label: "Notre histoire" },
 	],
 
 	hero: {
@@ -65,7 +66,6 @@ export const fr = {
 		altEyebrow: "Sans templates, sans compromis",
 		altHeadline:
 			"Chaque ligne de code, chaque campagne et chaque workflow sont conçus sur mesure pour votre rentabilité.",
-		scrollHint: "Défiler",
 	},
 
 	servicesList: [
@@ -244,6 +244,11 @@ export const fr = {
 		],
 	},
 
+	statsSection: {
+		eyebrow: "Chiffres clés",
+		title: "Des résultats concrets, mesurables.",
+		description: "La valeur créée se mesure dans les projets livrés, le temps gagné et la performance de vos opérations.",
+	},
 	statsList: [
 		{ value: 40, suffix: "+", label: "Projets livrés" },
 		{ value: 100, suffix: "%", label: "Clients satisfaits" },
@@ -304,10 +309,10 @@ export const fr = {
 		secondImageAlt: "Atelier de travail de l’équipe Skemalab",
 		secondImageCaption: "Atelier · Méthode & delivery",
 		pillars: [
-			["Mission", "Allier tech, marketing et automation pour scaler."],
-			["Approche", "Diagnostic précis, exécution rapide, ROI suivi."],
-			["Équipes", "Produit, design, growth & automation."],
-			["Modèle", "Partenariat long terme, pas livraison jetable."],
+			[ "Mission", "Allier tech, marketing et automation pour scaler." ],
+			[ "Approche", "Diagnostic précis, exécution rapide, ROI suivi." ],
+			[ "Équipes", "Produit, design, growth & automation." ],
+			[ "Modèle", "Partenariat long terme, pas livraison jetable." ],
 		],
 	},
 
@@ -391,16 +396,18 @@ export const fr = {
 		heroLead:
 			"Skemalab conçoit, bâtit et automatise des écosystèmes digitaux performants qui génèrent une valeur business immédiate et durable.",
 		heroCta1: "Découvrir notre histoire",
-		heroCta2: "Rencontrer les fondateurs",
+		heroCta2: "Rencontrer l’équipe",
 		strip1: "Projets livrés avec succès",
 		strip2: "Clients satisfaits",
 		strip3: "Accélération des process",
 		strip4: "Économisées / sem. en moy.",
 
-		identityEyebrow: "01 — Notre Identité & Vision",
-		identityTitlePart1:
-			"Réconcilier le code, la croissance et l’automatisation en un ",
-		identityTitleHighlight: "système unique.",
+		identityEyebrow: "Skemalab · Partenaire de transformation digitale",
+		identityTitle: "Nous bâtissons les systèmes digitaux des entreprises ambitieuses.",
+		identityBody: [
+			"Skemalab est une firme digitale basée à Essaouira qui réunit conseil, ingénierie logicielle, ERP et automatisation intelligente. Nous concevons des plateformes robustes, sécurisées et pensées pour produire des résultats concrets.",
+			"De l’audit à la mise en production, nos équipes accompagnent les organisations qui visent l’échelle, avec rigueur, transparence et une vision à long terme.",
+		],
 		hqLabel: "Siège & R&D",
 		scopeLabel: "Rayonnement",
 		scopeValue: "Europe · MENA · International",
@@ -421,21 +428,21 @@ export const fr = {
 				name: "Build",
 				title: "Développement & SaaS Sur-Mesure",
 				desc: "Applications web et mobiles, architectures Next.js, plateformes métiers et intégrations d'APIs robustes conçues pour convertir, scaler et durer.",
-				tags: ["Next.js", "React", "APIs & Microservices", "Cloud"],
+				tags: [ "Next.js", "React", "APIs & Microservices", "Cloud" ],
 			},
 			{
 				num: "02",
 				name: "Grow",
 				title: "Marketing Digital & Acquisition ROI",
 				desc: "Stratégies d'acquisition orientées rentabilité directe : SEO technique, tunnels de vente à haute conversion, campagnes ciblées et branding premium.",
-				tags: ["SEO / SEA", "Funnels de vente", "Growth", "Data Analytics"],
+				tags: [ "SEO / SEA", "Funnels de vente", "Growth", "Data Analytics" ],
 			},
 			{
 				num: "03",
 				name: "Automate",
 				title: "Workflows Intelligents & Agents IA",
 				desc: "Suppression radicale des tâches répétitives, interconnexion de vos outils SaaS et intégration d'assistants IA pour démultiplier la productivité.",
-				tags: ["n8n & Make", "Agents IA & LLMs", "CRM Auto", "Workflows 24/7"],
+				tags: [ "n8n & Make", "Agents IA & LLMs", "CRM Auto", "Workflows 24/7" ],
 			},
 		],
 
@@ -467,6 +474,7 @@ export const fr = {
 		timelineEyebrow: "02 — Notre Histoire & Genèse",
 		timelineTitlePart1: "Comment l’idée de SkemaLab est née : ",
 		timelineTitleHighlight: "de la vision à la réalité.",
+		timelineDescription: "À Essaouira, Feissal Tarkaoui et Marouan Khadiri unissent leurs expertises pour bâtir un studio où la technologie sert directement la croissance.",
 		timelineSubtitlePart1: "Découvrez comment ",
 		timelineSubtitlePart2: " (CEO) et ",
 		timelineSubtitlePart3:
@@ -537,7 +545,8 @@ export const fr = {
 			},
 		],
 
-		foundersEyebrow: "03 — Direction & Leadership",
+		foundersEyebrow: "03 — L’équipe SkemaLab",
+		teamHoverHint: "Survolez ou sélectionnez un portrait pour découvrir son profil",
 		foundersTitlePart1: "Les esprits derrière ",
 		foundersTitleHighlight: "SkemaLab.",
 		foundersSubtitle:
@@ -549,7 +558,7 @@ export const fr = {
 				name: "Feissal Tarkaoui",
 				role: "Fondateur & CEO",
 				title: "Chief Executive Officer & Stratégie Business",
-				bio: "Entrepreneur visionnaire et stratège digital, Feissal pilote la vision globale, le développement commercial et la stratégie produit de Skemalab. Fort d'une expertise aiguisée en croissance digitale, conversion et négociation, il veille à ce que chaque solution développée devienne un puissant moteur de rentabilité pour nos partenaires.",
+				bio: "Feissal pilote la stratégie et la croissance de Skemalab.",
 				quote:
 					"La technologie n’a de réelle valeur que si elle produit un impact financier et opérationnel mesurable pour l'entreprise.",
 				expertiseLabel: "Domaines d’intervention :",
@@ -567,7 +576,7 @@ export const fr = {
 				name: "Marouan Khadiri",
 				role: "CTO",
 				title: "Chief Technology Officer & Architecte Systèmes",
-				bio: "Architecte logiciel et expert en automatisation avancée, Marouan conçoit les infrastructures techniques, les plateformes web haute performance et les systèmes de workflows intelligents chez Skemalab. Spécialiste Next.js, API & écosystèmes n8n / IA, il transforme la complexité technique en architectures fluides et scalables.",
+				bio: "Marouan conçoit les architectures et automatisations de Skemalab.",
 				quote:
 					"Automatiser le répétitif et bâtir des architectures robustes pour libérer le potentiel humain et faire grandir les entreprises sans friction.",
 				expertiseLabel: "Domaines d’intervention :",
@@ -579,6 +588,17 @@ export const fr = {
 				],
 				focusArea: "Deep Tech, Architecture & IA",
 				ctaBtn: "Échanger sur l’architecture",
+			},
+			{
+				id: "adam-khairi",
+				name: "Adam Khairi",
+				role: "Lead Software Engineer",
+				title: "Ingénieur logiciel & Solutions IA",
+				bio: "Adam développe des produits web et mobiles, de l’architecture à l’interface, et intègre des solutions d’IA adaptées aux usages.",
+				quote: "La meilleure technologie est celle qui rend l’expérience simple et utile.",
+				expertiseLabel: "Domaines d’intervention :",
+				focusArea: "Ingénierie logicielle & IA",
+				ctaBtn: "Échanger avec Adam",
 			},
 		],
 

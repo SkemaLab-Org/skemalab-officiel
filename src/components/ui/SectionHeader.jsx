@@ -19,33 +19,29 @@ export default function SectionHeader({
 	return (
 		<header className={cn(centered && "text-center", className)}>
 			{(label || index) && (
-				<div className={cn("ledger-rule", centered && "justify-center gap-6")}>
+				<div className={cn("ledger-rule", centered && "justify-center gap-4")}>
 					{label ? (
-						<span className="label-mono flex items-center gap-2 text-accent">
-							<span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+						<span className="label-mono flex items-center gap-3 text-accent">
+							{index ? <span className="section-index" aria-hidden="true">{index}</span> : null}
+							<span className="h-4 w-px bg-accent/50" aria-hidden="true" />
 							{label}
 						</span>
 					) : (
 						<span />
 					)}
-					{index ? (
-						<span className="label-mono text-muted font-mono" aria-hidden="true">
-							{index}
-						</span>
-					) : null}
 				</div>
 			)}
 
 			<div
 				className={cn(
-					"mt-8 grid gap-6 sm:mt-10",
+				"mt-6 grid gap-6 sm:mt-8",
 					!centered && description && "lg:grid-cols-[1.35fr_0.65fr] lg:items-end lg:gap-12",
 					centered && "justify-items-center",
 				)}
 			>
 				<h2
 					className={cn(
-						"display-lg max-w-[22ch]",
+						"section-title max-w-[22ch] text-fg",
 						centered && "mx-auto max-w-[26ch]",
 						titleClassName,
 					)}

@@ -72,7 +72,7 @@ export default function Hero() {
 				className="stage dark bg-[#07110e] text-cream"
 				id="hero"
 			>
-				<div className="pin">
+				<div className="pin zellige-spot zellige-spot--top-end zellige-spot--small">
 					<RibbonField />
 
 					<div
@@ -204,10 +204,6 @@ export default function Hero() {
 								"Chaque ligne de code, chaque campagne et chaque workflow sont conçus sur mesure pour votre rentabilité." }
 						</h2>
 					</div>
-
-					<span className="scroll-hint label-mono text-[#a2b8b1]">
-						{ t.hero.scrollHint || "Scroll" }
-					</span>
 				</div>
 			</section>
 		</>
