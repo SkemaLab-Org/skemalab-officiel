@@ -123,6 +123,23 @@ html:not(.dark) {
     -webkit-font-smoothing: antialiased;
     overflow-x: clip;
   }
+/* Moroccan Zellige background lattice across the whole body */
+body::before {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  background-image: url("/moroccan-zellige.svg");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  opacity: 0.16;
+  pointer-events: none;
+  content: "";
+}
+
+html:not(.dark) body::before {
+  opacity: 0.08;
+}
+
 
   h1,
   h2,
@@ -589,6 +606,73 @@ html:not(.dark) .photo-duotone img {
     opacity: 1;
   }
 }
+/* Full-body cursor lamp: follows the mouse across all sections, lighting the zellige */
+.body-lamp {
+  --mx: 50vw;
+  --my: 34vh;
+  opacity: 0;
+  transition: opacity 700ms var(--ease-out-expo);
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+
+.body-lamp[data-lit="true"] {
+  opacity: 1;
+}
+
+.body-lamp::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    32rem circle at var(--mx) var(--my),
+    rgba(197, 168, 128, 0.16),
+    rgba(58, 217, 191, 0.06) 42%,
+    transparent 72%
+  );
+  mix-blend-mode: screen;
+}
+
+.body-lamp::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/moroccan-zellige.svg");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  opacity: 0.85;
+  mask-image: radial-gradient(
+    22rem circle at var(--mx) var(--my),
+    #000 0%,
+    rgba(0, 0, 0, 0.35) 46%,
+    transparent 72%
+  );
+  -webkit-mask-image: radial-gradient(
+    22rem circle at var(--mx) var(--my),
+    #000 0%,
+    rgba(0, 0, 0, 0.35) 46%,
+    transparent 72%
+  );
+}
+
+html:not(.dark) .body-lamp::before {
+  background: radial-gradient(
+    32rem circle at var(--mx) var(--my),
+    rgba(197, 168, 128, 0.2),
+    rgba(10, 107, 94, 0.06) 42%,
+    transparent 72%
+  );
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .body-lamp {
+    display: none !important;
+  }
+}
+
 
 /* Lenis */
 html.lenis,

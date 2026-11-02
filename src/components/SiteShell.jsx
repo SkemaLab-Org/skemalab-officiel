@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,9 +21,35 @@ export default function SiteShell({ children }) {
 		damping: 30,
 		restDelta: 0.001,
 	});
+
+	useEffect(() => {
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+		const lamp = document.getElementById("body-lamp");
+		if (!lamp) return undefined;
+
+		const onPointerMove = (e) => {
+			if (e.pointerType === "touch") return;
+			lamp.style.setProperty("--mx", `${e.clientX}px`);
+			lamp.style.setProperty("--my", `${e.clientY}px`);
+			lamp.dataset.lit = "true";
+		};
+
+		const onPointerLeave = () => {
+			delete lamp.dataset.lit;
+		};
+
+		window.addEventListener("pointermove", onPointerMove, { passive: true });
+		document.addEventListener("mouseleave", onPointerLeave);
+		return () => {
+			window.removeEventListener("pointermove", onPointerMove);
+			document.removeEventListener("mouseleave", onPointerLeave);
+		};
+	}, []);
+
 	return (
 		<CalendlyProvider>
 			<div id="top" className="flex min-h-svh flex-col">
+				<div id="body-lamp" aria-hidden="true" className="body-lamp" />
 				<motion.div
 					id="rail"
 					aria-hidden="true"
