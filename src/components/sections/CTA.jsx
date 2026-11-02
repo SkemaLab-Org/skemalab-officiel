@@ -15,7 +15,6 @@ export default function CTA() {
 		<section className="relative bg-[#07110e] py-16 text-cream sm:py-20 lg:py-24">
 			{/* Ambient glows */}
 			<div aria-hidden="true" className="pointer-events-none absolute inset-0">
-				<div className="zellige absolute inset-0 opacity-30" />
 				<div className="absolute -left-24 top-0 h-[32rem] w-[32rem] rounded-full bg-brand/20 blur-[130px]" />
 				<div className="absolute -right-16 bottom-0 h-[24rem] w-[24rem] rounded-full bg-accent-bright/12 blur-[120px]" />
 			</div>
