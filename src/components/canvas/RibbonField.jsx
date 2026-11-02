@@ -12,8 +12,8 @@ import { useTheme } from "@/components/ThemeProvider";
  */
 
 const TINTS = {
-	dark: ["#3ad9bf", "#17a08c", "#0d6d60"],
-	light: ["#099280", "#088070", "#066557"],
+	dark: ["#3ad9bf", "#C5A880", "#0d6d60"],
+	light: ["#099280", "#C5A880", "#066557"],
 };
 
 /* Kept in sync with the constants inside the fragment shader. */
@@ -267,7 +267,7 @@ function create2DRenderer(canvas, theme) {
 
 export default function RibbonField({ className = "", scrollProgress }) {
 	const wrapRef = useRef(null);
-	const { theme } = useTheme();
+	const theme = "dark";
 	const reduce = useReducedMotion();
 
 	useEffect(() => {

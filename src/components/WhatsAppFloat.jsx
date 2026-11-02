@@ -35,7 +35,7 @@ export default function WhatsAppFloat() {
 				onClick={scrollToTop}
 				aria-label={t.common.backToTop || "Retour en haut"}
 				title={t.common.backToTop || "Retour en haut"}
-				className={`flex h-11 w-11 items-center justify-center rounded-full border border-line-strong bg-surface text-fg shadow-lg transition-all duration-300 hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+				className={`flex h-11 w-11 items-center justify-center rounded-none border border-line-strong bg-surface text-fg shadow-md transition-all duration-300 hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
 					showScrollTop
 						? "translate-y-0 opacity-100"
 						: "pointer-events-none translate-y-3 opacity-0"
@@ -50,9 +50,9 @@ export default function WhatsAppFloat() {
 				rel="noopener noreferrer"
 				aria-label="Contacter Skemalab sur WhatsApp"
 				title="WhatsApp"
-				className="group flex h-13 w-13 items-center justify-center rounded-full bg-brand text-on-brand shadow-lg shadow-brand/25 transition-transform duration-300 hover:-translate-y-0.5 hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+				className="group flex h-11 w-11 items-center justify-center rounded-none bg-brand text-on-brand shadow-md transition-transform duration-300 hover:-translate-y-0.5 hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
 			>
-				<WhatsAppIcon className="h-6 w-6" />
+				<WhatsAppIcon className="h-5 w-5" />
 			</a>
 		</div>
 	);

@@ -23,7 +23,8 @@ export default function SiteShell({ children }) {
 	});
 
 	useEffect(() => {
-		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+			return undefined;
 		const lamp = document.getElementById("body-lamp");
 		if (!lamp) return undefined;
 
