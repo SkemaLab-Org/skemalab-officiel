@@ -1,133 +1,220 @@
 "use client";
 
-import { motion } from "motion/react";
-import { ArrowUpRight, Check } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { useReducedMotion } from "motion/react";
 import { useI18n } from "@/components/I18nProvider";
-import SectionHeader from "@/components/ui/SectionHeader";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import Spotlight from "@/components/ui/Spotlight";
-import Reveal from "@/components/motion/Reveal";
-import Button from "@/components/ui/Button";
-import { DURATION, EASE } from "@/lib/motion";
+import BandHeader from "@/components/ui/BandHeader";
+import TileCanvas from "@/components/canvas/TileCanvas";
 
+/**
+ * Stage 5 · Services (Architecture Stage)
+ * Pinned sticky stage where scrolling cycles through the 3 service pillars
+ * with active card highlighting and bottom meter progression.
+ */
 export default function Services() {
-  const { t } = useI18n();
-  const services = t.servicesList;
-  const copy = t.servicesSection;
+	const { t, isRTL } = useI18n();
+	const reduce = useReducedMotion();
+	const services = t.servicesList;
+	const copy = t.servicesSection;
 
-  return (
-    <section id="services" className="section-y relative overflow-hidden bg-page">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-32 top-1/3 h-[26rem] w-[26rem] rounded-full bg-accent/6 blur-[140px]"
-      />
+	const [activeCard, setActiveCard] = useState(0);
+	const [progress, setProgress] = useState(0);
 
-      <div className="shell relative">
-        <Reveal>
-          <SectionHeader
-            label={copy.eyebrow}
-            index="02"
-            title={
-              <>
-                {copy.titlePart1}
-                <span className="text-accent">{copy.titleHighlight}</span>
-              </>
-            }
-            description={copy.description}
-          />
-        </Reveal>
+	useEffect(() => {
+		if (reduce) return undefined;
+		const stageEl = document.getElementById("services-stage");
+		if (!stageEl) return undefined;
 
-        <Reveal delay={0.08}>
-          <Tabs
-            defaultValue={services[0].id}
-            orientation="vertical"
-            className="mt-12 grid gap-8 sm:mt-16 lg:grid-cols-[0.78fr_1.22fr] lg:gap-12"
-          >
-            <TabsList aria-label={copy.eyebrow} className="lg:border-t">
-              {services.map((service, index) => (
-                <TabsTrigger
-                  key={service.id}
-                  value={service.id}
-                  className="group gap-5 py-5 lg:py-7"
-                >
-                  <span className="label-mono text-muted transition-colors group-data-[state=active]:text-accent">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+		let raf = 0;
+		function sync() {
+			const val = parseFloat(stageEl.style.getPropertyValue("--p"));
+			if (!isNaN(val)) {
+				setProgress(val);
+				const idx = val < 0.35 ? 0 : val < 0.7 ? 1 : 2;
+				setActiveCard(idx);
+			}
+			raf = requestAnimationFrame(sync);
+		}
+		raf = requestAnimationFrame(sync);
+		return () => {
+			if (raf) cancelAnimationFrame(raf);
+		};
+	}, [reduce]);
 
-                  <span className="min-w-0 flex-1">
-                    <span className="label-mono block text-muted">
-                      {service.subtitle}
-                    </span>
-                    <span className="mt-1.5 block font-display text-xl leading-tight tracking-tight text-fg sm:text-2xl">
-                      {service.title}
-                    </span>
-                  </span>
+	/* ── Flat layout: mobile (<900 px) + reduced-motion ── */
+	const flatCards = (desktopVisible = false) => (
+		<section
+			className={`section-y bg-page ${desktopVisible ? "" : "min-[900px]:hidden"}`}
+		>
+			<div className="shell">
+				<BandHeader
+					index="01"
+					label={copy.eyebrow}
+					title={
+						<>
+							{copy.titlePart1}
+							{copy.titleHighlight}
+						</>
+					}
+					description={copy.description}
+				/>
+				<div className="mt-10 flex flex-col divide-y divide-line border-y border-line">
+					{services.map((service, index) => (
+						<article key={service.id} className="flex flex-col bg-page py-7">
+							<div className="flex items-start justify-between gap-6">
+								<TileCanvas
+									variant={service.id}
+									className="max-w-[160px] flex-1"
+								/>
+								<span className="label-mono shrink-0 text-muted">
+									{String(index + 1).padStart(2, "0")}
+								</span>
+							</div>
+							<h3 className="mt-6 text-[17px] font-medium leading-snug text-fg">
+								{service.title}
+							</h3>
+							<p className="mt-2 text-sm leading-[1.62] text-muted">
+								{service.description}
+							</p>
+							<p className="label-mono mt-4 mb-5 leading-[1.7] text-muted">
+								{service.points.slice(0, 3).join(" · ")}
+							</p>
+							<a
+								href="#contact"
+								className="mt-auto inline-flex items-center gap-2 border-t border-line pt-4 text-[13px] text-fg transition-colors hover:text-accent"
+							>
+								{copy.tileCta}
+								<ArrowUpRight
+									size={14}
+									aria-hidden="true"
+									className="rtl-flip"
+								/>
+							</a>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
+	);
 
-                  <ArrowUpRight
-                    size={18}
-                    aria-hidden="true"
-                    className="shrink-0 text-muted transition-all duration-300 group-data-[state=active]:text-accent rtl-flip"
-                  />
-                </TabsTrigger>
-              ))}
-            </TabsList>
+	if (reduce) {
+		return (
+			<>
+				<span id="services" aria-hidden="true" className="block h-0" />
+				{flatCards(true)}
+			</>
+		);
+	}
 
-            {services.map((service) => (
-              <TabsContent key={service.id} value={service.id} className="min-w-0">
-                <motion.div
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: DURATION.base, ease: EASE.out }}
-                >
-                  <Spotlight className="relative flex min-h-[28rem] flex-col overflow-hidden rounded-lg border border-line bg-surface p-6 sm:p-9 lg:p-12">
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="label-mono text-accent">{service.heroLabel}</span>
-                      <span className="label-mono text-muted">
-                        {service.id.toUpperCase()}
-                      </span>
-                    </div>
+	return (
+		<>
+			<span id="services" aria-hidden="true" className="block h-0" />
 
-                    <h3 className="display-md mt-8 max-w-[24ch]">{service.title}</h3>
-                    <p className="mt-4 max-w-xl text-base leading-relaxed text-fg/85 sm:text-lg">
-                      {service.heroHeadline}
-                    </p>
-                    <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
-                      {service.description}
-                    </p>
+			{/* Mobile flat cards — hidden on desktop */}
+			{flatCards()}
 
-                    <div className="mt-auto pt-10">
-                      <p className="label-mono text-muted">{copy.eyebrow}</p>
-                      <ul className="mt-4 grid gap-x-8 gap-y-0 sm:grid-cols-2">
-                        {service.points.map((point) => (
-                          <li
-                            key={point}
-                            className="flex items-start gap-3 border-t border-line py-3 text-sm leading-relaxed text-fg/85"
-                          >
-                            <Check
-                              size={15}
-                              strokeWidth={2}
-                              aria-hidden="true"
-                              className="mt-0.5 shrink-0 text-accent"
-                            />
-                            <span>{point}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+			{/* Desktop pinned scroll-through — hidden on mobile */}
+			<section className="stage hidden min-[900px]:block" id="services-stage">
+				<div className="pin">
+					<div className="wrap w-full max-w-6xl mx-auto px-6 sm:px-8">
+						<div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 border-b border-line pb-4">
+							<div className="flex items-center gap-3">
+								<span className="label-mono text-accent">01</span>
+								<span className="label-mono text-fg/75">{copy.eyebrow}</span>
+							</div>
+							<h2 className="font-display text-xl sm:text-2xl font-light tracking-[-0.02em] text-fg">
+								{copy.titlePart1}
+								<span className="text-accent">{copy.titleHighlight}</span>
+							</h2>
+						</div>
 
-                    <div className="mt-8">
-                      <Button href="#contact" variant="secondary" size="sm">
-                        {copy.talkWithExpert}
-                        <ArrowUpRight size={15} className="rtl-flip" />
-                      </Button>
-                    </div>
-                  </Spotlight>
-                </motion.div>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </Reveal>
-      </div>
-    </section>
-  );
+						<div className="grid grid-cols-3 gap-px border-y border-line bg-line">
+							{services.map((service, index) => {
+								const isCurrent = index === activeCard;
+								return (
+									<article
+										key={service.id}
+										onClick={() => {
+											const stageEl = document.getElementById("services-stage");
+											if (!stageEl) return;
+											const r = stageEl.getBoundingClientRect();
+											const travel = r.height - window.innerHeight;
+											const targets = [0.15, 0.52, 0.88];
+											window.scrollTo({
+												top: window.scrollY + r.top + travel * targets[index],
+												behavior: "smooth",
+											});
+										}}
+										className={`flex flex-col bg-surface px-8 py-8 transition-all duration-300 cursor-pointer border-t-2 ${
+											isCurrent
+												? "border-accent bg-surface-2/60 opacity-100"
+												: "border-transparent opacity-65 hover:opacity-95"
+										}`}
+									>
+										<div className="flex items-start justify-between gap-6">
+											<TileCanvas
+												variant={service.id}
+												className="max-w-[170px] flex-1"
+											/>
+											<span
+												className={`label-mono shrink-0 transition-colors ${
+													isCurrent
+														? "text-accent font-mono font-medium"
+														: "text-muted"
+												}`}
+											>
+												{String(index + 1).padStart(2, "0")}
+											</span>
+										</div>
+
+										<h3 className="mt-5 min-h-[2.4em] text-[17px] font-medium leading-snug text-fg">
+											{service.title}
+										</h3>
+
+										<p className="mt-2 line-clamp-3 min-h-[4rem] text-xs sm:text-sm leading-[1.62] text-muted">
+											{service.description}
+										</p>
+
+										<p className="label-mono mt-4 mb-5 text-[11px] leading-[1.7] text-muted line-clamp-1">
+											{service.points.slice(0, 3).join(" · ")}
+										</p>
+
+										<a
+											href="#contact"
+											className="mt-auto inline-flex items-center gap-2 border-t border-line pt-3 text-[13px] text-fg transition-colors hover:text-accent"
+										>
+											{copy.tileCta}
+											<ArrowUpRight
+												size={14}
+												aria-hidden="true"
+												className="rtl-flip"
+											/>
+										</a>
+									</article>
+								);
+							})}
+						</div>
+
+						{/* Bottom Stage Progress Meter */}
+						<div
+							className="relative mt-6 h-[2px] w-full bg-line-soft overflow-hidden"
+							role="progressbar"
+							aria-valuenow={Math.round(progress * 100)}
+							aria-valuemin={0}
+							aria-valuemax={100}
+						>
+							<i
+								className="block h-[2px] bg-accent transition-[width] duration-75 ease-out"
+								style={{
+									width: `${progress * 100}%`,
+									float: isRTL ? "right" : "left",
+								}}
+							/>
+						</div>
+					</div>
+				</div>
+			</section>
+		</>
+	);
 }

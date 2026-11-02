@@ -15,6 +15,7 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
+  --color-line-soft: var(--line-soft);
   --color-brand: var(--brand);
   --color-brand-deep: var(--brand-deep);
   --color-accent: var(--accent);
@@ -31,8 +32,8 @@
   --font-display: var(--font-bricolage), var(--font-manrope), ui-sans-serif,
     sans-serif;
   --font-arabic: var(--font-cairo), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", "Segoe UI Mono",
-    Menlo, Consolas, "Liberation Mono", monospace;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo,
+    monospace;
 
   --radius-xs: 4px;
   --radius-sm: 8px;
@@ -62,6 +63,7 @@
   --muted: #a2b8b1;
   --line: rgba(242, 237, 226, 0.12);
   --line-strong: rgba(242, 237, 226, 0.26);
+  --line-soft: rgba(242, 237, 226, 0.06);
   --brand: #17a08c;
   --brand-deep: #0d6d60;
   --accent: #3ad9bf;
@@ -83,6 +85,7 @@ html:not(.dark) {
   --muted: #4a625b;
   --line: rgba(8, 28, 23, 0.14);
   --line-strong: rgba(8, 28, 23, 0.28);
+  --line-soft: rgba(8, 28, 23, 0.06);
   --brand: #0b7a6b;
   --brand-deep: #085e52;
   --accent: #0a6b5e;
@@ -93,27 +96,6 @@ html:not(.dark) {
   --danger: #b42318;
   --selection: #0b7a6b;
   --selection-fg: #fffdf7;
-}
-
-section {
-  position: relative;
-  isolation: isolate;
-}
-
-/* The zellige lattice is the ground of the whole page: every section carries
-   it behind its own background, and the sections that draw their own lattice
-   opt out with data-zellige="custom". */
-section:not([data-zellige="custom"])::before {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background-image: url("/moroccan-zellige.svg");
-  background-repeat: repeat;
-  background-size: 128px 128px;
-  opacity: 0.3;
-  border-radius: inherit;
-  pointer-events: none;
-  content: "";
 }
 
 @layer base {
@@ -141,6 +123,23 @@ section:not([data-zellige="custom"])::before {
     -webkit-font-smoothing: antialiased;
     overflow-x: clip;
   }
+/* Moroccan Zellige background lattice across the whole body */
+body::before {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  background-image: url("/moroccan-zellige.svg");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  opacity: 0.16;
+  pointer-events: none;
+  content: "";
+}
+
+html:not(.dark) body::before {
+  opacity: 0.42;
+}
+
 
   h1,
   h2,
@@ -222,7 +221,15 @@ section:not([data-zellige="custom"])::before {
   margin-inline: auto;
   width: 100%;
   max-width: 1400px;
-  padding-inline: clamp(20px, 5vw, 64px);
+  padding-inline: 1.25rem;
+
+  @media (width >= 640px) {
+    padding-inline: 2rem;
+  }
+
+  @media (width >= 1024px) {
+    padding-inline: 3rem;
+  }
 }
 
 @utility section-y {
@@ -235,38 +242,6 @@ section:not([data-zellige="custom"])::before {
   @media (width >= 1024px) {
     padding-block: 9rem;
   }
-}
-
-/* A band is a full-width ground separated only by a hairline. */
-@utility band-y {
-  padding-block: clamp(4.25rem, 8vw, 7.5rem);
-}
-
-/* The generated-light home uses scale, not weight, for hierarchy. */
-@utility display-hero {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 8.6vw, 8.25rem);
-  font-weight: 300;
-  line-height: 0.9;
-  letter-spacing: -0.045em;
-}
-
-@utility display-band {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4.3vw, 3.65rem);
-  font-weight: 400;
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-}
-
-@utility mono-label {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-variant-numeric: tabular-nums;
 }
 
 @utility display-xl {
@@ -296,10 +271,25 @@ section:not([data-zellige="custom"])::before {
 @utility label-mono {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  font-weight: 400;
-  letter-spacing: 0.14em;
+  font-weight: 300;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
+}
+
+/* Arabic does not take Latin uppercase or tracking. */
+[dir="rtl"] .label-mono {
+  font-family: var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Landing display voice: light grotesque, optical tracking, tight leading. */
+@utility landing-display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
 }
 
 /* Hairline that carries the section label — replaces the generic kicker. */
@@ -361,6 +351,73 @@ select.field {
 .field option {
   background: var(--surface);
   color: var(--fg);
+}
+
+/* Editorial photography is the only bitmap on the landing page. It is
+   desaturated and tinted so it reads as part of the generated-light system. */
+.photo-duotone {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.photo-duotone img {
+  filter: grayscale(1) contrast(1.04) brightness(0.82);
+}
+
+html:not(.dark) .photo-duotone img {
+  filter: grayscale(1) contrast(1.04) brightness(0.95);
+}
+
+.photo-duotone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--brand);
+  mix-blend-mode: color;
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+/* Native FAQ rows with a CSS-only plus that collapses to a minus. */
+.faq-item summary {
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-plus {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  width: 13px;
+  height: 13px;
+}
+
+.faq-plus::before,
+.faq-plus::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+
+.faq-plus::before {
+  inset-inline: 0;
+  top: 6px;
+  height: 1px;
+}
+
+.faq-plus::after {
+  inset-block: 0;
+  inset-inline-start: 6px;
+  width: 1px;
+  transition: transform 0.2s var(--ease-out-expo);
+}
+
+.faq-item[open] .faq-plus::after {
+  transform: scaleY(0);
 }
 
 /* Animated link underline */
@@ -479,116 +536,6 @@ select.field {
   animation-play-state: paused !important;
 }
 
-/* Borderless disclosure — the plus becomes a minus. */
-.accordion-item summary::-webkit-details-marker {
-  display: none;
-}
-
-.accordion-item summary {
-  list-style: none;
-}
-
-.accordion-item .accordion-minus {
-  display: none;
-}
-
-.accordion-item[open] .accordion-plus {
-  display: none;
-}
-
-.accordion-item[open] .accordion-minus {
-  display: block;
-}
-
-/* Live-signal dot used by the spectrum readout. */
-.live-dot {
-  animation: live-pulse 2.4s var(--ease-out-expo) infinite;
-}
-
-@keyframes live-pulse {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.35;
-    transform: scale(0.7);
-  }
-}
-
-/* Generated-light hero veil: keeps the lower furniture legible. */
-.hero-veil {
-  background:
-    radial-gradient(
-      ellipse 120% 70% at 50% 18%,
-      transparent 20%,
-      rgba(7, 17, 14, 0.5) 72%,
-      rgba(7, 17, 14, 0.86) 100%
-    ),
-    linear-gradient(
-      to bottom,
-      transparent 18%,
-      rgba(7, 17, 14, 0.22) 48%,
-      rgba(7, 17, 14, 0.94) 100%
-    );
-}
-
-/* Cursor lamp: a warm, luminous pool that lights the zellige under the
-   pointer. The position is written to CSS custom properties, so moving the
-   mouse never re-renders React. */
-.hero-lamp {
-  --mx: 50%;
-  --my: 34%;
-  opacity: 0;
-  transition: opacity 700ms var(--ease-out-expo);
-}
-
-.hero-lamp[data-lit="true"] {
-  opacity: 1;
-}
-
-.hero-lamp::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    26rem circle at var(--mx) var(--my),
-    rgba(197, 168, 128, 0.18),
-    rgba(58, 217, 191, 0.07) 42%,
-    transparent 72%
-  );
-  mix-blend-mode: screen;
-}
-
-.hero-lamp::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("/moroccan-zellige.svg");
-  background-repeat: repeat;
-  background-size: 128px 128px;
-  opacity: 0.9;
-  mask-image: radial-gradient(
-    17rem circle at var(--mx) var(--my),
-    #000 0%,
-    rgba(0, 0, 0, 0.35) 46%,
-    transparent 72%
-  );
-  -webkit-mask-image: radial-gradient(
-    17rem circle at var(--mx) var(--my),
-    #000 0%,
-    rgba(0, 0, 0, 0.35) 46%,
-    transparent 72%
-  );
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-lamp {
-    transition: none;
-  }
-}
-
 /* Marquee (footer wordmark, manifesto strip) */
 .marquee-track {
   display: flex;
@@ -626,6 +573,10 @@ select.field {
   mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 10%, transparent 78%);
 }
 
+html:not(.dark) .zellige {
+  --zellige-line: rgba(8, 149, 135, 0.28);
+}
+
 /* Text mask reveal helpers */
 .mask-line {
   display: block;
@@ -659,15 +610,73 @@ select.field {
     opacity: 1;
   }
 }
-
-/* Arabic script keeps connected letterforms: Cairo carries display type and
-   synthetic tracking/case transforms are dropped. Unlayered on purpose so it
-   also wins over the display/mono utilities. */
-html[dir="rtl"] :is(h1, h2, h3, h4, .display-hero, .display-band, .display-xl, .display-lg, .display-md, .mono-label, .label-mono) {
-  font-family: var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
-  letter-spacing: 0;
-  text-transform: none;
+/* Full-body cursor lamp: follows the mouse across all sections, lighting the zellige */
+.body-lamp {
+  --mx: 50vw;
+  --my: 34vh;
+  opacity: 0;
+  transition: opacity 700ms var(--ease-out-expo);
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
 }
+
+.body-lamp[data-lit="true"] {
+  opacity: 1;
+}
+
+.body-lamp::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    32rem circle at var(--mx) var(--my),
+    rgba(197, 168, 128, 0.16),
+    rgba(58, 217, 191, 0.06) 42%,
+    transparent 72%
+  );
+  mix-blend-mode: screen;
+}
+
+.body-lamp::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/moroccan-zellige.svg");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  opacity: 0.85;
+  mask-image: radial-gradient(
+    22rem circle at var(--mx) var(--my),
+    #000 0%,
+    rgba(0, 0, 0, 0.35) 46%,
+    transparent 72%
+  );
+  -webkit-mask-image: radial-gradient(
+    22rem circle at var(--mx) var(--my),
+    #000 0%,
+    rgba(0, 0, 0, 0.35) 46%,
+    transparent 72%
+  );
+}
+
+html:not(.dark) .body-lamp::before {
+  background: radial-gradient(
+    32rem circle at var(--mx) var(--my),
+    rgba(197, 168, 128, 0.2),
+    rgba(10, 107, 94, 0.06) 42%,
+    transparent 72%
+  );
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .body-lamp {
+    display: none !important;
+  }
+}
+
 
 /* Lenis */
 html.lenis,
@@ -696,8 +705,410 @@ html.lenis body {
   .drift,
   .wave-track,
   .marquee-track,
-  .beam-frame::before,
-  .live-dot {
+  .beam-frame::before {
     animation: none !important;
+  }
+}
+/* ==========================================================================
+   Pinned Stage Primitives & Scroll-Driven Animation System
+   Exact layout & scroll mechanics from Kilnwave (superdesign draft 90c604f5)
+   ========================================================================== */
+
+:root {
+  --page-progress: 0;
+  --pad: clamp(20px, 5vw, 64px);
+}
+
+#rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  z-index: 95;
+  background: var(--accent);
+  width: calc(var(--page-progress) * 100%);
+  pointer-events: none;
+}
+
+.stage {
+  position: relative;
+}
+
+.pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--page);
+  color: var(--fg);
+}
+
+/* Stage 1 · Hero */
+#hero {
+  height: 340svh;
+  --p: 0;
+}
+#hero .pin {
+  justify-content: flex-end;
+  background: #07110e !important;
+}
+#hero .hero-inner {
+  position: relative;
+  z-index: 2;
+  transform: translateY(calc(var(--p) * -14vh)) scale(calc(1 - var(--p) * 0.30));
+  transform-origin: 0 100%;
+  opacity: calc(1 - var(--p) * 1.25);
+}
+[dir="rtl"] #hero .hero-inner {
+  transform-origin: 100% 100%;
+}
+#hero .hero-meta {
+  transform: translateX(calc(var(--p) * -6vw));
+  opacity: calc(1 - var(--p) * 2);
+}
+[dir="rtl"] #hero .hero-meta {
+  transform: translateX(calc(var(--p) * 6vw));
+}
+#hero .hero-alt {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(32px, 6vw, 72px);
+  z-index: 3;
+  margin: 0 auto;
+  opacity: calc((var(--p) - 0.46) * 2.6);
+  transform: translateY(calc(26px - var(--p) * 26px));
+  pointer-events: none;
+}
+#hero .scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  z-index: 4;
+  transform: translateX(-50%);
+  opacity: calc(1 - var(--p) * 5);
+  pointer-events: none;
+}
+
+/* Stage 2 · Engine / Method */
+#engine {
+  height: 440svh;
+  --p: 0;
+}
+@media (max-width: 899px) {
+  #engine {
+    display: none;
+  }
+}
+#engine .pin {
+  background: var(--surface);
+}
+
+.eng {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: clamp(24px, 5vw, 64px);
+  align-items: center;
+  width: 100%;
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+@media (max-width: 900px) {
+  .eng {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+.cues {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-left: 1px solid var(--line-soft);
+}
+[dir="rtl"] .cues {
+  border-left: none;
+  border-right: 1px solid var(--line-soft);
+}
+@media (max-width: 900px) {
+  .cues {
+    flex-direction: row;
+    overflow-x: auto;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid var(--line-soft);
+  }
+}
+.cue {
+  padding: 14px 0 14px 18px;
+  border-left: 2px solid transparent;
+  margin-left: -1px;
+  transition: border-color 0.4s var(--ease-out-expo), opacity 0.4s var(--ease-out-expo);
+  opacity: 0.45;
+  cursor: pointer;
+  text-align: left;
+}
+.cue b {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  color: var(--fg);
+}
+.cue span {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  display: block;
+}
+[dir="rtl"] .cue {
+  padding: 14px 18px 14px 0;
+  border-left: none;
+  border-right: 2px solid transparent;
+  margin-left: 0;
+  margin-right: -1px;
+  text-align: right;
+}
+.cue.on {
+  opacity: 1;
+  border-left-color: var(--accent);
+}
+[dir="rtl"] .cue.on {
+  border-right-color: var(--accent);
+}
+.eng-stage {
+  position: relative;
+  aspect-ratio: 16/10;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+}
+.eng-stage canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.eng-hud {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  z-index: 2;
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  pointer-events: none;
+}
+[dir="rtl"] .eng-hud {
+  left: auto;
+  right: 20px;
+}
+.eng-hud .no {
+  font-size: 34px;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+.eng-status {
+  position: absolute;
+  right: 20px;
+  bottom: 18px;
+  z-index: 2;
+  color: var(--accent);
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+}
+[dir="rtl"] .eng-status {
+  right: auto;
+  left: 20px;
+}
+.eng-meter {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--accent);
+  z-index: 2;
+  width: calc(var(--p) * 100%);
+}
+[dir="rtl"] .eng-meter {
+  left: auto;
+  right: 0;
+}
+
+/* Stage 3 · Field (Spectrum Sweep) */
+#field {
+  height: 340svh;
+  --p: 0;
+}
+.field-in {
+  width: 100%;
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+.field-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+.field-head h2 {
+  font-size: clamp(1.7rem, 3.6vw, 2.8rem);
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  max-width: 20ch;
+  line-height: 1.1;
+}
+.strip {
+  position: relative;
+  height: clamp(220px, 40svh, 400px);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  background: var(--surface);
+}
+.strip canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.strip-tag {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  pointer-events: none;
+}
+[dir="rtl"] .strip-tag {
+  left: auto;
+  right: 20px;
+}
+.strip-read {
+  position: absolute;
+  right: 20px;
+  bottom: 18px;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  pointer-events: none;
+}
+[dir="rtl"] .strip-read {
+  right: auto;
+  left: 20px;
+}
+
+/* Stage 4 · Claim (Statement Wipe) */
+#claim {
+  height: 230svh;
+  --p: 0;
+}
+.claim-in {
+  width: 100%;
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 var(--pad);
+  position: relative;
+}
+.claim-in h2 {
+  font-size: clamp(2rem, 6vw, 4.6rem);
+  line-height: 1.04;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  max-width: 22ch;
+  color: var(--line-strong);
+  position: relative;
+}
+.claim-in h2 .fill {
+  position: absolute;
+  inset: 0;
+  color: var(--fg);
+  clip-path: inset(0 calc(100% - var(--p) * 100%) 0 0);
+}
+[dir="rtl"] .claim-in h2 .fill {
+  clip-path: inset(0 0 0 calc(100% - var(--p) * 100%));
+}
+.claim-rule {
+  height: 1px;
+  background: var(--line);
+  margin: clamp(28px, 4vw, 48px) 0;
+}
+.claim-rule i {
+  display: block;
+  height: 1px;
+  background: var(--accent);
+  width: calc(var(--p) * 100%);
+}
+[dir="rtl"] .claim-rule i {
+  float: right;
+}
+
+/* Stage 5 · Services (Architecture scrub stage) */
+#services-stage {
+  height: 320svh;
+  --p: 0;
+}
+@media (max-width: 899px) {
+  #services-stage {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage {
+    height: auto !important;
+  }
+  .pin {
+    position: static !important;
+    height: auto !important;
+    padding: clamp(56px, 9vw, 96px) 0 !important;
+  }
+  #hero .pin {
+    min-height: 70svh !important;
+  }
+  #hero .hero-inner, #hero .hero-meta {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  #hero .hero-alt {
+    position: static !important;
+    opacity: 1 !important;
+    transform: none !important;
+    margin-top: 36px !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+  .scroll-hint, #rail {
+    display: none !important;
+  }
+  .cue {
+    opacity: 1 !important;
+    border-left-color: var(--accent) !important;
+  }
+  .claim-in h2 .fill {
+    clip-path: none !important;
+  }
+  .claim-rule i {
+    width: 100% !important;
+  }
+  .eng-meter {
+    width: 100% !important;
   }
 }
