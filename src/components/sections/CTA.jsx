@@ -19,10 +19,6 @@ export default function CTA() {
 				<div className="absolute -left-24 top-0 h-[32rem] w-[32rem] rounded-full bg-brand/20 blur-[130px]" />
 				<div className="absolute -right-16 bottom-0 h-[24rem] w-[24rem] rounded-full bg-accent-bright/12 blur-[120px]" />
 			</div>
-
-			{/* beam-frame border stays on the section itself */}
-			<div className="beam-frame absolute inset-0 pointer-events-none" aria-hidden="true" />
-
 			<div className="shell relative z-10">
 				<Reveal>
 					<div className="relative mx-auto max-w-3xl text-center">
