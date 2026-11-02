@@ -66,28 +66,38 @@ export default function Hero() {
 		<>
 			{intro ? <IntroStage onDone={() => setRevealed(true)} /> : null}
 
-			<section ref={containerRef} className="stage" id="hero">
+			<section
+				ref={containerRef}
+				className="stage dark bg-[#07110e] text-cream"
+				id="hero"
+			>
 				<div className="pin">
 					<RibbonField />
 
 					<div
 						aria-hidden="true"
-						className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(244,240,231,0.94)_0%,rgba(244,240,231,0.52)_48%,rgba(244,240,231,0)_80%)] dark:bg-[linear-gradient(to_top,rgba(7,17,14,0.94)_0%,rgba(7,17,14,0.68)_42%,rgba(7,17,14,0)_76%)]"
+						className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(7,17,14,0.94)_0%,rgba(7,17,14,0.68)_42%,rgba(7,17,14,0)_76%)]"
 					/>
 					<div
 						aria-hidden="true"
-						className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_42%,rgba(244,240,231,0.45)_100%)] dark:bg-[radial-gradient(ellipse_at_50%_45%,transparent_32%,rgba(7,17,14,0.62)_100%)]"
+						className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_32%,rgba(7,17,14,0.62)_100%)]"
 					/>
 
 					<div className="hero-inner shell relative z-10 flex flex-1 flex-col justify-end pb-8 pt-24 sm:pb-10 sm:pt-28">
 						<div
 							style={contentStyle(0)}
-							className="hero-meta flex flex-col gap-2 border-b border-line pb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+							className="hero-meta flex flex-col gap-2 border-b border-[rgba(242,237,226,0.12)] pb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
 						>
-							<span className="label-mono text-fg/75">{t.hero.eyebrow}</span>
+							<span className="label-mono text-[#f2ede2]/75">
+								{t.hero.eyebrow}
+							</span>
 							<div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-								<span className="label-mono text-fg/75">{t.hero.location}</span>
-								<span className="label-mono text-fg/75">{pillarLabels}</span>
+								<span className="label-mono text-[#f2ede2]/75">
+									{t.hero.location}
+								</span>
+								<span className="label-mono text-[#f2ede2]/75">
+									{pillarLabels}
+								</span>
 							</div>
 						</div>
 
@@ -97,8 +107,8 @@ export default function Hero() {
 							style={contentStyle(reduce ? 0 : 60)}
 							className={
 								isRTL
-									? "mt-8 max-w-[14ch] font-display text-[clamp(2.5rem,6.5vw,6rem)] font-light leading-[1.15] tracking-normal text-balance"
-									: "mt-8 max-w-[15ch] font-display text-[clamp(3rem,8vw,8rem)] font-light leading-[0.9] tracking-[-0.05em]"
+					? "mt-8 max-w-[14ch] font-display text-[clamp(2.5rem,6.5vw,6rem)] font-light leading-[1.15] tracking-normal text-balance text-[rgba(242,237,226,0.13)]"
+					: "mt-8 max-w-[15ch] font-display text-[clamp(3rem,8vw,8rem)] font-light leading-[0.9] tracking-[-0.05em] text-[rgba(242,237,226,0.13)]"
 							}
 						>
 							{isRTL ? (
@@ -138,7 +148,7 @@ export default function Hero() {
 							style={contentStyle(reduce ? 0 : 340)}
 							className="mt-8 flex flex-col gap-6 sm:mt-10 lg:flex-row lg:items-end lg:justify-between"
 						>
-							<p className="max-w-[38ch] text-[15px] leading-[1.7] text-muted">
+							<p className="max-w-[38ch] text-[15px] leading-[1.7] text-[#a2b8b1]">
 								{t.hero.subheading}
 							</p>
 							<div className="flex flex-wrap items-center gap-3">
@@ -148,7 +158,7 @@ export default function Hero() {
 								<Button
 									href="#services"
 									variant="outline"
-									className="rounded-none"
+									className="rounded-none border-[rgba(242,237,226,0.3)] text-[#f2ede2] hover:border-[#3ad9bf] hover:text-[#3ad9bf]"
 								>
 									{t.hero.ctaAll}
 								</Button>
@@ -158,7 +168,7 @@ export default function Hero() {
 						<nav
 							aria-label={t.hero.ctaAll}
 							style={contentStyle(reduce ? 0 : 420)}
-							className="mt-10 grid grid-cols-3 border-t border-line"
+							className="mt-10 grid grid-cols-3 border-t border-[rgba(242,237,226,0.12)]"
 						>
 							{t.hero.pillars.map((pillar) => (
 								<a
@@ -166,10 +176,10 @@ export default function Hero() {
 									href="#services"
 									className="group flex min-w-0 flex-col gap-1.5 py-5 pe-4"
 								>
-									<span className="label-mono text-fg/75 transition-colors group-hover:text-accent">
+									<span className="label-mono text-[#f2ede2]/75 transition-colors group-hover:text-[#3ad9bf]">
 										{pillar.label}
 									</span>
-									<span className="hidden truncate text-sm text-muted transition-colors group-hover:text-fg sm:block">
+									<span className="hidden truncate text-sm text-[#a2b8b1] transition-colors group-hover:text-[#f2ede2] sm:block">
 										{pillar.title}
 									</span>
 								</a>
@@ -181,16 +191,16 @@ export default function Hero() {
 						aria-hidden="true"
 						className="hero-alt shell pointer-events-none"
 					>
-						<span className="label-mono mb-3 block text-accent">
+						<span className="label-mono mb-3 block text-[#3ad9bf]">
 							{t.hero.altEyebrow || "Sans templates, sans compromis"}
 						</span>
-						<h2 className="max-w-[26ch] font-display text-[clamp(1.8rem,4.2vw,3.4rem)] font-light leading-[1.06] tracking-[-0.035em] text-fg">
+						<h2 className="max-w-[26ch] font-display text-[clamp(1.8rem,4.2vw,3.4rem)] font-light leading-[1.06] tracking-[-0.035em] text-[#f2ede2]">
 							{t.hero.altHeadline ||
 								"Chaque ligne de code, chaque campagne et chaque workflow sont conçus sur mesure pour votre rentabilité."}
 						</h2>
 					</div>
 
-					<span className="scroll-hint label-mono">
+					<span className="scroll-hint label-mono text-[#a2b8b1]">
 						{t.hero.scrollHint || "Scroll"}
 					</span>
 				</div>
