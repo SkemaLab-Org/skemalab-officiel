@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { DURATION, EASE, VIEWPORT } from "@/lib/motion";
-import { cn } from "@/lib/utils";
 
 /**
  * Single-shot entrance reveal. Falls back to a plain element when the visitor
@@ -40,30 +39,5 @@ export default function Reveal({
 		>
 			{children}
 		</Component>
-	);
-}
-
-/** Horizontal rule that draws itself in on scroll. */
-export function RevealRule({ className = "", delay = 0 }) {
-	const reduce = useReducedMotion();
-
-	if (reduce) {
-		return (
-			<div
-				aria-hidden="true"
-				className={cn("h-px w-full bg-line", className)}
-			/>
-		);
-	}
-
-	return (
-		<motion.div
-			aria-hidden="true"
-			className={cn("h-px w-full origin-left bg-line", className)}
-			initial={{ scaleX: 0 }}
-			whileInView={{ scaleX: 1 }}
-			viewport={VIEWPORT}
-			transition={{ duration: DURATION.slow, delay, ease: EASE.out }}
-		/>
 	);
 }

@@ -23,22 +23,22 @@ import { DURATION, EASE } from "@/lib/motion";
 export default function Contact() {
   const { t } = useI18n();
   const copy = t.contactSection;
-  const [status, setStatus] = useState("idle");
+  const [ status, setStatus ] = useState( "idle" );
 
   const serviceOptions = useMemo(
     () => [
-      ...t.servicesList.map((service) => ({
+      ...t.servicesList.map( ( service ) => ( {
         value: service.id,
         label: service.title,
-      })),
+      } ) ),
       { value: "global", label: copy.globalService },
     ],
-    [t.servicesList, copy.globalService],
+    [ t.servicesList, copy.globalService ],
   );
 
   const resolver = useMemo(
-    () => zodResolver(createContactSchema(t.contactErrors)),
-    [t.contactErrors],
+    () => zodResolver( createContactSchema( t.contactErrors ) ),
+    [ t.contactErrors ],
   );
 
   const {
@@ -46,7 +46,7 @@ export default function Contact() {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm({
+  } = useForm( {
     resolver,
     mode: "onSubmit",
     defaultValues: {
@@ -58,19 +58,19 @@ export default function Contact() {
       message: "",
       website: "",
     },
-  });
+  } );
 
-  const onSubmit = async (values) => {
+  const onSubmit = async ( values ) => {
     const serviceLabel =
-      serviceOptions.find((option) => option.value === values.service)?.label ||
+      serviceOptions.find( ( option ) => option.value === values.service )?.label ||
       values.service;
 
-    setStatus("sending");
+    setStatus( "sending" );
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch( "/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+        body: JSON.stringify( {
           name: values.name,
           company: values.company,
           email: values.email,
@@ -78,26 +78,26 @@ export default function Contact() {
           service: serviceLabel,
           message: values.message,
           website: values.website,
-        }),
-      });
+        } ),
+      } );
 
-      if (response.status === 429) {
-        setStatus("rate_limit");
+      if ( response.status === 429 ) {
+        setStatus( "rate_limit" );
         return;
       }
-      if (response.status === 503) {
-        setStatus("unavailable");
+      if ( response.status === 503 ) {
+        setStatus( "unavailable" );
         return;
       }
-      if (!response.ok) {
-        setStatus("error");
+      if ( !response.ok ) {
+        setStatus( "error" );
         return;
       }
 
       reset();
-      setStatus("success");
+      setStatus( "success" );
     } catch {
-      setStatus("error");
+      setStatus( "error" );
     }
   };
 
@@ -110,169 +110,169 @@ export default function Contact() {
           <Reveal>
             <div className="flex items-center gap-4">
               <span className="label-mono shrink-0 text-muted">
-                08 · {copy.eyebrow}
+                08 · { copy.eyebrow }
               </span>
               <span aria-hidden="true" className="h-px flex-1 bg-line" />
             </div>
 
             <h2 className="landing-display mt-8 max-w-[16ch] text-[clamp(2rem,4.2vw,3.2rem)] text-fg">
-              {copy.title}
+              { copy.title }
             </h2>
             <p className="mt-5 max-w-[42ch] text-[15px] leading-[1.7] text-muted">
-              {copy.description}
+              { copy.description }
             </p>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            <ul className="mt-10 space-y-0 border-t border-line">
+          <Reveal delay={ 0.1 }>
+            <ul className="mt-10 space-y-0 ">
               <ContactRow
-                icon={Mail}
-                label={copy.emailLabel}
-                value={contactInfo.email}
-                href={`mailto:${contactInfo.email}`}
+                icon={ Mail }
+                label={ copy.emailLabel }
+                value={ contactInfo.email }
+                href={ `mailto:${ contactInfo.email }` }
               />
               <ContactRow
-                icon={Phone}
-                label={copy.phoneLabel}
-                value={contactInfo.phone}
-                href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
+                icon={ Phone }
+                label={ copy.phoneLabel }
+                value={ contactInfo.phone }
+                href={ `tel:${ contactInfo.phone.replace( /\s/g, "" ) }` }
               />
               <ContactRow
-                icon={MapPin}
-                label={copy.locationLabel}
-                value={contactInfo.locations.join(" · ")}
+                icon={ MapPin }
+                label={ copy.locationLabel }
+                value={ contactInfo.locations.join( " · " ) }
               />
             </ul>
           </Reveal>
         </div>
 
-        <Reveal delay={0.12}>
+        <Reveal delay={ 0.12 }>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={ handleSubmit( onSubmit ) }
             noValidate
-            aria-busy={busy}
-            className="border-t border-line pt-8"
+            aria-busy={ busy }
+            className="pt-8"
           >
 
-            {status === "success" ? (
+            { status === "success" ? (
               <StatusPanel
                 variant="success"
-                eyebrow={copy.successEyebrow}
-                title={copy.successTitle}
-                text={copy.successText}
-                resetLabel={copy.resetSuccess}
-                onReset={() => setStatus("idle")}
+                eyebrow={ copy.successEyebrow }
+                title={ copy.successTitle }
+                text={ copy.successText }
+                resetLabel={ copy.resetSuccess }
+                onReset={ () => setStatus( "idle" ) }
               />
             ) : status === "rate_limit" ? (
               <StatusPanel
                 variant="error"
-                eyebrow={copy.rateLimitEyebrow}
-                title={copy.rateLimitTitle}
-                text={copy.rateLimitText}
-                resetLabel={copy.backBtn}
-                onReset={() => setStatus("idle")}
+                eyebrow={ copy.rateLimitEyebrow }
+                title={ copy.rateLimitTitle }
+                text={ copy.rateLimitText }
+                resetLabel={ copy.backBtn }
+                onReset={ () => setStatus( "idle" ) }
               />
             ) : status === "error" || status === "unavailable" ? (
               <StatusPanel
                 variant="error"
-                eyebrow={copy.errorEyebrow}
-                title={copy.errorTitle}
-                text={copy.errorText}
-                resetLabel={copy.retryBtn}
-                onReset={() => setStatus("idle")}
+                eyebrow={ copy.errorEyebrow }
+                title={ copy.errorTitle }
+                text={ copy.errorText }
+                resetLabel={ copy.retryBtn }
+                onReset={ () => setStatus( "idle" ) }
               />
             ) : (
               <div className="grid gap-5 sm:grid-cols-2">
                 <p className="text-sm text-muted sm:col-span-2">
-                  {copy.fieldsRequirement}
+                  { copy.fieldsRequirement }
                 </p>
 
-                {/* Honeypot — hidden from people, visible to naive bots */}
+                {/* Honeypot — hidden from people, visible to naive bots */ }
                 <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0" aria-hidden="true">
                   <label htmlFor="contact-website">Site web</label>
                   <input
                     id="contact-website"
                     type="text"
-                    tabIndex={-1}
+                    tabIndex={ -1 }
                     autoComplete="off"
-                    {...register("website")}
+                    { ...register( "website" ) }
                   />
                 </div>
 
                 <Field
                   id="contact-name"
-                  label={copy.nameInput}
-                  error={errors.name?.message}
+                  label={ copy.nameInput }
+                  error={ errors.name?.message }
                   autoComplete="name"
-                  maxLength={CONTACT_LIMITS.name}
-                  {...register("name")}
+                  maxLength={ CONTACT_LIMITS.name }
+                  { ...register( "name" ) }
                 />
                 <Field
                   id="contact-company"
-                  label={copy.companyInput}
-                  error={errors.company?.message}
+                  label={ copy.companyInput }
+                  error={ errors.company?.message }
                   autoComplete="organization"
-                  maxLength={CONTACT_LIMITS.company}
-                  {...register("company")}
+                  maxLength={ CONTACT_LIMITS.company }
+                  { ...register( "company" ) }
                 />
                 <Field
                   id="contact-email"
-                  label={copy.emailInput}
+                  label={ copy.emailInput }
                   type="email"
-                  error={errors.email?.message}
+                  error={ errors.email?.message }
                   autoComplete="email"
-                  maxLength={200}
-                  {...register("email")}
+                  maxLength={ 200 }
+                  { ...register( "email" ) }
                 />
                 <Field
                   id="contact-phone"
-                  label={copy.phoneInput}
+                  label={ copy.phoneInput }
                   type="tel"
-                  error={errors.phone?.message}
+                  error={ errors.phone?.message }
                   autoComplete="tel"
-                  maxLength={CONTACT_LIMITS.phone}
-                  {...register("phone")}
+                  maxLength={ CONTACT_LIMITS.phone }
+                  { ...register( "phone" ) }
                 />
 
                 <div className="sm:col-span-2">
                   <label htmlFor="contact-service" className="label-mono mb-1 block text-muted">
-                    {copy.serviceInput}
+                    { copy.serviceInput }
                   </label>
                   <select
                     id="contact-service"
-                    aria-invalid={errors.service ? "true" : undefined}
-                    aria-describedby={errors.service ? "contact-service-error" : undefined}
+                    aria-invalid={ errors.service ? "true" : undefined }
+                    aria-describedby={ errors.service ? "contact-service-error" : undefined }
                     className="field"
                     defaultValue=""
-                    {...register("service")}
+                    { ...register( "service" ) }
                   >
                     <option value="" disabled>
-                      {copy.servicePlaceholder}
+                      { copy.servicePlaceholder }
                     </option>
-                    {serviceOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
+                    { serviceOptions.map( ( option ) => (
+                      <option key={ option.value } value={ option.value }>
+                        { option.label }
                       </option>
-                    ))}
+                    ) ) }
                   </select>
-                  <FieldError id="contact-service-error" message={errors.service?.message} />
+                  <FieldError id="contact-service-error" message={ errors.service?.message } />
                 </div>
 
                 <div className="sm:col-span-2">
                   <label htmlFor="contact-message" className="label-mono mb-1 block text-muted">
-                    {copy.messageInput}
+                    { copy.messageInput }
                   </label>
                   <textarea
                     id="contact-message"
-                    rows={5}
-                    placeholder={copy.messagePlaceholder}
-                    aria-invalid={errors.message ? "true" : undefined}
-                    aria-describedby={errors.message ? "contact-message-error" : undefined}
-                    maxLength={CONTACT_LIMITS.message}
+                    rows={ 5 }
+                    placeholder={ copy.messagePlaceholder }
+                    aria-invalid={ errors.message ? "true" : undefined }
+                    aria-describedby={ errors.message ? "contact-message-error" : undefined }
+                    maxLength={ CONTACT_LIMITS.message }
                     className="field resize-none"
-                    {...register("message")}
+                    { ...register( "message" ) }
                   />
-                  <FieldError id="contact-message-error" message={errors.message?.message} />
+                  <FieldError id="contact-message-error" message={ errors.message?.message } />
                 </div>
 
                 <div className="pt-1 sm:col-span-2">
@@ -280,15 +280,15 @@ export default function Contact() {
                     type="submit"
                     size="md"
                     className="rounded-none"
-                    loading={busy}
-                    disabled={busy}
+                    loading={ busy }
+                    disabled={ busy }
                   >
-                    {busy ? copy.submitting : copy.submitBtn}
-                    {!busy ? <ArrowUpRight size={16} className="rtl-flip" /> : null}
+                    { busy ? copy.submitting : copy.submitBtn }
+                    { !busy ? <ArrowUpRight size={ 16 } className="rtl-flip" /> : null }
                   </Button>
                 </div>
               </div>
-            )}
+            ) }
           </form>
         </Reveal>
       </div>
@@ -296,109 +296,109 @@ export default function Contact() {
   );
 }
 
-function Field({ id, label, type = "text", error, ...props }) {
+function Field( { id, label, type = "text", error, ...props } ) {
   return (
     <div>
-      <label htmlFor={id} className="label-mono mb-1 block text-muted">
-        {label}
+      <label htmlFor={ id } className="label-mono mb-1 block text-muted">
+        { label }
       </label>
       <input
-        id={id}
-        type={type}
-        aria-invalid={error ? "true" : undefined}
-        aria-describedby={error ? `${id}-error` : undefined}
+        id={ id }
+        type={ type }
+        aria-invalid={ error ? "true" : undefined }
+        aria-describedby={ error ? `${ id }-error` : undefined }
         className="field"
-        {...props}
+        { ...props }
       />
-      <FieldError id={`${id}-error`} message={error} />
+      <FieldError id={ `${ id }-error` } message={ error } />
     </div>
   );
 }
 
-function FieldError({ id, message }) {
+function FieldError( { id, message } ) {
   return (
-    <AnimatePresence initial={false}>
-      {message ? (
+    <AnimatePresence initial={ false }>
+      { message ? (
         <motion.p
-          id={id}
+          id={ id }
           role="alert"
-          initial={{ opacity: 0, y: -4 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -4 }}
-          transition={{ duration: DURATION.fast, ease: EASE.out }}
+          initial={ { opacity: 0, y: -4 } }
+          animate={ { opacity: 1, y: 0 } }
+          exit={ { opacity: 0, y: -4 } }
+          transition={ { duration: DURATION.fast, ease: EASE.out } }
           className="mt-2 text-xs text-danger"
         >
-          {message}
+          { message }
         </motion.p>
-      ) : null}
+      ) : null }
     </AnimatePresence>
   );
 }
 
-function ContactRow({ icon: Icon, label, value, href }) {
+function ContactRow( { icon: Icon, label, value, href } ) {
   const content = (
     <>
       <span className="grid h-10 w-10 shrink-0 place-items-center rounded-none border border-line text-muted transition-colors group-hover:border-accent group-hover:text-fg">
-        <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
+        <Icon size={ 16 } strokeWidth={ 1.75 } aria-hidden="true" />
       </span>
       <span className="min-w-0 flex-1">
-        <span className="label-mono block text-muted">{label}</span>
+        <span className="label-mono block text-muted">{ label }</span>
         <span className="mt-1 block break-all text-sm text-fg transition-colors group-hover:text-accent">
-          {value}
+          { value }
         </span>
       </span>
-      {href ? (
+      { href ? (
         <ArrowUpRight
-          size={15}
+          size={ 15 }
           aria-hidden="true"
           className="shrink-0 text-muted transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent rtl-flip"
         />
-      ) : null}
+      ) : null }
     </>
   );
 
   const className =
     "group flex min-h-16 items-center gap-3 border-b border-line py-3";
 
-  if (href) {
+  if ( href ) {
     return (
       <li>
-        <a href={href} className={className}>
-          {content}
+        <a href={ href } className={ className }>
+          { content }
         </a>
       </li>
     );
   }
 
-  return <li className={className}>{content}</li>;
+  return <li className={ className }>{ content }</li>;
 }
 
-function StatusPanel({ variant = "success", eyebrow, title, text, resetLabel, onReset }) {
+function StatusPanel( { variant = "success", eyebrow, title, text, resetLabel, onReset } ) {
   const Icon = variant === "success" ? CheckCircle2 : AlertCircle;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: DURATION.base, ease: EASE.out }}
+      initial={ { opacity: 0, y: 10 } }
+      animate={ { opacity: 1, y: 0 } }
+      transition={ { duration: DURATION.base, ease: EASE.out } }
       className="flex min-h-[22rem] flex-col items-start justify-center py-6"
       role="status"
     >
       <Icon
-        size={34}
-        strokeWidth={1.5}
+        size={ 34 }
+        strokeWidth={ 1.5 }
         aria-hidden="true"
-        className={variant === "success" ? "text-fg" : "text-danger"}
+        className={ variant === "success" ? "text-fg" : "text-danger" }
       />
-      <p className="label-mono mt-6 text-muted">{eyebrow}</p>
-      <h3 className="mt-3 font-display text-2xl tracking-tight sm:text-3xl">{title}</h3>
-      <p className="mt-3 max-w-md text-sm leading-relaxed text-muted">{text}</p>
+      <p className="label-mono mt-6 text-muted">{ eyebrow }</p>
+      <h3 className="mt-3 font-display text-2xl tracking-tight sm:text-3xl">{ title }</h3>
+      <p className="mt-3 max-w-md text-sm leading-relaxed text-muted">{ text }</p>
       <button
         type="button"
-        onClick={onReset}
+        onClick={ onReset }
         className="link-underline mt-7 min-h-11 text-sm text-muted transition-colors hover:text-fg"
       >
-        {resetLabel}
+        { resetLabel }
       </button>
     </motion.div>
   );

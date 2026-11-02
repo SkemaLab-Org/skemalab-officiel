@@ -21,54 +21,54 @@ import {
 import { TEAM_MEMBERS, TEMPLATES } from "./signatureTemplates";
 
 export default function EmailSignatureStudio() {
-	const [activeTemplateId, setActiveTemplateId] = useState("executive");
-	const [formData, setFormData] = useState({ ...TEAM_MEMBERS[0] });
-	const [showDisclaimer] = useState(false);
-	const [copiedRich, setCopiedRich] = useState(false);
-	const [copiedCode, setCopiedCode] = useState(false);
-	const [previewMode, setPreviewMode] = useState("gmail"); // "gmail" | "clean"
-	const [showGuideModal, setShowGuideModal] = useState(false);
-	const [statusMessage, setStatusMessage] = useState("");
+	const [ activeTemplateId, setActiveTemplateId ] = useState( "executive" );
+	const [ formData, setFormData ] = useState( { ...TEAM_MEMBERS[ 0 ] } );
+	const [ showDisclaimer ] = useState( false );
+	const [ copiedRich, setCopiedRich ] = useState( false );
+	const [ copiedCode, setCopiedCode ] = useState( false );
+	const [ previewMode, setPreviewMode ] = useState( "gmail" ); // "gmail" | "clean"
+	const [ showGuideModal, setShowGuideModal ] = useState( false );
+	const [ statusMessage, setStatusMessage ] = useState( "" );
 
-	const signaturePreviewRef = useRef(null);
+	const signaturePreviewRef = useRef( null );
 
 	// When member changes, update formData
-	const handleSelectMember = (member) => {
-		setFormData({ ...member });
-		flashStatus(`Profil exécutif de ${member.name} chargé.`);
+	const handleSelectMember = ( member ) => {
+		setFormData( { ...member } );
+		flashStatus( `Profil exécutif de ${ member.name } chargé.` );
 	};
 
-	const handleInputChange = (field, value) => {
-		setFormData((prev) => {
-			const updated = { ...prev, [field]: value };
-			if (field === "whatsapp") {
-				updated.whatsappClean = value.replace(/[^0-9]/g, "");
+	const handleInputChange = ( field, value ) => {
+		setFormData( ( prev ) => {
+			const updated = { ...prev, [ field ]: value };
+			if ( field === "whatsapp" ) {
+				updated.whatsappClean = value.replace( /[^0-9]/g, "" );
 			}
-			if (field === "githubUrl") {
+			if ( field === "githubUrl" ) {
 				updated.github = value
 					.trim()
-					.replace(/^https?:\/\//i, "")
-					.replace(/\/+$/, "");
+					.replace( /^https?:\/\//i, "" )
+					.replace( /\/+$/, "" );
 			}
 			return updated;
-		});
+		} );
 	};
 
-	const flashStatus = (msg) => {
-		setStatusMessage(msg);
-		setTimeout(() => setStatusMessage(""), 4000);
+	const flashStatus = ( msg ) => {
+		setStatusMessage( msg );
+		setTimeout( () => setStatusMessage( "" ), 4000 );
 	};
 
 	// Find active template generator
 	const activeTemplate =
-		TEMPLATES.find((t) => t.id === activeTemplateId) || TEMPLATES[0];
+		TEMPLATES.find( ( t ) => t.id === activeTemplateId ) || TEMPLATES[ 0 ];
 
 	// Export HTML always uses absolute production URLs so pasted signatures keep
 	// working outside the site.
-	const signatureHtml = activeTemplate.generator(formData, {
+	const signatureHtml = activeTemplate.generator( formData, {
 		showAddress: true,
 		showDisclaimer,
-	});
+	} );
 
 	// The on-page preview resolves assets from this site, so a member whose photo
 	// is not deployed yet still renders instead of showing alt text.
@@ -82,17 +82,17 @@ export default function EmailSignatureStudio() {
 		let copied = false;
 
 		try {
-			if (typeof window !== "undefined" && window.navigator?.clipboard) {
-				const blobHtml = new Blob([signatureHtml], { type: "text/html" });
-				const plainText = `${formData.name}\n${formData.role} - SkemaLab\nEmail: ${formData.email}\nTél: ${formData.phone}\nWeb: ${formData.websiteUrl}\n${formData.tagline}`;
-				const blobText = new Blob([plainText], { type: "text/plain" });
+			if ( typeof window !== "undefined" && window.navigator?.clipboard ) {
+				const blobHtml = new Blob( [ signatureHtml ], { type: "text/html" } );
+				const plainText = `${ formData.name }\n${ formData.role } - SkemaLab\nEmail: ${ formData.email }\nTél: ${ formData.phone }\nWeb: ${ formData.websiteUrl }\n${ formData.tagline }`;
+				const blobText = new Blob( [ plainText ], { type: "text/plain" } );
 
-				if (typeof ClipboardItem !== "undefined") {
-					const item = new ClipboardItem({
+				if ( typeof ClipboardItem !== "undefined" ) {
+					const item = new ClipboardItem( {
 						"text/html": blobHtml,
 						"text/plain": blobText,
-					});
-					await navigator.clipboard.write([item]);
+					} );
+					await navigator.clipboard.write( [ item ] );
 					copied = true;
 				} else {
 					copied = copyViaDomSelection();
@@ -100,7 +100,7 @@ export default function EmailSignatureStudio() {
 			} else {
 				copied = copyViaDomSelection();
 			}
-		} catch (err) {
+		} catch ( err ) {
 			console.warn(
 				"ClipboardItem write failed, using fallback selection copy",
 				err,
@@ -108,41 +108,41 @@ export default function EmailSignatureStudio() {
 			copied = copyViaDomSelection();
 		}
 
-		if (!copied) {
+		if ( !copied ) {
 			flashStatus(
 				"La copie a échoué. Vérifiez les autorisations du presse-papiers de votre navigateur.",
 			);
 			return;
 		}
 
-		setCopiedRich(true);
-		flashStatus("Signature copiée avec succès ! Collez (Ctrl+V) dans Gmail.");
-		setTimeout(() => setCopiedRich(false), 4000);
+		setCopiedRich( true );
+		flashStatus( "Signature copiée avec succès ! Collez (Ctrl+V) dans Gmail." );
+		setTimeout( () => setCopiedRich( false ), 4000 );
 	};
 
 	// Fallback copy by selecting a temporary node built from the export HTML.
 	const copyViaDomSelection = () => {
-		if (typeof document === "undefined") return false;
-		const host = document.createElement("div");
-		host.setAttribute("aria-hidden", "true");
+		if ( typeof document === "undefined" ) return false;
+		const host = document.createElement( "div" );
+		host.setAttribute( "aria-hidden", "true" );
 		host.style.cssText = "position:fixed;left:-9999px;top:0;opacity:0;";
 		host.innerHTML = signatureHtml;
-		document.body.appendChild(host);
+		document.body.appendChild( host );
 		const range = document.createRange();
-		range.selectNodeContents(host);
+		range.selectNodeContents( host );
 		const selection = window.getSelection();
 
-		if (!selection) {
+		if ( !selection ) {
 			host.remove();
 			return false;
 		}
 
 		try {
 			selection.removeAllRanges();
-			selection.addRange(range);
-			return document.execCommand("copy");
-		} catch (error) {
-			console.error("Fallback signature copy failed", error);
+			selection.addRange( range );
+			return document.execCommand( "copy" );
+		} catch ( error ) {
+			console.error( "Fallback signature copy failed", error );
 			return false;
 		} finally {
 			selection.removeAllRanges();
@@ -153,12 +153,12 @@ export default function EmailSignatureStudio() {
 	// Copy Raw HTML Code
 	const handleCopyCode = async () => {
 		try {
-			await navigator.clipboard.writeText(signatureHtml);
-			setCopiedCode(true);
-			flashStatus("Code HTML brut copié dans le presse-papiers !");
-			setTimeout(() => setCopiedCode(false), 3000);
-		} catch (e) {
-			console.error(e);
+			await navigator.clipboard.writeText( signatureHtml );
+			setCopiedCode( true );
+			flashStatus( "Code HTML brut copié dans le presse-papiers !" );
+			setTimeout( () => setCopiedCode( false ), 3000 );
+		} catch ( e ) {
+			console.error( e );
 			flashStatus(
 				"Impossible de copier le code HTML. Vérifiez les autorisations du presse-papiers.",
 			);
@@ -167,14 +167,14 @@ export default function EmailSignatureStudio() {
 
 	return (
 		<div className="w-full">
-			{/* HEADER SECTION */}
+			{/* HEADER SECTION */ }
 			<section className="relative overflow-hidden border-b border-line bg-surface/50 py-12 sm:py-16">
 				<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(8,149,135,0.18),transparent)]" />
 
 				<div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 					<div className="flex flex-col items-center text-center pt-20">
 						<h1 className="mt-4 text-3xl font-extrabold tracking-tight text-fg sm:text-4xl lg:text-5xl">
-							Signature Email{" "}
+							Signature Email{ " " }
 							<span className="text-brand">Executive &amp; Corporate</span>
 						</h1>
 
@@ -184,30 +184,30 @@ export default function EmailSignatureStudio() {
 							dans Gmail.
 						</p>
 
-						{/* Quick Status Notification */}
+						{/* Quick Status Notification */ }
 						<AnimatePresence>
-							{statusMessage && (
+							{ statusMessage && (
 								<motion.div
-									initial={{ opacity: 0, y: 10 }}
-									animate={{ opacity: 1, y: 0 }}
-									exit={{ opacity: 0, y: -10 }}
+									initial={ { opacity: 0, y: 10 } }
+									animate={ { opacity: 1, y: 0 } }
+									exit={ { opacity: 0, y: -10 } }
 									className="mt-4 flex items-center gap-2 rounded-sm border border-brand/40 bg-brand/15 px-4 py-2 text-xs font-semibold text-brand shadow-sm"
 								>
 									<Check className="h-4 w-4 text-brand" />
-									<span>{statusMessage}</span>
+									<span>{ statusMessage }</span>
 								</motion.div>
-							)}
+							) }
 						</AnimatePresence>
 					</div>
 				</div>
 			</section>
 
-			{/* MAIN STUDIO WORKSPACE */}
+			{/* MAIN STUDIO WORKSPACE */ }
 			<div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 				<div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
-					{/* LEFT COLUMN: CUSTOMIZER & SETTINGS (5 COLS) */}
+					{/* LEFT COLUMN: CUSTOMIZER & SETTINGS (5 COLS) */ }
 					<div className="space-y-6 lg:col-span-5">
-						{/* 1. MEMBER SELECTOR */}
+						{/* 1. MEMBER SELECTOR */ }
 						<div className="rounded-sm border border-line bg-surface p-5 shadow-sm">
 							<div className="flex items-center justify-between pb-3 border-b border-line">
 								<span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted">
@@ -220,25 +220,24 @@ export default function EmailSignatureStudio() {
 							</div>
 
 							<div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
-								{TEAM_MEMBERS.map((member) => {
+								{ TEAM_MEMBERS.map( ( member ) => {
 									const isActive = formData.name === member.name;
 									return (
 										<button
-											key={member.id}
+											key={ member.id }
 											type="button"
-											onClick={() => handleSelectMember(member)}
-											aria-pressed={isActive}
-											title={`${member.name} — ${member.shortRole}`}
-											className={`flex items-center gap-2.5 rounded-sm border p-2.5 text-left transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:flex-col sm:gap-2 sm:px-2 sm:py-3 sm:text-center ${
-												isActive
+											onClick={ () => handleSelectMember( member ) }
+											aria-pressed={ isActive }
+											title={ `${ member.name } — ${ member.shortRole }` }
+											className={ `flex items-center gap-2.5 rounded-sm border p-2.5 text-left transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:flex-col sm:gap-2 sm:px-2 sm:py-3 sm:text-center ${ isActive
 													? "border-brand bg-brand/10 shadow-sm"
 													: "border-line bg-page hover:border-brand/40 hover:bg-surface"
-											}`}
+												}` }
 										>
 											<div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-brand/40 sm:h-11 sm:w-11">
 												<Image
-													src={member.localAvatar}
-													alt={member.name}
+													src={ member.localAvatar }
+													alt={ member.name }
 													fill
 													unoptimized
 													className="object-cover"
@@ -247,22 +246,22 @@ export default function EmailSignatureStudio() {
 											</div>
 											<div className="min-w-0 flex-1 sm:w-full sm:flex-none">
 												<div className="text-balance text-xs font-bold leading-tight text-fg">
-													{member.name}
+													{ member.name }
 												</div>
 												<div className="mt-0.5 text-balance text-[10px] leading-tight text-muted">
-													{member.shortRole}
+													{ member.shortRole }
 												</div>
 											</div>
 										</button>
 									);
-								})}
+								} ) }
 							</div>
 
 							<div className="mt-3">
 								<button
 									type="button"
-									onClick={() =>
-										setFormData({
+									onClick={ () =>
+										setFormData( {
 											name: "Nouveau Membre",
 											role: "Senior Consultant & Business Strategy",
 											department: "Direction Conseil & Croissance",
@@ -278,7 +277,7 @@ export default function EmailSignatureStudio() {
 											avatar: "https://i.imgur.com/t5DqN7J.jpeg",
 											localAvatar: "https://i.imgur.com/t5DqN7J.jpeg",
 											address: "Essaouira, Maroc • International",
-										})
+										} )
 									}
 									className="w-full rounded-sm border border-dashed border-line py-2 text-center text-xs font-semibold text-muted hover:border-brand hover:text-brand"
 								>
@@ -287,7 +286,7 @@ export default function EmailSignatureStudio() {
 							</div>
 						</div>
 
-						{/* 2. TEMPLATE SELECTOR */}
+						{/* 2. TEMPLATE SELECTOR */ }
 						<div className="rounded-sm border border-line bg-surface p-5 shadow-sm">
 							<span className="flex items-center gap-2 pb-3 border-b border-line text-xs font-bold uppercase tracking-wider text-muted">
 								<Layers className="h-4 w-4 text-brand" />
@@ -295,44 +294,42 @@ export default function EmailSignatureStudio() {
 							</span>
 
 							<div className="mt-4 space-y-2">
-								{TEMPLATES.map((tmpl) => {
+								{ TEMPLATES.map( ( tmpl ) => {
 									const isSelected = activeTemplateId === tmpl.id;
 									return (
 										<button
-											key={tmpl.id}
+											key={ tmpl.id }
 											type="button"
-											onClick={() => setActiveTemplateId(tmpl.id)}
-											className={`flex w-full items-center justify-between rounded-sm border p-3 text-left transition-all ${
-												isSelected
+											onClick={ () => setActiveTemplateId( tmpl.id ) }
+											className={ `flex w-full items-center justify-between rounded-sm border p-3 text-left transition-all ${ isSelected
 													? "border-brand bg-brand/10 shadow-sm"
 													: "border-line bg-page hover:border-brand/40"
-											}`}
+												}` }
 										>
 											<div>
 												<div className="flex items-center gap-2">
 													<span className="text-xs font-bold text-fg">
-														{tmpl.name}
+														{ tmpl.name }
 													</span>
 													<span className="rounded bg-brand/20 px-1.5 py-0.5 text-[9px] font-bold text-brand uppercase">
-														{tmpl.badge}
+														{ tmpl.badge }
 													</span>
 												</div>
 												<p className="mt-0.5 text-[11px] text-muted">
-													{tmpl.description}
+													{ tmpl.description }
 												</p>
 											</div>
 											<ChevronRight
-												className={`h-4 w-4 shrink-0 transition-transform ${
-													isSelected ? "text-brand translate-x-1" : "text-muted"
-												}`}
+												className={ `h-4 w-4 shrink-0 transition-transform ${ isSelected ? "text-brand translate-x-1" : "text-muted"
+													}` }
 											/>
 										</button>
 									);
-								})}
+								} ) }
 							</div>
 						</div>
 
-						{/* 3. EDITABLE DETAILS FORM */}
+						{/* 3. EDITABLE DETAILS FORM */ }
 						<div className="rounded-sm border border-line bg-surface p-5 shadow-sm">
 							<span className="flex items-center gap-2 pb-3 border-b border-line text-xs font-bold uppercase tracking-wider text-muted">
 								<Settings2 className="h-4 w-4 text-brand" />
@@ -340,51 +337,51 @@ export default function EmailSignatureStudio() {
 							</span>
 
 							<div className="mt-4 space-y-3.5">
-								{/* Full Name */}
+								{/* Full Name */ }
 								<div>
 									<label className="block text-xs font-semibold text-fg">
 										Nom complet
 									</label>
 									<input
 										type="text"
-										value={formData.name}
-										onChange={(e) => handleInputChange("name", e.target.value)}
+										value={ formData.name }
+										onChange={ ( e ) => handleInputChange( "name", e.target.value ) }
 										className="mt-1 w-full rounded-sm border border-line bg-page px-3 py-2 text-xs font-medium text-fg focus:border-brand focus:outline-none"
 										placeholder="Feissal Tarkaoui"
 									/>
 								</div>
 
-								{/* Job Title / Role */}
+								{/* Job Title / Role */ }
 								<div>
 									<label className="block text-xs font-semibold text-fg">
 										Poste &amp; Titre Exécutif
 									</label>
 									<input
 										type="text"
-										value={formData.role}
-										onChange={(e) => handleInputChange("role", e.target.value)}
+										value={ formData.role }
+										onChange={ ( e ) => handleInputChange( "role", e.target.value ) }
 										className="mt-1 w-full rounded-sm border border-line bg-page px-3 py-2 text-xs font-medium text-fg focus:border-brand focus:outline-none"
 										placeholder="Chief Executive Officer & Stratégie Business"
 									/>
 								</div>
 
-								{/* Department */}
+								{/* Department */ }
 								<div>
 									<label className="block text-xs font-semibold text-fg">
 										Département / Direction
 									</label>
 									<input
 										type="text"
-										value={formData.department || ""}
-										onChange={(e) =>
-											handleInputChange("department", e.target.value)
+										value={ formData.department || "" }
+										onChange={ ( e ) =>
+											handleInputChange( "department", e.target.value )
 										}
 										className="mt-1 w-full rounded-sm border border-line bg-page px-3 py-2 text-xs font-medium text-fg focus:border-brand focus:outline-none"
 										placeholder="Executive Board & Growth Strategy"
 									/>
 								</div>
 
-								{/* Email & Phone */}
+								{/* Email & Phone */ }
 								<div className="grid grid-cols-2 gap-3">
 									<div>
 										<label className="block text-xs font-semibold text-fg">
@@ -392,9 +389,9 @@ export default function EmailSignatureStudio() {
 										</label>
 										<input
 											type="email"
-											value={formData.email}
-											onChange={(e) =>
-												handleInputChange("email", e.target.value)
+											value={ formData.email }
+											onChange={ ( e ) =>
+												handleInputChange( "email", e.target.value )
 											}
 											className="mt-1 w-full rounded-sm border border-line bg-page px-3 py-2 text-xs font-medium text-fg focus:border-brand focus:outline-none"
 											placeholder="contact@skemalab.com"
@@ -406,9 +403,9 @@ export default function EmailSignatureStudio() {
 										</label>
 										<input
 											type="text"
-											value={formData.phone}
-											onChange={(e) =>
-												handleInputChange("phone", e.target.value)
+											value={ formData.phone }
+											onChange={ ( e ) =>
+												handleInputChange( "phone", e.target.value )
 											}
 											className="mt-1 w-full rounded-sm border border-line bg-page px-3 py-2 text-xs font-medium text-fg focus:border-brand focus:outline-none"
 											placeholder="+212 6 99 99 57 54"
@@ -416,7 +413,7 @@ export default function EmailSignatureStudio() {
 									</div>
 								</div>
 
-								{/* WhatsApp & Website */}
+								{/* WhatsApp & Website */ }
 								<div className="grid grid-cols-2 gap-3">
 									<div>
 										<label className="block text-xs font-semibold text-fg">
@@ -424,9 +421,9 @@ export default function EmailSignatureStudio() {
 										</label>
 										<input
 											type="text"
-											value={formData.whatsapp}
-											onChange={(e) =>
-												handleInputChange("whatsapp", e.target.value)
+											value={ formData.whatsapp }
+											onChange={ ( e ) =>
+												handleInputChange( "whatsapp", e.target.value )
 											}
 											className="mt-1 w-full rounded-sm border border-line bg-page px-3 py-2 text-xs font-medium text-fg focus:border-brand focus:outline-none"
 											placeholder="+212 6 99 99 57 54"
@@ -438,9 +435,9 @@ export default function EmailSignatureStudio() {
 										</label>
 										<input
 											type="text"
-											value={formData.website}
-											onChange={(e) =>
-												handleInputChange("website", e.target.value)
+											value={ formData.website }
+											onChange={ ( e ) =>
+												handleInputChange( "website", e.target.value )
 											}
 											className="mt-1 w-full rounded-sm border border-line bg-page px-3 py-2 text-xs font-medium text-fg focus:border-brand focus:outline-none"
 											placeholder="www.skemalab.com"
@@ -448,33 +445,33 @@ export default function EmailSignatureStudio() {
 									</div>
 								</div>
 
-								{/* LinkedIn */}
+								{/* LinkedIn */ }
 								<div>
 									<label className="block text-xs font-semibold text-fg">
 										Lien LinkedIn
 									</label>
 									<input
 										type="text"
-										value={formData.linkedin}
-										onChange={(e) =>
-											handleInputChange("linkedin", e.target.value)
+										value={ formData.linkedin }
+										onChange={ ( e ) =>
+											handleInputChange( "linkedin", e.target.value )
 										}
 										className="mt-1 w-full rounded-sm border border-line bg-page px-3 py-2 text-xs font-medium text-fg focus:border-brand focus:outline-none"
 										placeholder="feissal-tarkaoui"
 									/>
 								</div>
 
-								{/* GitHub (optional) */}
+								{/* GitHub (optional) */ }
 								<div>
 									<label className="block text-xs font-semibold text-fg">
-										Profil GitHub{" "}
+										Profil GitHub{ " " }
 										<span className="font-normal text-muted">(optionnel)</span>
 									</label>
 									<input
 										type="text"
-										value={formData.githubUrl || ""}
-										onChange={(e) =>
-											handleInputChange("githubUrl", e.target.value)
+										value={ formData.githubUrl || "" }
+										onChange={ ( e ) =>
+											handleInputChange( "githubUrl", e.target.value )
 										}
 										className="mt-1 w-full rounded-sm border border-line bg-page px-3 py-2 text-xs font-medium text-fg focus:border-brand focus:outline-none"
 										placeholder="https://github.com/votre-profil"
@@ -484,32 +481,32 @@ export default function EmailSignatureStudio() {
 									</p>
 								</div>
 
-								{/* Tagline / Slogan */}
+								{/* Tagline / Slogan */ }
 								<div>
 									<label className="block text-xs font-semibold text-fg">
 										Devise / Slogan SkemaLab
 									</label>
 									<input
 										type="text"
-										value={formData.tagline}
-										onChange={(e) =>
-											handleInputChange("tagline", e.target.value)
+										value={ formData.tagline }
+										onChange={ ( e ) =>
+											handleInputChange( "tagline", e.target.value )
 										}
 										className="mt-1 w-full rounded-sm border border-line bg-page px-3 py-2 text-xs font-medium text-fg focus:border-brand focus:outline-none"
 										placeholder="Build · Grow · Automate"
 									/>
 								</div>
 
-								{/* Photo URL */}
+								{/* Photo URL */ }
 								<div>
 									<label className="block text-xs font-semibold text-fg">
 										URL Photo de profil (Haute Définition)
 									</label>
 									<input
 										type="text"
-										value={formData.avatar}
-										onChange={(e) =>
-											handleInputChange("avatar", e.target.value)
+										value={ formData.avatar }
+										onChange={ ( e ) =>
+											handleInputChange( "avatar", e.target.value )
 										}
 										className="mt-1 w-full rounded-sm border border-line bg-page px-3 py-2 text-xs font-medium text-fg focus:border-brand focus:outline-none"
 										placeholder="https://i.imgur.com/t5DqN7J.jpeg"
@@ -519,9 +516,9 @@ export default function EmailSignatureStudio() {
 						</div>
 					</div>
 
-					{/* RIGHT COLUMN: LIVE PREVIEW & EXPORT ACTIONS (7 COLS) */}
+					{/* RIGHT COLUMN: LIVE PREVIEW & EXPORT ACTIONS (7 COLS) */ }
 					<div className="space-y-6 lg:col-span-7">
-						{/* ACTION CARD (TOP BAR) */}
+						{/* ACTION CARD (TOP BAR) */ }
 						<div className="rounded-sm border border-brand/30 bg-brand/5 p-5 shadow-sm">
 							<div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 								<div>
@@ -536,10 +533,10 @@ export default function EmailSignatureStudio() {
 								<div className="flex flex-wrap gap-2">
 									<button
 										type="button"
-										onClick={handleCopyForGmail}
+										onClick={ handleCopyForGmail }
 										className="inline-flex items-center gap-2 rounded-sm bg-brand px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-brand/20 transition-all hover:bg-accent active:scale-95 cursor-pointer"
 									>
-										{copiedRich ? (
+										{ copiedRich ? (
 											<>
 												<Check className="h-4 w-4" />
 												<span>Copié pour Gmail !</span>
@@ -549,12 +546,12 @@ export default function EmailSignatureStudio() {
 												<Copy className="h-4 w-4" />
 												<span>Copier la Signature (Gmail)</span>
 											</>
-										)}
+										) }
 									</button>
 
 									<button
 										type="button"
-										onClick={() => setShowGuideModal(true)}
+										onClick={ () => setShowGuideModal( true ) }
 										className="inline-flex items-center gap-1.5 rounded-sm border border-line bg-surface px-3 py-2 text-xs font-semibold text-fg hover:border-brand hover:text-brand cursor-pointer"
 									>
 										<HelpCircle className="h-3.5 w-3.5" />
@@ -564,9 +561,9 @@ export default function EmailSignatureStudio() {
 							</div>
 						</div>
 
-						{/* PREVIEW CONTAINER */}
+						{/* PREVIEW CONTAINER */ }
 						<div className="rounded-sm border border-line bg-surface shadow-sm overflow-hidden">
-							{/* PREVIEW HEADER */}
+							{/* PREVIEW HEADER */ }
 							<div className="flex flex-wrap items-center justify-between border-b border-line bg-page/70 px-4 py-3">
 								<div className="flex items-center gap-2">
 									<span className="flex h-2.5 w-2.5 rounded-full bg-brand" />
@@ -574,20 +571,19 @@ export default function EmailSignatureStudio() {
 										Rendu en Boîte de Réception
 									</span>
 									<span className="text-xs text-muted">
-										({activeTemplate.name})
+										({ activeTemplate.name })
 									</span>
 								</div>
 
-								{/* PREVIEW SIMULATOR TABS */}
+								{/* PREVIEW SIMULATOR TABS */ }
 								<div className="flex items-center gap-1 rounded-sm border border-line bg-surface p-1">
 									<button
 										type="button"
-										onClick={() => setPreviewMode("gmail")}
-										className={`flex items-center gap-1 rounded px-2.5 py-1 text-[11px] font-semibold transition-all cursor-pointer ${
-											previewMode === "gmail"
+										onClick={ () => setPreviewMode( "gmail" ) }
+										className={ `flex items-center gap-1 rounded px-2.5 py-1 text-[11px] font-semibold transition-all cursor-pointer ${ previewMode === "gmail"
 												? "bg-brand text-white shadow-xs"
 												: "text-muted hover:text-fg"
-										}`}
+											}` }
 									>
 										<Laptop className="h-3 w-3" />
 										<span>Gmail Web</span>
@@ -595,12 +591,11 @@ export default function EmailSignatureStudio() {
 
 									<button
 										type="button"
-										onClick={() => setPreviewMode("clean")}
-										className={`flex items-center gap-1 rounded px-2.5 py-1 text-[11px] font-semibold transition-all cursor-pointer ${
-											previewMode === "clean"
+										onClick={ () => setPreviewMode( "clean" ) }
+										className={ `flex items-center gap-1 rounded px-2.5 py-1 text-[11px] font-semibold transition-all cursor-pointer ${ previewMode === "clean"
 												? "bg-brand text-white shadow-xs"
 												: "text-muted hover:text-fg"
-										}`}
+											}` }
 									>
 										<Eye className="h-3 w-3" />
 										<span>Aperçu Pur</span>
@@ -608,12 +603,12 @@ export default function EmailSignatureStudio() {
 								</div>
 							</div>
 
-							{/* SIMULATED GMAIL COMPOSE WINDOW */}
-							{previewMode === "gmail" ? (
+							{/* SIMULATED GMAIL COMPOSE WINDOW */ }
+							{ previewMode === "gmail" ? (
 								<div className="p-4 sm:p-6 bg-[#f4f7f6] dark:bg-[#070b0a]">
-									{/* Gmail Compose Window Frame */}
+									{/* Gmail Compose Window Frame */ }
 									<div className="overflow-hidden rounded-sm border border-[#d3dedb] bg-white shadow-md">
-										{/* Header bar */}
+										{/* Header bar */ }
 										<div className="flex items-center justify-between border-b border-[#e5eeec] bg-[#eef5f3] px-4 py-2.5">
 											<div className="flex items-center gap-2">
 												<Building2 className="h-3.5 w-3.5 text-brand" />
@@ -628,20 +623,20 @@ export default function EmailSignatureStudio() {
 											</div>
 										</div>
 
-										{/* Meta fields */}
+										{/* Meta fields */ }
 										<div className="border-b border-[#eef5f3] px-4 py-2 text-xs text-[#5B6B66]">
-											<span className="font-semibold text-[#1B2B28]">À :</span>{" "}
+											<span className="font-semibold text-[#1B2B28]">À :</span>{ " " }
 											direction@groupe-partenaire.com
 										</div>
 										<div className="border-b border-[#eef5f3] px-4 py-2 text-xs text-[#5B6B66]">
 											<span className="font-semibold text-[#1B2B28]">
 												Objet :
-											</span>{" "}
+											</span>{ " " }
 											Partenariat Stratégique &amp; Architecture Digitale —
 											SkemaLab
 										</div>
 
-										{/* Email Body & Signature Container */}
+										{/* Email Body & Signature Container */ }
 										<div className="p-5 sm:p-6 space-y-4">
 											<p className="text-xs leading-relaxed text-[#1B2B28]">
 												Bonjour,
@@ -658,14 +653,14 @@ export default function EmailSignatureStudio() {
 											<p className="text-xs text-[#1B2B28]">
 												Excellente journée,
 												<br />
-												<span className="font-bold">{formData.name}</span>
+												<span className="font-bold">{ formData.name }</span>
 											</p>
 
-											{/* THE RENDERED SIGNATURE IN EMAIL */}
+											{/* THE RENDERED SIGNATURE IN EMAIL */ }
 											<div className="pt-4 border-t border-dashed border-[#d3dedb]">
 												<div
-													ref={signaturePreviewRef}
-													dangerouslySetInnerHTML={{ __html: previewHtml }}
+													ref={ signaturePreviewRef }
+													dangerouslySetInnerHTML={ { __html: previewHtml } }
 													className="select-all overflow-x-auto py-2"
 												/>
 											</div>
@@ -676,34 +671,34 @@ export default function EmailSignatureStudio() {
 								/* CLEAN WHITE CANVAS PREVIEW */
 								<div className="flex items-center justify-center p-6 sm:p-10 bg-white">
 									<div
-										ref={signaturePreviewRef}
-										dangerouslySetInnerHTML={{ __html: previewHtml }}
+										ref={ signaturePreviewRef }
+										dangerouslySetInnerHTML={ { __html: previewHtml } }
 										className="select-all overflow-x-auto"
 									/>
 								</div>
-							)}
+							) }
 
-							{/* BOTTOM QUICK ACTIONS & HTML CODE EXPORT */}
-							<div className="flex flex-wrap items-center justify-between gap-3 border-t border-line bg-surface p-4">
+							{/* BOTTOM QUICK ACTIONS & HTML CODE EXPORT */ }
+							<div className="flex flex-wrap items-center justify-between gap-3  bg-surface p-4">
 								<div className="flex items-center gap-2">
 									<button
 										type="button"
-										onClick={handleCopyForGmail}
+										onClick={ handleCopyForGmail }
 										className="inline-flex items-center gap-1.5 rounded-sm bg-brand px-3.5 py-2 text-xs font-bold text-white transition-all hover:bg-accent cursor-pointer"
 									>
 										<Copy className="h-3.5 w-3.5" />
 										<span>
-											{copiedRich ? "Copié !" : "Copier la Signature"}
+											{ copiedRich ? "Copié !" : "Copier la Signature" }
 										</span>
 									</button>
 
 									<button
 										type="button"
-										onClick={handleCopyCode}
+										onClick={ handleCopyCode }
 										className="inline-flex items-center gap-1.5 rounded-sm border border-line bg-page px-3 py-2 text-xs font-semibold text-fg hover:border-brand hover:text-brand cursor-pointer"
 									>
 										<Code2 className="h-3.5 w-3.5" />
-										<span>{copiedCode ? "Code Copié !" : "Code HTML"}</span>
+										<span>{ copiedCode ? "Code Copié !" : "Code HTML" }</span>
 									</button>
 								</div>
 
@@ -714,7 +709,7 @@ export default function EmailSignatureStudio() {
 							</div>
 						</div>
 
-						{/* HOW IT WORKS / GMAIL STEP BY STEP CARD */}
+						{/* HOW IT WORKS / GMAIL STEP BY STEP CARD */ }
 						<div className="rounded-sm border border-line bg-surface p-6 shadow-sm">
 							<h3 className="flex items-center gap-2 text-sm font-bold text-fg">
 								<span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[10px] font-extrabold text-white">
@@ -732,7 +727,7 @@ export default function EmailSignatureStudio() {
 										Copier la signature
 									</h4>
 									<p className="mt-1 text-[11px] text-muted leading-snug">
-										Cliquez sur le bouton vert{" "}
+										Cliquez sur le bouton vert{ " " }
 										<strong>« Copier la Signature »</strong> ci-dessus.
 									</p>
 								</div>
@@ -745,8 +740,8 @@ export default function EmailSignatureStudio() {
 										Ouvrir Gmail
 									</h4>
 									<p className="mt-1 text-[11px] text-muted leading-snug">
-										Allez dans ⚙️ <strong>Paramètres</strong> &gt;{" "}
-										<strong>Général</strong> &gt; rubrique{" "}
+										Allez dans ⚙️ <strong>Paramètres</strong> &gt;{ " " }
+										<strong>Général</strong> &gt; rubrique{ " " }
 										<strong>Signature</strong>.
 									</p>
 								</div>
@@ -759,15 +754,15 @@ export default function EmailSignatureStudio() {
 										Coller &amp; Enregistrer
 									</h4>
 									<p className="mt-1 text-[11px] text-muted leading-snug">
-										Faites <strong>Ctrl + V</strong> (ou{" "}
-										<strong>Cmd + V</strong>) dans la boîte, puis cliquez sur{" "}
+										Faites <strong>Ctrl + V</strong> (ou{ " " }
+										<strong>Cmd + V</strong>) dans la boîte, puis cliquez sur{ " " }
 										<em>Enregistrer</em> en bas.
 									</p>
 								</div>
 							</div>
 						</div>
 
-						{/* RAW HTML ACCORDION / CODE DRAWER */}
+						{/* RAW HTML ACCORDION / CODE DRAWER */ }
 						<details className="group rounded-sm border border-line bg-surface p-4 shadow-sm">
 							<summary className="flex cursor-pointer items-center justify-between text-xs font-bold text-fg">
 								<span className="flex items-center gap-2">
@@ -780,12 +775,12 @@ export default function EmailSignatureStudio() {
 							</summary>
 							<div className="mt-3">
 								<pre className="max-h-60 overflow-auto rounded-sm bg-[#0b0f0e] p-3 text-[11px] text-[#a0aec0] font-mono select-all">
-									{signatureHtml}
+									{ signatureHtml }
 								</pre>
 								<div className="mt-2 text-right">
 									<button
 										type="button"
-										onClick={handleCopyCode}
+										onClick={ handleCopyCode }
 										className="inline-flex items-center gap-1 text-xs font-bold text-brand hover:underline cursor-pointer"
 									>
 										<Copy className="h-3 w-3" />
@@ -798,14 +793,14 @@ export default function EmailSignatureStudio() {
 				</div>
 			</div>
 
-			{/* POPUP MODAL: STEP BY STEP GUIDE */}
+			{/* POPUP MODAL: STEP BY STEP GUIDE */ }
 			<AnimatePresence>
-				{showGuideModal && (
+				{ showGuideModal && (
 					<div className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
 						<motion.div
-							initial={{ opacity: 0, scale: 0.95 }}
-							animate={{ opacity: 1, scale: 1 }}
-							exit={{ opacity: 0, scale: 0.95 }}
+							initial={ { opacity: 0, scale: 0.95 } }
+							animate={ { opacity: 1, scale: 1 } }
+							exit={ { opacity: 0, scale: 0.95 } }
 							className="relative w-full max-w-lg rounded-sm border border-line bg-surface p-6 shadow-2xl"
 						>
 							<div className="flex items-center justify-between pb-4 border-b border-line">
@@ -824,7 +819,7 @@ export default function EmailSignatureStudio() {
 								</div>
 								<button
 									type="button"
-									onClick={() => setShowGuideModal(false)}
+									onClick={ () => setShowGuideModal( false ) }
 									className="rounded-sm p-1.5 text-muted hover:bg-page hover:text-fg cursor-pointer"
 								>
 									✕
@@ -837,7 +832,7 @@ export default function EmailSignatureStudio() {
 										1
 									</span>
 									<p>
-										Sur cette page, cliquez sur{" "}
+										Sur cette page, cliquez sur{ " " }
 										<strong>« Copier la Signature »</strong>. Le contenu avec
 										photos, liens et mise en page est copié dans votre
 										presse-papier.
@@ -850,7 +845,7 @@ export default function EmailSignatureStudio() {
 									</span>
 									<p>
 										Ouvrez votre boîte <strong>Gmail</strong> (web), cliquez sur
-										la roue crantée ⚙️ en haut à droite, puis sur{" "}
+										la roue crantée ⚙️ en haut à droite, puis sur{ " " }
 										<strong>« Voir tous les paramètres »</strong>.
 									</p>
 								</div>
@@ -861,7 +856,7 @@ export default function EmailSignatureStudio() {
 									</span>
 									<p>
 										Dans l&apos;onglet <strong>« Général »</strong>, faites
-										défiler vers le bas jusqu&apos;à la section{" "}
+										défiler vers le bas jusqu&apos;à la section{ " " }
 										<strong>Signature</strong>.
 									</p>
 								</div>
@@ -873,7 +868,7 @@ export default function EmailSignatureStudio() {
 									<p>
 										Cliquez sur <strong>« Créer »</strong> (nommez-la par
 										exemple <em>SkemaLab Officielle</em>) puis dans le grand
-										cadre blanc à droite, faites simplement{" "}
+										cadre blanc à droite, faites simplement{ " " }
 										<strong>Coller (Ctrl + V ou Cmd + V)</strong>.
 									</p>
 								</div>
@@ -885,7 +880,7 @@ export default function EmailSignatureStudio() {
 									<p>
 										Configurez <em>« Pour les nouveaux e-mails »</em> sur votre
 										nouvelle signature, descendez tout en bas de la page Gmail
-										et cliquez sur{" "}
+										et cliquez sur{ " " }
 										<strong>« Enregistrer les modifications »</strong>.
 									</p>
 								</div>
@@ -894,10 +889,10 @@ export default function EmailSignatureStudio() {
 							<div className="mt-6 flex justify-end">
 								<button
 									type="button"
-									onClick={() => {
+									onClick={ () => {
 										handleCopyForGmail();
-										setShowGuideModal(false);
-									}}
+										setShowGuideModal( false );
+									} }
 									className="rounded-sm bg-brand px-4 py-2 text-xs font-bold text-white hover:bg-accent cursor-pointer"
 								>
 									Copier et Fermer
@@ -905,7 +900,7 @@ export default function EmailSignatureStudio() {
 							</div>
 						</motion.div>
 					</div>
-				)}
+				) }
 			</AnimatePresence>
 		</div>
 	);

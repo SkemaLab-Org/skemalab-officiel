@@ -17,9 +17,9 @@ export default function Studio() {
   const page = t.aboutPage;
 
   const facts = [
-    [intro.foundedBy, `${founders[0].name} · ${intro.founderStatus}`],
-    [page.hqLabel, contactInfo.locations.join(" · ")],
-    [page.scopeLabel, page.scopeValue],
+    [ intro.foundedBy, `${ founders[ 0 ].name } · ${ intro.founderStatus }` ],
+    [ page.hqLabel, contactInfo.locations.join( " · " ) ],
+    [ page.scopeLabel, page.scopeValue ],
   ];
 
   const photos = [
@@ -43,33 +43,33 @@ export default function Studio() {
         <Reveal>
           <BandHeader
             index="05"
-            label={home.sectionLabel}
-            title={home.title}
-            description={home.p1}
+            label={ home.sectionLabel }
+            title={ home.title }
+            description={ home.p1 }
           />
         </Reveal>
 
-        <Reveal delay={0.06} className="mt-12 sm:mt-16">
+        <Reveal delay={ 0.06 } className="mt-12 sm:mt-16">
           <div className="grid grid-cols-1 gap-px border-y border-line bg-line min-[560px]:grid-cols-2">
-            {photos.map((photo) => (
+            { photos.map( ( photo ) => (
               <figure
-                key={photo.caption}
+                key={ photo.caption }
                 className="photo-duotone relative m-0 aspect-[4/5] w-full sm:aspect-[4/3] lg:aspect-[16/9]"
               >
                 <Image
-                  src={photo.src}
-                  alt={photo.alt}
+                  src={ photo.src }
+                  alt={ photo.alt }
                   fill
                   sizes="(max-width: 560px) 100vw, 50vw"
                   className="object-cover"
                 />
                 <figcaption className="absolute bottom-0 start-0 z-10 bg-[#07110e]/55 px-3 py-2">
                   <span className="label-mono text-cream/90">
-                    {photo.caption}
+                    { photo.caption }
                   </span>
                 </figcaption>
               </figure>
-            ))}
+            ) ) }
           </div>
         </Reveal>
 
@@ -77,52 +77,52 @@ export default function Studio() {
           <div className="min-w-0">
             <Reveal>
               <p className="max-w-[52ch] text-[15px] leading-[1.7] text-muted">
-                {home.p2}
+                { home.p2 }
               </p>
             </Reveal>
-            <Reveal delay={0.06}>
+            <Reveal delay={ 0.06 }>
               <p className="mt-5 max-w-[52ch] text-[15px] leading-[1.7] text-muted">
-                {intro.secondary}
+                { intro.secondary }
               </p>
             </Reveal>
 
-            <Reveal delay={0.12}>
-              <div className="mt-9 border-t border-line pt-6">
-                <p className="label-mono text-muted">{home.promiseEyebrow}</p>
+            <Reveal delay={ 0.12 }>
+              <div className="mt-9  pt-6">
+                <p className="label-mono text-muted">{ home.promiseEyebrow }</p>
                 <p className="mt-3 max-w-[34ch] font-display text-[clamp(1.25rem,2vw,1.6rem)] font-light leading-[1.25] tracking-[-0.02em] text-fg">
-                  {home.promiseText}
+                  { home.promiseText }
                 </p>
               </div>
             </Reveal>
           </div>
 
           <div className="min-w-0">
-            <Reveal delay={0.08}>
-              <dl className="border-t border-line">
-                {facts.map(([term, value]) => (
+            <Reveal delay={ 0.08 }>
+              <dl className="">
+                { facts.map( ( [ term, value ] ) => (
                   <div
-                    key={term}
+                    key={ term }
                     className="grid gap-1 border-b border-line py-4 sm:grid-cols-[0.4fr_1fr] sm:items-baseline sm:gap-6"
                   >
-                    <dt className="label-mono text-muted">{term}</dt>
-                    <dd className="text-sm leading-relaxed text-fg">{value}</dd>
+                    <dt className="label-mono text-muted">{ term }</dt>
+                    <dd className="text-sm leading-relaxed text-fg">{ value }</dd>
                   </div>
-                ))}
+                ) ) }
               </dl>
             </Reveal>
 
-            <Reveal delay={0.14}>
+            <Reveal delay={ 0.14 }>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Button href="#contact" className="rounded-none">
-                  {home.cta}
-                  <ArrowUpRight size={16} className="rtl-flip" />
+                  { home.cta }
+                  <ArrowUpRight size={ 16 } className="rtl-flip" />
                 </Button>
                 <Button
                   href="/our-story"
                   variant="outline"
                   className="rounded-none"
                 >
-                  {intro.cta}
+                  { intro.cta }
                 </Button>
               </div>
             </Reveal>
