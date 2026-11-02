@@ -17,6 +17,7 @@ export default function Projects() {
 	const [ activeIndex, setActiveIndex ] = useState( 0 );
 	const activeGoal = goals[ activeIndex ] || goals[ 0 ];
 	const reduce = useReducedMotion();
+
 	return (
 		<section id="projets" className="section-y bg-page">
 			<div className="shell">
@@ -34,7 +35,7 @@ export default function Projects() {
 						<div
 							role="group"
 							aria-label={ copy.eyebrow }
-							className=""
+							className="space-y-1"
 						>
 							{ goals.map( ( goal, index ) => {
 								const active = index === activeIndex;
@@ -45,14 +46,16 @@ export default function Projects() {
 										aria-pressed={ active }
 										onClick={ () => setActiveIndex( index ) }
 										className={ cn(
-											"group flex w-full items-center gap-4 border-b border-line py-4 text-start transition-colors duration-300 sm:py-5",
-											active ? "text-fg" : "text-muted hover:text-fg",
+											"group relative flex w-full items-center gap-4 border-b border-line px-3 py-4 text-start transition-all duration-300 sm:py-5 sm:px-4",
+											active
+												? "border-accent bg-surface-2/45 text-fg shadow-[inset_2px_0_0_0_var(--accent)]"
+												: "text-muted hover:bg-surface-2/20 hover:text-fg",
 										) }
 									>
 										<span
 											className={ cn(
-												"label-mono w-6 shrink-0 transition-colors",
-												active ? "text-fg" : "text-muted",
+												"label-mono w-6 shrink-0 transition-colors font-mono",
+												active ? "text-accent font-semibold" : "text-muted",
 											) }
 										>
 											{ String( index + 1 ).padStart( 2, "0" ) }
@@ -69,10 +72,10 @@ export default function Projects() {
 											size={ 16 }
 											aria-hidden="true"
 											className={ cn(
-												"shrink-0 transition-transform duration-300 rtl-flip",
+												"shrink-0 transition-all duration-300 rtl-flip",
 												active
-													? "text-fg group-hover:-translate-y-0.5"
-													: "text-muted",
+													? "text-accent translate-x-0.5 -translate-y-0.5"
+													: "text-muted/60 group-hover:text-fg",
 											) }
 										/>
 									</button>
@@ -84,11 +87,16 @@ export default function Projects() {
 					<Reveal delay={ 0.08 }>
 						<div
 							aria-live="polite"
-							className="relative min-h-[22rem] overflow-hidden border border-line bg-page p-6 sm:min-h-[24rem] sm:p-10"
+							className="relative min-h-[22rem] overflow-hidden border border-line bg-surface p-6 sm:min-h-[25rem] sm:p-10 shadow-[0_4px_30px_rgba(0,0,0,0.12)]"
 						>
+							<div
+								aria-hidden="true"
+								className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent/5 blur-3xl"
+							/>
+
 							<span
 								aria-hidden="true"
-								className="pointer-events-none absolute bottom-5 end-7 font-display text-[4.5rem] font-light leading-none tracking-[-0.05em] text-fg/[0.06] sm:text-[5.5rem]"
+								className="pointer-events-none absolute bottom-5 end-7 font-display text-[4.5rem] font-light leading-none tracking-[-0.05em] text-fg/[0.05] sm:text-[6rem]"
 							>
 								{ String( activeIndex + 1 ).padStart( 2, "0" ) }
 							</span>
@@ -102,19 +110,19 @@ export default function Projects() {
 									transition={ { duration: DURATION.base, ease: EASE.out } }
 									className="relative flex h-full flex-col"
 								>
-									<span className="label-mono text-muted">
+									<span className="atelier-pill mb-2 w-fit">
 										{ activeGoal.category }
 									</span>
 
 									<h3 className="landing-display mt-6 max-w-[20ch] text-[clamp(1.6rem,2.6vw,2.2rem)] text-fg">
 										{ activeGoal.goal }
 									</h3>
-									<p className="mt-4 max-w-[38ch] text-sm leading-[1.7] text-muted">
+									<p className="mt-4 max-w-[40ch] text-sm leading-[1.7] text-muted">
 										{ activeGoal.description }
 									</p>
 
 									<div className="mt-auto pt-10">
-										<Button href="#contact" size="sm" className="rounded-none">
+										<Button href="#contact" size="sm">
 											{ copy.similarProject }
 											<ArrowUpRight size={ 15 } className="rtl-flip" />
 										</Button>

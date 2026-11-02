@@ -138,7 +138,7 @@ export function CalendlyProvider({ children }) {
 									onClick={closeBooking}
 									aria-label="Fermer la fenêtre"
 									tabIndex={open ? 0 : -1}
-									className="flex h-10 w-10 items-center justify-center rounded-md border border-cream/15 text-cream/80 transition-colors hover:border-accent-bright hover:text-accent-bright"
+									className="flex h-10 w-10 items-center justify-center rounded-none border border-cream/15 text-cream/80 transition-colors hover:border-accent-bright hover:text-accent-bright hover:bg-cream/5"
 								>
 									<X size={18} />
 								</button>

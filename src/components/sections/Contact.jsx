@@ -109,10 +109,12 @@ export default function Contact() {
         <div className="min-w-0">
           <Reveal>
             <div className="flex items-center gap-4">
-              <span className="label-mono shrink-0 text-muted">
-                08 · { copy.eyebrow }
-              </span>
-              <span aria-hidden="true" className="h-px flex-1 bg-line" />
+              <div className="label-mono flex items-center gap-2 shrink-0">
+                <span className="font-mono text-accent font-semibold">08</span>
+                <span className="text-muted/40" aria-hidden="true">/</span>
+                <span className="text-fg/80">{ copy.eyebrow }</span>
+              </div>
+              <span aria-hidden="true" className="h-px flex-1 bg-gradient-to-r from-line via-line-soft to-transparent" />
             </div>
 
             <h2 className="landing-display mt-8 max-w-[16ch] text-[clamp(2rem,4.2vw,3.2rem)] text-fg">
@@ -124,7 +126,7 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={ 0.1 }>
-            <ul className="mt-10 space-y-0 ">
+            <ul className="mt-10 space-y-0">
               <ContactRow
                 icon={ Mail }
                 label={ copy.emailLabel }
@@ -151,9 +153,8 @@ export default function Contact() {
             onSubmit={ handleSubmit( onSubmit ) }
             noValidate
             aria-busy={ busy }
-            className="pt-8"
+            className="pt-2 sm:pt-6"
           >
-
             { status === "success" ? (
               <StatusPanel
                 variant="success"
@@ -201,49 +202,51 @@ export default function Contact() {
 
                 <Field
                   id="contact-name"
-                  label={ copy.nameInput }
-                  error={ errors.name?.message }
+                  label={ copy.nameLabel }
                   autoComplete="name"
                   maxLength={ CONTACT_LIMITS.name }
+                  error={ errors.name?.message }
                   { ...register( "name" ) }
                 />
+
                 <Field
                   id="contact-company"
-                  label={ copy.companyInput }
-                  error={ errors.company?.message }
+                  label={ copy.companyLabel }
                   autoComplete="organization"
                   maxLength={ CONTACT_LIMITS.company }
+                  error={ errors.company?.message }
                   { ...register( "company" ) }
                 />
+
                 <Field
                   id="contact-email"
-                  label={ copy.emailInput }
+                  label={ copy.emailLabel }
                   type="email"
-                  error={ errors.email?.message }
                   autoComplete="email"
                   maxLength={ 200 }
+                  error={ errors.email?.message }
                   { ...register( "email" ) }
                 />
+
                 <Field
                   id="contact-phone"
-                  label={ copy.phoneInput }
+                  label={ copy.phoneLabel }
                   type="tel"
-                  error={ errors.phone?.message }
                   autoComplete="tel"
                   maxLength={ CONTACT_LIMITS.phone }
+                  error={ errors.phone?.message }
                   { ...register( "phone" ) }
                 />
 
                 <div className="sm:col-span-2">
                   <label htmlFor="contact-service" className="label-mono mb-1 block text-muted">
-                    { copy.serviceInput }
+                    { copy.serviceLabel }
                   </label>
                   <select
                     id="contact-service"
                     aria-invalid={ errors.service ? "true" : undefined }
                     aria-describedby={ errors.service ? "contact-service-error" : undefined }
-                    className="field"
-                    defaultValue=""
+                    className="field cursor-pointer"
                     { ...register( "service" ) }
                   >
                     <option value="" disabled>
@@ -260,12 +263,11 @@ export default function Contact() {
 
                 <div className="sm:col-span-2">
                   <label htmlFor="contact-message" className="label-mono mb-1 block text-muted">
-                    { copy.messageInput }
+                    { copy.messageLabel }
                   </label>
                   <textarea
                     id="contact-message"
-                    rows={ 5 }
-                    placeholder={ copy.messagePlaceholder }
+                    rows={ 4 }
                     aria-invalid={ errors.message ? "true" : undefined }
                     aria-describedby={ errors.message ? "contact-message-error" : undefined }
                     maxLength={ CONTACT_LIMITS.message }
@@ -275,11 +277,10 @@ export default function Contact() {
                   <FieldError id="contact-message-error" message={ errors.message?.message } />
                 </div>
 
-                <div className="pt-1 sm:col-span-2">
+                <div className="pt-2 sm:col-span-2">
                   <Button
                     type="submit"
-                    size="md"
-                    className="rounded-none"
+                    size="lg"
                     loading={ busy }
                     disabled={ busy }
                   >
@@ -324,9 +325,9 @@ function FieldError( { id, message } ) {
           role="alert"
           initial={ { opacity: 0, y: -4 } }
           animate={ { opacity: 1, y: 0 } }
-          exit={ { opacity: 0, y: -4 } }
+          exit={ { opacity: 0 } }
           transition={ { duration: DURATION.fast, ease: EASE.out } }
-          className="mt-2 text-xs text-danger"
+          className="mt-1 text-xs text-danger"
         >
           { message }
         </motion.p>
@@ -338,18 +339,18 @@ function FieldError( { id, message } ) {
 function ContactRow( { icon: Icon, label, value, href } ) {
   const content = (
     <>
-      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-none border border-line text-muted transition-colors group-hover:border-accent group-hover:text-fg">
-        <Icon size={ 16 } strokeWidth={ 1.75 } aria-hidden="true" />
+      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-none border border-line-strong text-muted transition-all duration-300 group-hover:border-accent group-hover:text-accent group-hover:bg-accent/5">
+        <Icon size={ 17 } strokeWidth={ 1.75 } aria-hidden="true" />
       </span>
       <span className="min-w-0 flex-1">
         <span className="label-mono block text-muted">{ label }</span>
-        <span className="mt-1 block break-all text-sm text-fg transition-colors group-hover:text-accent">
+        <span className="mt-1 block break-all text-sm font-medium text-fg transition-colors group-hover:text-accent">
           { value }
         </span>
       </span>
       { href ? (
         <ArrowUpRight
-          size={ 15 }
+          size={ 16 }
           aria-hidden="true"
           className="shrink-0 text-muted transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent rtl-flip"
         />
@@ -358,7 +359,7 @@ function ContactRow( { icon: Icon, label, value, href } ) {
   );
 
   const className =
-    "group flex min-h-16 items-center gap-3 border-b border-line py-3";
+    "group flex min-h-16 items-center gap-3.5 border-b border-line px-2 py-3.5 transition-colors duration-200 hover:bg-surface-2/25";
 
   if ( href ) {
     return (
@@ -388,7 +389,7 @@ function StatusPanel( { variant = "success", eyebrow, title, text, resetLabel, o
         size={ 34 }
         strokeWidth={ 1.5 }
         aria-hidden="true"
-        className={ variant === "success" ? "text-fg" : "text-danger" }
+        className={ variant === "success" ? "text-accent" : "text-danger" }
       />
       <p className="label-mono mt-6 text-muted">{ eyebrow }</p>
       <h3 className="mt-3 font-display text-2xl tracking-tight sm:text-3xl">{ title }</h3>

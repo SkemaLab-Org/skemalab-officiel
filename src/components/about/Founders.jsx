@@ -48,7 +48,7 @@ export default function Founders() {
 
 				<div className="mt-12 grid gap-10 sm:mt-16 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16">
 					<Reveal>
-						<div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-line bg-deep">
+						<div className="relative aspect-[4/5] overflow-hidden rounded-none border border-line bg-deep shadow-[0_4px_30px_rgba(0,0,0,0.25)]">
 							<AnimatePresence initial={ false }>
 								<motion.div
 									key={ active.id }
@@ -70,7 +70,7 @@ export default function Founders() {
 
 							<span
 								aria-hidden="true"
-								className="absolute inset-0 bg-gradient-to-t from-[#07110e] via-[#07110e]/20 to-transparent"
+								className="absolute inset-0 bg-gradient-to-t from-[#07110e] via-[#07110e]/25 to-transparent"
 							/>
 
 							<div className="absolute inset-x-5 bottom-5 sm:inset-x-7 sm:bottom-7">
@@ -84,7 +84,7 @@ export default function Founders() {
 
 					<div className="min-w-0">
 						<div
-							className=""
+							className="space-y-1"
 							role="group"
 							aria-label={ copy.foundersEyebrow }
 						>
@@ -97,14 +97,16 @@ export default function Founders() {
 										aria-pressed={ isActive }
 										onClick={ () => setActiveId( founder.id ) }
 										className={ cn(
-											"group flex w-full items-baseline gap-4 border-b border-line py-4 text-start transition-colors duration-300",
-											isActive ? "text-fg" : "text-muted hover:text-fg",
+											"group flex w-full items-baseline gap-4 border-b border-line px-3 py-4 text-start transition-all duration-300 sm:px-4",
+											isActive
+												? "border-accent bg-surface-2/45 text-fg shadow-[inset_2px_0_0_0_var(--accent)]"
+												: "text-muted hover:bg-surface-2/20 hover:text-fg",
 										) }
 									>
 										<span
 											className={ cn(
-												"label-mono w-6 shrink-0",
-												isActive ? "text-accent" : "text-muted",
+												"label-mono w-6 shrink-0 font-mono",
+												isActive ? "text-accent font-semibold" : "text-muted",
 											) }
 										>
 											{ String( index + 1 ).padStart( 2, "0" ) }
@@ -121,10 +123,10 @@ export default function Founders() {
 											size={ 16 }
 											aria-hidden="true"
 											className={ cn(
-												"shrink-0 transition-colors rtl-flip",
+												"shrink-0 transition-transform duration-200 rtl-flip",
 												isActive
-													? "text-accent"
-													: "text-muted group-hover:text-muted",
+													? "text-accent translate-x-0.5 -translate-y-0.5"
+													: "text-muted/60 group-hover:text-fg",
 											) }
 										/>
 									</button>
@@ -139,10 +141,10 @@ export default function Founders() {
 								animate={ { opacity: 1, y: 0 } }
 								exit={ reduce ? { opacity: 0 } : { opacity: 0, y: -8 } }
 								transition={ { duration: DURATION.fast, ease: EASE.out } }
-								className="mt-6"
+								className="mt-6 border border-line bg-surface p-6 sm:p-7 shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
 								aria-live="polite"
 							>
-								<p className="label-mono text-muted">{ active.title }</p>
+								<p className="label-mono text-accent font-mono">{ active.title }</p>
 								<p className="mt-3 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
 									{ active.shortBio }
 								</p>
@@ -164,7 +166,7 @@ export default function Founders() {
 								target="_blank"
 								rel="noopener noreferrer"
 								aria-label={ `Profil LinkedIn de ${ active.name }` }
-								className="inline-flex h-12 items-center gap-2 rounded-md border border-line px-4 text-sm text-muted transition-colors hover:border-accent hover:text-accent"
+								className="inline-flex h-12 items-center gap-2 rounded-none border border-line-strong px-4 text-sm text-muted transition-colors hover:border-accent hover:text-accent hover:bg-surface-2/30"
 							>
 								LinkedIn
 								<ArrowUpRight size={ 14 } aria-hidden="true" />

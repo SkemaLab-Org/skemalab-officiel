@@ -38,7 +38,7 @@ export default function Footer() {
 		"inline-flex min-h-9 items-center text-[13px] text-[#a2b8b1] transition-colors hover:text-[#3ad9bf]";
 
 	return (
-		<footer className="bg-[#07110e] text-[#f2ede2]">
+		<footer className="border-t border-[rgba(242,237,226,0.1)] bg-[#07110e] text-[#f2ede2]">
 			<div className="shell grid gap-12 py-14 sm:py-16 lg:grid-cols-[1.4fr_0.7fr_1fr] lg:gap-16">
 				<div className="max-w-sm">
 					<Image
@@ -62,7 +62,7 @@ export default function Footer() {
 									? { target: "_blank", rel: "noopener noreferrer" }
 									: {} ) }
 								aria-label={ label }
-								className="flex h-10 w-10 items-center justify-center rounded-none border border-[rgba(242,237,226,0.16)] text-[#a2b8b1] transition-colors hover:border-[#3ad9bf] hover:text-[#3ad9bf]"
+								className="flex h-10 w-10 items-center justify-center rounded-none border border-[rgba(242,237,226,0.16)] text-[#a2b8b1] transition-all duration-200 hover:border-[#3ad9bf] hover:bg-[#3ad9bf]/10 hover:text-[#3ad9bf]"
 							>
 								<Icon className="h-[17px] w-[17px]" />
 							</a>
@@ -114,7 +114,7 @@ export default function Footer() {
 				</div>
 			</div>
 
-			<div>
+			<div className="border-t border-[rgba(242,237,226,0.08)]">
 				<div className="shell flex flex-col items-start justify-between gap-3 py-5 sm:flex-row sm:items-center">
 					<p className="label-mono text-[#a2b8b1]">
 						© { new Date().getFullYear() } { t.common.copyright }
@@ -123,7 +123,7 @@ export default function Footer() {
 						<p className="label-mono text-[#a2b8b1]">{ t.common.tagline }</p>
 						<a
 							href="#top"
-							className="label-mono inline-flex items-center gap-1.5 text-[#a2b8b1] transition-colors hover:text-[#3ad9bf]"
+							className="label-mono inline-flex items-center gap-1.5 border border-cream/15 px-2.5 py-1 text-[#a2b8b1] transition-all duration-200 hover:border-[#3ad9bf] hover:text-[#3ad9bf]"
 						>
 							<ArrowUp size={ 12 } aria-hidden="true" />
 							<span className="sr-only">{ t.common.backToTop }</span>

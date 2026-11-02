@@ -61,28 +61,32 @@ export default function Services() {
 				/>
 				<div className="mt-10 flex flex-col divide-y divide-line border-y border-line">
 					{ services.map( ( service, index ) => (
-						<article key={ service.id } className="flex flex-col bg-page py-7">
+						<article key={ service.id } className="flex flex-col bg-page py-8">
 							<div className="flex items-start justify-between gap-6">
 								<TileCanvas
 									variant={ service.id }
 									className="max-w-[160px] flex-1"
 								/>
-								<span className="label-mono shrink-0 text-muted">
+								<span className="label-mono font-mono text-accent font-medium shrink-0">
 									{ String( index + 1 ).padStart( 2, "0" ) }
 								</span>
 							</div>
-							<h3 className="mt-6 text-[17px] font-medium leading-snug text-fg">
+							<h3 className="mt-6 text-[18px] font-medium leading-snug text-fg">
 								{ service.title }
 							</h3>
-							<p className="mt-2 text-sm leading-[1.62] text-muted">
+							<p className="mt-2 text-sm leading-[1.65] text-muted">
 								{ service.description }
 							</p>
-							<p className="label-mono mt-4 mb-5 leading-[1.7] text-muted">
-								{ service.points.slice( 0, 3 ).join( " · " ) }
-							</p>
+							<div className="mt-4 mb-5 flex flex-wrap gap-1.5">
+								{ service.points.slice( 0, 3 ).map( ( pt ) => (
+									<span key={ pt } className="atelier-pill">
+										{ pt }
+									</span>
+								) ) }
+							</div>
 							<a
 								href="#contact"
-								className="mt-auto inline-flex items-center gap-2  pt-4 text-[13px] text-fg transition-colors hover:text-accent"
+								className="mt-auto inline-flex items-center gap-2 pt-3 text-[13px] font-medium text-fg transition-colors hover:text-accent"
 							>
 								{ copy.tileCta }
 								<ArrowUpRight
@@ -120,8 +124,8 @@ export default function Services() {
 					<div className="wrap w-full max-w-6xl mx-auto px-6 sm:px-8">
 						<div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 pb-4">
 							<div className="flex items-center gap-3">
-								<span className="label-mono text-accent">01</span>
-								<span className="label-mono text-fg/75">{ copy.eyebrow }</span>
+								<span className="label-mono font-mono text-accent font-semibold tracking-wider">01</span>
+								<span className="label-mono text-fg/80">{ copy.eyebrow }</span>
 							</div>
 							<h2 className="font-display text-xl sm:text-2xl font-light tracking-[-0.02em] text-fg">
 								{ copy.titlePart1 }
@@ -146,9 +150,9 @@ export default function Services() {
 												behavior: "smooth",
 											} );
 										} }
-										className={ `flex flex-col bg-surface px-8 py-8 transition-all duration-300 cursor-pointer border-t-2 ${ isCurrent
-											? "border-accent bg-surface-2/60 opacity-100"
-											: "border-transparent opacity-65 hover:opacity-95"
+										className={ `relative flex flex-col bg-surface px-8 py-8 transition-all duration-300 cursor-pointer border-t-2 ${ isCurrent
+											? "border-accent bg-surface-2/75 shadow-[inset_0_1px_24px_rgba(58,217,191,0.08)] opacity-100"
+											: "border-transparent opacity-65 hover:opacity-95 hover:bg-surface-2/30"
 											}` }
 									>
 										<div className="flex items-start justify-between gap-6">
@@ -158,7 +162,7 @@ export default function Services() {
 											/>
 											<span
 												className={ `label-mono shrink-0 transition-colors ${ isCurrent
-													? "text-accent font-mono font-medium"
+													? "text-accent font-mono font-semibold"
 													: "text-muted"
 													}` }
 											>
@@ -174,13 +178,17 @@ export default function Services() {
 											{ service.description }
 										</p>
 
-										<p className="label-mono mt-4 mb-5 text-[11px] leading-[1.7] text-muted line-clamp-1">
-											{ service.points.slice( 0, 3 ).join( " · " ) }
-										</p>
+										<div className="mt-4 mb-5 flex flex-wrap gap-1.5 min-h-[2.2rem]">
+											{ service.points.slice( 0, 3 ).map( ( pt ) => (
+												<span key={ pt } className="atelier-pill">
+													{ pt }
+												</span>
+											) ) }
+										</div>
 
 										<a
 											href="#contact"
-											className="mt-auto inline-flex items-center gap-2  pt-3 text-[13px] text-fg transition-colors hover:text-accent"
+											className="mt-auto inline-flex items-center gap-2 pt-3 text-[13px] font-medium text-fg transition-colors hover:text-accent"
 										>
 											{ copy.tileCta }
 											<ArrowUpRight
@@ -203,7 +211,7 @@ export default function Services() {
 							aria-valuemax={ 100 }
 						>
 							<i
-								className="block h-[2px] bg-accent transition-[width] duration-75 ease-out"
+								className="block h-[2px] bg-accent glow-accent transition-[width] duration-75 ease-out"
 								style={ {
 									width: `${ progress * 100 }%`,
 									float: isRTL ? "right" : "left",

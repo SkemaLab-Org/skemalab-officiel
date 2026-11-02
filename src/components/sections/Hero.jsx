@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { useReducedMotion } from "motion/react";
 import { useI18n } from "@/components/I18nProvider";
 import IntroStage from "@/components/IntroStage";
@@ -86,16 +87,19 @@ export default function Hero() {
 					<div className="hero-inner shell relative z-10 flex flex-1 flex-col justify-end pb-8 pt-24 sm:pb-10 sm:pt-28">
 						<div
 							style={ contentStyle( 0 ) }
-							className="hero-meta flex flex-col gap-2 pb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+							className="hero-meta flex flex-col gap-3 pb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
 						>
-							<span className="label-mono text-[#f2ede2]/75">
-								{ t.hero.eyebrow }
-							</span>
+							<div className="flex items-center gap-2.5">
+								<span className="status-dot shrink-0" aria-hidden="true" />
+								<span className="label-mono text-[#f2ede2]/90 tracking-widest">
+									{ t.hero.eyebrow }
+								</span>
+							</div>
 							<div className="flex flex-wrap items-center gap-x-6 gap-y-2">
 								<span className="label-mono text-[#f2ede2]/75">
 									{ t.hero.location }
 								</span>
-								<span className="label-mono text-[#f2ede2]/75">
+								<span className="label-mono text-accent/90">
 									{ pillarLabels }
 								</span>
 							</div>
@@ -152,13 +156,13 @@ export default function Hero() {
 								{ t.hero.subheading }
 							</p>
 							<div className="flex flex-wrap items-center gap-3">
-								<Button href="#contact" className="rounded-none">
+								<Button href="#contact">
 									{ t.hero.ctaPrimary }
 								</Button>
 								<Button
 									href="#services"
 									variant="outline"
-									className="rounded-none border-[rgba(242,237,226,0.3)] text-[#f2ede2] hover:border-[#3ad9bf] hover:text-[#3ad9bf]"
+									className="border-[rgba(242,237,226,0.3)] text-[#f2ede2] hover:border-[#3ad9bf] hover:text-[#3ad9bf]"
 								>
 									{ t.hero.ctaAll }
 								</Button>
@@ -168,16 +172,17 @@ export default function Hero() {
 						<nav
 							aria-label={ t.hero.ctaAll }
 							style={ contentStyle( reduce ? 0 : 420 ) }
-							className="mt-10 grid grid-cols-3"
+							className="mt-10 grid grid-cols-3 pt-2"
 						>
 							{ t.hero.pillars.map( ( pillar ) => (
 								<a
 									key={ pillar.id }
 									href="#services"
-									className="group flex min-w-0 flex-col gap-1.5 py-5 pe-4"
+									className="group flex min-w-0 flex-col gap-1.5 py-4 pe-4 transition-transform duration-300 hover:translate-x-0.5"
 								>
-									<span className="label-mono text-[#f2ede2]/75 transition-colors group-hover:text-[#3ad9bf]">
+									<span className="label-mono text-[#f2ede2]/75 transition-colors group-hover:text-accent flex items-center gap-1.5">
 										{ pillar.label }
+										<ArrowUpRight size={ 12 } className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 rtl-flip" />
 									</span>
 									<span className="hidden truncate text-sm text-[#a2b8b1] transition-colors group-hover:text-[#f2ede2] sm:block">
 										{ pillar.title }

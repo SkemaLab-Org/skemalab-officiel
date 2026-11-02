@@ -15,7 +15,7 @@ export default function Closing() {
     <section className="relative bg-page py-16 sm:py-20 lg:py-24">
       <div className="shell">
         <Reveal>
-          <div className="beam-frame relative isolate overflow-hidden rounded-lg bg-[#07110e] px-6 py-16 text-cream sm:px-12 sm:py-24">
+          <div className="beam-frame relative isolate overflow-hidden rounded-none border border-[rgba(242,237,226,0.12)] bg-[#07110e] px-6 py-16 text-cream sm:px-12 sm:py-24">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0">
               <div className="zellige absolute inset-0 opacity-30" />
               <div className="absolute -left-24 top-0 h-[24rem] w-[24rem] rounded-full bg-brand/20 blur-[130px]" />
@@ -23,13 +23,13 @@ export default function Closing() {
             </div>
 
             <div className="relative mx-auto max-w-3xl text-center">
-              <p className="label-mono text-accent-bright">{copy.closingEyebrow}</p>
+              <p className="label-mono text-accent-bright tracking-widest">{copy.closingEyebrow}</p>
 
               <h2 className="display-lg mx-auto mt-6 max-w-[26ch] text-cream">
                 {copy.closingTitle}
               </h2>
 
-              <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-cream/65 sm:text-base">
+              <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-cream/70 sm:text-base">
                 {copy.closingText}
               </p>
 

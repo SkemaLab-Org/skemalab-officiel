@@ -52,7 +52,7 @@ export default function Identity() {
             </Reveal>
 
             <Reveal delay={ 0.12 }>
-              <dl className="mt-8 ">
+              <dl className="mt-8 space-y-0">
                 { [
                   [ copy.hqLabel, contactInfo.locations.join( " · " ) ],
                   [ copy.scopeLabel, copy.scopeValue ],
@@ -69,7 +69,7 @@ export default function Identity() {
                 ].map( ( [ term, value ] ) => (
                   <div
                     key={ term }
-                    className="grid gap-1 border-b border-line py-4 sm:grid-cols-[0.4fr_1fr] sm:items-baseline sm:gap-6"
+                    className="grid gap-1 border-b border-line px-2 py-4 transition-colors duration-200 hover:bg-surface-2/20 sm:grid-cols-[0.4fr_1fr] sm:items-baseline sm:gap-6"
                   >
                     <dt className="label-mono text-muted">{ term }</dt>
                     <dd className="text-sm leading-relaxed text-fg/85">{ value }</dd>
@@ -85,7 +85,7 @@ export default function Identity() {
               whileInView={ reduce ? undefined : { clipPath: "inset(0 0 0% 0)" } }
               viewport={ VIEWPORT }
               transition={ { duration: DURATION.slow, ease: EASE.out } }
-              className="relative aspect-[4/3] overflow-hidden rounded-lg border border-line bg-deep"
+              className="relative aspect-[4/3] overflow-hidden rounded-none border border-line bg-deep shadow-[0_4px_30px_rgba(0,0,0,0.2)]"
             >
               <Parallax offset={ 24 } className="h-full">
                 <Image
@@ -98,8 +98,8 @@ export default function Identity() {
               </Parallax>
             </motion.div>
 
-            <div className="mt-6 rounded-lg border border-line bg-surface p-6 sm:p-8">
-              <p className="label-mono text-accent">{ copy.standardBadge }</p>
+            <div className="mt-6 rounded-none border border-line bg-surface p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
+              <p className="label-mono text-accent font-mono">{ copy.standardBadge }</p>
               <h3 className="mt-3 font-display text-xl leading-tight tracking-tight sm:text-2xl">
                 { copy.standardTitle }
               </h3>
@@ -122,10 +122,10 @@ export default function Identity() {
           <div className="mt-10 grid gap-4 sm:gap-6 lg:grid-cols-3">
             { copy.pillars.map( ( pillar, index ) => (
               <Reveal key={ pillar.num } delay={ index * 0.06 }>
-                <article className="flex h-full flex-col justify-between rounded-lg border border-line bg-surface p-6 transition-colors duration-300 hover:border-line-strong sm:p-8">
+                <article className="flex h-full flex-col justify-between rounded-none border border-line bg-surface p-6 transition-all duration-300 hover:border-accent/50 hover:bg-surface-2/30 sm:p-8">
                   <div>
                     <div className="flex items-baseline justify-between gap-4">
-                      <span className="label-mono text-accent">
+                      <span className="label-mono text-accent font-mono font-medium">
                         { pillar.num } — { pillar.name }
                       </span>
                     </div>
@@ -137,11 +137,11 @@ export default function Identity() {
                     </p>
                   </div>
 
-                  <ul className="mt-8 flex flex-wrap gap-2  pt-5">
+                  <ul className="mt-8 flex flex-wrap gap-1.5 pt-5 border-t border-line">
                     { pillar.tags.map( ( tag ) => (
                       <li
                         key={ tag }
-                        className="rounded-full border border-line px-3 py-1 text-xs text-muted"
+                        className="atelier-pill"
                       >
                         { tag }
                       </li>
@@ -154,7 +154,7 @@ export default function Identity() {
         </div>
 
         <Reveal>
-          <div className="mt-16 rounded-lg border border-line bg-surface p-6 sm:mt-24 sm:p-10 lg:p-14">
+          <div className="mt-16 rounded-none border border-line bg-surface p-6 sm:mt-24 sm:p-10 lg:p-14 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
             <div className="max-w-2xl">
               <p className="label-mono text-accent">{ copy.commitmentsEyebrow }</p>
               <h3 className="mt-4 display-md">{ copy.commitmentsTitle }</h3>
@@ -162,8 +162,8 @@ export default function Identity() {
 
             <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
               { copy.principles.map( ( principle ) => (
-                <div key={ principle.num } className=" pt-5">
-                  <span className="label-mono text-accent">{ principle.num }</span>
+                <div key={ principle.num } className="pt-2">
+                  <span className="label-mono text-accent font-mono">{ principle.num }</span>
                   <h4 className="mt-3 text-base font-semibold leading-snug">
                     { principle.title }
                   </h4>
@@ -174,10 +174,10 @@ export default function Identity() {
               ) ) }
             </div>
 
-            <div className="mt-10">
+            <div className="mt-10 pt-4 border-t border-line">
               <Link
                 href="/#contact"
-                className="link-underline text-sm text-fg hover:text-accent"
+                className="link-underline text-sm font-medium text-fg hover:text-accent"
               >
                 { t.ctaBanner.ctaPrimary }
                 <ArrowUpRight size={ 15 } className="rtl-flip" aria-hidden="true" />
