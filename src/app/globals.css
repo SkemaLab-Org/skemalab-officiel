@@ -1060,6 +1060,11 @@ html.lenis body {
   height: 320svh;
   --p: 0;
 }
+@media (max-width: 899px) {
+  #services-stage {
+    display: none;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .stage {
