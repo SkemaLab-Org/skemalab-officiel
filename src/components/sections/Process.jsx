@@ -27,7 +27,10 @@ export default function Process() {
 		const engEl = document.getElementById("engine");
 		if (!engEl) return undefined;
 
+		// The pinned engine stage only renders on desktop; mobile uses the flat list.
+		const mq = window.matchMedia("(min-width: 900px)");
 		let raf = 0;
+
 		function sync() {
 			const r = engEl.getBoundingClientRect();
 			const travel = Math.max(1, r.height - window.innerHeight);
@@ -38,9 +41,23 @@ export default function Process() {
 			setPhase(ph);
 			raf = requestAnimationFrame(sync);
 		}
-		raf = requestAnimationFrame(sync);
-		return () => {
+
+		function start() {
+			if (raf || !mq.matches) return;
+			raf = requestAnimationFrame(sync);
+		}
+
+		function stop() {
 			if (raf) cancelAnimationFrame(raf);
+			raf = 0;
+		}
+
+		start();
+		const onChange = () => (mq.matches ? start() : stop());
+		mq.addEventListener("change", onChange);
+		return () => {
+			stop();
+			mq.removeEventListener("change", onChange);
 		};
 	}, [reduce]);
 	const activeStep = steps[phase] || steps[0];
@@ -61,6 +78,9 @@ export default function Process() {
 		let raf = 0;
 		let mounted = true;
 
+		// Only animate while the pinned engine stage is actually visible.
+		const mq = window.matchMedia("(min-width: 900px)");
+
 		const fit = () => {
 			const dpr = Math.min(window.devicePixelRatio || 1, 2);
 			const rect = canvas.getBoundingClientRect();
@@ -73,18 +93,19 @@ export default function Process() {
 			return dpr;
 		};
 
-		let dpr = fit();
+		let dpr = 1;
 		const onResize = () => {
+			if (!mq.matches) return;
 			dpr = fit();
 		};
 		window.addEventListener("resize", onResize, { passive: true });
 
-		let start = 0;
+		let startedAt = 0;
 
 		const render = (now) => {
 			if (!mounted) return;
-			if (!start) start = now;
-			const t = (now - start) * 0.001;
+			if (!startedAt) startedAt = now;
+			const t = (now - startedAt) * 0.001;
 
 			const w = canvas.width;
 			const h = canvas.height;
@@ -290,12 +311,26 @@ export default function Process() {
 			raf = requestAnimationFrame(render);
 		};
 
-		raf = requestAnimationFrame(render);
+		function start() {
+			if (raf || !mounted || !mq.matches) return;
+			dpr = fit();
+			raf = requestAnimationFrame(render);
+		}
+
+		function stop() {
+			if (raf) cancelAnimationFrame(raf);
+			raf = 0;
+		}
+
+		const onChange = () => (mq.matches ? start() : stop());
+		mq.addEventListener("change", onChange);
+		start();
 
 		return () => {
 			mounted = false;
-			if (raf) cancelAnimationFrame(raf);
+			stop();
 			window.removeEventListener("resize", onResize);
+			mq.removeEventListener("change", onChange);
 		};
 	}, [reduce, isDark]);
 
@@ -336,34 +371,60 @@ export default function Process() {
 		);
 	}
 
+	/* ── Flat layout: mobile (<900 px) ── */
+	const flatSteps = (
+		<section className="section-y bg-surface min-[900px]:hidden">
+			<div className="shell">
+				<BandHeader
+					index="02"
+					label={copy.eyebrow}
+					title={copy.title}
+					description={copy.description}
+				/>
+				<ol className="mt-10 flex list-none flex-col divide-y divide-line border-y border-line p-0">
+					{steps.map((step, index) => (
+						<li key={step.step} className="flex flex-col py-7">
+							<div className="flex items-baseline justify-between gap-4">
+								<span className="label-mono text-accent">{step.step}</span>
+								<span className="label-mono text-muted" aria-hidden="true">
+									{String(index + 1).padStart(2, "0")} /{" "}
+									{String(steps.length).padStart(2, "0")}
+								</span>
+							</div>
+							<h3 className="mt-4 font-display text-[21px] leading-tight tracking-[-0.01em] text-fg">
+								{step.title}
+							</h3>
+							<p className="mt-2 text-sm leading-relaxed text-muted">
+								{step.text}
+							</p>
+						</li>
+					))}
+				</ol>
+			</div>
+		</section>
+	);
+
 	return (
-		<section className="stage" id="engine">
+		<>
 			<span id="method" aria-hidden="true" className="block h-0" />
-			<div className="pin">
-				<div className="eng">
-					<div className="cues">
-						{steps.map((step, index) => {
-							const isOn = index <= phase;
-							return (
-								<div
-									key={step.step}
-									data-cue={index}
-									role="button"
-									tabIndex={0}
-									onClick={() => {
-										const engineEl = document.getElementById("engine");
-										if (!engineEl) return;
-										const r = engineEl.getBoundingClientRect();
-										const travel = r.height - window.innerHeight;
-										const targets = [0.1, 0.45, 0.7, 0.95];
-										window.scrollTo({
-											top: window.scrollY + r.top + travel * targets[index],
-											behavior: "smooth",
-										});
-									}}
-									onKeyDown={(e) => {
-										if (e.key === "Enter" || e.key === " ") {
-											e.preventDefault();
+
+			{/* Mobile flat steps — hidden on desktop */}
+			{flatSteps}
+
+			{/* Desktop pinned scroll-through — hidden on mobile */}
+			<section className="stage hidden min-[900px]:block" id="engine">
+				<div className="pin">
+					<div className="eng">
+						<div className="cues">
+							{steps.map((step, index) => {
+								const isOn = index <= phase;
+								return (
+									<div
+										key={step.step}
+										data-cue={index}
+										role="button"
+										tabIndex={0}
+										onClick={() => {
 											const engineEl = document.getElementById("engine");
 											if (!engineEl) return;
 											const r = engineEl.getBoundingClientRect();
@@ -373,34 +434,48 @@ export default function Process() {
 												top: window.scrollY + r.top + travel * targets[index],
 												behavior: "smooth",
 											});
-										}
-									}}
-									className={`cue ${isOn ? "on" : ""}`}
-								>
-									<b className="font-display">{step.title}</b>
-									<span>{step.text}</span>
-								</div>
-							);
-						})}
-					</div>
-
-					<div className="eng-stage">
-						<canvas ref={canvasRef} id="engCanvas" aria-hidden="true" />
-						<div className="eng-hud">
-							<span className="no" id="engNo">
-								{stepNumber}
-							</span>
-							<span className="label-mono uppercase" id="engName">
-								{activeStep.title}
-							</span>
+										}}
+										onKeyDown={(e) => {
+											if (e.key === "Enter" || e.key === " ") {
+												e.preventDefault();
+												const engineEl = document.getElementById("engine");
+												if (!engineEl) return;
+												const r = engineEl.getBoundingClientRect();
+												const travel = r.height - window.innerHeight;
+												const targets = [0.1, 0.45, 0.7, 0.95];
+												window.scrollTo({
+													top: window.scrollY + r.top + travel * targets[index],
+													behavior: "smooth",
+												});
+											}
+										}}
+										className={`cue ${isOn ? "on" : ""}`}
+									>
+										<b className="font-display">{step.title}</b>
+										<span>{step.text}</span>
+									</div>
+								);
+							})}
 						</div>
-						<span className="eng-status" id="engStatus">
-							{statusText}
-						</span>
-						<i className="eng-meter" />
+
+						<div className="eng-stage">
+							<canvas ref={canvasRef} id="engCanvas" aria-hidden="true" />
+							<div className="eng-hud">
+								<span className="no" id="engNo">
+									{stepNumber}
+								</span>
+								<span className="label-mono uppercase" id="engName">
+									{activeStep.title}
+								</span>
+							</div>
+							<span className="eng-status" id="engStatus">
+								{statusText}
+							</span>
+							<i className="eng-meter" />
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		</>
 	);
 }

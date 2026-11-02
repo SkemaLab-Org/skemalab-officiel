@@ -43,8 +43,10 @@ export default function Services() {
 	}, [reduce]);
 
 	/* ── Flat layout: mobile (<900 px) + reduced-motion ── */
-	const flatCards = (
-		<section id="services" className="section-y bg-page min-[900px]:hidden">
+	const flatCards = (desktopVisible = false) => (
+		<section
+			className={`section-y bg-page ${desktopVisible ? "" : "min-[900px]:hidden"}`}
+		>
 			<div className="shell">
 				<BandHeader
 					index="01"
@@ -83,7 +85,11 @@ export default function Services() {
 								className="mt-auto inline-flex items-center gap-2 border-t border-line pt-4 text-[13px] text-fg transition-colors hover:text-accent"
 							>
 								{copy.tileCta}
-								<ArrowUpRight size={14} aria-hidden="true" className="rtl-flip" />
+								<ArrowUpRight
+									size={14}
+									aria-hidden="true"
+									className="rtl-flip"
+								/>
 							</a>
 						</article>
 					))}
@@ -92,17 +98,24 @@ export default function Services() {
 		</section>
 	);
 
-	if (reduce) return flatCards;
-
+	if (reduce) {
+		return (
+			<>
+				<span id="services" aria-hidden="true" className="block h-0" />
+				{flatCards(true)}
+			</>
+		);
+	}
 
 	return (
 		<>
+			<span id="services" aria-hidden="true" className="block h-0" />
+
 			{/* Mobile flat cards — hidden on desktop */}
-			{flatCards}
+			{flatCards()}
 
 			{/* Desktop pinned scroll-through — hidden on mobile */}
 			<section className="stage hidden min-[900px]:block" id="services-stage">
-				<span id="services" aria-hidden="true" className="block h-0" />
 				<div className="pin">
 					<div className="wrap w-full max-w-6xl mx-auto px-6 sm:px-8">
 						<div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 border-b border-line pb-4">
@@ -172,7 +185,11 @@ export default function Services() {
 											className="mt-auto inline-flex items-center gap-2 border-t border-line pt-3 text-[13px] text-fg transition-colors hover:text-accent"
 										>
 											{copy.tileCta}
-											<ArrowUpRight size={14} aria-hidden="true" className="rtl-flip" />
+											<ArrowUpRight
+												size={14}
+												aria-hidden="true"
+												className="rtl-flip"
+											/>
 										</a>
 									</article>
 								);

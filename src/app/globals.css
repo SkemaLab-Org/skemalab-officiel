@@ -798,6 +798,11 @@ html.lenis body {
   height: 440svh;
   --p: 0;
 }
+@media (max-width: 899px) {
+  #engine {
+    display: none;
+  }
+}
 #engine .pin {
   background: var(--surface);
 }
