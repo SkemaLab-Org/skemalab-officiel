@@ -137,7 +137,7 @@ body::before {
 }
 
 html:not(.dark) body::before {
-  opacity: 0.08;
+  opacity: 0.42;
 }
 
 
@@ -573,6 +573,10 @@ html:not(.dark) .photo-duotone img {
   mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 10%, transparent 78%);
 }
 
+html:not(.dark) .zellige {
+  --zellige-line: rgba(8, 149, 135, 0.28);
+}
+
 /* Text mask reveal helpers */
 .mask-line {
   display: block;
@@ -749,6 +753,7 @@ html.lenis body {
 }
 #hero .pin {
   justify-content: flex-end;
+  background: #07110e !important;
 }
 #hero .hero-inner {
   position: relative;
