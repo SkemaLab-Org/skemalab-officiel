@@ -1070,6 +1070,42 @@ html.lenis body {
   pointer-events: none;
 }
 
+/* Short CSS viewports are common with display scaling and compact laptop
+   windows. Let the hero follow document flow there so its full content can
+   grow vertically instead of being forced into the clipped sticky viewport. */
+@media (max-height: 760px) {
+  #hero {
+    height: auto;
+    min-height: 100svh;
+    --p: 0 !important;
+  }
+
+  #hero .pin {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 100svh;
+  }
+
+  #hero .hero-inner,
+  #hero .hero-meta {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  #hero .hero-alt {
+    position: relative;
+    bottom: auto;
+    margin-block-start: 2rem;
+    opacity: 1;
+    transform: none;
+  }
+
+  #hero .scroll-hint {
+    display: none;
+  }
+}
+
 /* Stage 2 · Engine / Method */
 #engine {
   height: 440svh;

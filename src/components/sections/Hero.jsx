@@ -111,8 +111,8 @@ export default function Hero() {
 							style={ contentStyle( reduce ? 0 : 60 ) }
 							className={
 								isRTL
-									? "mt-8 max-w-[14ch] font-display text-[clamp(2.5rem,6.5vw,6rem)] font-light leading-[1.15] tracking-normal text-balance text-white"
-									: "mt-8 max-w-[15ch] font-display text-[clamp(3rem,8vw,8rem)] font-light leading-[0.9] tracking-[-0.05em] text-white"
+									? "mt-8 max-w-[14ch] font-display text-[clamp(2.5rem,min(6.5vw,13svh),6rem)] font-light leading-[1.15] tracking-normal text-balance text-white"
+									: "mt-8 max-w-[15ch] font-display text-[clamp(2.5rem,min(8vw,13svh),8rem)] font-light leading-[0.9] tracking-[-0.05em] text-white"
 							}
 						>
 							{ isRTL ? (

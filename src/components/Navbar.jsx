@@ -167,7 +167,7 @@ export default function Navbar() {
 
 	useEffect( () => {
 		const onResize = () => {
-			if ( window.innerWidth >= 1024 ) setOpen( false );
+			if ( window.innerWidth >= 1100 ) setOpen( false );
 		};
 		window.addEventListener( "resize", onResize );
 		return () => window.removeEventListener( "resize", onResize );
@@ -193,7 +193,7 @@ export default function Navbar() {
 							role="dialog"
 							aria-modal="true"
 							aria-label={ t.common.menuLabel }
-							className="fixed inset-0 z-[95] flex flex-col bg-page text-fg lg:hidden"
+							className="fixed inset-0 z-[95] flex flex-col bg-page text-fg min-[1100px]:hidden"
 							initial={ { opacity: 0 } }
 							animate={ { opacity: 1 } }
 							exit={ { opacity: 0 } }
@@ -282,8 +282,8 @@ export default function Navbar() {
 				animate={ { y: hidden && !open ? "-100%" : "0%" } }
 				transition={ { duration: 0.4, ease: EASE.out } }
 			>
-				<div className="shell flex h-16 items-center justify-between gap-4 lg:h-20">
-					<div className="flex items-center gap-5">
+				<div className="shell flex h-16 items-center justify-between gap-4 min-[1100px]:h-20">
+					<div className="flex min-w-0 items-center gap-5">
 						<BrandMark
 							tone={ darkSurface ? "dark" : "auto" }
 							className="h-7 lg:h-8"
@@ -292,7 +292,7 @@ export default function Navbar() {
 					</div>
 
 					<nav
-						className="hidden items-center gap-1 lg:flex"
+						className="hidden items-center gap-1 min-[1100px]:flex"
 						aria-label="Principale"
 					>
 						{ navLinks.map( ( link ) => {
@@ -333,7 +333,7 @@ export default function Navbar() {
 						} ) }
 					</nav>
 
-					<div className="hidden items-center gap-2 lg:flex">
+					<div className="hidden items-center gap-2 min-[1100px]:flex">
 						<LanguageSwitcher onDark={ darkSurface } />
 						<ThemeToggle onDark={ darkSurface } />
 						<CalendlyButton className="min-h-10 rounded-none px-4 py-2 text-[13px]">
@@ -341,7 +341,7 @@ export default function Navbar() {
 						</CalendlyButton>
 					</div>
 
-					<div className="flex items-center gap-2 lg:hidden">
+					<div className="flex items-center gap-2 min-[1100px]:hidden">
 						<ThemeToggle onDark={ darkSurface } />
 						<button
 							ref={ menuButtonRef }
