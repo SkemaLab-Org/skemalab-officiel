@@ -41,8 +41,8 @@ function MilestoneCard({ milestone, index, total, progress }) {
 				aria-hidden="true"
 				className={
 					above
-						? "absolute start-1/2 bottom-[calc(50%+0.875rem)] h-[6%] w-[2px] origin-bottom bg-gradient-to-t from-accent/80 to-accent/15"
-						: "absolute start-1/2 top-[calc(50%+0.875rem)] h-[6%] w-[2px] origin-top bg-gradient-to-b from-accent/80 to-accent/15"
+						? "absolute start-1/2 bottom-[calc(50%+0.875rem)] h-4 w-[2px] origin-bottom bg-gradient-to-t from-accent/80 to-accent/15"
+						: "absolute start-1/2 top-[calc(50%+0.875rem)] h-4 w-[2px] origin-top bg-gradient-to-b from-accent/80 to-accent/15"
 				}
 				style={{ scaleY: reveal, opacity: reveal }}
 			/>
