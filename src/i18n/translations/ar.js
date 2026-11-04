@@ -144,7 +144,6 @@ export const ar = {
 		foundedBy: "أسسه",
 		founderStatus: "الرئيس التنفيذي واستراتيجية الأعمال",
 		roleSuffix: "· المؤسس والرئيس التنفيذي",
-		cta: "اكتشف قصتنا",
 	},
 
 	processSection: {
@@ -545,7 +544,6 @@ export const ar = {
 		],
 
 		foundersEyebrow: "03 — فريق سكيما لاب",
-		teamHoverHint: "مرّر المؤشر أو اختر صورة لاكتشاف الملف الشخصي",
 		foundersTitlePart1: "العقول المؤسسة وراء ",
 		foundersTitleHighlight: "سكيما لاب.",
 		foundersSubtitle:

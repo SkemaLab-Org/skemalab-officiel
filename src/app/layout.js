@@ -4,6 +4,7 @@ import {
   Cairo,
   JetBrains_Mono,
 } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { I18nProvider } from "@/components/I18nProvider";
@@ -117,15 +118,15 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-svh bg-page font-sans text-fg antialiased">
         <JsonLd />
-        <script
+        <Script
           id="theme-init"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: themeInitScript }}
-          suppressHydrationWarning
         />
-        <script
+        <Script
           id="locale-init"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: localeInitScript }}
-          suppressHydrationWarning
         />
         <ThemeProvider>
           <I18nProvider>

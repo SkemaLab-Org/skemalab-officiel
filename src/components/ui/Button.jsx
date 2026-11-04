@@ -1,5 +1,6 @@
 import { cva } from "class-variance-authority";
 import { Loader2 } from "lucide-react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -53,6 +54,14 @@ export default function Button({
 	);
 
 	if (href) {
+		if (href.startsWith("/") && !href.startsWith("//")) {
+			return (
+				<Link href={href} onClick={onClick} className={classes} {...rest}>
+					{content}
+				</Link>
+			);
+		}
+
 		return (
 			<a href={href} onClick={onClick} className={classes} {...rest}>
 				{content}
@@ -73,5 +82,3 @@ export default function Button({
 		</button>
 	);
 }
-
-export { buttonVariants };

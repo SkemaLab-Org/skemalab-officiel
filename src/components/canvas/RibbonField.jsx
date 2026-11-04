@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "motion/react";
-import { useTheme } from "@/components/ThemeProvider";
 
 /**
  * Generated light for the hero: three ribbons drawn in the browser.

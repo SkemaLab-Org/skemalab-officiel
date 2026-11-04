@@ -145,7 +145,6 @@ export const fr = {
 		foundedBy: "Fondé par",
 		founderStatus: "Chief Executive Officer & Stratégie Business",
 		roleSuffix: "· Fondateur & CEO",
-		cta: "Découvrir notre histoire",
 	},
 
 	processSection: {
@@ -546,7 +545,6 @@ export const fr = {
 		],
 
 		foundersEyebrow: "03 — L’équipe SkemaLab",
-		teamHoverHint: "Survolez ou sélectionnez un portrait pour découvrir son profil",
 		foundersTitlePart1: "Les esprits derrière ",
 		foundersTitleHighlight: "SkemaLab.",
 		foundersSubtitle:

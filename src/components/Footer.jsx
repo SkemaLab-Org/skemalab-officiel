@@ -91,11 +91,6 @@ export default function Footer({ animate = false }) {
 								</a>
 							</li>
 						) ) }
-						<li>
-							<a href="/our-story" className={ linkClass }>
-								{ t.aboutIntro.cta }
-							</a>
-						</li>
 					</ul>
 				</nav>
 

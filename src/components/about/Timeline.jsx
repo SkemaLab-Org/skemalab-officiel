@@ -338,7 +338,7 @@ export default function Timeline() {
 					</div>
 				</div>
 				<ol className="mt-8 grid list-none gap-4 p-0 md:grid-cols-2">
-					{milestones.map((milestone, index) => (
+					{milestones.map((milestone) => (
 						<li
 							key={milestone.id}
 							className="border border-line bg-page p-5 sm:p-6"

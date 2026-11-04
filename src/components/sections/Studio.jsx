@@ -117,11 +117,8 @@ export default function Studio() {
 									{ home.cta }
 									<ArrowUpRight size={ 16 } className="rtl-flip" />
 								</Button>
-								<Button
-									href="/our-story"
-									variant="outline"
-								>
-									{ intro.cta }
+								<Button href="/our-story" variant="outline">
+									{ page.heroCta1 }
 								</Button>
 							</div>
 						</Reveal>
