@@ -590,9 +590,9 @@ export const fr = {
 			{
 				id: "adam-khairi",
 				name: "Adam Khairi",
-				role: "Lead Software Engineer",
-				title: "Ingénieur logiciel & Solutions IA",
-				bio: "Adam développe des produits web et mobiles, de l’architecture à l’interface, et intègre des solutions d’IA adaptées aux usages.",
+				role: "Head of Engineering",
+				title: "Head of Engineering — Logiciel, Produit & IA",
+				bio: "Je pilote et je construis. En tant que Head of Engineering, Adam dirige l’architecture, l’UI/UX, les produits web et mobiles ainsi que les solutions IA.",
 				quote: "La meilleure technologie est celle qui rend l’expérience simple et utile.",
 				expertiseLabel: "Domaines d’intervention :",
 				focusArea: "Ingénierie logicielle & IA",

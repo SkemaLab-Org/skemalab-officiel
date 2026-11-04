@@ -58,7 +58,7 @@ export default function AboutPage() {
         {
           "@type": "Person",
           name: "Adam Khairi",
-          jobTitle: "Lead Software Engineer",
+          jobTitle: "Head of Engineering — Logiciel, Produit & IA",
         },
       ],
     },

@@ -47,8 +47,8 @@ export const TEAM_MEMBERS = [
   {
     id: "adam-khairi",
     name: "Adam Khairi",
-    shortRole: "Lead Engineer & IA",
-    role: "Lead Software Engineer",
+    shortRole: "Head of Engineering & IA",
+    role: "Head of Engineering — Logiciel, Produit & IA",
     department: "Développement Full-Stack, Mobile & Solutions IA",
     email: "contact@skemalab.com",
     phone: "+212 6 99 99 57 54",

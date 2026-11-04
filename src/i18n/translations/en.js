@@ -587,9 +587,9 @@ export const en = {
 			{
 				id: "adam-khairi",
 				name: "Adam Khairi",
-				role: "Lead Software Engineer",
-				title: "Software Engineer & AI Solutions",
-				bio: "Adam builds web and mobile products from architecture to interface, and integrates AI solutions around real user needs.",
+				role: "Head of Engineering",
+				title: "Head of Engineering — Software, Product & AI",
+				bio: "I lead and build. As Head of Engineering, Adam drives software architecture, UI/UX, web & mobile products, and AI integration.",
 				quote: "The best technology makes the experience feel simple and useful.",
 				expertiseLabel: "Areas of expertise:",
 				focusArea: "Software Engineering & AI",
