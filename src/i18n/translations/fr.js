@@ -538,7 +538,7 @@ export const fr = {
 				name: "Adam Khairi",
 				role: "Head of Engineering",
 				title: "Head of Engineering — Logiciel, Produit & IA",
-				bio: "Je pilote et je construis. En tant que Head of Engineering, Adam dirige l’architecture, l’UI/UX, les produits web et mobiles ainsi que les solutions IA.",
+				bio: "Pilote et construis. En tant que Head of Engineering, Adam dirige l’architecture, l’UI/UX, les produits web et mobiles ainsi que les solutions IA.",
 				quote: "La meilleure technologie est celle qui rend l’expérience simple et utile.",
 				expertiseLabel: "Domaines d’intervention :",
 				focusArea: "Ingénierie logicielle & IA",
