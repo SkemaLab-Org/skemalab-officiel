@@ -73,45 +73,25 @@ export default function Studio() {
 					</div>
 				</Reveal>
 
-				<div className="mt-12 grid gap-10 sm:mt-16 min-[900px]:grid-cols-[1fr_0.9fr] min-[900px]:gap-16">
+				<div className="mt-9 grid gap-12 sm:mt-16 min-[900px]:grid-cols-[1fr_0.9fr] min-[900px]:gap-16">
 					<div className="min-w-0">
-						<Reveal>
+						<Reveal className="grid gap-5 sm:gap-8">
 							<p className="max-w-[52ch] text-[15px] leading-[1.7] text-muted">
 								{ home.p2 }
 							</p>
-						</Reveal>
-						<Reveal delay={ 0.06 }>
-							<p className="mt-5 max-w-[52ch] text-[15px] leading-[1.7] text-muted">
+							<p className="max-w-[52ch] text-[15px] leading-[1.7] text-muted">
 								{ intro.secondary }
 							</p>
 						</Reveal>
-
+					</div>
+					<div className="min-w-0">
 						<Reveal delay={ 0.12 }>
-							<div className="mt-9 border-s-2 border-accent/70 ps-5 py-1">
+							<div className="border-s-2 border-accent/70 py-1 ps-5">
 								<p className="label-mono text-accent">{ home.promiseEyebrow }</p>
 								<blockquote className="mt-3 max-w-[34ch] font-display text-[clamp(1.25rem,2vw,1.6rem)] font-light leading-[1.3] tracking-[-0.02em] text-fg">
 									« { home.promiseText } »
 								</blockquote>
 							</div>
-						</Reveal>
-					</div>
-
-					<div className="min-w-0">
-						<Reveal delay={ 0.08 }>
-							<dl className="space-y-0">
-								{ facts.map( ( [ term, value ] ) => (
-									<div
-										key={ term }
-										className="grid gap-1 border-b border-line px-3 py-4 transition-colors duration-200 hover:bg-surface-2/25 sm:grid-cols-[0.4fr_1fr] sm:items-baseline sm:gap-6"
-									>
-										<dt className="label-mono text-muted">{ term }</dt>
-										<dd className="text-sm leading-relaxed text-fg">{ value }</dd>
-									</div>
-								) ) }
-							</dl>
-						</Reveal>
-
-						<Reveal delay={ 0.14 }>
 							<div className="mt-8 flex flex-wrap items-center gap-3">
 								<Button href="#contact">
 									{ home.cta }

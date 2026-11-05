@@ -453,6 +453,13 @@ main section.bg-surface {
   }
 }
 
+@media (max-width: 1099px) {
+  .storyline-section {
+    height: auto !important;
+    min-height: 0;
+  }
+}
+
 @media (max-width: 340px) {
   #story-hero .story-hero-content h1 {
     margin-top: 1.25rem;

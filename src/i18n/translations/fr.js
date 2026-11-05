@@ -30,7 +30,7 @@ export const fr = {
 
 	hero: {
 		eyebrow: "Conseil, Ingénierie logicielle & Automatisation",
-		location: "Essaouira · Maroc",
+		location: "E104 TECHNOPARK ESSAOUIRA · Maroc",
 		headline: "Des systèmes qui font grandir votre entreprise.",
 		subheading:
 			"Nous développons vos logiciels sur mesure, pilotons votre acquisition et automatisons vos opérations.",
@@ -141,7 +141,7 @@ export const fr = {
 		secondary:
 			"De l’audit à la mise en production, nos équipes accompagnent les organisations qui visent l’échelle, avec rigueur, transparence et une vision à long terme.",
 		imageAlt: "Espace de travail créatif de Skemalab",
-		imageCaption: "Essaouira · Maroc",
+		imageCaption: "E104 TECHNOPARK ESSAOUIRA · Maroc",
 		foundedBy: "Fondé par",
 		founderStatus: "Chief Executive Officer & Stratégie Business",
 		roleSuffix: "· Fondateur & CEO",
@@ -471,77 +471,23 @@ export const fr = {
 		],
 
 		timelineEyebrow: "02 — Notre Histoire & Genèse",
-		timelineTitlePart1: "Comment l’idée de SkemaLab est née : ",
-		timelineTitleHighlight: "de la vision à la réalité.",
-		timelineDescription: "À Essaouira, Feissal Tarkaoui et Marouan Khadiri unissent leurs expertises pour bâtir un studio où la technologie sert directement la croissance.",
+		timelineTitlePart1: "Trois regards, une même ambition : ",
+		timelineTitleHighlight: "faire de la technologie un moteur de progrès.",
+		timelineDescription: "À Essaouira, Feissal Tarkaoui, Marouan Khadiri et Adam Khairi ont choisi de réunir leurs talents pour créer SkemaLab : un studio où stratégie, ingénierie et produit avancent dans la même direction.",
 		timelineSubtitlePart1: "Découvrez comment ",
-		timelineSubtitlePart2: " (CEO) et ",
-		timelineSubtitlePart3:
-			" (CTO) ont uni leurs expertises pour bâtir un laboratoire digital nouvelle génération.",
-		thesisEyebrow: "La Thèse Fondatrice",
-		thesisQuote:
-			"Un site ultra design qui ne génère aucun lead est une perte d’argent. Une campagne d’acquisition brillante sans opérations automatisées crée un goulot d’étranglement. SkemaLab est né pour apporter une solution intégrale et fluide.",
-		thesisAuthors: "— Feissal Tarkaoui & Marouan Khadiri, Fondateurs",
+		timelineSubtitlePart2: " (CEO), ",
+		timelineSubtitlePart3: " (CTO) et Adam Khairi ont transformé une conviction commune en une aventure entrepreneuriale collective.",
+		thesisEyebrow: "La conviction fondatrice",
+		thesisQuote: "La technologie n’a de sens que lorsqu’elle aide une entreprise à mieux avancer. De cette conviction est née SkemaLab : réunir stratégie, ingénierie et expérience produit pour concevoir des solutions utiles, cohérentes et pensées pour durer.",
+		thesisAuthors: "— Feissal Tarkaoui, Marouan Khadiri & Adam Khairi, équipe fondatrice",
 		seeProfiles: "Voir leurs profils",
 
 		milestones: [
-			{
-				id: "genesis",
-				year: "2023",
-				period: "Genèse",
-				title: "L'Étincelle Fondatrice & Le Constat",
-				subtitle: "La vision partagée de Feissal Tarkaoui & Marouan Khadiri",
-				description:
-					"Feissal (visionnaire business) et Marouan (architecte tech) font un constat sans appel : les entreprises sont ralenties par des sites vitrines sans conversion, des outils fragmentés et des centaines d'heures perdues sur des tâches manuelles. Ils décident d'unir leurs forces pour créer un studio hybride où l'ingénierie technique sert directement le chiffre d'affaires.",
-				tag: "L'Idée Initiale",
-				highlight: "Combler le fossé entre Deep Tech, Growth et Automatisation",
-			},
-			{
-				id: "foundation",
-				year: "2023",
-				period: "Lancement",
-				title: "Création de SkemaLab & Premiers Déploiements",
-				subtitle: "Implantation à Essaouira, rayonnement international",
-				description:
-					"Naissance officielle de SkemaLab. Les fondateurs conçoivent leur laboratoire R&D et livrent leurs premiers systèmes pour des clients en Europe et MENA : plateformes web ultra-rapides, pipelines CRM automatisés et tunnels de conversion. Les premiers retours confirment des gains spectaculaires de productivité.",
-				tag: "Fondation",
-				highlight:
-					"Premiers clients internationaux et 15h+ économisées / semaine",
-			},
-			{
-				id: "methodology",
-				year: "2024",
-				period: "Expansion",
-				title: "Le Système « Build · Grow · Automate »",
-				subtitle: "Formalisation d'une méthodologie propriétaire éprouvée",
-				description:
-					"Skemalab structure son approche en 3 piliers synergiques. Développement sur-mesure (Build), marketing à haute valeur ajoutée (Grow), et automatisation des processus métiers (Automate). Plus de 25 projets majeurs sont déployés avec une rigueur de sprint millimétrée.",
-				tag: "Système Éprouvé",
-				highlight:
-					"Une cadence de livraison rapide et des résultats mesurables",
-			},
-			{
-				id: "ai-era",
-				year: "2025",
-				period: "Innovation",
-				title: "L'Intégration Massive de l'IA & Workflows Autonomes",
-				subtitle: "L'avant-garde des opérations intelligentes",
-				description:
-					"Sous le leadership technologique de Marouan et la vision d'échelle de Feissal, SkemaLab connecte les agents IA et les architectures Next.js cloud-native aux process internes des clients. Les délais de traitement chutent de 50% chez nos partenaires.",
-				tag: "Révolution IA",
-				highlight: "Workflows autonomes 24/7 et assistants sur-mesure",
-			},
-			{
-				id: "scale",
-				year: "2026",
-				period: "Aujourd'hui & Futur",
-				title: "L'Expansion & La Référence Internationale",
-				subtitle: "Le partenaire technologique des entreprises ambitieuses",
-				description:
-					"Avec plus de 40 projets d'envergure livrés, un taux de satisfaction de 100% et un portefeuille international solide, SkemaLab s'impose comme le studio digital qui transforme la technologie en levier de souveraineté et d'hyper-croissance.",
-				tag: "Cap Futur",
-				highlight: "40+ projets réussis · Partenaire stratégique global",
-			},
+			{ id: "genesis", year: "2023", period: "Genèse", title: "Une conviction commune prend forme", subtitle: "Feissal Tarkaoui, Marouan Khadiri et Adam Khairi imaginent SkemaLab", description: "À l’origine, trois sensibilités complémentaires se rencontrent autour d’une même question : comment rendre la technologie réellement utile aux entreprises ? Feissal apporte la lecture stratégique et la compréhension des enjeux de croissance ; Marouan imagine des architectures fiables et des systèmes bien conçus ; Adam veille à transformer les idées en produits clairs, cohérents et agréables à utiliser. Ensemble, ils posent les bases d’un studio capable de relier vision, technologie et expérience.", tag: "La rencontre des expertises", highlight: "Relier stratégie, ingénierie et expérience produit" },
+			{ id: "foundation", year: "2023", period: "Lancement", title: "La naissance de SkemaLab", subtitle: "Une ambition commune portée depuis Essaouira", description: "SkemaLab prend forme comme un studio indépendant, ancré à Essaouira et ouvert aux projets qui dépassent les frontières. Les trois fondateurs définissent une façon de travailler fondée sur l’écoute, la collaboration étroite et l’exigence d’exécution. Chaque projet devient l’occasion de rapprocher les besoins du terrain des possibilités du numérique.", tag: "Le studio prend forme", highlight: "Un ancrage à Essaouira, une ambition sans frontières" },
+			{ id: "methodology", year: "2024", period: "Méthode", title: "Une méthode pensée comme un tout", subtitle: "Faire dialoguer stratégie, technologie et expérience", description: "Au fil des projets, leur complémentarité devient une méthode : comprendre les enjeux avant de concevoir, bâtir des outils solides, puis soigner chaque interaction pour que la solution trouve sa place dans le quotidien des équipes. Stratégie, développement, design produit et automatisation sont pensés ensemble, avec un dialogue constant entre les trois fondateurs.", tag: "La méthode SkemaLab", highlight: "Des solutions cohérentes, conçues pour les usages réels" },
+			{ id: "ai-era", year: "2025", period: "Exploration", title: "Ouvrir le champ des possibles", subtitle: "Mettre l’innovation au service des usages", description: "L’intelligence artificielle et l’automatisation ouvrent de nouvelles pistes. L’équipe les aborde avec curiosité et discernement : partir d’un besoin concret, choisir la bonne approche et intégrer la technologie de façon responsable dans des expériences simples à prendre en main.", tag: "Innovation utile", highlight: "La technologie avancée, au service d’expériences accessibles" },
+			{ id: "scale", year: "2026", period: "Aujourd’hui & demain", title: "Grandir sans perdre l’essentiel", subtitle: "Le prochain chapitre s’écrit avec chaque collaboration", description: "SkemaLab poursuit son chemin avec la même exigence fondatrice : écouter avant de construire, travailler en équipe et viser un impact tangible. Feissal, Marouan et Adam continuent de faire évoluer le studio aux côtés de leurs clients, avec la volonté de rendre les idées ambitieuses concrètes et durables.", tag: "La suite de l’histoire", highlight: "Une équipe complémentaire, tournée vers les projets à venir" },
 		],
 
 		foundersEyebrow: "03 — L’équipe SkemaLab",

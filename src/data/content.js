@@ -135,7 +135,7 @@ export const contactInfo = {
 	phone: "+212 6 99 99 57 54",
 	whatsapp: "212699995754",
 	linkedin: "https://www.linkedin.com/company/skemalab",
-	locations: ["Essaouira", "Maroc"],
+	locations: [ "E104 TECHNOPARK ESSAOUIRA", "Maroc" ],
 };
 
 export const siteConfig = {
