@@ -1077,10 +1077,23 @@ html.lenis body {
   pointer-events: none;
 }
 
+/* Keep the scroll reveal on phones, with a shorter stage so the second message
+   arrives sooner and has time to settle before the opening copy fades away. */
+@media (max-width: 899px) {
+  #hero {
+    height: 220svh;
+  }
+
+  #hero .hero-alt {
+    opacity: calc((var(--p) - 0.32) * 3.2);
+    transform: translateY(calc(18px - var(--p) * 28px));
+  }
+}
+
 /* Short CSS viewports are common with display scaling and compact laptop
    windows. Let the hero follow document flow there so its full content can
    grow vertically instead of being forced into the clipped sticky viewport. */
-@media (max-height: 760px) {
+@media (min-width: 900px) and (max-height: 760px) {
   #hero {
     height: auto;
     min-height: 100svh;
