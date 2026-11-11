@@ -1,0 +1,28 @@
+MODÈLE D'ARTICLE — NE PAS SUPPRIMER
+==================================
+
+Ce dossier commence par un « _ » : il est donc ignoré par le chargeur de
+contenu et n'apparaît jamais sur le site.
+
+POUR CRÉER UN ARTICLE
+---------------------
+
+1. Dupliquez ce dossier et renommez-le avec le slug de l'article :
+   minuscules, chiffres et tirets uniquement (ex. « automatiser-avec-n8n »).
+2. Renseignez meta.json (métadonnées communes aux trois langues).
+3. Écrivez fr.md, en.md et ar.md. Supprimez une langue si elle n'existe pas :
+   l'article sera simplement absent dans cette langue.
+4. Passez `draft` à false et vérifiez que `date` n'est pas dans le futur.
+5. Lancez `npm run content:check` avant de publier.
+
+RÈGLES IMPORTANTES
+------------------
+
+- La couverture doit être une URL https:// d'un domaine listé dans
+  src/lib/blog/image-hosts.json.
+- Les slugs page, tag, rss et rss.xml sont réservés.
+- description : entre 50 et 160 caractères.
+- Une langue absente = un warning, pas une erreur.
+- Un brouillon (draft: true) ou une date future = article invisible partout.
+
+Voir README-BLOG.md à la racine du projet pour la documentation complète.

@@ -26,6 +26,7 @@ export const en = {
 		{ href: "/#agence", label: "Agency" },
 		{ href: "/#contact", label: "Contact" },
 		{ href: "/our-story", label: "Our story" },
+		{ href: "/blog", label: "Blog" },
 	],
 
 	hero: {

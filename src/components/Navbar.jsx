@@ -35,10 +35,15 @@ const FOCUSABLE =
 const DARK_HERO_ROUTES = new Set( [ "/", "/our-story" ] );
 
 export default function Navbar() {
-	const { t } = useI18n();
+	const { t, locale } = useI18n();
 	const pathname = usePathname();
 	const navLinks = t.nav;
 	const darkSurface = DARK_HERO_ROUTES.has( pathname );
+	// On blog URLs the path is the source of truth, even before hydration.
+	const pathLocale = pathname?.match( /^\/(fr|en|ar)\/blog(?:\/|$)/ )?.[ 1 ];
+	const linkLocale = pathLocale || locale;
+	const resolveHref = ( href ) =>
+		href === "/blog" ? `/${ linkLocale }/blog` : href;
 
 	const [ scrolled, setScrolled ] = useState( false );
 	const [ hidden, setHidden ] = useState( false );
@@ -217,7 +222,7 @@ export default function Navbar() {
 									{ navLinks.map( ( link, index ) => (
 										<motion.a
 											key={ link.href }
-											href={ link.href }
+											href={ resolveHref( link.href ) }
 											onClick={ closeMenu }
 											className="group flex min-h-16 items-center justify-between gap-4 border-b border-line py-4"
 											initial={ { opacity: 0, y: 14 } }
@@ -298,11 +303,14 @@ export default function Navbar() {
 						{ navLinks.map( ( link ) => {
 							const isActive =
 								( pathname === "/" && active === link.href ) ||
-								( pathname === "/our-story" && link.href === "/our-story" );
+								( pathname === "/our-story" &&
+									link.href === "/our-story" ) ||
+								( link.href === "/blog" &&
+									pathname?.startsWith( `/${locale}/blog` ) );
 							return (
 								<Link
 									key={ link.href }
-									href={ link.href }
+									href={ resolveHref( link.href ) }
 									aria-current={ isActive ? "true" : undefined }
 									className={ cn(
 										"label-mono relative whitespace-nowrap px-2 py-2 transition-colors duration-300 xl:px-3",

@@ -106,7 +106,7 @@ export const viewport = {
 };
 
 const themeInitScript = `(function(){try{var t=localStorage.getItem("skemalab-theme");var r=document.documentElement;if(t==="light"){r.classList.remove("dark");r.style.colorScheme="light"}else{r.classList.add("dark");r.style.colorScheme="dark"}}catch(e){}})();`;
-const localeInitScript = `(function(){try{var l=localStorage.getItem("skemalab-locale")||"fr";var r=document.documentElement;r.setAttribute("lang",l);if(l==="ar"){r.setAttribute("dir","rtl");r.classList.add("rtl")}else{r.setAttribute("dir","ltr");r.classList.remove("rtl")}}catch(e){}})();`;
+const localeInitScript = `(function(){try{var p=location.pathname;var m=p.match(/^\\/(fr|en|ar)\\/blog(?:\\/|$)/);var l=m?m[1]:(localStorage.getItem("skemalab-locale")||"fr");if(m){localStorage.setItem("skemalab-locale",l)}var r=document.documentElement;r.setAttribute("lang",l);if(l==="ar"){r.setAttribute("dir","rtl");r.classList.add("rtl")}else{r.setAttribute("dir","ltr");r.classList.remove("rtl")}}catch(e){}})();`;
 
 export default function RootLayout({ children }) {
   return (

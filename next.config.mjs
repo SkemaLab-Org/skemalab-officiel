@@ -1,3 +1,9 @@
+import fs from "node:fs";
+
+const imageHosts = JSON.parse(
+  fs.readFileSync(new URL("./src/lib/blog/image-hosts.json", import.meta.url), "utf8"),
+);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Fewer legacy polyfills for modern browsers (PageSpeed "Legacy JavaScript")
@@ -9,48 +15,42 @@ const nextConfig = {
     qualities: [70, 75],
     deviceSizes: [640, 750, 828, 1080, 1200, 1600],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    remotePatterns: [
+    remotePatterns: imageHosts.map((hostname) => ({
+      protocol: "https",
+      hostname,
+    })),
+  },
+  // Content is read at runtime (ISR) and on-demand generation: make sure the
+  // Markdown/JSON files are bundled with the serverless functions.
+  outputFileTracingIncludes: {
+    "/*": ["./content/**/*", "./src/lib/blog/image-hosts.json"],
+  },
+  async redirects() {
+    return [
+      // Blog URLs without a locale fall back to French, the site default.
+      // Specific routes are declared first so they are not swallowed by :slug.
+      { source: "/blog", destination: "/fr/blog", permanent: false },
       {
-        protocol: "https",
-        hostname: "images.unsplash.com",
+        source: "/blog/page/:n",
+        destination: "/fr/blog/page/:n",
+        permanent: false,
       },
       {
-        protocol: "https",
-        hostname: "i.imgur.com",
+        source: "/blog/tag/:tag",
+        destination: "/fr/blog/tag/:tag",
+        permanent: false,
       },
       {
-        protocol: "https",
-        hostname: "imgur.com",
+        source: "/blog/rss.xml",
+        destination: "/fr/blog/rss.xml",
+        permanent: false,
       },
       {
-        protocol: "https",
-        hostname: "*.imgur.com",
+        source: "/blog/:slug",
+        destination: "/fr/blog/:slug",
+        permanent: false,
       },
-      {
-        protocol: "https",
-        hostname: "www.skemalab.com",
-      },
-      {
-        protocol: "https",
-        hostname: "skemalab.com",
-      },
-      {
-        protocol: "https",
-        hostname: "img.magnific.com",
-      },
-      {
-        protocol: "https",
-        hostname: "www.magnific.com",
-      },
-      {
-        protocol: "https",
-        hostname: "magnific.com",
-      },
-      {
-        protocol: "https",
-        hostname: "img.freepik.com",
-      },
-    ],
+    ];
   },
   async headers() {
     const isDev = process.env.NODE_ENV !== "production";
@@ -67,15 +67,7 @@ const nextConfig = {
       "'self'",
       "data:",
       "blob:",
-      "https://images.unsplash.com",
-      "https://i.imgur.com",
-      "https://*.imgur.com",
-      "https://www.skemalab.com",
-      "https://skemalab.com",
-      "https://img.magnific.com",
-      "https://www.magnific.com",
-      "https://magnific.com",
-      "https://img.freepik.com",
+      ...imageHosts.map((hostname) => `https://${hostname}`),
     ].join(" ");
 
     const frameSrc = [

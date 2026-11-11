@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { ArrowUp } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { contactInfo } from "@/data/content";
@@ -33,7 +34,10 @@ const socialLinks = [
 ];
 
 export default function Footer( { animate = false } ) {
-	const { t } = useI18n();
+	const { t, locale } = useI18n();
+	const pathname = usePathname();
+	const pathLocale = pathname?.match( /^\/(fr|en|ar)\/blog(?:\/|$)/ )?.[ 1 ];
+	const linkLocale = pathLocale || locale;
 	const reduce = useReducedMotion();
 	const FooterElement = animate ? motion.footer : "footer";
 	const motionProps = animate && !reduce
@@ -86,7 +90,14 @@ export default function Footer( { animate = false } ) {
 					<ul className="mt-4 space-y-1">
 						{ navLinks.map( ( link ) => (
 							<li key={ link.href }>
-								<a href={ link.href } className={ linkClass }>
+								<a
+									href={
+										link.href === "/blog"
+											? `/${ linkLocale }/blog`
+											: link.href
+									}
+									className={ linkClass }
+								>
 									{ link.label }
 								</a>
 							</li>

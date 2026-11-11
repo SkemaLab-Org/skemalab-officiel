@@ -4,7 +4,9 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { Check } from "lucide-react";
 import { motion } from "motion/react";
+import { usePathname, useRouter } from "next/navigation";
 import { useI18n } from "@/components/I18nProvider";
+import { useBlogAlternates } from "@/lib/blog/alternates-store";
 import { cn } from "@/lib/utils";
 
 function FlagIcon({ loc, className = "h-3.5 w-5" }) {
@@ -34,6 +36,10 @@ export default function LanguageSwitcher({
   onDark = true,
 }) {
   const { locale, setLocale, locales, isRTL } = useI18n();
+  const pathname = usePathname();
+  const router = useRouter();
+  const blogAlternates = useBlogAlternates();
+  const isBlogPath = /^\/(fr|en|ar)\/blog(?:\/|$)/.test(pathname || "");
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState(null);
   const containerRef = useRef(null);
@@ -85,8 +91,17 @@ export default function LanguageSwitcher({
 
   const handleSelect = (code, enabled) => {
     if (!enabled) return;
-    setLocale(code);
     setOpen(false);
+
+    if (code === locale) return;
+
+    setLocale(code);
+
+    // On the blog, the URL must follow the language too. If the article has
+    // no translation, fall back to the localized blog index.
+    if (isBlogPath) {
+      router.push(blogAlternates?.[code] ?? `/${code}/blog`);
+    }
   };
 
   if (isMobile) {
@@ -207,7 +222,7 @@ export default function LanguageSwitcher({
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-haspopup="listbox"
-        aria-label={isRTL ? "تغيير اللغة" : "Changer de langue"}
+        aria-label={`${isRTL ? "تغيير اللغة" : "Changer de langue"} (${current.short})`}
         className={cn(
           "flex h-11 items-center justify-center gap-2 rounded-none border px-3 transition-colors",
           onDark

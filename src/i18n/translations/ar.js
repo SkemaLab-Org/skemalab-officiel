@@ -26,6 +26,7 @@ export const ar = {
 		{ href: "/#agence", label: "من نحن" },
 		{ href: "/#contact", label: "تواصل معنا" },
 		{ href: "/our-story", label: "قصتنا" },
+		{ href: "/blog", label: "المدونة" },
 	],
 
 	hero: {

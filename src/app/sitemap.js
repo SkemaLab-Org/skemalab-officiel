@@ -1,8 +1,12 @@
 import { siteConfig } from "@/data/content";
+import { getBlogSitemapEntries } from "@/lib/blog/sitemap";
 
-export default function sitemap() {
+export const revalidate = 60;
+
+export default async function sitemap() {
   const baseUrl = siteConfig.url;
   const lastModified = new Date();
+  const blogEntries = await getBlogSitemapEntries();
 
   return [
     {
@@ -36,5 +40,6 @@ export default function sitemap() {
         `${ baseUrl }/opengraph-image`,
       ],
     },
+    ...blogEntries,
   ];
 }

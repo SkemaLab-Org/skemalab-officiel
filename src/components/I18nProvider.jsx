@@ -33,14 +33,22 @@ function applyLocaleToDoc(locale) {
 function getStoredLocale() {
   if (typeof window === "undefined") return defaultLocale;
   try {
-    // 1. Check URL search param (?lang=ar)
+    // 1. Blog URLs are the source of truth inside /[locale]/blog.
+    const blogMatch = window.location.pathname.match(
+      /^\/(fr|en|ar)\/blog(?:\/|$)/,
+    );
+    if (blogMatch && locales[blogMatch[1]]?.enabled) {
+      return blogMatch[1];
+    }
+
+    // 2. Check URL search param (?lang=ar)
     const urlParams = new URLSearchParams(window.location.search);
     const queryLang = urlParams.get("lang");
     if (queryLang && locales[queryLang]?.enabled) {
       return queryLang;
     }
 
-    // 2. Check localStorage
+    // 3. Check localStorage
     const saved = window.localStorage.getItem("skemalab-locale");
     if (saved && locales[saved]?.enabled) {
       return saved;

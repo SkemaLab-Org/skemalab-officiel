@@ -26,6 +26,7 @@ export const fr = {
 		{ href: "/#agence", label: "Agence" },
 		{ href: "/#contact", label: "Contact" },
 		{ href: "/our-story", label: "Notre histoire" },
+		{ href: "/blog", label: "Blog" },
 	],
 
 	hero: {
