@@ -1,15 +1,17 @@
+import { BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Reveal from "@/components/motion/Reveal";
 import {
   BLOG_INDEX_ALTERNATES,
   POSTS_PER_PAGE,
   blogPagePath,
-  blogPath,
 } from "@/lib/blog/config";
 import { getPosts, getTags } from "@/lib/blog/posts";
 import { t } from "@/lib/blog/ui-strings";
 import PostCard from "./PostCard";
 import RegisterAlternates from "./RegisterAlternates";
+import TopicBar from "./TopicBar";
 
 export default async function BlogIndex({ locale, pageNumber = 1 }) {
   const [allPosts, tags] = await Promise.all([
@@ -44,48 +46,56 @@ export default async function BlogIndex({ locale, pageNumber = 1 }) {
       <RegisterAlternates alternates={BLOG_INDEX_ALTERNATES} />
 
       <header className="blog-index-head">
-        <p className="label-mono">{t(locale, "blog")}</p>
-        <h1>{t(locale, "blogTitle")}</h1>
+        <div className="blog-index-head-top">
+          <p className="label-mono blog-index-eyebrow">{t(locale, "blog")}</p>
+          <p className="label-mono blog-index-count">
+            {allPosts.length} {t(locale, "articles")}
+          </p>
+        </div>
+
+        <h1 className="blog-index-title">{t(locale, "blogTitle")}</h1>
         <p className="blog-index-desc">{t(locale, "blogDesc")}</p>
       </header>
 
       {tags.length > 0 && (
-        <nav className="blog-tagbar" aria-label={t(locale, "tags")}>
-          <ul>
-            {tags.map(({ tag, count }) => (
-              <li key={tag}>
-                <Link
-                  href={`${blogPath(locale)}/tag/${encodeURIComponent(tag)}`}
-                >
-                  <span>{tag}</span>
-                  <span className="blog-tag-count" aria-hidden="true">
-                    {count}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <TopicBar locale={locale} tags={tags} total={allPosts.length} />
       )}
 
       {allPosts.length === 0 ? (
-        <p className="blog-empty">{t(locale, "empty")}</p>
+        <div className="blog-empty">
+          <BookOpen size={22} strokeWidth={1.5} aria-hidden="true" />
+          <p>{t(locale, "empty")}</p>
+        </div>
       ) : (
         <>
           {featured && (
-            <section className="blog-featured" aria-labelledby="featured">
-              <p className="label-mono" id="featured">
+            <section className="blog-featured" aria-labelledby="featured-heading">
+              <h2 className="label-mono blog-section-label" id="featured-heading">
                 {t(locale, "featured")}
-              </p>
-              <PostCard post={featured} locale={locale} featured />
+              </h2>
+              <PostCard post={featured} locale={locale} featured headingLevel="h3" />
             </section>
           )}
 
           {posts.length > 0 && (
-            <section className="blog-grid" aria-label={t(locale, "allPosts")}>
-              {posts.map((post) => (
-                <PostCard key={post.slug} post={post} locale={locale} />
-              ))}
+            <section className="blog-section" aria-labelledby="all-posts-heading">
+              <h2
+                className="label-mono blog-section-label"
+                id="all-posts-heading"
+              >
+                {t(locale, "allPosts")}
+              </h2>
+              <div className="blog-grid">
+                {posts.map((post, index) => (
+                  <Reveal
+                    key={post.slug}
+                    className="blog-card-reveal"
+                    delay={Math.min(index, 6) * 0.06}
+                  >
+                    <PostCard post={post} locale={locale} headingLevel="h3" />
+                  </Reveal>
+                ))}
+              </div>
             </section>
           )}
 
@@ -97,10 +107,24 @@ export default async function BlogIndex({ locale, pageNumber = 1 }) {
                   rel="prev"
                   className="blog-page-link"
                 >
-                  ← {t(locale, "prev")}
+                  <ChevronLeft
+                    size={15}
+                    strokeWidth={1.75}
+                    aria-hidden="true"
+                    className="rtl-flip"
+                  />
+                  {t(locale, "prev")}
                 </Link>
               ) : (
-                <span />
+                <span className="blog-page-link" aria-disabled="true">
+                  <ChevronLeft
+                    size={15}
+                    strokeWidth={1.75}
+                    aria-hidden="true"
+                    className="rtl-flip"
+                  />
+                  {t(locale, "prev")}
+                </span>
               )}
 
               <span className="blog-page-count">
@@ -114,10 +138,24 @@ export default async function BlogIndex({ locale, pageNumber = 1 }) {
                   rel="next"
                   className="blog-page-link"
                 >
-                  {t(locale, "next")} →
+                  {t(locale, "next")}
+                  <ChevronRight
+                    size={15}
+                    strokeWidth={1.75}
+                    aria-hidden="true"
+                    className="rtl-flip"
+                  />
                 </Link>
               ) : (
-                <span />
+                <span className="blog-page-link" aria-disabled="true">
+                  {t(locale, "next")}
+                  <ChevronRight
+                    size={15}
+                    strokeWidth={1.75}
+                    aria-hidden="true"
+                    className="rtl-flip"
+                  />
+                </span>
               )}
             </nav>
           )}

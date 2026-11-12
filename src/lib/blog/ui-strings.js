@@ -16,11 +16,17 @@ const dict = {
     page: "Page",
     of: "sur",
     allPosts: "Tous les articles",
+    articles: "articles",
+    all: "Tous",
+    readMore: "Lire l'article",
     copy: "Copier",
     copied: "Copié !",
     cta: "Lancer un projet",
+    ctaDesc:
+      "Décrivez-nous votre projet en quelques lignes. Nous revenons vers vous sous 48 h avec un premier avis clair.",
     backToBlog: "Retour au blog",
     tags: "Sujets",
+    topicsCount: "sujets",
   },
   en: {
     blog: "Blog",
@@ -39,11 +45,17 @@ const dict = {
     page: "Page",
     of: "of",
     allPosts: "All posts",
+    articles: "articles",
+    all: "All",
+    readMore: "Read the article",
     copy: "Copy",
     copied: "Copied!",
     cta: "Start a project",
+    ctaDesc:
+      "Tell us about your project in a few lines. We come back within 48 hours with a first honest take.",
     backToBlog: "Back to blog",
     tags: "Topics",
+    topicsCount: "topics",
   },
   ar: {
     blog: "المدونة",
@@ -62,11 +74,17 @@ const dict = {
     page: "الصفحة",
     of: "من",
     allPosts: "كل المقالات",
+    articles: "مقالات",
+    all: "الكل",
+    readMore: "اقرأ المقال",
     copy: "نسخ",
     copied: "تم النسخ!",
     cta: "أطلق مشروعك",
+    ctaDesc:
+      "صف مشروعك في أسطر قليلة. نعود إليك خلال 48 ساعة برأي أول واضح.",
     backToBlog: "رجوع إلى المدونة",
     tags: "المواضيع",
+    topicsCount: "مواضيع",
   },
 };
 

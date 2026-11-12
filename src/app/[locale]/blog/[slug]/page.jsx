@@ -1,3 +1,4 @@
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CalendlyButton from "@/components/CalendlyButton";
@@ -5,6 +6,7 @@ import CoverImage from "@/components/blog/CoverImage";
 import JsonLd from "@/components/blog/JsonLd";
 import PostCard from "@/components/blog/PostCard";
 import PostEnhancer from "@/components/blog/PostEnhancer";
+import PostMeta from "@/components/blog/PostMeta";
 import RegisterAlternates from "@/components/blog/RegisterAlternates";
 import ShareButtons from "@/components/blog/ShareButtons";
 import Toc from "@/components/blog/Toc";
@@ -13,7 +15,6 @@ import {
   SITE_URL,
   absoluteUrl,
   blogPath,
-  formatPostDate,
   isBlogLocale,
 } from "@/lib/blog/config";
 import {
@@ -95,7 +96,6 @@ export default async function BlogPostPage({ params }) {
   ]);
 
   const url = absoluteUrl(blogPath(locale, slug));
-  const date = formatPostDate(post.date, locale);
 
   return (
     <article className="blog-article">
@@ -153,37 +153,45 @@ export default async function BlogPostPage({ params }) {
       />
 
       <nav aria-label="breadcrumb" className="blog-breadcrumb">
-        <Link href={blogPath(locale)}>← {t(locale, "backToBlog")}</Link>
+        <Link href={blogPath(locale)}>
+          <ArrowLeft
+            size={14}
+            strokeWidth={1.75}
+            aria-hidden="true"
+            className="rtl-flip"
+          />
+          {t(locale, "backToBlog")}
+        </Link>
       </nav>
 
       <header className="blog-hero">
-        {post.tags.length > 0 && (
-          <ul className="blog-tags" aria-label={t(locale, "tags")}>
-            {post.tags.map((tag) => (
-              <li key={tag}>
-                <Link
-                  href={`${blogPath(locale)}/tag/${encodeURIComponent(tag)}`}
-                >
-                  {tag}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+        <div className="blog-hero-text">
+          {post.tags.length > 0 && (
+            <ul className="blog-tags" aria-label={t(locale, "tags")}>
+              {post.tags.map((tag) => (
+                <li key={tag}>
+                  <Link
+                    href={`${blogPath(locale)}/tag/${encodeURIComponent(tag)}`}
+                  >
+                    {tag}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
 
-        <h1>{post.title}</h1>
+          <h1>{post.title}</h1>
 
-        <p className="blog-meta">
-          <time dateTime={post.date}>{date}</time>
-          <span aria-hidden="true"> · </span>
-          <span>{post.author}</span>
-          <span aria-hidden="true"> · </span>
-          <span>
-            {post.readingTime} {t(locale, "minRead")}
-          </span>
-        </p>
+          <PostMeta post={post} locale={locale} variant="hero" />
+        </div>
 
-        <CoverImage src={post.cover} alt={post.coverAlt} priority />
+        <CoverImage
+          src={post.cover}
+          alt={post.coverAlt}
+          priority
+          sizes="(min-width: 1440px) 1312px, (min-width: 1024px) 944px, 100vw"
+          className="blog-hero-cover"
+        />
       </header>
 
       <div className="blog-layout">
@@ -217,6 +225,8 @@ export default async function BlogPostPage({ params }) {
                   key={relatedPost.slug}
                   post={relatedPost}
                   locale={locale}
+                  compact
+                  headingLevel="h3"
                 />
               ))}
             </div>
@@ -224,11 +234,26 @@ export default async function BlogPostPage({ params }) {
         )}
 
         <section className="blog-cta">
-          <p className="label-mono">Skemalab</p>
-          <h2>{t(locale, "cta")}</h2>
-          <CalendlyButton className="min-h-11 rounded-none px-5">
-            {t(locale, "cta")}
-          </CalendlyButton>
+          <div className="blog-cta-inner">
+            <span className="blog-cta-mark blog-cta-mark--start-start" aria-hidden="true">
+              +
+            </span>
+            <span className="blog-cta-mark blog-cta-mark--start-end" aria-hidden="true">
+              +
+            </span>
+            <span className="blog-cta-mark blog-cta-mark--end-start" aria-hidden="true">
+              +
+            </span>
+            <span className="blog-cta-mark blog-cta-mark--end-end" aria-hidden="true">
+              +
+            </span>
+            <p className="label-mono">Skemalab</p>
+            <h2>{t(locale, "cta")}</h2>
+            <p className="blog-cta-desc">{t(locale, "ctaDesc")}</p>
+            <CalendlyButton className="mt-2 min-h-12 px-6">
+              {t(locale, "cta")}
+            </CalendlyButton>
+          </div>
         </section>
       </footer>
     </article>

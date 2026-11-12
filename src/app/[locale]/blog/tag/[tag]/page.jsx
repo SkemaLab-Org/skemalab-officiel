@@ -1,7 +1,9 @@
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PostCard from "@/components/blog/PostCard";
 import RegisterAlternates from "@/components/blog/RegisterAlternates";
+import TopicBar from "@/components/blog/TopicBar";
 import {
   BLOG_INDEX_ALTERNATES,
   BLOG_LOCALES,
@@ -70,31 +72,58 @@ export default async function BlogTagPage({ params }) {
   if (!isBlogLocale(locale)) notFound();
 
   const tag = decodeTag(rawTag);
-  const posts = (await getPosts(locale)).filter((post) =>
-    post.tags.includes(tag),
-  );
-  if (posts.length === 0) notFound();
+  const [posts, tags] = await Promise.all([
+    getPosts(locale),
+    getTags(locale),
+  ]);
+  const tagged = posts.filter((post) => post.tags.includes(tag));
+  if (tagged.length === 0) notFound();
 
   return (
     <div className="blog-index">
       <RegisterAlternates alternates={BLOG_INDEX_ALTERNATES} />
 
       <nav aria-label="breadcrumb" className="blog-breadcrumb">
-        <Link href={blogPath(locale)}>← {t(locale, "backToBlog")}</Link>
+        <Link href={blogPath(locale)}>
+          <ArrowLeft
+            size={14}
+            strokeWidth={1.75}
+            aria-hidden="true"
+            className="rtl-flip"
+          />
+          {t(locale, "backToBlog")}
+        </Link>
       </nav>
 
       <header className="blog-index-head">
-        <p className="label-mono">{t(locale, "blog")}</p>
-        <h1>#{tag}</h1>
+        <div className="blog-index-head-top">
+          <p className="label-mono blog-index-eyebrow">{t(locale, "tags")}</p>
+          <p className="label-mono blog-index-count">
+            {posts.length} {t(locale, "articles")}
+          </p>
+        </div>
+        <h1 className="blog-index-title">#{tag}</h1>
         <p className="blog-index-desc">
-          {posts.length} {t(locale, "allPosts")}
+          {tagged.length} {t(locale, "articles")}
         </p>
       </header>
 
-      <section className="blog-grid" aria-label={t(locale, "allPosts")}>
-        {posts.map((post) => (
-          <PostCard key={post.slug} post={post} locale={locale} />
-        ))}
+      <TopicBar locale={locale} tags={tags} activeTag={tag} total={posts.length} />
+
+      <section className="blog-section" aria-labelledby="tag-posts-heading">
+        <h2 className="label-mono blog-section-label" id="tag-posts-heading">
+          {t(locale, "allPosts")}
+        </h2>
+        <div className="blog-grid">
+          {tagged.map((post) => (
+            <PostCard
+              key={post.slug}
+              post={post}
+              locale={locale}
+              headingLevel="h3"
+            />
+          ))}
+        </div>
       </section>
     </div>
   );
