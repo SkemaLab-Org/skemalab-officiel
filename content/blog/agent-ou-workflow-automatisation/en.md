@@ -32,6 +32,8 @@ That is the agent's territory, because the rule does not fit in a line of code.
 
 n8n shipped a distinct Agents feature on 25 September 2026. Existing workflows become the agent's tools. Each tool keeps its own credentials, and sensitive calls go through human approval. The agent does not replace your automations, it calls them.
 
+For a practical example of a conventional workflow, see [our n8n outreach automation article](/en/blog/automatiser-avec-n8n).
+
 ## The decision rule, four questions
 
 1. **Is the input structured?** A field, a form, an event. If yes, workflow.

@@ -32,6 +32,8 @@ C'est le terrain de l'agent, parce que la règle ne tient pas dans une ligne de 
 
 n8n a lancé une fonctionnalité Agents distincte le 25 septembre 2026. Les workflows existants deviennent les outils de l'agent. Chaque outil garde ses identifiants, et les appels sensibles passent par une approbation humaine. L'agent ne remplace pas vos automatisations, il les appelle.
 
+Pour voir à quoi ressemble un workflow classique en pratique, consultez [notre exemple d'automatisation de prospection avec n8n](/fr/blog/automatiser-avec-n8n).
+
 ## La règle de décision, quatre questions
 
 1. **L'entrée est-elle structurée ?** Un champ, un formulaire, un événement. Si oui, workflow.

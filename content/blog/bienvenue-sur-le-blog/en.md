@@ -15,11 +15,13 @@ A digital studio learns fast, but forgets even faster. Writing forces us to stru
 ### What you will find here
 
 - lessons learned from real projects;
-- practical guides on development and SEO;
+- practical guides on [website development and SEO](/en/blog/refonte-ou-optimisation-site-web);
 - automation workflows you can adapt;
-- honest analyses of what we test, including its limits.
+- honest analyses of what we test, including [when to choose an AI agent or a workflow](/en/blog/agent-ou-workflow-automatisation).
 
 Our editorial priorities are simple: be useful, stay concrete and own our technical choices.
+
+We also look at how AI search describes companies in [our article on branded searches](/en/blog/votre-marque-dans-les-recherches-ia).
 
 > Clarity is not a simplification. It is the result of serious work.
 

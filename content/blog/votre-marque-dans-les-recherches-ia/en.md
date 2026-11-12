@@ -63,7 +63,7 @@ Your reputation is now built on properties you do not own. Your website remains 
 
 It is foundational work without flashy gimmicks. We prefer stating that upfront.
 
-If you want to know what Google currently says about your brand, [contact us](/#contact). To understand our content approach, read [our introduction article](/en/blog/bienvenue-sur-le-blog).
+If you want to know what Google currently says about your brand, [contact us](/#contact). To understand our content approach, read [our introduction article](/en/blog/bienvenue-sur-le-blog). If you are planning a redesign, see [our guide to choosing between a redesign and optimization](/en/blog/refonte-ou-optimisation-site-web).
 
 ## Sources
 

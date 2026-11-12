@@ -68,4 +68,4 @@ Ensuite, un nœud **IF** envoie les scores supérieurs ou égaux à 2 vers Slack
 
 Après un mois, le temps de traitement d'un lead est passé de quinze minutes à moins de deux. Le vrai gain n'est pas la vitesse : c'est la régularité.
 
-Pour aller plus loin, lisez [notre article d'introduction](/fr/blog/bienvenue-sur-le-blog) ou [contactez-nous](/#contact) pour cadrer votre premier workflow.
+Pour aller plus loin, lisez [notre article d'introduction](/fr/blog/bienvenue-sur-le-blog), découvrez [quand un agent IA est préférable à un workflow](/fr/blog/agent-ou-workflow-automatisation), ou [contactez-nous](/#contact) pour cadrer votre premier workflow.

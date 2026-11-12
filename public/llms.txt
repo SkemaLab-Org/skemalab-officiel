@@ -1,0 +1,64 @@
+# SkemaLab
+
+> SkemaLab est un studio digital basé à Essaouira, au Maroc. Il accompagne les petites et moyennes entreprises au Maroc et en Europe avec du développement web et mobile sur mesure, du marketing digital orienté ROI et l’automatisation de workflows avec n8n, Make et l’IA.
+
+Ce fichier résume les informations officielles du site en français, en anglais et en arabe. Le site principal est en français. Le blog propose des contenus en français, en anglais et en arabe. Pour les informations à jour, consulter les pages officielles ci-dessous.
+
+## Informations officielles
+
+- [Accueil — français](https://www.skemalab.com/)
+- [Notre histoire et notre équipe — français](https://www.skemalab.com/our-story)
+- [Blog — français](https://www.skemalab.com/fr/blog)
+- [Blog — العربية](https://www.skemalab.com/ar/blog)
+- [Blog — English](https://www.skemalab.com/en/blog)
+
+## Services
+
+- Développement informatique : sites, plateformes et applications conçus sur mesure, avec intégrations API et déploiement.
+- Marketing digital : stratégie d’acquisition, SEO, contenu, publicité digitale et tunnels de conversion orientés vers les objectifs business.
+- Automatisation et workflows : connexion d’outils et automatisation de tâches avec n8n, Make et l’IA.
+
+## Contact
+
+- Email : [contact@skemalab.com](mailto:contact@skemalab.com)
+- Téléphone et WhatsApp : +212 6 99 99 57 54
+- LinkedIn : [SkemaLab](https://www.linkedin.com/company/skemalab)
+- Adresse : E104 Technopark, Essaouira, Maroc
+
+## English
+
+SkemaLab is a digital studio based in Essaouira, Morocco. It supports small and medium-sized businesses in Morocco and Europe with custom web and mobile development, ROI-focused digital marketing, and workflow automation using n8n, Make, and AI.
+
+The main website is in French. The blog is available in French, English, and Arabic. See the [English blog](https://www.skemalab.com/en/blog) for articles in English.
+
+### Services
+
+- Custom websites, platforms, and applications, including API integrations and deployment.
+- Digital marketing focused on acquisition, SEO, content, paid media, and conversion.
+- Workflow automation and tool integrations using n8n, Make, and AI.
+
+### Contact
+
+- Email: [contact@skemalab.com](mailto:contact@skemalab.com)
+- Phone and WhatsApp: +212 6 99 99 57 54
+- LinkedIn: [SkemaLab](https://www.linkedin.com/company/skemalab)
+- Address: E104 Technopark, Essaouira, Morocco
+
+## العربية
+
+سكيمالاب استوديو رقمي مقره في الصويرة، المغرب. يقدّم خدماته للشركات الصغيرة والمتوسطة في المغرب وأوروبا، وتشمل تطوير المواقع والمنصات والتطبيقات حسب الطلب، والتسويق الرقمي الموجّه نحو النتائج، وأتمتة سير العمل باستخدام n8n وMake والذكاء الاصطناعي.
+
+الموقع الرئيسي متاح باللغة الفرنسية، بينما يضمّ المدوّنة محتوى بالفرنسية والإنجليزية والعربية. للحصول على المعلومات الرسمية والمحدّثة، يرجى الرجوع إلى الروابط أعلاه.
+
+### الخدمات
+
+- تطوير المواقع والمنصات والتطبيقات المخصّصة، مع تكامل واجهات البرمجة ونشر الحلول.
+- التسويق الرقمي: تحسين الظهور في محركات البحث، وصناعة المحتوى، والإعلانات الرقمية، ومسارات التحويل.
+- أتمتة المهام وسير العمل وربط الأدوات باستخدام n8n وMake والذكاء الاصطناعي.
+
+### التواصل
+
+- البريد الإلكتروني: [contact@skemalab.com](mailto:contact@skemalab.com)
+- الهاتف وواتساب: +212 6 99 99 57 54
+- لينكدإن: [SkemaLab](https://www.linkedin.com/company/skemalab)
+- العنوان: E104 Technopark، الصويرة، المغرب

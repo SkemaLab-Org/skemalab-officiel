@@ -53,6 +53,8 @@ Certain signals are unequivocal:
 
 A poorly handled migration can wipe out years of organic search equity:
 
+For another perspective on online visibility, read [our analysis of branded searches in AI results](/en/blog/votre-marque-dans-les-recherches-ia).
+
 1. Map all legacy URLs and pair each old page with its successor via **301 redirects**.
 2. Migrate content along with metadata, titles, and structured schema data.
 3. Crawl indexable pages pre- and post-launch to verify response codes and canonical tags.

@@ -144,7 +144,7 @@ export const siteConfig = {
 	url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.skemalab.com",
 	ogImage: "/opengraph-image",
 	description:
-		"Skemalab est un studio digital orienté résultats : développement web & mobile sur mesure, marketing digital ROI et automatisation de workflows (n8n, Make, IA) pour propulser votre croissance.",
+		"Studio digital basé à Essaouira, Skemalab accompagne les TPE et PME au Maroc et en Europe en développement web et mobile sur mesure, marketing digital orienté ROI et automatisation de workflows avec n8n, Make et l’IA.",
 	shortDescription:
 		"Studio digital d'excellence : Développement Web, Marketing Digital et Automatisation de workflows.",
 	keywords: [
@@ -167,7 +167,6 @@ export const siteConfig = {
 		"automatisation IA",
 	],
 	locale: "fr_FR",
-	localeAlternate: "en_US",
 };
 
 /** CTA navbar — ouvre Calendly (NEXT_PUBLIC_CALENDLY_URL) */

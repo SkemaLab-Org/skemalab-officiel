@@ -41,7 +41,7 @@ const mono = JetBrains_Mono({
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Skemalab | Développement Web, Marketing Digital & Automatisation",
+    default: "Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
     template: "%s | Skemalab",
   },
   description: siteConfig.description,
@@ -57,10 +57,9 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: siteConfig.locale || "fr_FR",
-    alternateLocale: siteConfig.localeAlternate ? [siteConfig.localeAlternate] : undefined,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: "Skemalab | Studio Digital : Développement, Marketing & Automatisation",
+    title: "Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
     description: siteConfig.description,
     images: [
       {
@@ -73,7 +72,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Skemalab | Développement Web, Marketing Digital & Automatisation",
+    title: "Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
     description: siteConfig.description,
     images: ["/opengraph-image"],
   },

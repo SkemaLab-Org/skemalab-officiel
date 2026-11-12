@@ -15,11 +15,13 @@ Un studio digital apprend vite, mais oublie encore plus vite. Écrire nous oblig
 ### Ce que vous trouverez ici
 
 - des retours d'expérience sur des projets réels ;
-- des guides pratiques sur le développement et le SEO ;
+- des guides pratiques sur le [développement et le SEO](/fr/blog/refonte-ou-optimisation-site-web) ;
 - des workflows d'automatisation prêts à adapter ;
-- des analyses de ce que nous testons, avec leurs limites.
+- des analyses de ce que nous testons, comme [le choix entre un agent IA et un workflow](/fr/blog/agent-ou-workflow-automatisation).
 
 Nos priorités éditoriales sont simples : être utiles, rester concrets et assumer nos choix techniques.
+
+Nous parlons aussi de la façon dont les moteurs IA présentent les entreprises, dans [notre analyse des recherches de marque](/fr/blog/votre-marque-dans-les-recherches-ia).
 
 > La clarté n'est pas une simplification. C'est le résultat d'un travail sérieux.
 

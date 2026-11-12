@@ -15,51 +15,22 @@ export default function JsonLd() {
     telephone: contactInfo.phone,
     address: {
       "@type": "PostalAddress",
-      addressLocality: contactInfo.locations[ 0 ] || "Essaouira",
-      addressCountry: contactInfo.locations[ 1 ] === "Maroc" ? "MA" : "MA",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 31.5085,
-      longitude: -9.7595,
+      streetAddress: "E104 Technopark",
+      addressLocality: "Essaouira",
+      addressCountry: "MA",
     },
     sameAs: [
       contactInfo.linkedin,
       `https://wa.me/${ contactInfo.whatsapp }`,
     ].filter( Boolean ),
-    priceRange: "$$",
-    currenciesAccepted: "EUR, MAD, USD",
-    paymentAccepted: "Virement bancaire, Carte bancaire",
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-        ],
-        opens: "09:00",
-        closes: "18:00",
-      },
-    ],
     areaServed: [
       {
         "@type": "Country",
         name: "Maroc",
       },
       {
-        "@type": "Country",
-        name: "France",
-      },
-      {
         "@type": "Continent",
         name: "Europe",
-      },
-      {
-        "@type": "AdministrativeArea",
-        name: "MENA",
       },
     ],
     knowsAbout: [
@@ -85,10 +56,6 @@ export default function JsonLd() {
           name: service.title,
           description: service.description,
           category: service.subtitle,
-          offers: {
-            "@type": "Offer",
-            priceCurrency: "EUR",
-          },
         },
       } ) ),
     },

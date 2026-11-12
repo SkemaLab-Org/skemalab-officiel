@@ -5,13 +5,11 @@ export const revalidate = 60;
 
 export default async function sitemap() {
   const baseUrl = siteConfig.url;
-  const lastModified = new Date();
   const blogEntries = await getBlogSitemapEntries();
 
   return [
     {
       url: baseUrl,
-      lastModified,
       changeFrequency: "weekly",
       priority: 1.0,
       alternates: {
@@ -27,7 +25,6 @@ export default async function sitemap() {
     },
     {
       url: `${ baseUrl }/our-story`,
-      lastModified,
       changeFrequency: "monthly",
       priority: 0.8,
       alternates: {

@@ -63,7 +63,7 @@ Votre réputation se construit désormais dans des endroits que vous ne posséde
 
 C'est un travail de fond, sans effet spectaculaire. Nous préférons le dire avant de commencer.
 
-Si vous voulez savoir ce que Google raconte aujourd'hui de votre marque, [contactez-nous](/#contact). Pour comprendre notre approche du contenu, lisez [notre article d'introduction](/fr/blog/bienvenue-sur-le-blog).
+Si vous voulez savoir ce que Google raconte aujourd'hui de votre marque, [contactez-nous](/#contact). Pour comprendre notre approche du contenu, lisez [notre article d'introduction](/fr/blog/bienvenue-sur-le-blog). Si vous préparez une refonte, consultez aussi [notre guide pour choisir entre refonte et optimisation](/fr/blog/refonte-ou-optimisation-site-web).
 
 ## Sources
 

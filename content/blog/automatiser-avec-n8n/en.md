@@ -68,4 +68,4 @@ An **IF** node then sends scores of 2 or more to Slack, and the rest to a nurtur
 
 After one month, the time spent processing a lead dropped from fifteen minutes to under two. The real gain is not speed: it is consistency.
 
-To go further, read [our introduction article](/en/blog/bienvenue-sur-le-blog) or [contact us](/#contact) to scope your first workflow.
+To go further, read [our introduction article](/en/blog/bienvenue-sur-le-blog), see [when an AI agent is preferable to a workflow](/en/blog/agent-ou-workflow-automatisation), or [contact us](/#contact) to scope your first workflow.

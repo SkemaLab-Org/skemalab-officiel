@@ -53,6 +53,8 @@ Certains signaux ne trompent pas :
 
 Une refonte mal orchestrée peut effacer des années de référencement. Les règles de protection sont strictes :
 
+Pour un autre angle sur la visibilité en ligne, lisez aussi [notre analyse des recherches de marque dans les résultats IA](/fr/blog/votre-marque-dans-les-recherches-ia).
+
 1. Cartographiez toutes les anciennes URLs et associez chaque page à sa remplaçante via une **redirection 301**.
 2. Migrez le contenu avec ses balises, ses titres et ses données structurées.
 3. Crawlez le site avant et après pour comparer les codes de réponse et les balises canoniques.
