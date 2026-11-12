@@ -656,15 +656,8 @@ html:not(.dark) .photo-duotone img {
   filter: grayscale(1) contrast(1.04) brightness(0.95);
 }
 
-.photo-duotone::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--brand);
-  mix-blend-mode: color;
-  opacity: 0.32;
-  pointer-events: none;
-}
+/* Green brand tint overlay removed — images keep the desaturated base
+   treatment but no longer receive the brand-color wash on top. */
 
 /* Native FAQ rows with a CSS-only plus that collapses to a minus. */
 .faq-item summary {
