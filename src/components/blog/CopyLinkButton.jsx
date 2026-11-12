@@ -1,5 +1,6 @@
 "use client";
 
+import { Check, Link2 } from "lucide-react";
 import { useState } from "react";
 
 export default function CopyLinkButton({ url, label, copiedLabel }) {
@@ -24,6 +25,8 @@ export default function CopyLinkButton({ url, label, copiedLabel }) {
     window.setTimeout(() => setCopied(false), 1500);
   };
 
+  const Icon = copied ? Check : Link2;
+
   return (
     <button
       type="button"
@@ -31,6 +34,7 @@ export default function CopyLinkButton({ url, label, copiedLabel }) {
       onClick={copy}
       aria-live="polite"
     >
+      <Icon size={14} strokeWidth={1.75} aria-hidden="true" />
       {copied ? copiedLabel : label}
     </button>
   );

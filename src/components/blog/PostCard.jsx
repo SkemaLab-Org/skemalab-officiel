@@ -1,21 +1,41 @@
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { blogPath, formatPostDate } from "@/lib/blog/config";
+import { blogPath } from "@/lib/blog/config";
 import { t } from "@/lib/blog/ui-strings";
 import CoverImage from "./CoverImage";
+import PostMeta from "./PostMeta";
 
-export default function PostCard({ post, locale, featured = false }) {
+export default function PostCard({
+  post,
+  locale,
+  featured = false,
+  compact = false,
+  headingLevel = "h2",
+}) {
+  const Heading = headingLevel;
+
+  const className = [
+    "blog-card",
+    featured ? "blog-card--featured" : "",
+    compact ? "blog-card--compact" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <article className={`blog-card${featured ? " blog-card-featured" : ""}`}>
-      <CoverImage
-        src={post.cover}
-        alt={post.coverAlt}
-        priority={featured}
-        sizes={
-          featured
-            ? "(min-width: 1024px) 720px, 100vw"
-            : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-        }
-      />
+    <article className={className}>
+      <div className="blog-card-media">
+        <CoverImage
+          src={post.cover}
+          alt={post.coverAlt}
+          priority={featured}
+          sizes={
+            featured
+              ? "(min-width: 900px) 620px, 100vw"
+              : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          }
+        />
+      </div>
 
       <div className="blog-card-body">
         {post.tags.length > 0 && (
@@ -28,23 +48,24 @@ export default function PostCard({ post, locale, featured = false }) {
           </ul>
         )}
 
-        <h2 className="blog-card-title">
+        <Heading className="blog-card-title">
           <Link href={blogPath(locale, post.slug)}>{post.title}</Link>
-        </h2>
+        </Heading>
 
-        <p className="blog-card-excerpt">{post.excerpt}</p>
+        {!compact && <p className="blog-card-excerpt">{post.excerpt}</p>}
 
-        <p className="blog-meta">
-          <time dateTime={post.date}>
-            {formatPostDate(post.date, locale)}
-          </time>
-          <span aria-hidden="true"> · </span>
-          <span>{post.author}</span>
-          <span aria-hidden="true"> · </span>
-          <span>
-            {post.readingTime} {t(locale, "minRead")}
+        <PostMeta
+          post={post}
+          locale={locale}
+          variant={compact ? "compact" : "card"}
+        />
+
+        {!compact && (
+          <span className="blog-card-cta">
+            {t(locale, "readMore")}
+            <ArrowUpRight size={14} strokeWidth={1.75} aria-hidden="true" />
           </span>
-        </p>
+        )}
       </div>
     </article>
   );

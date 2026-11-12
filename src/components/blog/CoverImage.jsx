@@ -8,11 +8,12 @@ export default function CoverImage({
   alt,
   priority = false,
   sizes = "(min-width: 1024px) 1024px, 100vw",
+  className = "",
 }) {
   const [failed, setFailed] = useState(false);
 
   return (
-    <div className="cover-box">
+    <div className={`cover-box ${className}`.trim()}>
       {failed ? (
         <div className="cover-fallback" role="img" aria-label={alt} />
       ) : (
@@ -23,6 +24,7 @@ export default function CoverImage({
           sizes={sizes}
           priority={priority}
           onError={() => setFailed(true)}
+          className="cover-image"
           style={{ objectFit: "cover" }}
         />
       )}
