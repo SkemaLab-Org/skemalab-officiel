@@ -649,11 +649,11 @@ select.field {
 }
 
 .photo-duotone img {
-  filter: grayscale(1) contrast(1.04) brightness(0.82);
+  filter: none;
 }
 
 html:not(.dark) .photo-duotone img {
-  filter: grayscale(1) contrast(1.04) brightness(0.95);
+  filter: none;
 }
 
 /* Green brand tint overlay removed — images keep the desaturated base
