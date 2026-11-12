@@ -11,7 +11,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## Blog
 
 - Documentation complète : `README-BLOG.md`.
-- Le contenu vit dans `content/blog/<slug>/` (`meta.json` + `fr.md`/`en.md`/`ar.md`) ; ne pas déplacer ces fichiers sans mettre à jour `src/lib/blog/core.js`.
+- Le contenu vit dans `content/blog/<catégorie>/<slug>/` (`meta.json` + `fr.md`/`en.md`/`ar.md`) ; les catégories sont `build`, `grow` et `automate`, déduites du dossier parent. Ne pas déplacer ces fichiers sans mettre à jour `src/lib/blog/core.js`.
 - Le pipeline Markdown (`src/lib/blog/markdown.js`) est couvert par `src/lib/blog/__tests__/markdown.test.js`. Lancer `npm test` avant toute modification du rendu.
 - `npm run content:check` valide le contenu ; il tourne aussi au début de `npm run build`.
 

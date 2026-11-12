@@ -1,26 +1,36 @@
-import { BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/motion/Reveal";
 import {
   BLOG_INDEX_ALTERNATES,
   POSTS_PER_PAGE,
+  blogCategoryAlternates,
+  blogCategoryPath,
   blogPagePath,
+  blogPath,
+  isCategory,
 } from "@/lib/blog/config";
-import { getPosts, getTags } from "@/lib/blog/posts";
-import { t } from "@/lib/blog/ui-strings";
+import { getCategories, getPosts, getPostsByCategory } from "@/lib/blog/posts";
+import { categoryDescription, categoryLabel, t } from "@/lib/blog/ui-strings";
+import CategoryBar from "./CategoryBar";
 import PostCard from "./PostCard";
 import RegisterAlternates from "./RegisterAlternates";
-import TopicBar from "./TopicBar";
 
-export default async function BlogIndex({ locale, pageNumber = 1 }) {
-  const [allPosts, tags] = await Promise.all([
-    getPosts(locale),
-    getTags(locale),
+export default async function BlogIndex({
+  locale,
+  pageNumber = 1,
+  category = null,
+}) {
+  if (category !== null && !isCategory(category)) notFound();
+
+  const [allPosts, categories] = await Promise.all([
+    category ? getPostsByCategory(locale, category) : getPosts(locale),
+    getCategories(locale),
   ]);
 
   const featured =
-    pageNumber === 1
+    !category && pageNumber === 1
       ? (allPosts.find((post) => post.featured) ?? allPosts[0] ?? null)
       : null;
 
@@ -41,25 +51,59 @@ export default async function BlogIndex({ locale, pageNumber = 1 }) {
   const start = (pageNumber - 1) * POSTS_PER_PAGE;
   const posts = rest.slice(start, start + POSTS_PER_PAGE);
 
+  const pagePath = (n) =>
+    category ? blogCategoryPath(locale, category, n) : blogPagePath(locale, n);
+
+  const totalPosts = categories.reduce((sum, item) => sum + item.count, 0);
+  const title = category
+    ? categoryLabel(locale, category)
+    : t(locale, "blogTitle");
+  const description = category
+    ? categoryDescription(locale, category)
+    : t(locale, "blogDesc");
+
   return (
     <div className="blog-index">
-      <RegisterAlternates alternates={BLOG_INDEX_ALTERNATES} />
+      <RegisterAlternates
+        alternates={
+          category ? blogCategoryAlternates(category) : BLOG_INDEX_ALTERNATES
+        }
+      />
+
+      {category && (
+        <nav aria-label="breadcrumb" className="blog-breadcrumb">
+          <Link href={blogPath(locale)}>
+            <ArrowLeft
+              size={14}
+              strokeWidth={1.75}
+              aria-hidden="true"
+              className="rtl-flip"
+            />
+            {t(locale, "backToBlog")}
+          </Link>
+        </nav>
+      )}
 
       <header className="blog-index-head">
         <div className="blog-index-head-top">
-          <p className="label-mono blog-index-eyebrow">{t(locale, "blog")}</p>
+          <p className="label-mono blog-index-eyebrow">
+            {category ? t(locale, "categories") : t(locale, "blog")}
+          </p>
           <p className="label-mono blog-index-count">
             {allPosts.length} {t(locale, "articles")}
           </p>
         </div>
 
-        <h1 className="blog-index-title">{t(locale, "blogTitle")}</h1>
-        <p className="blog-index-desc">{t(locale, "blogDesc")}</p>
+        <h1 className="blog-index-title">{title}</h1>
+        <p className="blog-index-desc">{description}</p>
       </header>
 
-      {tags.length > 0 && (
-        <TopicBar locale={locale} tags={tags} total={allPosts.length} />
-      )}
+      <CategoryBar
+        locale={locale}
+        categories={categories}
+        activeCategory={category}
+        total={totalPosts}
+      />
 
       {allPosts.length === 0 ? (
         <div className="blog-empty">
@@ -103,7 +147,7 @@ export default async function BlogIndex({ locale, pageNumber = 1 }) {
             <nav className="blog-pagination" aria-label={t(locale, "page")}>
               {pageNumber > 1 ? (
                 <Link
-                  href={blogPagePath(locale, pageNumber - 1)}
+                  href={pagePath(pageNumber - 1)}
                   rel="prev"
                   className="blog-page-link"
                 >
@@ -134,7 +178,7 @@ export default async function BlogIndex({ locale, pageNumber = 1 }) {
 
               {pageNumber < totalPages ? (
                 <Link
-                  href={blogPagePath(locale, pageNumber + 1)}
+                  href={pagePath(pageNumber + 1)}
                   rel="next"
                   className="blog-page-link"
                 >

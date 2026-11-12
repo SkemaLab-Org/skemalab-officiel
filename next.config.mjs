@@ -36,8 +36,19 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: "/blog/category/:category",
+        destination: "/fr/blog/category/:category",
+        permanent: false,
+      },
+      // Tags are metadata now: old tag URLs fall back to the blog index.
+      {
         source: "/blog/tag/:tag",
-        destination: "/fr/blog/tag/:tag",
+        destination: "/fr/blog",
+        permanent: false,
+      },
+      {
+        source: "/:locale(fr|en|ar)/blog/tag/:tag",
+        destination: "/:locale/blog",
         permanent: false,
       },
       {

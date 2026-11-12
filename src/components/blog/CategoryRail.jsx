@@ -19,7 +19,7 @@ function toPx(raw) {
 }
 
 /**
- * Scrollable rail of topic chips.
+ * Scrollable rail of category chips.
  *
  * It owns three progressive enhancements on top of a plain list of links:
  *  - it measures the overflow so the edge fades only appear when there is
@@ -28,7 +28,7 @@ function toPx(raw) {
  *    only while it is pinned under the navbar;
  *  - it moves the focus between chips with the arrow keys.
  */
-export default function TopicRail({ label, children }) {
+export default function CategoryRail({ label, children }) {
   const railRef = useRef(null);
   const navRef = useRef(null);
   const [overflow, setOverflow] = useState("none");
@@ -133,14 +133,14 @@ export default function TopicRail({ label, children }) {
   return (
     <nav
       ref={navRef}
-      className="blog-tagbar"
+      className="blog-categorybar"
       aria-label={label}
       role="navigation"
       data-stuck={stuck ? "true" : undefined}
     >
       <div
         ref={railRef}
-        className="blog-tagbar-rail"
+        className="blog-categorybar-rail"
         data-overflow={overflow}
         onKeyDown={onKeyDown}
       >

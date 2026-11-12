@@ -1,7 +1,7 @@
-export const INTRO_SESSION_KEY = "skemalab-intro-seen";
+const INTRO_SESSION_KEY = "skemalab-intro-seen";
 
 /** Reads the session marker without assuming storage is available. */
-export function hasSeenIntro() {
+function hasSeenIntro() {
   if (typeof window === "undefined") return false;
   try {
     return window.sessionStorage.getItem(INTRO_SESSION_KEY) === "1";
@@ -19,7 +19,7 @@ export function markIntroSeen() {
   }
 }
 
-export function prefersReducedMotion() {
+function prefersReducedMotion() {
   if (typeof window === "undefined" || !window.matchMedia) return false;
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }

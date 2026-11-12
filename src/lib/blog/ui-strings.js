@@ -26,7 +26,17 @@ const dict = {
       "Décrivez-nous votre projet en quelques lignes. Nous revenons vers vous sous 48 h avec un premier avis clair.",
     backToBlog: "Retour au blog",
     tags: "Sujets",
-    topicsCount: "sujets",
+    categories: "Catégories",
+    categoriesCount: "catégories",
+    categoryBuild: "Build",
+    categoryGrow: "Grow",
+    categoryAutomate: "Automate",
+    categoryBuildDesc:
+      "Développement de sites, d'applications et d'interfaces sur mesure.",
+    categoryGrowDesc:
+      "Visibilité, acquisition et croissance digitale, du SEO à la recherche IA.",
+    categoryAutomateDesc:
+      "Automatisation des opérations, workflows et agents IA.",
   },
   en: {
     blog: "Blog",
@@ -55,7 +65,17 @@ const dict = {
       "Tell us about your project in a few lines. We come back within 48 hours with a first honest take.",
     backToBlog: "Back to blog",
     tags: "Topics",
-    topicsCount: "topics",
+    categories: "Categories",
+    categoriesCount: "categories",
+    categoryBuild: "Build",
+    categoryGrow: "Grow",
+    categoryAutomate: "Automate",
+    categoryBuildDesc:
+      "Websites, applications and custom interfaces, designed and built to last.",
+    categoryGrowDesc:
+      "Visibility, acquisition and digital growth, from SEO to AI search.",
+    categoryAutomateDesc:
+      "Operations automation, workflows and AI agents.",
   },
   ar: {
     blog: "المدونة",
@@ -84,9 +104,35 @@ const dict = {
       "صف مشروعك في أسطر قليلة. نعود إليك خلال 48 ساعة برأي أول واضح.",
     backToBlog: "رجوع إلى المدونة",
     tags: "المواضيع",
-    topicsCount: "مواضيع",
+    categories: "الفئات",
+    categoriesCount: "فئات",
+    categoryBuild: "البناء",
+    categoryGrow: "النمو",
+    categoryAutomate: "الأتمتة",
+    categoryBuildDesc: "تصميم وبناء المواقع والتطبيقات والواجهات المخصصة.",
+    categoryGrowDesc:
+      "الظهور والاستقطاب والنمو الرقمي، من تحسين محركات البحث إلى البحث بالذكاء الاصطناعي.",
+    categoryAutomateDesc: "أتمتة العمليات وسير العمل ووكلاء الذكاء الاصطناعي.",
   },
 };
 
 export const t = (locale, key) =>
   dict[locale]?.[key] ?? dict.fr[key] ?? key;
+
+const CATEGORY_LABEL_KEY = {
+  build: "categoryBuild",
+  grow: "categoryGrow",
+  automate: "categoryAutomate",
+};
+
+const CATEGORY_DESCRIPTION_KEY = {
+  build: "categoryBuildDesc",
+  grow: "categoryGrowDesc",
+  automate: "categoryAutomateDesc",
+};
+
+export const categoryLabel = (locale, category) =>
+  t(locale, CATEGORY_LABEL_KEY[category] ?? "categories");
+
+export const categoryDescription = (locale, category) =>
+  t(locale, CATEGORY_DESCRIPTION_KEY[category] ?? "blogDesc");

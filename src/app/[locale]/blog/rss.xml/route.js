@@ -6,6 +6,7 @@ import {
   isBlogLocale,
 } from "@/lib/blog/config";
 import { getPosts } from "@/lib/blog/posts";
+import { categoryLabel } from "@/lib/blog/ui-strings";
 
 export const dynamic = "force-static";
 export const revalidate = 60;
@@ -38,6 +39,7 @@ export async function GET(_request, { params }) {
       <guid isPermaLink="true">${absoluteUrl(blogPath(locale, post.slug))}</guid>
       <pubDate>${new Date(`${post.date}T12:00:00Z`).toUTCString()}</pubDate>
       <description>${esc(post.excerpt)}</description>
+      <category>${esc(categoryLabel(locale, post.category))}</category>
       ${post.tags.map((tag) => `<category>${esc(tag)}</category>`).join("")}
     </item>`,
     )

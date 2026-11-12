@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { blogPath } from "@/lib/blog/config";
-import { t } from "@/lib/blog/ui-strings";
+import { categoryLabel, t } from "@/lib/blog/ui-strings";
 import CoverImage from "./CoverImage";
 import PostMeta from "./PostMeta";
 
@@ -38,6 +38,10 @@ export default function PostCard({
       </div>
 
       <div className="blog-card-body">
+        <p className="blog-card-category label-mono">
+          {categoryLabel(locale, post.category)}
+        </p>
+
         {post.tags.length > 0 && (
           <ul className="blog-tags" aria-label={t(locale, "tags")}>
             {post.tags.map((tag) => (

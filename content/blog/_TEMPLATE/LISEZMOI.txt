@@ -7,22 +7,40 @@ contenu et n'apparaît jamais sur le site.
 POUR CRÉER UN ARTICLE
 ---------------------
 
-1. Dupliquez ce dossier et renommez-le avec le slug de l'article :
-   minuscules, chiffres et tirets uniquement (ex. « automatiser-avec-n8n »).
-2. Renseignez meta.json (métadonnées communes aux trois langues).
-3. Écrivez fr.md, en.md et ar.md. Supprimez une langue si elle n'existe pas :
+1. Choisissez la catégorie de l'article : build, grow ou automate.
+   La catégorie est déduite du dossier parent, il n'y a rien à écrire dans
+   meta.json.
+2. Dupliquez ce dossier dans `content/blog/<catégorie>/` et renommez-le avec
+   le slug de l'article : minuscules, chiffres et tirets uniquement
+   (ex. « content/blog/automate/automatiser-avec-n8n »).
+3. Renseignez meta.json (métadonnées communes aux trois langues).
+4. Écrivez fr.md, en.md et ar.md. Supprimez une langue si elle n'existe pas :
    l'article sera simplement absent dans cette langue.
-4. Passez `draft` à false et vérifiez que `date` n'est pas dans le futur.
-5. Lancez `npm run content:check` avant de publier.
+5. Passez `draft` à false et vérifiez que `date` n'est pas dans le futur.
+6. Lancez `npm run content:check` avant de publier.
+
+CATÉGORIES
+----------
+
+- `content/blog/build/`    → Build    (sites, applications, interfaces)
+- `content/blog/grow/`     → Grow     (visibilité, acquisition, croissance)
+- `content/blog/automate/` → Automate (automatisation, workflows, agents IA)
+
+Un article déposé directement à la racine de `content/blog/` (hors `_TEMPLATE`)
+est refusé par la validation.
 
 RÈGLES IMPORTANTES
 ------------------
 
 - La couverture doit être une URL https:// d'un domaine listé dans
   src/lib/blog/image-hosts.json.
-- Les slugs page, tag, rss et rss.xml sont réservés.
+- Les slugs page, category, rss et rss.xml sont réservés.
+- Un slug ne peut exister que dans une seule catégorie : sinon les URLs
+  /{locale}/blog/{slug} entreraient en collision.
 - description : entre 50 et 160 caractères.
 - Une langue absente = un warning, pas une erreur.
 - Un brouillon (draft: true) ou une date future = article invisible partout.
+- Les `tags` restent des métadonnées (mots-clés, RSS) ; le filtrage du blog
+  se fait par catégorie.
 
 Voir README-BLOG.md à la racine du projet pour la documentation complète.

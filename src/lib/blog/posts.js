@@ -1,6 +1,6 @@
 import "server-only";
 import { cache } from "react";
-import { BLOG_LOCALES, blogPath } from "./config.js";
+import { BLOG_LOCALES, CATEGORIES, blogPath } from "./config.js";
 import {
   estimateReadingTime,
   isPublished,
@@ -24,6 +24,7 @@ function toSummary(post, locale) {
 
   return {
     slug: post.slug,
+    category: post.category,
     locale,
     title: entry.frontmatter.title,
     description: entry.frontmatter.description,
@@ -86,16 +87,18 @@ export async function getAlternates(slug) {
   return alternates;
 }
 
-export async function getTags(locale) {
-  const counts = new Map();
-  for (const post of await getPosts(locale)) {
-    for (const tag of post.tags) {
-      counts.set(tag, (counts.get(tag) ?? 0) + 1);
-    }
-  }
-  return [...counts]
-    .map(([tag, count]) => ({ tag, count }))
-    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
+export async function getCategories(locale) {
+  const posts = await getPosts(locale);
+  return CATEGORIES.map((category) => ({
+    category,
+    count: posts.filter((post) => post.category === category).length,
+  }));
+}
+
+export async function getPostsByCategory(locale, category) {
+  return (await getPosts(locale)).filter(
+    (post) => post.category === category,
+  );
 }
 
 export async function getRelated(locale, slug, limit = 3) {
@@ -107,7 +110,9 @@ export async function getRelated(locale, slug, limit = 3) {
     .filter((post) => post.slug !== slug)
     .map((post) => ({
       post,
-      score: post.tags.filter((tag) => current.tags.includes(tag)).length,
+      score:
+        (post.category === current.category ? 3 : 0) +
+        post.tags.filter((tag) => current.tags.includes(tag)).length,
     }))
     .sort(
       (a, b) =>

@@ -67,7 +67,7 @@ export const TEAM_MEMBERS = [
   },
 ];
 
-export const BRAND_CONFIG = {
+const BRAND_CONFIG = {
   logoUrl: "https://i.imgur.com/10bcsyJ.png",
 };
 

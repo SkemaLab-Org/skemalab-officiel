@@ -1,5 +1,11 @@
-import { BLOG_LOCALES, absoluteUrl, blogPath } from "./config.js";
-import { getAllParams, getPost } from "./posts.js";
+import {
+  BLOG_LOCALES,
+  CATEGORIES,
+  absoluteUrl,
+  blogCategoryPath,
+  blogPath,
+} from "./config.js";
+import { getAllParams, getPost, getPostsByCategory } from "./posts.js";
 
 export async function getBlogSitemapEntries() {
   const listLanguages = Object.fromEntries(
@@ -12,6 +18,31 @@ export async function getBlogSitemapEntries() {
     priority: 0.7,
     alternates: { languages: listLanguages },
   }));
+
+  for (const category of CATEGORIES) {
+    const byLocale = {};
+    for (const locale of BLOG_LOCALES) {
+      const posts = await getPostsByCategory(locale, category);
+      if (posts.length > 0) byLocale[locale] = posts;
+    }
+
+    const languages = Object.fromEntries(
+      Object.keys(byLocale).map((locale) => [
+        locale,
+        absoluteUrl(blogCategoryPath(locale, category)),
+      ]),
+    );
+
+    for (const [locale, posts] of Object.entries(byLocale)) {
+      entries.push({
+        url: absoluteUrl(blogCategoryPath(locale, category)),
+        lastModified: posts[0]?.updated ?? posts[0]?.date,
+        changeFrequency: "weekly",
+        priority: 0.65,
+        alternates: { languages },
+      });
+    }
+  }
 
   const params = await getAllParams();
   const slugs = [...new Set(params.map((entry) => entry.slug))];

@@ -19,12 +19,6 @@ export const services = [
 	},
 ];
 
-export const stats = [
-	{ value: 40, suffix: "+", label: "Projets livrés" },
-	{ value: 100, suffix: "%", label: "Clients satisfaits" },
-	{ value: 5, suffix: "h", label: "Économisées / jour en moyenne" },
-	{ value: 3, suffix: "×", label: "Accélération des process" },
-];
 export const founders = [
 	{
 		id: "feissal-tarkaoui",
@@ -64,69 +58,6 @@ export const founders = [
 			linkedin: "https://www.linkedin.com/in/adam-khairi/",
 		},
 		focusArea: "Software Engineering & IA",
-	},
-];
-
-export const timelineMilestones = [
-	{
-		id: "genesis",
-		year: "2023",
-		period: "Genèse",
-		title: "L'Étincelle Fondatrice & Le Constat",
-		subtitle: "La vision partagée de Feissal Tarkaoui & Marouan Khadiri",
-		description:
-			"Feissal (visionnaire business) et Marouan (architecte tech) font un constat sans appel : les entreprises sont ralenties par des sites vitrines sans conversion, des outils fragmentés et des centaines d'heures perdues sur des tâches manuelles. Ils décident d'unir leurs forces pour créer un studio hybride où l'ingénierie technique sert directement le chiffre d'affaires.",
-		tag: "L'Idée Initiale",
-		highlight: "Combler le fossé entre Deep Tech, Growth et Automatisation",
-		foundersImpact: "Synergie Business × Ingénierie",
-	},
-	{
-		id: "foundation",
-		year: "2023",
-		period: "Lancement",
-		title: "Création de SkemaLab & Premiers Déploiements",
-		subtitle: "Implantation à Essaouira, rayonnement international",
-		description:
-			"Naissance officielle de SkemaLab. Les fondateurs conçoivent leur laboratoire R&D et livrent leurs premiers systèmes pour des clients en Europe et MENA : plateformes web ultra-rapides, pipelines CRM automatisés et tunnels de conversion. Les premiers retours confirment des gains spectaculaires de productivité.",
-		tag: "Fondation",
-		highlight: "Premiers clients internationaux et 15h+ économisées / semaine",
-		foundersImpact: "Validation du modèle opérationnel",
-	},
-	{
-		id: "methodology",
-		year: "2024",
-		period: "Expansion",
-		title: "Le Système « Build · Grow · Automate »",
-		subtitle: "Formalisation d'une méthodologie propriétaire éprouvée",
-		description:
-			"Skemalab structure son approche en 3 piliers synergiques. Développement sur-mesure (Build), marketing à haute valeur ajoutée (Grow), et automatisation des processus métiers (Automate). Plus de 25 projets majeurs sont déployés avec une rigueur de sprint millimétrée.",
-		tag: "Système Éprouvé",
-		highlight: "Une cadence de livraison rapide et des résultats mesurables",
-		foundersImpact: "Méthode de croissance à fort impact",
-	},
-	{
-		id: "ai-era",
-		year: "2025",
-		period: "Innovation",
-		title: "L'Intégration Massive de l'IA & Workflows Autonomes",
-		subtitle: "L'avant-garde des opérations intelligentes",
-		description:
-			"Sous le leadership technologique de Marouan et la vision d'échelle de Feissal, SkemaLab connecte les agents IA et les architectures Next.js cloud-native aux process internes des clients. Les délais de traitement chutent de 50% chez nos partenaires.",
-		tag: "Révolution IA",
-		highlight: "Workflows autonomes 24/7 et assistants sur-mesure",
-		foundersImpact: "Pionniers de l'automatisation IA",
-	},
-	{
-		id: "scale",
-		year: "2026",
-		period: "Aujourd'hui & Futur",
-		title: "L'Expansion & La Référence Internationale",
-		subtitle: "Le partenaire technologique des entreprises ambitieuses",
-		description:
-			"Avec plus de 40 projets d'envergure livrés, un taux de satisfaction de 100% et un portefeuille international solide, SkemaLab s'impose comme le studio digital qui transforme la technologie en levier de souveraineté et d'hyper-croissance.",
-		tag: "Cap Futur",
-		highlight: "40+ projets réussis · Partenaire stratégique global",
-		foundersImpact: "Excellence continue & Scale",
 	},
 ];
 

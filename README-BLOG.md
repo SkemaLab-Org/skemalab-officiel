@@ -1,8 +1,8 @@
 # Blog Skemalab — documentation
 
 Blog multilingue (FR / EN / AR) en Markdown, sans base de données, sans CMS et
-sans back-office. Un article = un dossier dans `content/blog/`. Déposer les
-fichiers suffit à publier l'article.
+sans back-office. Un article = un dossier dans `content/blog/<catégorie>/`.
+Déposer les fichiers suffit à publier l'article et à l'assigner à une catégorie.
 
 - Stack : Next.js 16 (App Router), React 19, JavaScript (pas de TypeScript).
 - Rendu : SSG + ISR (`revalidate = 60`).
@@ -15,12 +15,23 @@ fichiers suffit à publier l'article.
 
 ## 1. Publier un article en 4 étapes
 
-### Étape 1 — Créer le dossier
+### Étape 1 — Créer le dossier dans une catégorie
 
-Dupliquez `content/blog/_TEMPLATE/` et renommez-le avec le slug de l'article.
+Le blog a trois catégories fixes : `build`, `grow` et `automate`. La catégorie
+d'un article est **déduite de son dossier parent** : il n'y a rien à écrire
+dans `meta.json`.
+
+| Dossier                    | Catégorie | Sujets couverts                              |
+| -------------------------- | --------- | -------------------------------------------- |
+| `content/blog/build/`      | Build     | Sites, applications, interfaces.             |
+| `content/blog/grow/`       | Grow      | Visibilité, acquisition, croissance.         |
+| `content/blog/automate/`   | Automate  | Automatisation, workflows, agents IA.        |
+
+Dupliquez `content/blog/_TEMPLATE/` dans la catégorie choisie et renommez-le
+avec le slug de l'article.
 
 ```
-content/blog/mon-nouvel-article/
+content/blog/automate/mon-nouvel-article/
 ├── meta.json
 ├── fr.md
 ├── en.md
@@ -28,8 +39,13 @@ content/blog/mon-nouvel-article/
 ```
 
 Règles du slug : minuscules, chiffres et tirets uniquement
-(`^[a-z0-9]+(?:-[a-z0-9]+)*$`). Slugs réservés : `page`, `tag`, `rss`,
+(`^[a-z0-9]+(?:-[a-z0-9]+)*$`). Slugs réservés : `page`, `category`, `rss`,
 `rss.xml`. Les dossiers commençant par `_` ou `.` sont ignorés.
+
+Un article déposé directement à la racine de `content/blog/` (hors
+`_TEMPLATE`) est refusé : la validation signale une catégorie inconnue. Un même
+slug ne peut exister que dans une seule catégorie, sinon les URLs
+`/{locale}/blog/{slug}` entreraient en collision.
 
 ### Étape 2 — Renseigner `meta.json`
 
@@ -56,7 +72,7 @@ Chaque fichier commence par un frontmatter YAML :
 | `description` | string | oui         | 50 à 160 caractères (SEO + partages).           |
 | `excerpt`     | string | non         | 300 caractères max. Accroche des cartes. Défaut : `description`. |
 | `coverAlt`    | string | oui         | Texte alternatif de la couverture.              |
-| `tags`        | array  | non         | Tags **localisés** (voir §3). Défaut : `[]`.    |
+| `tags`        | array  | non         | Tags **localisés**, affichés en badges non cliquables (voir §3). Défaut : `[]`. |
 
 Une langue absente (`en.md` manquant, par exemple) génère un warning mais
 l'article reste publié dans les autres langues. Il sera simplement absent de
@@ -82,13 +98,18 @@ publié.
 | ------------------- | ------------------------------------ |
 | Liste (page 1)      | `/fr/blog`, `/en/blog`, `/ar/blog`   |
 | Liste paginée       | `/{locale}/blog/page/2`              |
+| Catégorie           | `/{locale}/blog/category/{build,grow,automate}` |
+| Catégorie paginée   | `/{locale}/blog/category/{catégorie}/page/2` |
 | Article             | `/{locale}/blog/{slug}`              |
-| Tag                 | `/{locale}/blog/tag/{tag}`           |
 | Flux RSS            | `/{locale}/blog/rss.xml`             |
 
 Les anciennes URLs sans langue sont redirigées vers le français :
 `/blog` → `/fr/blog`, `/blog/mon-article` → `/fr/blog/mon-article`,
-`/blog/page/2`, `/blog/tag/x` et `/blog/rss.xml` de la même manière.
+`/blog/page/2`, `/blog/category/build` et `/blog/rss.xml` de la même manière.
+
+Les anciennes URLs de tags (`/blog/tag/x` et `/{locale}/blog/tag/x`) redirigent
+vers l'index du blog : les tags ne sont plus des pages, seulement des
+métadonnées.
 
 Le sélecteur de langue du site pointe vers la traduction correspondante de la
 page courante. Si l'article n'existe pas dans la langue choisie, il renvoie vers
@@ -131,16 +152,17 @@ sanitisation). Le pipeline applique `rehype-sanitize` avant les transformations
 maison ; les liens externes reçoivent `target="_blank"` et
 `rel="noopener noreferrer"`.
 
-### Tags localisés
+### Catégories et tags
 
-Un tag est une simple chaîne, écrite dans la langue de l'article. Un même sujet
-peut donc s'appeler `automatisation` (FR), `automation` (EN) et `الأتمتة` (AR).
-Les pages `/fr/blog/tag/automatisation` et `/en/blog/tag/automation` sont
-indépendantes : il n'y a pas de table de correspondance globale. C'est
-volontaire : cela évite un fichier de traduction supplémentaire à maintenir.
+Une catégorie (`build`, `grow`, `automate`) n'est pas un champ du contenu :
+elle vient du dossier parent, ce qui évite les oublis et les incohérences. La
+barre de filtres du blog liste les trois catégories avec leur nombre d'articles,
+et chaque catégorie possède ses propres URLs et son propre `hreflang`.
 
-Si vous voulez des tags strictement identiques entre langues, utilisez la même
-chaîne partout ; les URLs seront simplement encodées.
+Les tags restent des métadonnées libres, écrites dans la langue de l'article.
+Ils alimentent les mots-clés SEO, le RSS et les articles liés, et s'affichent
+comme badges non cliquables sous le titre. Un même sujet peut donc s'appeler
+`automatisation` (FR), `automation` (EN) et `الأتمتة` (AR).
 
 ### Arabe et RTL
 
@@ -198,9 +220,11 @@ contenu. Aucun autre fichier à modifier.
 
 | Situation                              | Résultat                                              |
 | -------------------------------------- | ----------------------------------------------------- |
-| `draft: true`                          | Invisible partout (liste, article, tags, RSS, sitemap). |
+| `draft: true`                          | Invisible partout (liste, catégories, article, RSS, sitemap). |
 | `date` dans le futur                   | Invisible partout jusqu'à la date, puis publié à l'ISR suivante. |
 | `en.md` manquant                       | Visible en FR et AR seulement.                        |
+| Article hors d'une catégorie           | Erreur de validation, build bloqué.                   |
+| Slug présent dans deux catégories      | Erreur de validation, build bloqué.                   |
 | Toutes les langues valides manquantes  | Erreur de validation, article exclu.                  |
 | `description` hors 50–160 caractères   | Erreur de validation, build bloqué.                   |
 | Image `http://` ou domaine inconnu     | Erreur de validation, build bloqué.                   |
@@ -216,9 +240,11 @@ Chaque page génère :
 - `hreflang` pour chaque traduction disponible + `x-default` (FR en priorité) ;
 - Open Graph (`website` pour les listes, `article` pour les articles) ;
 - Twitter Card `summary_large_image` ;
-- JSON-LD `BlogPosting` + `BreadcrumbList` sur les articles ;
+- JSON-LD `BlogPosting` (`articleSection` = catégorie) + `BreadcrumbList` sur
+  les articles ;
 - RSS par langue, déclaré via `alternates.types` ;
-- entrées de sitemap avec `alternates.languages`, y compris le blog.
+- entrées de sitemap avec `alternates.languages`, y compris le blog et les
+  catégories qui contiennent au moins un article.
 
 L'URL publique est lue dans `NEXT_PUBLIC_SITE_URL`, avec
 `https://www.skemalab.com` par défaut.
@@ -232,26 +258,33 @@ L'URL publique est lue dans `NEXT_PUBLIC_SITE_URL`, avec
 ```
 content/blog/
 ├── _TEMPLATE/            # modèle ignoré par le chargeur
-├── bienvenue-sur-le-blog/
-│   ├── meta.json
-│   ├── fr.md
-│   ├── en.md
-│   └── ar.md
-└── automatiser-avec-n8n/
-    ├── meta.json
-    ├── fr.md
-    ├── en.md
-    └── ar.md
+├── build/
+│   └── bienvenue-sur-le-blog/
+│       ├── meta.json
+│       ├── fr.md
+│       ├── en.md
+│       └── ar.md
+├── grow/
+│   └── votre-marque-dans-les-recherches-ia/
+│       ├── meta.json
+│       └── ...
+└── automate/
+    └── automatiser-avec-n8n/
+        ├── meta.json
+        └── ...
 ```
+
+La catégorie vient exclusivement du nom du dossier parent (`build`, `grow` ou
+`automate`). Tout autre dossier à la racine de `content/blog/` est une erreur.
 
 ### Code
 
 | Fichier                                              | Rôle                                                  |
 | ---------------------------------------------------- | ----------------------------------------------------- |
-| `src/lib/blog/config.js`                             | Locales, chemins, formats de date, URL du site.       |
+| `src/lib/blog/config.js`                             | Locales, catégories, chemins, formats de date, URL du site. |
 | `src/lib/blog/schema.js`                             | Schémas Zod, slugs réservés, validation des images.   |
-| `src/lib/blog/core.js`                               | Lecture des dossiers, règles de publication, temps de lecture. |
-| `src/lib/blog/posts.js`                              | Couche de données serveur (`cache()`), tags, articles liés. |
+| `src/lib/blog/core.js`                               | Lecture `catégorie/slug`, règles de publication, temps de lecture. |
+| `src/lib/blog/posts.js`                              | Couche de données serveur (`cache()`), catégories, articles liés. |
 | `src/lib/blog/markdown.js`                           | Pipeline unified/remark/rehype, callouts, sommaire, Shiki. |
 | `src/lib/blog/sitemap.js`                            | Entrées de sitemap du blog.                           |
 | `src/lib/blog/ui-strings.js`                         | Libellés d'interface FR/EN/AR.                        |
@@ -271,7 +304,8 @@ content/blog/
 | `src/app/[locale]/blog/page.jsx`                | `/{locale}/blog`                |
 | `src/app/[locale]/blog/page/[n]/page.jsx`       | `/{locale}/blog/page/{n}`       |
 | `src/app/[locale]/blog/[slug]/page.jsx`         | `/{locale}/blog/{slug}`         |
-| `src/app/[locale]/blog/tag/[tag]/page.jsx`      | `/{locale}/blog/tag/{tag}`      |
+| `src/app/[locale]/blog/category/[category]/page.jsx` | `/{locale}/blog/category/{catégorie}` |
+| `src/app/[locale]/blog/category/[category]/page/[n]/page.jsx` | `/{locale}/blog/category/{catégorie}/page/{n}` |
 | `src/app/[locale]/blog/rss.xml/route.js`        | `/{locale}/blog/rss.xml`        |
 
 ---
@@ -377,14 +411,20 @@ curl -I http://localhost:3000/blog            # doit rediriger vers /fr/blog
    `xhtml:link` pour chaque langue.
 6. **RSS** : valider le XML avec un lecteur de flux ; le type MIME doit être
    `application/rss+xml`.
-7. **Redirections** : `/blog`, `/blog/page/2`, `/blog/tag/x`, `/blog/rss.xml`
-   et `/blog/{slug}` doivent renvoyer vers le préfixe `/fr`.
-8. **Pages paginées** : créer plus de 9 articles pour vérifier
-   `/fr/blog/page/2` ; `/fr/blog/page/1` doit rediriger vers `/fr/blog`.
-9. **Dates futures** : un article daté de demain doit être absent du build, puis
-   apparaître après la date (nécessite un redéploiement ou une revalidation).
-10. **A11y** : navigation clavier du sommaire, focus visible sur les cartes,
-    contraste des tags.
+7. **Redirections** : `/blog`, `/blog/page/2`, `/blog/category/build`,
+   `/blog/rss.xml` et `/blog/{slug}` doivent renvoyer vers le préfixe `/fr`.
+   `/fr/blog/tag/x` doit renvoyer vers `/fr/blog`.
+8. **Catégories** : `/fr/blog/category/build`, `/en/blog/category/grow` et
+   `/ar/blog/category/automate` doivent s'afficher (y compris vides), et
+   `/fr/blog/category/inconnue` doit répondre 404. Vérifier que le filtre actif
+   est bien marqué et que les compteurs correspondent.
+9. **Pages paginées** : créer plus de 9 articles pour vérifier
+   `/fr/blog/page/2` et `/fr/blog/category/{catégorie}/page/2` ;
+   `/fr/blog/page/1` doit rediriger vers `/fr/blog`.
+10. **Dates futures** : un article daté de demain doit être absent du build, puis
+    apparaître après la date (nécessite un redéploiement ou une revalidation).
+11. **A11y** : navigation clavier du sommaire et du rail de catégories, focus
+    visible sur les cartes, contraste des chips et des tags.
 
 ---
 
@@ -396,7 +436,10 @@ curl -I http://localhost:3000/blog            # doit rediriger vers /fr/blog
   configurée.
 - **`x-default`** : pointe vers la version FR quand elle existe, sinon vers la
   première traduction disponible.
-- **Tags** : localisés par langue, sans table de correspondance globale.
+- **Catégories** : structurelles (`build`, `grow`, `automate`), déduites du
+  dossier parent et sans champ dédié dans `meta.json`.
+- **Tags** : localisés par langue, sans table de correspondance globale, et
+  affichés en badges non cliquables.
 - **HTML brut** : supprimé par sécurité ; seuls les callouts, tableaux, listes
   de tâches et blocs de code sont supportés.
 - **Validation** : le validateur bloque le build sur les erreurs ; les langues

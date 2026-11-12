@@ -14,6 +14,7 @@ import {
   OG_LOCALE,
   SITE_URL,
   absoluteUrl,
+  blogCategoryPath,
   blogPath,
   isBlogLocale,
 } from "@/lib/blog/config";
@@ -23,7 +24,7 @@ import {
   getRelated,
   getRenderedPost,
 } from "@/lib/blog/posts";
-import { t } from "@/lib/blog/ui-strings";
+import { categoryLabel, t } from "@/lib/blog/ui-strings";
 
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -113,6 +114,7 @@ export default async function BlogPostPage({ params }) {
               datePublished: post.date,
               dateModified: post.updated ?? post.date,
               inLanguage: locale,
+              articleSection: categoryLabel(locale, post.category),
               author: { "@type": "Organization", name: post.author },
               publisher: {
                 "@type": "Organization",
@@ -143,6 +145,14 @@ export default async function BlogPostPage({ params }) {
                 {
                   "@type": "ListItem",
                   position: 3,
+                  name: categoryLabel(locale, post.category),
+                  item: absoluteUrl(
+                    blogCategoryPath(locale, post.category),
+                  ),
+                },
+                {
+                  "@type": "ListItem",
+                  position: 4,
                   name: post.title,
                   item: url,
                 },
@@ -166,15 +176,18 @@ export default async function BlogPostPage({ params }) {
 
       <header className="blog-hero">
         <div className="blog-hero-text">
+          <Link
+            href={blogCategoryPath(locale, post.category)}
+            className="blog-category-link"
+          >
+            {categoryLabel(locale, post.category)}
+          </Link>
+
           {post.tags.length > 0 && (
             <ul className="blog-tags" aria-label={t(locale, "tags")}>
               {post.tags.map((tag) => (
                 <li key={tag}>
-                  <Link
-                    href={`${blogPath(locale)}/tag/${encodeURIComponent(tag)}`}
-                  >
-                    {tag}
-                  </Link>
+                  <span>{tag}</span>
                 </li>
               ))}
             </ul>

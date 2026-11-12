@@ -1,7 +1,12 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
-import { BLOG_LOCALES, READING_WPM } from "./config.js";
+import {
+  BLOG_LOCALES,
+  CATEGORIES,
+  READING_WPM,
+  isCategory,
+} from "./config.js";
 import {
   frontmatterSchema,
   imageUrlProblem,
@@ -46,32 +51,76 @@ function bodyImageUrls(body) {
   return urls;
 }
 
+async function readDir(dir) {
+  try {
+    return await fs.readdir(/* turbopackIgnore: true */ dir, {
+      withFileTypes: true,
+    });
+  } catch {
+    return null;
+  }
+}
+
 /**
- * Reads every article folder. Invalid files never throw: they are reported
- * through `issues` so the build validator can fail with a readable message.
+ * Reads every article folder. Articles live in `content/blog/<category>/<slug>/`,
+ * so the parent folder is the only source of truth for the category.
+ *
+ * Invalid files never throw: they are reported through `issues` so the build
+ * validator can fail with a readable message.
  */
 export async function readAllPosts(dir = CONTENT_DIR) {
   const issues = [];
   const posts = [];
+  const candidates = [];
 
-  let entries;
-  try {
-    entries = await fs.readdir(/* turbopackIgnore: true */ dir, {
-      withFileTypes: true,
-    });
-  } catch {
-    return { posts, issues };
-  }
+  const rootEntries = await readDir(dir);
+  if (!rootEntries) return { posts, issues };
 
-  for (const entry of entries) {
+  for (const entry of rootEntries) {
     if (!entry.isDirectory()) continue;
     if (entry.name.startsWith("_") || entry.name.startsWith(".")) continue;
 
-    const slug = entry.name;
-    const base = path.join(/* turbopackIgnore: true */ dir, slug);
+    const category = entry.name;
+    if (!isCategory(category)) {
+      issues.push({
+        level: "error",
+        where: category,
+        message: `catégorie inconnue : rangez l'article dans ${CATEGORIES.join(", ")}/`,
+      });
+      continue;
+    }
+
+    const categoryEntries = await readDir(
+      path.join(/* turbopackIgnore: true */ dir, category),
+    );
+    if (!categoryEntries) continue;
+
+    for (const child of categoryEntries) {
+      if (!child.isDirectory()) continue;
+      if (child.name.startsWith("_") || child.name.startsWith(".")) continue;
+      candidates.push({ category, slug: child.name });
+    }
+  }
+
+  const loadedSlugs = new Set();
+
+  for (const { category, slug } of candidates) {
+    const where = `${category}/${slug}`;
+    const base = path.join(/* turbopackIgnore: true */ dir, category, slug);
+
     const slugIssue = slugProblem(slug);
     if (slugIssue) {
-      issues.push({ level: "error", where: slug, message: slugIssue });
+      issues.push({ level: "error", where, message: slugIssue });
+      continue;
+    }
+
+    if (loadedSlugs.has(slug)) {
+      issues.push({
+        level: "error",
+        where,
+        message:
+          "slug déjà utilisé dans une autre catégorie (les URLs /blog/<slug> entreraient en collision)",
+      });
       continue;
     }
 
@@ -79,7 +128,7 @@ export async function readAllPosts(dir = CONTENT_DIR) {
     if (rawMeta === null) {
       issues.push({
         level: "error",
-        where: `${slug}/meta.json`,
+        where: `${where}/meta.json`,
         message: "fichier manquant",
       });
       continue;
@@ -91,7 +140,7 @@ export async function readAllPosts(dir = CONTENT_DIR) {
     } catch {
       issues.push({
         level: "error",
-        where: `${slug}/meta.json`,
+        where: `${where}/meta.json`,
         message: "JSON invalide",
       });
       continue;
@@ -102,7 +151,7 @@ export async function readAllPosts(dir = CONTENT_DIR) {
       for (const issue of metaParsed.error.issues) {
         issues.push({
           level: "error",
-          where: `${slug}/meta.json`,
+          where: `${where}/meta.json`,
           message: `${issue.path.join(".") || "(racine)"} : ${issue.message}`,
         });
       }
@@ -114,7 +163,7 @@ export async function readAllPosts(dir = CONTENT_DIR) {
     if (coverIssue) {
       issues.push({
         level: "error",
-        where: `${slug}/meta.json`,
+        where: `${where}/meta.json`,
         message: `cover : ${coverIssue}`,
       });
       continue;
@@ -122,12 +171,12 @@ export async function readAllPosts(dir = CONTENT_DIR) {
 
     const locales = {};
     for (const locale of BLOG_LOCALES) {
-      const where = `${slug}/${locale}.md`;
+      const file = `${where}/${locale}.md`;
       const raw = await readIfExists(path.join(base, `${locale}.md`));
       if (raw === null) {
         issues.push({
           level: "warning",
-          where,
+          where: file,
           message:
             "langue manquante (l'article ne sera pas visible dans cette langue)",
         });
@@ -140,7 +189,7 @@ export async function readAllPosts(dir = CONTENT_DIR) {
       } catch {
         issues.push({
           level: "error",
-          where,
+          where: file,
           message: "frontmatter YAML invalide",
         });
         continue;
@@ -151,7 +200,7 @@ export async function readAllPosts(dir = CONTENT_DIR) {
         for (const issue of frontmatter.error.issues) {
           issues.push({
             level: "error",
-            where,
+            where: file,
             message: `${issue.path.join(".") || "(racine)"} : ${issue.message}`,
           });
         }
@@ -162,7 +211,7 @@ export async function readAllPosts(dir = CONTENT_DIR) {
       if (body.trim().length < 100) {
         issues.push({
           level: "error",
-          where,
+          where: file,
           message: "contenu trop court (< 100 caractères)",
         });
         continue;
@@ -173,7 +222,7 @@ export async function readAllPosts(dir = CONTENT_DIR) {
         if (problem) {
           issues.push({
             level: "error",
-            where,
+            where: file,
             message: `image du corps : ${problem}`,
           });
         }
@@ -185,13 +234,14 @@ export async function readAllPosts(dir = CONTENT_DIR) {
     if (Object.keys(locales).length === 0) {
       issues.push({
         level: "error",
-        where: slug,
+        where,
         message: "aucune langue valide pour cet article",
       });
       continue;
     }
 
-    posts.push({ slug, meta, locales });
+    loadedSlugs.add(slug);
+    posts.push({ slug, category, meta, locales });
   }
 
   return { posts, issues };
