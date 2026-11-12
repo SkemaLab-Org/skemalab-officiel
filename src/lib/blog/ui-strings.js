@@ -26,6 +26,7 @@ const dict = {
       "Décrivez-nous votre projet en quelques lignes. Nous revenons vers vous sous 48 h avec un premier avis clair.",
     backToBlog: "Retour au blog",
     tags: "Sujets",
+    topicsCount: "sujets",
   },
   en: {
     blog: "Blog",
@@ -54,6 +55,7 @@ const dict = {
       "Tell us about your project in a few lines. We come back within 48 hours with a first honest take.",
     backToBlog: "Back to blog",
     tags: "Topics",
+    topicsCount: "topics",
   },
   ar: {
     blog: "المدونة",
@@ -82,6 +84,7 @@ const dict = {
       "صف مشروعك في أسطر قليلة. نعود إليك خلال 48 ساعة برأي أول واضح.",
     backToBlog: "رجوع إلى المدونة",
     tags: "المواضيع",
+    topicsCount: "مواضيع",
   },
 };
 

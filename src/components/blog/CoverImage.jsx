@@ -13,7 +13,7 @@ export default function CoverImage({
   const [failed, setFailed] = useState(false);
 
   return (
-    <div className={`cover-box ${className}`.trim()}>
+    <div className={`cover-box photo-duotone ${className}`.trim()}>
       {failed ? (
         <div className="cover-fallback" role="img" aria-label={alt} />
       ) : (

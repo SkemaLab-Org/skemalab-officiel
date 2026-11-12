@@ -164,7 +164,7 @@ export default async function BlogPostPage({ params }) {
         </Link>
       </nav>
 
-      <header className="blog-hero">
+      <header className="blog-hero zellige-spot zellige-spot--top-end">
         <div className="blog-hero-text">
           {post.tags.length > 0 && (
             <ul className="blog-tags" aria-label={t(locale, "tags")}>
@@ -233,8 +233,20 @@ export default async function BlogPostPage({ params }) {
           </section>
         )}
 
-        <section className="blog-cta beam-frame">
+        <section className="blog-cta">
           <div className="blog-cta-inner">
+            <span className="blog-cta-mark blog-cta-mark--start-start" aria-hidden="true">
+              +
+            </span>
+            <span className="blog-cta-mark blog-cta-mark--start-end" aria-hidden="true">
+              +
+            </span>
+            <span className="blog-cta-mark blog-cta-mark--end-start" aria-hidden="true">
+              +
+            </span>
+            <span className="blog-cta-mark blog-cta-mark--end-end" aria-hidden="true">
+              +
+            </span>
             <p className="label-mono">Skemalab</p>
             <h2>{t(locale, "cta")}</h2>
             <p className="blog-cta-desc">{t(locale, "ctaDesc")}</p>

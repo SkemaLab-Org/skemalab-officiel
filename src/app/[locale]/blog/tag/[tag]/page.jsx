@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PostCard from "@/components/blog/PostCard";
 import RegisterAlternates from "@/components/blog/RegisterAlternates";
+import TopicBar from "@/components/blog/TopicBar";
 import {
   BLOG_INDEX_ALTERNATES,
   BLOG_LOCALES,
@@ -107,31 +108,7 @@ export default async function BlogTagPage({ params }) {
         </p>
       </header>
 
-      <nav className="blog-tagbar" aria-label={t(locale, "tags")}>
-        <p className="label-mono blog-tagbar-label">{t(locale, "tags")}</p>
-        <ul>
-          <li>
-            <Link href={blogPath(locale)} className="blog-pill">
-              {t(locale, "all")}
-            </Link>
-          </li>
-          {tags.map(({ tag: itemTag, count }) => (
-            <li key={itemTag}>
-              <Link
-                href={`${blogPath(locale)}/tag/${encodeURIComponent(itemTag)}`}
-                className="blog-pill"
-                aria-current={itemTag === tag ? "page" : undefined}
-                aria-label={`${itemTag} (${count})`}
-              >
-                <span>{itemTag}</span>
-                <span className="blog-pill-count" aria-hidden="true">
-                  {count}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <TopicBar locale={locale} tags={tags} activeTag={tag} total={posts.length} />
 
       <section className="blog-section" aria-labelledby="tag-posts-heading">
         <h2 className="label-mono blog-section-label" id="tag-posts-heading">

@@ -6,12 +6,12 @@ import {
   BLOG_INDEX_ALTERNATES,
   POSTS_PER_PAGE,
   blogPagePath,
-  blogPath,
 } from "@/lib/blog/config";
 import { getPosts, getTags } from "@/lib/blog/posts";
 import { t } from "@/lib/blog/ui-strings";
 import PostCard from "./PostCard";
 import RegisterAlternates from "./RegisterAlternates";
+import TopicBar from "./TopicBar";
 
 export default async function BlogIndex({ locale, pageNumber = 1 }) {
   const [allPosts, tags] = await Promise.all([
@@ -58,25 +58,7 @@ export default async function BlogIndex({ locale, pageNumber = 1 }) {
       </header>
 
       {tags.length > 0 && (
-        <nav className="blog-tagbar" aria-label={t(locale, "tags")}>
-          <p className="label-mono blog-tagbar-label">{t(locale, "tags")}</p>
-          <ul>
-            {tags.map(({ tag, count }) => (
-              <li key={tag}>
-                <Link
-                  href={`${blogPath(locale)}/tag/${encodeURIComponent(tag)}`}
-                  className="blog-pill"
-                  aria-label={`${tag} (${count})`}
-                >
-                  <span>{tag}</span>
-                  <span className="blog-pill-count" aria-hidden="true">
-                    {count}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <TopicBar locale={locale} tags={tags} total={allPosts.length} />
       )}
 
       {allPosts.length === 0 ? (

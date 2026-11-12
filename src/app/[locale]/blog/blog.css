@@ -9,28 +9,63 @@
   --b-border-strong: var(--line-strong);
   --b-accent: var(--accent);
   --b-brand: var(--brand);
+  --b-on-brand: var(--on-brand);
   --b-hair: color-mix(in srgb, var(--b-fg) 7%, transparent);
   --b-tint: color-mix(in srgb, var(--b-accent) 8%, transparent);
+  /* Page gutter, mirrored by the full-bleed topic bar. */
+  --blog-pad: 1.25rem;
+  /* Height of the fixed site header; the topic bar pins right below it. */
+  --blog-nav-offset: 4rem;
   max-inline-size: 87.5rem; /* matches the site `shell` so edges align */
   margin-inline: auto;
-  padding-inline: 1.25rem;
-  padding-block: 7rem 5rem;
+  padding-inline: var(--blog-pad);
+  /* Vertical rhythm follows the landing `section-y` scale
+     (5.5rem / 7rem / 9rem); the extra room on top clears the fixed
+     header, which the landing hides behind a full-bleed hero. */
+  padding-block: 6rem 5.5rem;
   color: var(--b-fg);
+  /* The blog needs its own stacking level (still under the pointer lamp):
+     it keeps the copy above the global zellige layer, so the texture reads
+     as material instead of as a haze over the text. */
+  position: relative;
+  z-index: 0;
+  background: var(--b-bg);
+}
+
+/* The blog keeps the landing's translucent plane, so the global zellige
+   layer keeps running across the page instead of stopping dead at the
+   header. */
+body:has(.blog-root) main {
+  background: transparent;
+}
+
+body:has(.blog-root) .blog-root {
+  background: color-mix(in srgb, var(--b-bg) 91%, transparent);
 }
 
 @media (min-width: 640px) {
   .blog-root {
-    padding-inline: 2rem;
+    --blog-pad: 2rem;
+    padding-block: 7rem 7rem;
   }
 }
 
 @media (min-width: 1024px) {
   .blog-root {
-    padding-inline: 3rem;
+    --blog-pad: 3rem;
+    padding-block: 9rem 9rem;
   }
 }
 
-.blog-root a {
+/* The header grows from 4rem to 5rem on the wide breakpoint. */
+@media (min-width: 1100px) {
+  .blog-root {
+    --blog-nav-offset: 5rem;
+  }
+}
+
+/* The topic pills carry their own colour, so they opt out of the reset. */
+.blog-root a:not(.blog-pill) {
   color: inherit;
 }
 
@@ -50,19 +85,18 @@
 
 /* ------------------------------------------------------------------ cover */
 
+/* Square corners, no frame: the same treatment images get everywhere else
+   on the site. */
 .cover-box {
   position: relative;
   inline-size: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border-radius: 1rem;
   background: var(--b-card);
-  border: 1px solid var(--b-border);
-  transition: border-color 280ms var(--ease-out-expo);
 }
 
 .cover-image {
-  transition: transform 720ms var(--ease-out-expo);
+  transition: transform 700ms var(--ease-out-expo);
 }
 
 .cover-fallback {
@@ -83,12 +117,31 @@
   position: relative;
   display: grid;
   gap: 1.25rem;
-  margin-block-end: 2.25rem;
+  margin-block-end: 3rem;
   padding-block-end: 2.5rem;
   border-block-end: 1px solid var(--b-border);
-  --zellige-x: 82%;
-  --zellige-y: 18%;
-  --zellige-opacity: 0.22;
+  background: var(--b-bg);
+  /* The pocket keeps its accent glow but the tile is dropped: a zellige
+     stroke crossing the headline or the description reads as a stray mark
+     in the sentence rather than as texture. */
+  --zellige-x: 84%;
+  --zellige-y: 22%;
+  --zellige-opacity: 0.3;
+}
+
+/* Glow-only pocket for the blog header. */
+.blog-index-head.zellige-spot::before,
+.blog-hero.zellige-spot::before {
+  background-image: radial-gradient(
+    ellipse var(--zellige-glow-size) at var(--zellige-x) var(--zellige-y),
+    color-mix(in srgb, var(--accent) 30%, transparent),
+    transparent 72%
+  );
+}
+
+/* The pocket follows the writing direction, like every other spot. */
+[dir="rtl"] .blog-index-head {
+  --zellige-x: 16%;
 }
 
 .blog-index-head-top {
@@ -99,6 +152,8 @@
   gap: 0.75rem 1.5rem;
 }
 
+/* The eyebrow follows the landing `ledger-rule`: a quiet mono label on the
+   leading side, a count on the trailing side — no decorative kicker. */
 .blog-index-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -107,26 +162,20 @@
   color: var(--b-accent);
 }
 
-.blog-index-eyebrow::before {
-  content: "";
-  flex: none;
-  inline-size: 1.75rem;
-  block-size: 1px;
-  background: currentColor;
-}
-
 .blog-index-count {
   margin: 0;
   color: var(--b-muted);
 }
 
+/* Same voice as the landing `display-xl`: the page headline of the blog
+   reads with the same weight, tracking and leading as the landing hero. */
 .blog-index-title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 7vw, 5rem);
-  font-weight: 450;
+  font-size: clamp(2.5rem, 7.4vw, 6rem);
+  font-weight: 500;
   line-height: 0.98;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 
@@ -134,16 +183,18 @@
   margin: 0;
   max-inline-size: 36rem;
   color: var(--b-muted);
-  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  font-size: clamp(1rem, 1.1vw, 1.0625rem);
   line-height: 1.7;
   text-wrap: pretty;
 }
 
-@media (min-width: 1024px) {
+/* Same two-column head as the landing `BandHeader`: statement on the
+   leading side, lede on the trailing side. */
+@media (min-width: 820px) {
   .blog-index-head {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
     align-items: end;
-    column-gap: 4rem;
+    column-gap: 3rem;
   }
 
   .blog-index-head-top {
@@ -174,21 +225,251 @@
 
 /* --------------------------------------------------------------- tag pills */
 
-.blog-tagbar {
+/* Ledger header above the rail: label on the leading side, topic count on
+   the trailing side, hairline underneath. */
+.blog-tagbar-head {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem 1.25rem;
-  margin-block-end: 3rem;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin-block-end: 0;
+  padding-block-end: 0.85rem;
+  border-block-end: 1px solid var(--b-border);
 }
 
-.blog-tagbar-label {
+.blog-tagbar-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
   margin: 0;
-  flex: none;
+  color: var(--b-accent);
+}
+
+.blog-tagbar-count {
+  margin: 0;
   color: var(--b-muted);
 }
 
-.blog-tagbar ul,
+/* The bar pins under the navbar so filtering is always one gesture away.
+   It bleeds to the shell edges while keeping the chips on the grid. */
+.blog-tagbar {
+  position: sticky;
+  z-index: 60;
+  inset-block-start: var(--blog-nav-offset);
+  margin-inline: calc(-1 * var(--blog-pad));
+  margin-block-end: 2.75rem;
+  padding-inline: var(--blog-pad);
+  padding-block: 0.85rem;
+  border-block-end: 1px solid var(--b-border);
+  transition:
+    background-color 260ms var(--ease-out-expo),
+    box-shadow 260ms var(--ease-out-expo);
+}
+
+/* Frosted panel, only while the bar is actually pinned. */
+.blog-tagbar[data-stuck="true"] {
+  background: color-mix(in srgb, var(--b-bg) 82%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  backdrop-filter: blur(16px) saturate(1.3);
+  box-shadow: 0 14px 26px -20px rgb(0 0 0 / 0.6);
+}
+
+/* Whatever scrolls into the pinned bar dissolves instead of colliding. */
+.blog-tagbar::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 100%;
+  block-size: var(--blog-nav-offset);
+  background: linear-gradient(to bottom, transparent, var(--b-bg));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 240ms var(--ease-out-expo);
+}
+
+.blog-tagbar[data-stuck="true"]::before {
+  opacity: 1;
+}
+
+/* The rail itself: a single row that scrolls when it runs out of room. */
+.blog-tagbar-rail {
+  --fade-size: 2.5rem;
+  --fade-start: calc(-1 * var(--fade-size));
+  --fade-end: calc(-1 * var(--fade-size));
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* Room for the focus ring and the hover lift of the chips. */
+  padding-block: 0.35rem;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent var(--fade-start),
+    #000 calc(var(--fade-start) + var(--fade-size)),
+    #000 calc(100% - var(--fade-end) - var(--fade-size)),
+    transparent calc(100% - var(--fade-end))
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent var(--fade-start),
+    #000 calc(var(--fade-start) + var(--fade-size)),
+    #000 calc(100% - var(--fade-end) - var(--fade-size)),
+    transparent calc(100% - var(--fade-end))
+  );
+}
+
+.blog-tagbar-rail::-webkit-scrollbar {
+  display: none;
+}
+
+/* The fades follow the writing direction. */
+[dir="rtl"] .blog-tagbar-rail {
+  -webkit-mask-image: linear-gradient(
+    to left,
+    transparent var(--fade-start),
+    #000 calc(var(--fade-start) + var(--fade-size)),
+    #000 calc(100% - var(--fade-end) - var(--fade-size)),
+    transparent calc(100% - var(--fade-end))
+  );
+  mask-image: linear-gradient(
+    to left,
+    transparent var(--fade-start),
+    #000 calc(var(--fade-start) + var(--fade-size)),
+    #000 calc(100% - var(--fade-end) - var(--fade-size)),
+    transparent calc(100% - var(--fade-end))
+  );
+}
+
+/* A fade appears only on the edge that still hides content. */
+.blog-tagbar-rail[data-overflow="start"] {
+  --fade-start: 0px;
+}
+
+.blog-tagbar-rail[data-overflow="end"] {
+  --fade-end: 0px;
+}
+
+.blog-tagbar-rail[data-overflow="both"] {
+  --fade-start: 0px;
+  --fade-end: 0px;
+}
+
+.blog-tagbar-list {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  inline-size: max-content;
+  min-inline-size: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.blog-tagbar-item {
+  flex: none;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Topic chips follow the landing micro-label chips: square corners, a
+   hairline border, a mono voice, accent on hover. */
+.blog-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: none;
+  border: 1px solid var(--b-border);
+  border-radius: 0;
+  padding: 0.4rem 0.7rem;
+  background: transparent;
+  color: var(--b-muted);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color 200ms var(--ease-out-expo),
+    border-color 200ms var(--ease-out-expo),
+    background-color 200ms var(--ease-out-expo),
+    transform 180ms var(--ease-out-expo);
+}
+
+[dir="rtl"] .blog-pill {
+  font-family: var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Touch gets a taller chip so the rail stays comfortable under a thumb. */
+@media (pointer: coarse) {
+  .blog-pill {
+    padding-block: 0.55rem;
+  }
+}
+
+.blog-pill:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--b-accent) 60%, transparent);
+  background: var(--b-tint);
+  color: var(--b-fg);
+}
+
+.blog-pill:focus-visible {
+  outline: 2px solid var(--b-accent);
+  outline-offset: 2px;
+}
+
+/* The active filter is a solid accent chip, not a tinted outline. */
+.blog-pill[aria-current="page"] {
+  border-color: var(--b-accent);
+  background: var(--b-accent);
+  color: var(--b-on-brand);
+  font-weight: 500;
+}
+
+.blog-pill[aria-current="page"]:hover {
+  background: color-mix(in srgb, var(--b-accent) 86%, var(--b-fg));
+  color: var(--b-on-brand);
+}
+
+/* A pill inside a pill, so the count never competes with the label. */
+.blog-pill-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 1.35rem;
+  padding-inline: 0.3rem;
+  border-radius: 0;
+  background: var(--b-hair);
+  color: inherit;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+  transition:
+    background-color 200ms var(--ease-out-expo),
+    color 200ms var(--ease-out-expo);
+}
+
+.blog-pill:hover .blog-pill-count {
+  background: color-mix(in srgb, var(--b-accent) 18%, transparent);
+  color: var(--b-fg);
+}
+
+.blog-pill[aria-current="page"] .blog-pill-count {
+  background: color-mix(in srgb, var(--b-on-brand) 20%, transparent);
+  color: var(--b-on-brand);
+}
+
+/* Post tags — small, quiet, monospaced. */
 .blog-tags {
   display: flex;
   flex-wrap: wrap;
@@ -198,64 +479,13 @@
   margin: 0;
 }
 
-.blog-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  border: 1px solid var(--b-border);
-  border-radius: 999px;
-  padding: 0.32rem 0.7rem;
-  background: transparent;
-  color: var(--b-muted);
-  font-size: 0.8rem;
-  line-height: 1.2;
-  text-decoration: none;
-  transition:
-    color 200ms var(--ease-out-expo),
-    border-color 200ms var(--ease-out-expo),
-    background-color 200ms var(--ease-out-expo);
-}
-
-.blog-pill:hover,
-.blog-pill:focus-visible {
-  border-color: color-mix(in srgb, var(--b-accent) 65%, transparent);
-  background: var(--b-tint);
-  color: var(--b-accent);
-}
-
-.blog-pill[aria-current="page"] {
-  border-color: var(--b-accent);
-  background: var(--b-tint);
-  color: var(--b-accent);
-}
-
-.blog-pill-count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-inline-size: 1.35rem;
-  padding-inline: 0.35rem;
-  border-radius: 999px;
-  background: var(--b-hair);
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  line-height: 1.5;
-  transition: background-color 200ms var(--ease-out-expo);
-}
-
-.blog-pill:hover .blog-pill-count,
-.blog-pill[aria-current="page"] .blog-pill-count {
-  background: color-mix(in srgb, var(--b-accent) 22%, transparent);
-}
-
-/* Post tags — small, quiet, monospaced. */
 .blog-tags a,
 .blog-tags span {
   display: inline-flex;
   align-items: center;
   border: 1px solid var(--b-border);
-  border-radius: 999px;
-  padding: 0.18rem 0.55rem;
+  border-radius: 0;
+  padding: 0.2rem 0.55rem;
   font-family: var(--font-mono);
   font-size: 0.66rem;
   letter-spacing: 0.05em;
@@ -285,14 +515,20 @@
 /* ---------------------------------------------------------------- featured */
 
 .blog-featured {
-  margin-block-end: 4rem;
+  margin-block-end: 3rem;
+}
+
+@media (min-width: 640px) {
+  .blog-featured {
+    margin-block-end: 4rem;
+  }
 }
 
 /* ------------------------------------------------------------------- cards */
 
 .blog-grid {
   display: grid;
-  gap: 2.75rem 1.75rem;
+  gap: 3.5rem 1.75rem;
   grid-template-columns: 1fr;
 }
 
@@ -308,14 +544,20 @@
   }
 }
 
+/* Standard card — the landing panel recipe: a hairline frame over a
+   translucent surface, media flush to the edges, copy in the lower cell. */
 .blog-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
   min-inline-size: 0;
   block-size: 100%;
-  transition: transform 320ms var(--ease-out-expo);
+  border: 1px solid var(--b-border);
+  background: color-mix(in srgb, var(--b-card) 91%, transparent);
+  transition:
+    transform 320ms var(--ease-out-expo),
+    border-color 280ms var(--ease-out-expo),
+    box-shadow 280ms var(--ease-out-expo);
 }
 
 .blog-card-reveal {
@@ -325,22 +567,22 @@
 .blog-card:hover,
 .blog-card:focus-within {
   transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--b-accent) 38%, var(--b-border));
+  box-shadow: inset 0 1px 24px rgba(58, 217, 191, 0.08);
 }
 
 .blog-card-media {
   position: relative;
 }
 
-.blog-card-media .cover-box {
-  border-radius: 0.85rem;
-}
-
-.blog-card:hover .cover-box {
-  border-color: color-mix(in srgb, var(--b-accent) 42%, var(--b-border));
+/* Only the stacked card splits media from copy; the featured card sets its
+   media beside the copy inside one cell. */
+.blog-card:not(.blog-card--featured) .blog-card-media {
+  border-block-end: 1px solid var(--b-border);
 }
 
 .blog-card:hover .cover-image {
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 .blog-card-body {
@@ -350,13 +592,17 @@
   flex: 1;
 }
 
+.blog-card:not(.blog-card--featured) .blog-card-body {
+  padding: 1.25rem 1.4rem 1.5rem;
+}
+
 .blog-card-title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   font-weight: 500;
-  line-height: 1.22;
-  letter-spacing: -0.015em;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   text-wrap: pretty;
 }
 
@@ -384,7 +630,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 0.85rem;
+  border-radius: 0;
 }
 
 .blog-card-title a:focus-visible::after {
@@ -439,29 +685,37 @@
   transform: scaleX(-1) translateX(4px);
 }
 
-/* Featured lead card — image on one side, copy on the other. */
+/* Featured lead card — image on one side, copy on the other. Same frame as
+   the landing panels: square corners, hairline border, translucent surface,
+   one soft shadow. */
 .blog-card--featured {
   display: grid;
   gap: 1.75rem;
   padding: clamp(1.1rem, 2.2vw, 1.75rem);
   border: 1px solid var(--b-border);
-  border-radius: 1.25rem;
-  background: color-mix(in srgb, var(--b-card) 55%, transparent);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--b-card) 91%, transparent);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
   transition:
     transform 320ms var(--ease-out-expo),
-    border-color 280ms var(--ease-out-expo);
+    border-color 280ms var(--ease-out-expo),
+    box-shadow 280ms var(--ease-out-expo);
 }
 
 .blog-card--featured:hover {
   border-color: color-mix(in srgb, var(--b-accent) 38%, var(--b-border));
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.12),
+    inset 0 1px 24px rgba(58, 217, 191, 0.08);
 }
 
-.blog-card--featured .cover-box {
-  border-radius: 0.85rem;
+/* The focus ring follows the card frame. */
+.blog-card--featured .blog-card-title a::after {
+  border-radius: 0;
 }
 
 .blog-card--featured:hover .cover-image {
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 @media (min-width: 900px) {
@@ -471,9 +725,11 @@
     gap: 2.5rem;
   }
 
+  /* The lead headline carries the landing `display-lg` voice. */
   .blog-card--featured .blog-card-title {
-    font-size: clamp(1.9rem, 3vw, 2.65rem);
-    line-height: 1.08;
+    font-size: clamp(2rem, 4.8vw, 3.75rem);
+    font-weight: 500;
+    line-height: 1.02;
     letter-spacing: -0.03em;
   }
 
@@ -483,12 +739,12 @@
 }
 
 /* Compact cards — related posts. */
-.blog-card--compact {
-  gap: 0.85rem;
-}
-
 .blog-card--compact .cover-box {
   aspect-ratio: 16 / 10;
+}
+
+.blog-card--compact .blog-card-body {
+  padding: 1rem 1.1rem 1.15rem;
 }
 
 .blog-card--compact .blog-card-title {
@@ -537,17 +793,20 @@
   border-block-start: 1px solid var(--b-border);
 }
 
+/* Pagination — same square hairline buttons as the landing micro-labels. */
 .blog-page-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  min-block-size: 2.5rem;
   border: 1px solid var(--b-border);
-  border-radius: 999px;
+  border-radius: 0;
   padding: 0.5rem 1rem;
   background: transparent;
   color: var(--b-fg);
   font-family: var(--font-mono);
   font-size: 0.7rem;
+  font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
@@ -571,7 +830,7 @@
 }
 
 .blog-page-link:active {
-  transform: translateY(1px);
+  transform: scale(0.985);
 }
 
 .blog-page-link[aria-disabled="true"] {
@@ -595,14 +854,16 @@
 
 /* ------------------------------------------------------------- empty state */
 
+/* Empty state — same frame as the landing panels: square, hairline, quiet. */
 .blog-empty {
   display: grid;
   justify-items: center;
   gap: 0.85rem;
   padding: 4rem 1.5rem;
   margin-block-end: 2rem;
-  border: 1px dashed var(--b-border);
-  border-radius: 1rem;
+  border: 1px solid var(--b-border);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--b-card) 91%, transparent);
   color: var(--b-muted);
   text-align: center;
 }
@@ -618,6 +879,10 @@
 }
 
 /* ----------------------------------------------------------------- article */
+
+.blog-article {
+  background: var(--b-bg);
+}
 
 .blog-breadcrumb {
   margin-block-end: 2rem;
@@ -643,6 +908,7 @@
 
 .blog-hero {
   margin-block-end: 1rem;
+  background: var(--b-bg);
 }
 
 .blog-hero-text {
@@ -652,9 +918,9 @@
 .blog-hero h1 {
   margin-block: 0.9rem 1.35rem;
   font-family: var(--font-display);
-  font-size: clamp(2.3rem, 5.4vw, 4rem);
-  font-weight: 450;
-  line-height: 1.03;
+  font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+  font-weight: 500;
+  line-height: 1.02;
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
@@ -662,7 +928,6 @@
 .blog-hero-cover {
   margin-block-start: 2.5rem;
   aspect-ratio: 16 / 7;
-  border-radius: 1.25rem;
 }
 
 @media (max-width: 767px) {
@@ -675,6 +940,7 @@
   display: grid;
   gap: 2rem;
   margin-block-start: 3rem;
+  background: var(--b-bg);
 }
 
 /* Grid items default to a min-content floor; long code lines and tables
@@ -906,8 +1172,6 @@
   padding-block: 0.2rem;
   padding-inline: 1.15rem;
   border-inline-start: 2px solid var(--b-accent);
-  border-start-start-radius: 0.5rem;
-  border-end-start-radius: 0.5rem;
   background: color-mix(in srgb, var(--b-accent) 5%, transparent);
   color: var(--b-muted);
   font-style: italic;
@@ -920,8 +1184,6 @@
 .prose-skema img {
   max-inline-size: 100%;
   block-size: auto;
-  border: 1px solid var(--b-border);
-  border-radius: 0.9rem;
 }
 
 .prose-skema table {
@@ -958,7 +1220,7 @@
 .prose-skema :not(pre) > code {
   background: var(--b-card);
   border: 1px solid var(--b-border);
-  border-radius: 0.35rem;
+  border-radius: 0;
   padding: 0.1em 0.35em;
   font-size: 0.9em;
   font-family: var(--font-mono);
@@ -977,7 +1239,7 @@
   text-align: left;
   overflow-x: auto;
   padding: 1.1rem 1.2rem;
-  border-radius: 0.9rem;
+  border-radius: 0;
   background: color-mix(in srgb, var(--b-card) 80%, transparent);
   border: 1px solid var(--b-border);
   font-size: 0.875rem;
@@ -1011,7 +1273,7 @@ html:not(.dark) .prose-skema code[data-theme*=" "] span {
   inset-block-start: 0.6rem;
   inset-inline-end: 0.6rem;
   padding: 0.25rem 0.6rem;
-  border-radius: 0.4rem;
+  border-radius: 0;
   border: 1px solid var(--b-border);
   background: var(--b-bg);
   color: var(--b-fg);
@@ -1042,11 +1304,12 @@ html:not(.dark) .prose-skema code[data-theme*=" "] span {
 
 /* ---------------------------------------------------------------- callouts */
 
+/* Callouts keep the site's accent rail, without the rounded card. */
 .callout {
   border-inline-start: 4px solid var(--b-accent);
   background: var(--b-card);
   padding: 1rem 1.25rem;
-  border-radius: 0.6rem;
+  border-radius: 0;
 }
 
 .callout > p {
@@ -1121,11 +1384,15 @@ html:not(.dark) .prose-skema code[data-theme*=" "] span {
   appearance: none;
   border: 1px solid var(--b-border);
   background: transparent;
-  border-radius: 999px;
-  padding: 0.4rem 0.85rem;
+  border-radius: 0;
+  padding: 0.45rem 0.8rem;
   color: var(--b-muted);
-  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
   line-height: 1.2;
+  text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
   transition:
@@ -1135,6 +1402,12 @@ html:not(.dark) .prose-skema code[data-theme*=" "] span {
     transform 160ms var(--ease-out-expo);
 }
 
+[dir="rtl"] .blog-share-link {
+  font-family: var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
 .blog-share-link:hover {
   border-color: color-mix(in srgb, var(--b-accent) 65%, transparent);
   background: var(--b-tint);
@@ -1142,7 +1415,7 @@ html:not(.dark) .prose-skema code[data-theme*=" "] span {
 }
 
 .blog-share-link:active {
-  transform: translateY(1px);
+  transform: scale(0.985);
 }
 
 .blog-share-link svg {
@@ -1157,18 +1430,23 @@ html:not(.dark) .prose-skema code[data-theme*=" "] span {
 .blog-related h2 {
   margin-block: 0 1.5rem;
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
   font-weight: 500;
+  line-height: 1.08;
   letter-spacing: -0.02em;
 }
 
 /* -------------------------------------------------------------------- cta */
 
+/* Same frame as the landing closing CTA: a square hairline panel with a
+   soft shadow and precision corner marks. */
 .blog-cta {
   position: relative;
   isolation: isolate;
-  padding: 1px;
-  border-radius: 1.25rem;
+  border: 1px solid var(--b-border);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--b-card) 91%, transparent);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
 }
 
 .blog-cta-inner {
@@ -1178,8 +1456,36 @@ html:not(.dark) .prose-skema code[data-theme*=" "] span {
   justify-items: start;
   gap: 1rem;
   padding: clamp(1.75rem, 4vw, 3rem);
-  border-radius: calc(1.25rem - 1px);
-  background: color-mix(in srgb, var(--b-card) 78%, transparent);
+}
+
+/* Precision corner marks, mirrored for RTL. */
+.blog-cta-mark {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--b-muted) 40%, transparent);
+  pointer-events: none;
+}
+
+.blog-cta-mark--start-start {
+  inset-block-start: 0.75rem;
+  inset-inline-start: 0.75rem;
+}
+
+.blog-cta-mark--start-end {
+  inset-block-start: 0.75rem;
+  inset-inline-end: 0.75rem;
+}
+
+.blog-cta-mark--end-start {
+  inset-block-end: 0.75rem;
+  inset-inline-start: 0.75rem;
+}
+
+.blog-cta-mark--end-end {
+  inset-block-end: 0.75rem;
+  inset-inline-end: 0.75rem;
 }
 
 /* Soft signal glow in the trailing corner. */
@@ -1203,10 +1509,10 @@ html:not(.dark) .prose-skema code[data-theme*=" "] span {
 .blog-cta h2 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
-  font-weight: 450;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
@@ -1263,10 +1569,6 @@ html:not(.dark) .prose-skema code[data-theme*=" "] span {
 }
 
 @media (max-width: 639px) {
-  .blog-root {
-    padding-block-start: 5.5rem;
-  }
-
   .copy-btn {
     opacity: 1;
   }
