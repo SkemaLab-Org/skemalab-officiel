@@ -67,6 +67,9 @@
   --brand: #17a08c;
   --brand-deep: #0d6d60;
   --accent: #3ad9bf;
+  /* Signal colour for always-dark brand surfaces (hero, CTA). Never overridden
+     by the light theme, so it stays legible on deep green ground. */
+  --accent-bright: #3ad9bf;
   --on-brand: #04120e;
   --cream: #f2ede2;
   --ink: #07110e;
@@ -731,6 +734,104 @@ html:not(.dark) .photo-duotone img {
 
 [dir="rtl"] .link-underline::after {
   transform-origin: right center;
+}
+
+/* ==========================================================================
+   Atelier surfaces
+   Shared furniture of the landing page: hairline chips, live status dots and
+   the accent glow on the services progress meter.
+   ========================================================================== */
+
+/* Hairline chip — service points and project tags.
+   Square corners, mono micro-label, muted ink; the accent arrives on hover. */
+.atelier-pill {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  padding: 0.3rem 0.6rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  transition:
+    color 0.3s var(--ease-out-expo),
+    border-color 0.3s var(--ease-out-expo),
+    background-color 0.3s var(--ease-out-expo);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .atelier-pill:hover {
+    border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+  }
+}
+
+/* Arabic keeps the chip quiet: no Latin uppercase, no tracking. */
+[dir="rtl"] .atelier-pill {
+  font-family: var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Live status dot — hero eyebrow and closing CTA.
+   Both sit on a permanently dark brand plane, so the dot keeps the bright
+   signal colour in either theme. */
+.status-dot {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--accent-bright);
+  box-shadow: 0 0 8px 0 color-mix(in srgb, var(--accent-bright) 45%, transparent);
+}
+
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-bright) 50%, transparent),
+    transparent 68%
+  );
+  opacity: 0.5;
+  animation: status-dot-breathe 3.6s var(--ease-out-expo) infinite;
+  pointer-events: none;
+}
+
+@keyframes status-dot-breathe {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.12;
+    transform: scale(0.82);
+  }
+}
+
+/* Accent glow — the services progress meter reads as a lit edge. */
+.glow-accent {
+  box-shadow:
+    0 0 6px 0 color-mix(in srgb, var(--accent) 50%, transparent),
+    0 0 16px 0 color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+/* The meter track clips its children, which would cut the glow off. */
+[role="progressbar"]:has(> .glow-accent) {
+  overflow: visible;
 }
 
 /* Rotating gradient border used by the closing CTA */
