@@ -45,7 +45,7 @@ export default async function BlogIndex({ locale, pageNumber = 1 }) {
     <div className="blog-index">
       <RegisterAlternates alternates={BLOG_INDEX_ALTERNATES} />
 
-      <header className="blog-index-head zellige-spot">
+      <header className="blog-index-head">
         <div className="blog-index-head-top">
           <p className="label-mono blog-index-eyebrow">{t(locale, "blog")}</p>
           <p className="label-mono blog-index-count">

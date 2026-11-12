@@ -164,7 +164,7 @@ export default async function BlogPostPage({ params }) {
         </Link>
       </nav>
 
-      <header className="blog-hero zellige-spot zellige-spot--top-end">
+      <header className="blog-hero">
         <div className="blog-hero-text">
           {post.tags.length > 0 && (
             <ul className="blog-tags" aria-label={t(locale, "tags")}>

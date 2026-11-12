@@ -95,7 +95,7 @@ export default async function BlogTagPage({ params }) {
         </Link>
       </nav>
 
-      <header className="blog-index-head zellige-spot">
+      <header className="blog-index-head">
         <div className="blog-index-head-top">
           <p className="label-mono blog-index-eyebrow">{t(locale, "tags")}</p>
           <p className="label-mono blog-index-count">
