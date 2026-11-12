@@ -267,6 +267,17 @@ body:has(.blog-root) .blog-root {
     box-shadow 260ms var(--ease-out-expo);
 }
 
+/* When the navbar hides on scroll, the topic bar re-pins to the top so it
+   doesn't leave a gap the size of the now-hidden header. */
+html[data-nav-hidden="true"] .blog-tagbar {
+  inset-block-start: 0;
+}
+
+html[data-nav-hidden="true"] .blog-tagbar::before {
+  block-size: 0;
+  opacity: 0;
+}
+
 /* Frosted panel, only while the bar is actually pinned. */
 .blog-tagbar[data-stuck="true"] {
   background: color-mix(in srgb, var(--b-bg) 82%, transparent);

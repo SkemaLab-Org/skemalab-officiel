@@ -47,6 +47,13 @@ export default function Navbar() {
 
 	const [ scrolled, setScrolled ] = useState( false );
 	const [ hidden, setHidden ] = useState( false );
+
+	// Publish the navbar's hidden state so other sticky surfaces (e.g. the
+	// blog topic bar) can re-pin themselves to the top instead of leaving a
+	// gap the size of the now-hidden header.
+	useEffect( () => {
+		document.documentElement.dataset.navHidden = hidden ? "true" : "false";
+	}, [ hidden ] );
 	const [ open, setOpen ] = useState( false );
 	const [ active, setActive ] = useState( "" );
 	const [ trackedPathname, setTrackedPathname ] = useState( pathname );
