@@ -6,10 +6,10 @@ import Image from "next/image";
 import { markIntroSeen } from "@/lib/intro";
 import logoDark from "@/assets/logo2.png";
 
-const LINE_IN_MS = 220;
-const FLIGHT_START_MS = 1850;
-const PANEL_OUT_MS = 2650;
-const DONE_MS = 3100;
+const LINE_IN_MS = 200;
+const FLIGHT_START_MS = 1250;
+const PANEL_OUT_MS = 1500;
+const DONE_MS = 2100;
 
 /**
  * One-line opening stage. Mounted only when the hero decides the intro should

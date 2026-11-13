@@ -128,8 +128,7 @@ export default function RootLayout({ children }) {
 				<style
 					dangerouslySetInnerHTML={{
 						__html: `
-html[data-intro="pending"] body::after,
-html[data-intro="true"] body::after {
+html[data-intro="pending"] body::after {
   position: fixed;
   z-index: 120;
   inset: 0;
@@ -137,8 +136,7 @@ html[data-intro="true"] body::after {
   content: "";
   pointer-events: none;
 }
-html[data-intro="pending"] #hero,
-html[data-intro="true"] #hero {
+html[data-intro="pending"] #hero {
   opacity: 0 !important;
   visibility: hidden !important;
 }

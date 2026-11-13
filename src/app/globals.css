@@ -1099,15 +1099,13 @@ html[data-intro="pending"] [data-intro-anchor="nav"] {
   opacity: 0 !important;
 }
 
-/* Before and during the stage, hero and page chrome are hidden so the page never flashes */
-html[data-intro="pending"] #hero,
-html[data-intro="true"] #hero {
+/* Keep the hero covered until the mounted stage takes over from the pending guard. */
+html[data-intro="pending"] #hero {
   opacity: 0 !important;
   visibility: hidden !important;
 }
 
-html[data-intro="pending"] body::after,
-html[data-intro="true"] body::after {
+html[data-intro="pending"] body::after {
   position: fixed;
   z-index: 120;
   inset: 0;
