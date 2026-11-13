@@ -1088,6 +1088,33 @@ html.lenis body {
   }
 }
 /* ==========================================================================
+   Opening stage
+   While the first-visit splash is on screen it owns the wordmark: the header
+   mark is hidden with opacity only, so its rect stays measurable for the
+   hand-off flight.
+   ========================================================================== */
+
+html[data-intro="true"] [data-intro-anchor="nav"],
+html[data-intro="pending"] [data-intro-anchor="nav"] {
+  opacity: 0 !important;
+}
+
+/* Keep the hero covered until the mounted stage takes over from the pending guard. */
+html[data-intro="pending"] #hero {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+html[data-intro="pending"] body::after {
+  position: fixed;
+  z-index: 120;
+  inset: 0;
+  background: #07110e;
+  content: "";
+  pointer-events: none;
+}
+
+/* ==========================================================================
    Pinned Stage Primitives & Scroll-Driven Animation System
    Exact layout & scroll mechanics from Kilnwave (superdesign draft 90c604f5)
    ========================================================================== */
