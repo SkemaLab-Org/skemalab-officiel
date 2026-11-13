@@ -58,13 +58,13 @@ export default function Navbar() {
 	}, [ hidden ] );
 
 	useEffect( () => {
-		const id = requestAnimationFrame( () => {
+		const id = setTimeout( () => {
 			if ( shouldRunIntro() ) setIntroActive( true );
-		} );
+		}, 0 );
 		const onIntro = ( event ) => setIntroActive( Boolean( event.detail ) );
 		window.addEventListener( "skemalab:intro", onIntro );
 		return () => {
-			cancelAnimationFrame( id );
+			clearTimeout( id );
 			window.removeEventListener( "skemalab:intro", onIntro );
 		};
 	}, [] );

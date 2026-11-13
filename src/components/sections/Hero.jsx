@@ -28,16 +28,15 @@ export default function Hero() {
 	const { t, isRTL } = useI18n();
 	const reduce = useReducedMotion();
 	const [intro, setIntro] = useState(false);
-	const [revealed, setRevealed] = useState(true);
+	const [revealed, setRevealed] = useState(false);
 
 	useEffect(() => {
 		if (shouldRunIntro()) {
-			const id = requestAnimationFrame(() => {
-				setIntro(true);
-				setRevealed(false);
-			});
-			return () => cancelAnimationFrame(id);
+			const id = setTimeout(() => setIntro(true), 0);
+			return () => clearTimeout(id);
 		}
+		const id = setTimeout(() => setRevealed(true), 0);
+		return () => clearTimeout(id);
 	}, []);
 
 	const containerRef = useRef(null);

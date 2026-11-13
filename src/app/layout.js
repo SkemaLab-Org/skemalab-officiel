@@ -112,9 +112,6 @@ export const viewport = {
 
 const themeInitScript = `(function(){try{var t=localStorage.getItem("skemalab-theme");var r=document.documentElement;if(t==="light"){r.classList.remove("dark");r.style.colorScheme="light"}else{r.classList.add("dark");r.style.colorScheme="dark"}}catch(e){}})();`;
 const localeInitScript = `(function(){try{var p=location.pathname;var m=p.match(/^\\/(fr|en|ar)\\/blog(?:\\/|$)/);var l=m?m[1]:(localStorage.getItem("skemalab-locale")||"fr");if(m){localStorage.setItem("skemalab-locale",l)}var r=document.documentElement;r.setAttribute("lang",l);if(l==="ar"){r.setAttribute("dir","rtl");r.classList.add("rtl")}else{r.setAttribute("dir","ltr");r.classList.remove("rtl")}}catch(e){}})();`;
-// The opening stage owns the first paint of the home page. Flag it before
-// hydration so the page chrome never flashes under the splash.
-const introInitScript = `(function(){try{var r=document.documentElement;if(location.pathname!=="/")return;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var forced=sessionStorage.getItem("skemalab-force-intro")==="1";if(forced)sessionStorage.removeItem("skemalab-force-intro");var nav=performance&&performance.getEntriesByType&&performance.getEntriesByType("navigation")[0];var isReload=nav&&nav.type==="reload";if(isReload&&!forced)return;if('scrollRestoration' in history){history.scrollRestoration='manual';}window.scrollTo(0,0);r.setAttribute("data-intro","pending");setTimeout(function(){if(r.getAttribute("data-intro")==="pending"){r.removeAttribute("data-intro")}},4000)}catch(e){}})();`;
 
 export default function RootLayout({ children }) {
 	return (
@@ -124,6 +121,37 @@ export default function RootLayout({ children }) {
 			className={`dark ${display.variable} ${sans.variable} ${arabic.variable} ${mono.variable} antialiased`}
 			suppressHydrationWarning
 		>
+			<head>
+				<style
+					dangerouslySetInnerHTML={{
+						__html: `
+html[data-intro="pending"] body::after,
+html[data-intro="true"] body::after {
+  position: fixed;
+  z-index: 120;
+  inset: 0;
+  background: #07110e;
+  content: "";
+  pointer-events: none;
+}
+html[data-intro="pending"] #hero,
+html[data-intro="true"] #hero {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+html[data-intro="pending"] [data-intro-anchor="nav"],
+html[data-intro="true"] [data-intro-anchor="nav"] {
+  opacity: 0 !important;
+}
+`,
+					}}
+				/>
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `(function(){try{var p=location.pathname;if(p==="/"||p===""){if(!matchMedia("(prefers-reduced-motion: reduce)").matches){if('scrollRestoration' in history){history.scrollRestoration='manual';}window.scrollTo(0,0);document.documentElement.setAttribute("data-intro","pending");setTimeout(function(){if(document.documentElement.getAttribute("data-intro")==="pending"){document.documentElement.removeAttribute("data-intro");}},4000);}}}catch(e){}})();`,
+					}}
+				/>
+			</head>
 			<body className="min-h-svh bg-page font-sans text-fg antialiased">
 				<JsonLd />
 				<Script
@@ -135,11 +163,6 @@ export default function RootLayout({ children }) {
 					id="locale-init"
 					strategy="beforeInteractive"
 					dangerouslySetInnerHTML={{ __html: localeInitScript }}
-				/>
-				<Script
-					id="intro-init"
-					strategy="beforeInteractive"
-					dangerouslySetInnerHTML={{ __html: introInitScript }}
 				/>
 				<ThemeProvider>
 					<I18nProvider>

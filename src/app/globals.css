@@ -1094,19 +1094,20 @@ html.lenis body {
    hand-off flight.
    ========================================================================== */
 
-html[data-intro="true"] [data-intro-anchor="nav"], html[data-intro="pending"] [data-intro-anchor="nav"] {
-  opacity: 0;
+html[data-intro="true"] [data-intro-anchor="nav"],
+html[data-intro="pending"] [data-intro-anchor="nav"] {
+  opacity: 0 !important;
 }
 
-/* Before the stage mounts, a plain dark ground stands in for it, so the page
-   chrome never flashes between the first paint and the splash. */
+/* Before and during the stage, hero and page chrome are hidden so the page never flashes */
 html[data-intro="pending"] #hero,
 html[data-intro="true"] #hero {
   opacity: 0 !important;
   visibility: hidden !important;
 }
 
-html[data-intro="pending"] body::after {
+html[data-intro="pending"] body::after,
+html[data-intro="true"] body::after {
   position: fixed;
   z-index: 120;
   inset: 0;
