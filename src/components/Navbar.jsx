@@ -13,6 +13,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useI18n } from "@/components/I18nProvider";
 import { EASE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+import { shouldRunIntro } from "@/lib/intro";
 
 const CalendlyButton = dynamic( () => import( "@/components/CalendlyButton" ), {
 	ssr: false,
@@ -47,6 +48,7 @@ export default function Navbar() {
 
 	const [ scrolled, setScrolled ] = useState( false );
 	const [ hidden, setHidden ] = useState( false );
+	const [ introActive, setIntroActive ] = useState( false );
 
 	// Publish the navbar's hidden state so other sticky surfaces (e.g. the
 	// blog topic bar) can re-pin themselves to the top instead of leaving a
@@ -54,6 +56,18 @@ export default function Navbar() {
 	useEffect( () => {
 		document.documentElement.dataset.navHidden = hidden ? "true" : "false";
 	}, [ hidden ] );
+
+	useEffect( () => {
+		const id = requestAnimationFrame( () => {
+			if ( shouldRunIntro() ) setIntroActive( true );
+		} );
+		const onIntro = ( event ) => setIntroActive( Boolean( event.detail ) );
+		window.addEventListener( "skemalab:intro", onIntro );
+		return () => {
+			cancelAnimationFrame( id );
+			window.removeEventListener( "skemalab:intro", onIntro );
+		};
+	}, [] );
 	const [ open, setOpen ] = useState( false );
 	const [ active, setActive ] = useState( "" );
 	const [ trackedPathname, setTrackedPathname ] = useState( pathname );
@@ -296,11 +310,26 @@ export default function Navbar() {
 			>
 				<div className="shell flex h-16 items-center justify-between gap-4 min-[1100px]:h-20">
 					<div className="flex min-w-0 items-center gap-5">
-						<BrandMark
-							tone={ darkSurface ? "dark" : "auto" }
-							className="h-7 lg:h-8"
-							priority
-						/>
+						{/* Stable hand-off slot for the opening stage's wordmark. */}
+						<span
+							data-intro-anchor="nav"
+							className="flex items-center transition-opacity duration-300 ease-out-expo"
+						>
+							<span
+								data-intro-anchor="nav"
+								className="inline-flex items-center"
+								style={ {
+									opacity: introActive ? 0 : 1,
+									transition: "opacity 150ms cubic-bezier(.16,1,.3,1)",
+								} }
+							>
+								<BrandMark
+									tone={ darkSurface ? "dark" : "auto" }
+									className="h-7 lg:h-8"
+									priority
+								/>
+							</span>
+						</span>
 					</div>
 
 					<nav
