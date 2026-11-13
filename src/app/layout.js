@@ -47,7 +47,8 @@ export const metadata = {
 		}
 	})(),
 	title: {
-		default: "Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
+		default:
+			"Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
 		template: "%s | Skemalab",
 	},
 	description: siteConfig.description,
@@ -65,7 +66,8 @@ export const metadata = {
 		locale: siteConfig.locale || "fr_FR",
 		url: siteConfig.url,
 		siteName: siteConfig.name,
-		title: "Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
+		title:
+			"Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
 		description: siteConfig.description,
 		images: [
 			{
@@ -78,7 +80,8 @@ export const metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
+		title:
+			"Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
 		description: siteConfig.description,
 		images: ["/opengraph-image"],
 	},
