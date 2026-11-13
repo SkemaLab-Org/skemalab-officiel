@@ -1,20 +1,15 @@
-const INTRO_SESSION_KEY = "skemalab-intro-seen";
+const INTRO_FORCE_KEY = "skemalab-force-intro";
 
-function hasSeenIntro() {
+function hasForceIntro() {
 	if (typeof window === "undefined") return false;
 	try {
-		return window.sessionStorage.getItem(INTRO_SESSION_KEY) === "1";
+		const forced = window.sessionStorage.getItem(INTRO_FORCE_KEY) === "1";
+		if (forced) {
+			window.sessionStorage.removeItem(INTRO_FORCE_KEY);
+		}
+		return forced;
 	} catch {
 		return false;
-	}
-}
-
-export function markIntroSeen() {
-	if (typeof window === "undefined") return;
-	try {
-		window.sessionStorage.setItem(INTRO_SESSION_KEY, "1");
-	} catch {
-		/* private mode */
 	}
 }
 
@@ -23,33 +18,34 @@ function prefersReducedMotion() {
 	return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+export function markIntroSeen() {
+	// No-op
+}
+
 export function shouldRunIntro() {
 	if (prefersReducedMotion()) return false;
 	if (typeof window === "undefined") return true;
 
-	const navEntry = window.performance?.getEntriesByType("navigation")?.[0];
-	const isSoftReload = navEntry?.type === "reload";
-	const hasSeen = hasSeenIntro();
+	if (hasForceIntro()) return true;
 
-	if (isSoftReload && hasSeen) {
+	const navEntry = window.performance?.getEntriesByType("navigation")?.[0];
+	const navType = navEntry?.type;
+
+	if (navType === "reload") {
 		return false;
 	}
-	if (hasSeen && !isSoftReload) {
-		return false;
-	}
+
 	return true;
 }
 
 if (typeof window !== "undefined") {
 	window.addEventListener("keydown", (event) => {
 		if (
-			((event.ctrlKey || event.metaKey) &&
-				event.key.toLowerCase() === "r" &&
-				event.shiftKey) ||
-			(event.key === "F5" && event.shiftKey)
+			event.key === "F5" ||
+			((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "r")
 		) {
 			try {
-				window.sessionStorage.removeItem(INTRO_SESSION_KEY);
+				window.sessionStorage.setItem(INTRO_FORCE_KEY, "1");
 			} catch {}
 		}
 	});

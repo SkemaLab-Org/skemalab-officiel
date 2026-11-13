@@ -47,8 +47,7 @@ export const metadata = {
 		}
 	})(),
 	title: {
-		default:
-			"Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
+		default: "Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
 		template: "%s | Skemalab",
 	},
 	description: siteConfig.description,
@@ -66,8 +65,7 @@ export const metadata = {
 		locale: siteConfig.locale || "fr_FR",
 		url: siteConfig.url,
 		siteName: siteConfig.name,
-		title:
-			"Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
+		title: "Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
 		description: siteConfig.description,
 		images: [
 			{
@@ -80,8 +78,7 @@ export const metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title:
-			"Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
+		title: "Skemalab | Studio digital au Maroc — Web, marketing & automatisation",
 		description: siteConfig.description,
 		images: ["/opengraph-image"],
 	},
@@ -117,7 +114,7 @@ const themeInitScript = `(function(){try{var t=localStorage.getItem("skemalab-th
 const localeInitScript = `(function(){try{var p=location.pathname;var m=p.match(/^\\/(fr|en|ar)\\/blog(?:\\/|$)/);var l=m?m[1]:(localStorage.getItem("skemalab-locale")||"fr");if(m){localStorage.setItem("skemalab-locale",l)}var r=document.documentElement;r.setAttribute("lang",l);if(l==="ar"){r.setAttribute("dir","rtl");r.classList.add("rtl")}else{r.setAttribute("dir","ltr");r.classList.remove("rtl")}}catch(e){}})();`;
 // The opening stage owns the first paint of the home page. Flag it before
 // hydration so the page chrome never flashes under the splash.
-const introInitScript = `(function(){try{var r=document.documentElement;if(location.pathname!=="/")return;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var nav=performance&&performance.getEntriesByType&&performance.getEntriesByType("navigation")[0];var isReload=nav&&nav.type==="reload";var seen=sessionStorage.getItem("skemalab-intro-seen")==="1";if(isReload&&seen)return;if(seen&&!isReload)return;r.setAttribute("data-intro","pending");setTimeout(function(){if(r.getAttribute("data-intro")==="pending"){r.removeAttribute("data-intro")}},4000)}catch(e){}})();`;
+const introInitScript = `(function(){try{var r=document.documentElement;if(location.pathname!=="/")return;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var forced=sessionStorage.getItem("skemalab-force-intro")==="1";if(forced)sessionStorage.removeItem("skemalab-force-intro");var nav=performance&&performance.getEntriesByType&&performance.getEntriesByType("navigation")[0];var isReload=nav&&nav.type==="reload";if(isReload&&!forced)return;if('scrollRestoration' in history){history.scrollRestoration='manual';}window.scrollTo(0,0);r.setAttribute("data-intro","pending");setTimeout(function(){if(r.getAttribute("data-intro")==="pending"){r.removeAttribute("data-intro")}},4000)}catch(e){}})();`;
 
 export default function RootLayout({ children }) {
 	return (
