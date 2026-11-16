@@ -1,89 +1,42 @@
 ---
-title: "Welcome to the Skemalab blog"
-description: "Insights, methods and lessons learned on web development, digital marketing and automation."
-excerpt: "A space to share what we learn while building digital products, running campaigns and automating operations."
-coverAlt: "A workspace with a laptop, a notebook and a cup of coffee"
-tags: ["studio", "web", "automation"]
+title: "SkemaLab Agency: Build. Grow. Automate."
+description: "SkemaLab Agency opens its doors at the Essaouira Technopark. Build, Grow, Automate for Moroccan and French-speaking SMEs."
+excerpt: "It's official: SkemaLab Agency opens its doors at the Essaouira Technopark, office E104. Discover our story, our team and how we work."
+coverAlt: "The SkemaLab team at the Essaouira Technopark"
+tags: ["agency", "Essaouira", "BuildGrowAutomate"]
 ---
 
-We spend our days designing websites, launching campaigns and connecting tools. The Skemalab blog is where we take the time to explain **what actually works**, what wastes our time, and how we improve our methods.
+It's official. SkemaLab Agency opens its doors at the Essaouira Technopark, office E104.
 
-## Why this blog
+We won't pretend otherwise: we've dreamed of this for a long time.
 
-A digital studio learns fast, but forgets even faster. Writing forces us to structure our ideas and test them against reality. This blog is both a workshop notebook and a place to share.
+## Our story
 
-### What you will find here
+When the AI wave started, Feissal ran marketing and sales for an agency while Marouan led IT. Two different jobs, two different personalities, and one thing became clear fast: we complement each other. Two friends, almost brothers, with highs, lows, and a lot of coffee.
 
-- lessons learned from real projects;
-- practical guides on [website development and SEO](/en/blog/refonte-ou-optimisation-site-web);
-- automation workflows you can adapt;
-- honest analyses of what we test, including [when to choose an AI agent or a workflow](/en/blog/agent-ou-workflow-automatisation).
+One day we asked ourselves: what if we built something of our own? Something we actually care about.
 
-Our editorial priorities are simple: be useful, stay concrete and own our technical choices.
+The idea grew slowly. Adam joined us. Today we're a technical team of three, surrounded by salespeople, and a baby that has finally been born.
 
-We also look at how AI search describes companies in [our article on branded searches](/en/blog/votre-marque-dans-les-recherches-ia).
+## How we work
 
-> Clarity is not a simplification. It is the result of serious work.
+Three words sum up our way of doing things: Build. Grow. Automate. We build, we grow, we automate.
 
-### A simple method
+That comes from years of experience and a simple engineering view: know what to do, where, and when. We don't build a website just to have a website, or a system just to have a system. We build tools that save you time and money and get you out of repetitive tasks.
+
+The method itself has four steps.
 
 1. Clarify the problem and the expected outcome.
 2. Build the smallest version that proves the value.
 3. Measure, correct, then industrialise.
-4. Document what worked so you do not start from scratch.
+4. Document what worked so you don't start from scratch.
 
-- [x] Define a measurable goal
-- [x] Choose a single indicator
-- [ ] Automate reporting
-- [ ] Train the team on the tool
+## Who we serve
 
-## The formats we will use
+Moroccan small and medium businesses first, with a heart in Essaouira-Marrakech. That's our ground, we know its realities and its ecosystem. We also work with French-speaking clients in France, Belgium and elsewhere.
 
-We will alternate between short notes, case studies and technical tutorials. A topic can be covered more than once: the first version sets the frame, the next ones add what we learned in the field.
+## Come see us
 
-| Format | Length | For whom? |
-| --- | --- | --- |
-| Workshop note | 3 to 5 minutes | The whole team |
-| Practical guide | 8 to 12 minutes | Developers and marketers |
-| Case study | 10 to 15 minutes | Decision-makers and clients |
+The door is open. Essaouira Technopark, office E104.
 
-> [!NOTE]
-> Code samples are tested against current versions of Node.js and Next.js. If an API changes, the article is updated.
-
-> [!TIP]
-> Start with the problem, not the tool. A good workflow that solves the wrong problem is still a waste of time.
-
-> [!WARNING]
-> Never copy an automation workflow to production without understanding its side effects: duplicates, loops or mass sends.
-
-## A technical preview
-
-Here is the kind of configuration we use to keep rendering predictable:
-
-```ts
-type Article = {
-  slug: string;
-  locale: "fr" | "en" | "ar";
-  published: boolean;
-};
-
-export function isVisible(article: Article, today: string): boolean {
-  return article.published && article.slug.length > 0 && today.length === 10;
-}
-```
-
-And the command that validates content before a deployment:
-
-```bash
-npm run content:check
-```
-
-We like simple tools: one Markdown file, one metadata file, and a pipeline that validates everything. Nothing more.
-
-![The Skemalab team working on a project](https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80)
-
----
-
-The next article shows how we use [n8n to automate outreach](/en/blog/automatiser-avec-n8n). You can also read [our story](/our-story) to understand where the studio comes from.
-
-If you want to build something solid, [let's talk](/#contact).
+If you want to build something solid, [let's talk](/#contact). You can also read [our blog](/en/blog) for our field notes.
