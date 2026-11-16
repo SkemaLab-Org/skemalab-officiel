@@ -1,42 +1,40 @@
 ---
 title: "SkemaLab Agency : Build. Grow. Automate."
 description: "SkemaLab Agency ouvre ses portes au Technopark d'Essaouira. Build, Grow, Automate au service des TPE et PME marocaines et francophones."
-excerpt: "C'est officiel : SkemaLab Agency ouvre ses portes au Technopark d'Essaouira, bureau E104. Découvrez notre histoire, notre équipe et notre façon de travailler."
+excerpt: "SkemaLab Agency ouvre ses portes au Technopark d'Essaouira, bureau E104. Notre histoire, notre équipe et la façon dont nous travaillons."
 coverAlt: "L'équipe SkemaLab au Technopark d'Essaouira"
 tags: ["agence", "Essaouira", "BuildGrowAutomate"]
 ---
 
-C'est officiel. SkemaLab Agency ouvre ses portes au Technopark d'Essaouira, bureau E104.
+SkemaLab Agency ouvre officiellement ses portes au Technopark d'Essaouira, bureau E104. On vous attend.
 
-On ne vous le cache pas : on en rêvait depuis longtemps.
+## Comment tout a commencé
 
-## Notre histoire
+L'idée est née au moment où l'IA devenait partout. Feissal pilotait le marketing et le commercial d'une agence, Marouan tenait l'IT. Deux métiers, deux tempéraments, et une complémentarité évidente très vite. Deux amis, presque deux frères, avec des bons jours, des jours moins bons, et des cafés à n'en plus finir.
 
-Au début de la vague IA, Feissal gérait le marketing et le commercial d'une agence, Marouan pilotait l'IT. Deux métiers, deux caractères, et très vite une évidence : on se complète. Deux amis, presque deux frères, avec des hauts, des bas, et beaucoup de cafés.
+La question s'est posée un soir : et si on construisait notre propre chose ? Quelque chose qui nous ressemble vraiment.
 
-Un jour on s'est dit : et si on construisait quelque chose à nous ? Quelque chose qui nous tient vraiment à cœur.
+Le projet a mûri doucement. Adam a rejoint l'aventure. Aujourd'hui l'équipe technique compte trois personnes, entourées de commerciaux, et ce qui n'était qu'une idée est devenu une réalité.
 
-Petit à petit l'idée a grandi. Adam nous a rejoints. Aujourd'hui une équipe technique de trois, entourée de commerciaux, et un bébé qui vient enfin de naître.
+## Notre façon de travailler
 
-## Comment on travaille
+Trois mots résument notre approche : Build. Grow. Automate. On construit, on fait grandir, on automatise.
 
-Trois mots résument notre façon de faire : Build. Grow. Automate. On construit, on fait grandir, on automatise.
+Cette devise vient de nos années sur le terrain et d'une conviction simple : savoir quoi faire, où le faire et quand le faire. Pas de site pour avoir un site. Pas de système pour avoir un système. On conçoit des outils qui vous rendent du temps et de l'argent, et qui vous débarrassent des tâches répétitives.
 
-Ça vient de nos années d'expérience et d'une vision d'ingénierie simple : savoir quoi faire, où et quand. Chez nous pas de site pour faire un site, pas de système pour faire un système. On bâtit des outils qui vous font gagner du temps et de l'argent, et qui vous sortent des tâches répétitives.
-
-La méthode, elle, tient en quatre étapes.
+Notre méthode, en quatre étapes :
 
 1. Clarifier le problème et le résultat attendu.
 2. Construire la version la plus simple qui prouve la valeur.
-3. Mesurer, corriger, puis seulement industrialiser.
+3. Mesurer, corriger, puis industrialiser.
 4. Documenter ce qui a marché pour ne pas repartir de zéro.
 
-## Pour qui
+## À qui on s'adresse
 
-Les TPE et PME marocaines d'abord, avec un cœur à Essaouira-Marrakech. C'est notre terrain, on en connaît les réalités et l'écosystème. On accompagne aussi des clients francophones, en France, en Belgique et ailleurs.
+Les TPE et PME marocaines d'abord, avec un ancrage fort à Essaouira et Marrakech. C'est notre terrain, on en connaît les réalités et l'écosystème. On accompagne aussi des clients francophones, en France, en Belgique et ailleurs.
 
-## Venez nous voir
+## Passez nous voir
 
 La porte est ouverte. Technopark d'Essaouira, bureau E104.
 
-Si vous voulez construire quelque chose de solide, [parlons-en](/#contact). Vous pouvez aussi lire [notre blog](/fr/blog) pour nos retours d'expérience.
+Si vous avez un projet en tête, [parlons-en](/#contact). Et si vous voulez suivre nos retours d'expérience, [notre blog](/fr/blog) est là.
