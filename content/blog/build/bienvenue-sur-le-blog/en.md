@@ -38,3 +38,7 @@ Moroccan small and medium businesses first, with strong roots in Essaouira and M
 The door is open. Essaouira Technopark, office E104.
 
 If you have a project in mind, [let's talk](/#contact). And if you want to follow our field notes, [our blog](/en/blog) is right here.
+
+## Follow us
+
+Find SkemaLab on [LinkedIn](https://www.linkedin.com/company/skemalab). You can also reach us at [contact@skemalab.com](mailto:contact@skemalab.com).

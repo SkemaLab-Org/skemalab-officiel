@@ -38,3 +38,7 @@ tags: ["وكالة", "الصويرة", "BuildGrowAutomate"]
 الباب مفتوح. تكنوبارك الصويرة، مكتب E104.
 
 إذا كان لديكم مشروع في الأفق، [لنتحدث](/#contact). وإذا كنتم تريدون متابعة تجاربنا الميدانية، [مدونتنا](/ar/blog) هنا.
+
+## تابعونا
+
+اعثروا على سكيما لاب على [LinkedIn](https://www.linkedin.com/company/skemalab). ويمكنكم أيضاً مراسلتنا على [contact@skemalab.com](mailto:contact@skemalab.com).

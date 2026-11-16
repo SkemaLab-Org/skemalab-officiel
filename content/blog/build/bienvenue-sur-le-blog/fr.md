@@ -38,3 +38,7 @@ Les TPE et PME marocaines d'abord, avec un ancrage fort à Essaouira et Marrakec
 La porte est ouverte. Technopark d'Essaouira, bureau E104.
 
 Si vous avez un projet en tête, [parlons-en](/#contact). Et si vous voulez suivre nos retours d'expérience, [notre blog](/fr/blog) est là.
+
+## Suivez-nous
+
+Retrouvez SkemaLab sur [LinkedIn](https://www.linkedin.com/company/skemalab). Écrivez-nous aussi à [contact@skemalab.com](mailto:contact@skemalab.com).
