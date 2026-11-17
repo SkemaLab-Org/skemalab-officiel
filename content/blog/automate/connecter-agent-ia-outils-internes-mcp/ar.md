@@ -40,3 +40,15 @@ MCP يوحّد الطريقة التي يتحدث بها نموذج مع أدا�
 في مشاريع الأتمتة لدينا، MCP ليس نقطة البداية. نبدأ بسرد الإجراءات المطلوبة فعلاً، نقيدها إلى الحد الأدنى، ثم نضيف الوكيل.
 
 إذا كنتم تترددون بين أتمتة سريعة وأتمتة صحيحة، [لنتحدث](/#contact). نساعدكم في تحديد النطاق المناسب. يمكنكم أيضاً قراءة [مدونتنا](/ar/blog) للاطلاع على المزيد من الملاحظات الميدانية.
+
+
+## المصادر
+
+- OWASP، *Top 10 for LLM Applications 2025 — LLM01:2025 Prompt Injection*، genai.owasp.org/llmrisk/llm01-prompt-injection/.
+- OWASP، *Top 10 for LLM Applications 2025 — LLM06:2025 Excessive Agency*، genai.owasp.org/llm-top-10/.
+- Greshake et al.، *Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection*، arXiv:2302.12173.
+- MITRE ATLAS، *AML.T0051.001 — LLM Prompt Injection: Indirect*، atlas.mitre.org/techniques/AML.T0051.001.
+
+## تابعونا
+
+اعثروا على سكيما لاب على [LinkedIn](https://www.linkedin.com/company/skemalab). ويمكنكم أيضاً مراسلتنا على [contact@skemalab.com](mailto:contact@skemalab.com).

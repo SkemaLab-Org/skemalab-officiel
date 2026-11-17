@@ -40,3 +40,14 @@ This is not paranoia. It is what separates a useful tool from an incident you ex
 On our automation projects, MCP is never the starting point. We begin by listing the actions actually needed, restrict them to the strict minimum, then add the agent. The time savings come after, not before.
 
 If you are hesitating between automating fast and automating properly, [let's talk](/#contact). We help you scope the right perimeter. You can also read [our blog](/en/blog) for more field notes.
+
+## Sources
+
+- OWASP, *Top 10 for LLM Applications 2025 — LLM01:2025 Prompt Injection*, genai.owasp.org/llmrisk/llm01-prompt-injection/.
+- OWASP, *Top 10 for LLM Applications 2025 — LLM06:2025 Excessive Agency*, genai.owasp.org/llm-top-10/.
+- Greshake et al., *Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection*, arXiv:2302.12173.
+- MITRE ATLAS, *AML.T0051.001 — LLM Prompt Injection: Indirect*, atlas.mitre.org/techniques/AML.T0051.001.
+
+## Follow us
+
+Find SkemaLab on [LinkedIn](https://www.linkedin.com/company/skemalab). You can also reach us at [contact@skemalab.com](mailto:contact@skemalab.com).

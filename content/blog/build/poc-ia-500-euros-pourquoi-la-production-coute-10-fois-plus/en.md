@@ -31,3 +31,12 @@ Fallback plan. When the model does not answer or answers badly, what happens? We
 At SkemaLab we refuse to quote a POC without talking about what comes after. Maintenance, observability and API costs are line items in the quote, not surprises. A well-scoped AI project is budgeted over twelve months, not two weeks.
 
 If you are preparing an AI project and want to avoid bad surprises, [let's talk](/#contact). We help you scope the real cost. You can also read [our blog](/en/blog) for more field notes.
+
+## Sources
+
+- Sculley et al., *Hidden Technical Debt in Machine Learning Systems*, NeurIPS 2015 (research.google/pubs/pub43146/).
+- Zinkevich, *Rules of Machine Learning: Best Practices for ML Engineering*, developers.google.com/machine-learning/guides/rules-of-ml.
+
+## Follow us
+
+Find SkemaLab on [LinkedIn](https://www.linkedin.com/company/skemalab). You can also reach us at [contact@skemalab.com](mailto:contact@skemalab.com).

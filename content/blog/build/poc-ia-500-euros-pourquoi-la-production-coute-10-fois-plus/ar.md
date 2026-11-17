@@ -31,3 +31,13 @@ POC يقنع في عرض تجريبي لأنها يُظهر المسار الس�
 في سكيما لاب نرفض تسعير POC دون التحدث عما يأتي بعد. الصيانة، observability وتكاليف API هي بنود في devis، ليست مفاجآت. مشروع ذكاء اصطناعي محدد جيداً يُقدَّر على اثني عشر شهراً، وليس أسبوعين.
 
 إذا كنتم تجهزون مشروعاً للذكاء الاصطناعي وتريدون تجنب المفاجآت السيئة، [لنتحدث](/#contact). نساعدكم في تحديد التكلفة الحقيقية. يمكنكم أيضاً قراءة [مدونتنا](/ar/blog) للاطلاع على المزيد من الملاحظات الميدانية.
+
+
+## المصادر
+
+- Sculley et al.، *Hidden Technical Debt in Machine Learning Systems*، NeurIPS 2015 (research.google/pubs/pub43146/).
+- Zinkevich، *Rules of Machine Learning: Best Practices for ML Engineering*، developers.google.com/machine-learning/guides/rules-of-ml.
+
+## تابعونا
+
+اعثروا على سكيما لاب على [LinkedIn](https://www.linkedin.com/company/skemalab). ويمكنكم أيضاً مراسلتنا على [contact@skemalab.com](mailto:contact@skemalab.com).

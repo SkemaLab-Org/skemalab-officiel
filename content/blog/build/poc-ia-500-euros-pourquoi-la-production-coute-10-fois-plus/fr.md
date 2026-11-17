@@ -31,3 +31,12 @@ Le plan de repli. Quand le modèle ne répond pas ou répond mal, que se passe-t
 Chez SkemaLab, on refuse de donner un prix de POC sans parler de la suite. La maintenance, l'observabilité et les coûts d'API sont des lignes du devis, pas des surprises. Un projet IA bien cadré se budget sur douze mois, pas sur deux semaines.
 
 Si vous préparez un projet IA et voulez éviter les mauvaises surprises, [parlons-en](/#contact). On vous aide à cadrer le vrai coût. Vous pouvez aussi lire [notre blog](/fr/blog) pour d'autres retours d'expérience.
+
+## Sources
+
+- Sculley et al., *Hidden Technical Debt in Machine Learning Systems*, NeurIPS 2015 (research.google/pubs/pub43146/).
+- Zinkevich, *Rules of Machine Learning: Best Practices for ML Engineering*, developers.google.com/machine-learning/guides/rules-of-ml.
+
+## Suivez-nous
+
+Retrouvez SkemaLab sur [LinkedIn](https://www.linkedin.com/company/skemalab). Écrivez-nous aussi à [contact@skemalab.com](mailto:contact@skemalab.com).
