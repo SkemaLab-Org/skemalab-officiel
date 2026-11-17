@@ -43,10 +43,10 @@ Si vous hésitez entre automatiser vite et automatiser proprement, [parlons-en](
 
 ## Sources
 
-- [OWASP — Top 10 for LLM Applications 2025, LLM01:2025 Prompt Injection](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
-- [OWASP — Top 10 for LLM Applications 2025, LLM06:2025 Excessive Agency](https://genai.owasp.org/llm-top-10/)
+- [OWASP — Top 10 for LLM Applications 2025 (LLM01 Prompt Injection, LLM06 Excessive Agency)](https://genai.owasp.org/llm-top-10/)
 - [Greshake et al. — Indirect Prompt Injection (arXiv 2302.12173)](https://arxiv.org/abs/2302.12173)
 - [MITRE ATLAS — AML.T0051.001 Indirect Prompt Injection](https://atlas.mitre.org/techniques/AML.T0051.001)
+- [Model Context Protocol specification](https://modelcontextprotocol.io/)
 
 ## Suivez-nous
 

@@ -36,6 +36,7 @@ If you are preparing an AI project and want to avoid bad surprises, [let's talk]
 
 - [Sculley et al. — Hidden Technical Debt in Machine Learning Systems (NeurIPS 2015)](https://research.google/pubs/pub43146/)
 - [Zinkevich — Rules of Machine Learning (Google)](https://developers.google.com/machine-learning/guides/rules-of-ml)
+- [Chip Huyen — AI Engineering (production systems)](https://huyenchip.com/2025/01/16/ai-engineering.html)
 
 ## Follow us
 
