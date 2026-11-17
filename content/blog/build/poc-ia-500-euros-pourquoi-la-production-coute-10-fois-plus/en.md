@@ -34,8 +34,8 @@ If you are preparing an AI project and want to avoid bad surprises, [let's talk]
 
 ## Sources
 
-- Sculley et al., *Hidden Technical Debt in Machine Learning Systems*, NeurIPS 2015 (research.google/pubs/pub43146/).
-- Zinkevich, *Rules of Machine Learning: Best Practices for ML Engineering*, developers.google.com/machine-learning/guides/rules-of-ml.
+- [Sculley et al. — Hidden Technical Debt in Machine Learning Systems (NeurIPS 2015)](https://research.google/pubs/pub43146/)
+- [Zinkevich — Rules of Machine Learning (Google)](https://developers.google.com/machine-learning/guides/rules-of-ml)
 
 ## Follow us
 
