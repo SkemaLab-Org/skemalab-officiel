@@ -582,4 +582,74 @@ export const en = {
 		closingBtn1: "Schedule a discovery call",
 		closingBtn2: "Send a message",
 	},
+	expertisePage: {
+		hero: {
+			badge: "Sector expertise",
+			label: "Skemalab · Three sectors, one standard",
+			h1Part1: "Business systems built for ",
+			h1Highlight: "your reality.",
+			lede: "Skemalab designs robust platforms for three demanding sectors: agricultural cooperatives, educational institutions, and dental practices.",
+			lead: "Each sector has its own flows, constraints, and challenges. We know them, and we build accordingly.",
+			cta1: "Discover our expertise",
+			cta2: "Talk to an expert",
+		},
+		intro: {
+			eyebrow: "Our expertise",
+			title: "Three sectors. One method.",
+			description: "We don't build generic solutions. Every system is designed for the real flows, real users, and measurable outcomes of your sector.",
+		},
+		ui: {
+			capabilities: "Capabilities",
+			outcomes: "Outcomes",
+		},
+		sectors: [
+			{
+				id: "cooperatives",
+				index: "01",
+				name: "Agricultural cooperatives",
+				promise: "Management systems that support members, stocks, and production flows.",
+				paragraphs: [
+					"Agricultural cooperatives manage complex flows: members, harvests, stocks, payments, traceability. We design platforms that centralize these operations and give visibility at every step.",
+					"From member registration to lot traceability, our systems are built for robustness and everyday ease of use.",
+				],
+				capabilities: ["Member management", "Harvest tracking", "Lot traceability", "Payments & disbursements", "Dashboards", "Reports & exports"],
+				outcomes: ["Real-time stock visibility", "Fewer data-entry errors", "Full lot traceability", "Administrative time saved"],
+				cta: "Talk about your cooperative",
+			},
+			{
+				id: "education",
+				index: "02",
+				name: "Educational systems",
+				promise: "Platforms that support students, teachers, and administration.",
+				paragraphs: [
+					"Educational institutions need reliable systems to manage enrollments, schedules, grades, and communication. We build platforms that simplify daily life for every stakeholder.",
+					"From school management to parent-school communication, our solutions are designed to be intuitive and robust.",
+				],
+				capabilities: ["Enrollment management", "Schedules", "Grade tracking", "Parent communication", "Student portals", "Pedagogical reports"],
+				outcomes: ["Simplified administration", "Better communication", "Real-time pedagogical tracking", "Reduced workload"],
+				cta: "Talk about your institution",
+			},
+			{
+				id: "dental",
+				index: "03",
+				name: "Dental care",
+				promise: "Practice management systems designed for practitioners and their patients.",
+				paragraphs: [
+					"Dental practices juggle appointments, patient records, treatments, and billing. We design systems that streamline these flows and free up time for what matters most: care.",
+					"From appointment booking to record management, our platforms are built for precision and simplicity.",
+				],
+				capabilities: ["Appointment booking", "Patient records", "Treatment plans", "Billing", "Automatic reminders", "Dashboard"],
+				outcomes: ["Fewer missed appointments", "Centralized patient records", "Simplified billing", "Daily time saved"],
+				cta: "Talk about your practice",
+			},
+		],
+		closing: {
+			eyebrow: "Take action",
+			title: "Ready to build the system that fits your sector?",
+			text: "Whether you are a cooperative, an educational institution, or a dental practice, we design the platform that looks like you.",
+			cta: "Start a project",
+			ruleLabel: "Skemalab · Sector expertise",
+		},
+	},
+
 };

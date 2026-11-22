@@ -585,4 +585,74 @@ export const fr = {
 		closingBtn1: "Planifier un appel découverte",
 		closingBtn2: "Envoyer un message",
 	},
+	expertisePage: {
+		hero: {
+			badge: "Expertise sectorielle",
+			label: "Skemalab · Trois secteurs, une même exigence",
+			h1Part1: "Des systèmes métiers conçus pour ",
+			h1Highlight: "votre réalité.",
+			lede: "Skemalab conçoit des plateformes robustes pour trois secteurs exigeants : coopératives agricoles, établissements d'enseignement et cabinets dentaires.",
+			lead: "Chaque secteur a ses flux, ses contraintes et ses enjeux. Nous les connaissons et nous construisons en conséquence.",
+			cta1: "Découvrir nos expertises",
+			cta2: "Parler à un expert",
+		},
+		intro: {
+			eyebrow: "Notre expertise",
+			title: "Trois secteurs. Une même méthode.",
+			description: "Nous ne faisons pas de solutions génériques. Chaque système est pensé pour les flux réels, les utilisateurs réels et les résultats mesurables de votre secteur.",
+		},
+		ui: {
+			capabilities: "Capacités",
+			outcomes: "Résultats",
+		},
+		sectors: [
+			{
+				id: "cooperatives",
+				index: "01",
+				name: "Coopératives agricoles",
+				promise: "Des systèmes de gestion qui soutiennent les membres, les stocks et les flux de production.",
+				paragraphs: [
+					"Les coopératives agricoles gèrent des flux complexes : adhérents, récoltes, stocks, paiements, traçabilité. Nous concevons des plateformes qui centralisent ces opérations et donnent de la visibilité à chaque étape.",
+					"De l'enregistrement des membres à la traçabilité des lots, nos systèmes sont pensés pour la robustesse et la simplicité d'usage au quotidien.",
+				],
+				capabilities: ["Gestion des adhérents", "Suivi des récoltes", "Traçabilité des lots", "Paiements & versements", "Tableaux de bord", "Rapports & exports"],
+				outcomes: ["Visibilité temps réel sur les stocks", "Réduction des erreurs de saisie", "Traçabilité complète des lots", "Gain de temps administratif"],
+				cta: "Parler de votre coopérative",
+			},
+			{
+				id: "education",
+				index: "02",
+				name: "Systèmes éducatifs",
+				promise: "Des plateformes qui accompagnent élèves, enseignants et administration.",
+				paragraphs: [
+					"Les établissements d'enseignement ont besoin de systèmes fiables pour gérer inscriptions, emplois du temps, notes et communication. Nous construisons des plateformes qui simplifient le quotidien de tous les acteurs.",
+					"De la gestion scolaire à la communication parents-école, nos solutions sont pensées pour être intuitives et robustes.",
+				],
+				capabilities: ["Gestion des inscriptions", "Emplois du temps", "Suivi des notes", "Communication parents", "Portails élèves", "Rapports pédagogiques"],
+				outcomes: ["Simplification administrative", "Meilleure communication", "Suivi pédagogique en temps réel", "Réduction de la charge de travail"],
+				cta: "Parler de votre établissement",
+			},
+			{
+				id: "dental",
+				index: "03",
+				name: "Soins dentaires",
+				promise: "Des systèmes de gestion de cabinet pensés pour les praticiens et leurs patients.",
+				paragraphs: [
+					"Les cabinets dentaires jonglent entre rendez-vous, dossiers patients, traitements et facturation. Nous concevons des systèmes qui fluidifient ces flux et libèrent du temps pour l'essentiel : les soins.",
+					"De la prise de rendez-vous à la gestion des dossiers, nos plateformes sont pensées pour la précision et la simplicité.",
+				],
+				capabilities: ["Prise de rendez-vous", "Dossiers patients", "Plan de traitement", "Facturation", "Rappels automatiques", "Tableau de bord"],
+				outcomes: ["Moins de rendez-vous manqués", "Dossiers patients centralisés", "Facturation simplifiée", "Gain de temps au quotidien"],
+				cta: "Parler de votre cabinet",
+			},
+		],
+		closing: {
+			eyebrow: "Passer à l'action",
+			title: "Prêt à construire le système qui correspond à votre secteur ?",
+			text: "Que vous soyez une coopérative, un établissement d'enseignement ou un cabinet dentaire, nous concevons la plateforme qui vous ressemble.",
+			cta: "Démarrer un projet",
+			ruleLabel: "Skemalab · Expertise sectorielle",
+		},
+	},
+
 };
