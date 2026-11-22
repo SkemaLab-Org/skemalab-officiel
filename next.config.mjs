@@ -8,6 +8,7 @@ const imageHosts = JSON.parse(
 const nextConfig = {
   // Fewer legacy polyfills for modern browsers (PageSpeed "Legacy JavaScript")
   experimental: {
+    agentUpgrade: "security",
     optimizePackageImports: ["lucide-react", "motion"],
   },
   images: {
