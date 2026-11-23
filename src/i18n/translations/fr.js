@@ -20,17 +20,16 @@ export const fr = {
 	},
 
 	nav: [
+		{ href: "/#services", label: "Services" },
+		{ href: "/#projets", label: "Projets" },
+		{ href: "/#agence", label: "Le studio" },
+		{ href: "/#contact", label: "Contact" },
+		{ href: "/our-story", label: "Notre histoire" },
 		{ href: "/expertise/cooperatives", label: "Expertise", items: [
 			{ href: "/expertise/cooperatives", label: "Coopératives agricoles" },
 			{ href: "/expertise/education", label: "Systèmes éducatifs" },
 			{ href: "/expertise/dental", label: "Soins dentaires" },
 		] },
-		{ href: "/#services", label: "Services" },
-		{ href: "/#method", label: "Méthode" },
-		{ href: "/#projets", label: "Projets" },
-		{ href: "/#agence", label: "Agence" },
-		{ href: "/#contact", label: "Contact" },
-		{ href: "/our-story", label: "Notre histoire" },
 		{ href: "/blog", label: "Blog" },
 	],
 

@@ -50,12 +50,14 @@ export default function Navbar() {
 	const [ scrolled, setScrolled ] = useState( false );
 	const [ hidden, setHidden ] = useState( false );
 	const [ introActive, setIntroActive ] = useState( false );
+	const [ expertiseOpen, setExpertiseOpen ] = useState( false );
 
 	// Publish the navbar's hidden state so other sticky surfaces (e.g. the
 	// blog topic bar) can re-pin themselves to the top instead of leaving a
 	// gap the size of the now-hidden header.
 	useEffect( () => {
 		document.documentElement.dataset.navHidden = hidden ? "true" : "false";
+		if ( hidden ) setExpertiseOpen( false );
 	}, [ hidden ] );
 
 	useEffect( () => {
@@ -364,7 +366,20 @@ export default function Navbar() {
 							if ( link.items ) {
 								const isActive = link.items.some( ( item ) => pathname === item.href );
 								return (
-									<details key={ link.label } className="group relative">
+					<details
+						key={ link.label }
+						className="group relative"
+						open={ expertiseOpen }
+						onMouseEnter={ () => setExpertiseOpen( true ) }
+						onMouseLeave={ () => setExpertiseOpen( false ) }
+						onFocusCapture={ () => setExpertiseOpen( true ) }
+						onBlurCapture={ ( event ) => {
+							if ( !event.currentTarget.contains( event.relatedTarget ) ) {
+								setExpertiseOpen( false );
+							}
+						} }
+						onToggle={ ( event ) => setExpertiseOpen( event.currentTarget.open ) }
+					>
 											<summary
 												className={ cn(
 													"label-mono flex cursor-pointer list-none items-center gap-1 whitespace-nowrap px-2 py-2 transition-colors duration-300 xl:px-3 [&::-webkit-details-marker]:hidden",
@@ -376,14 +391,16 @@ export default function Navbar() {
 												{ link.label }
 												<ArrowUpRight size={ 12 } className="transition-transform group-open:rotate-45" />
 											</summary>
-											<div className="absolute left-0 top-full z-20 mt-3 w-72 border border-line bg-page p-2 shadow-2xl dark:bg-[#07110e]">
-												<div className="px-3 py-2 label-mono text-accent">{ link.label }</div>
-												{ link.items.map( ( item, index ) => (
-													<Link key={ item.href } href={ item.href } className="group/item flex items-center justify-between gap-3 px-3 py-3 text-sm text-muted transition-colors hover:bg-surface hover:text-fg dark:hover:bg-white/5 dark:hover:text-cream" aria-current={ pathname === item.href ? "page" : undefined }>
-														<span className="flex items-center gap-3"><span className="label-mono text-accent/70">0{ index + 1 }</span>{ item.label }</span>
-														<ArrowUpRight size={ 14 } className="opacity-0 transition group-hover/item:translate-x-0.5 group-hover/item:-translate-y-0.5 group-hover/item:opacity-100 rtl-flip" />
-													</Link>
-												) ) }
+											<div className="absolute left-0 top-full z-20 w-72 pt-3">
+												<div className="border border-line bg-page p-2 shadow-2xl dark:bg-[#07110e]">
+													<div className="px-3 py-2 label-mono text-accent">{ link.label }</div>
+													{ link.items.map( ( item, index ) => (
+														<Link key={ item.href } href={ item.href } onClick={ () => setExpertiseOpen( false ) } className="group/item flex items-center justify-between gap-3 px-3 py-3 text-sm text-muted transition-colors hover:bg-surface hover:text-fg dark:hover:bg-white/5 dark:hover:text-cream" aria-current={ pathname === item.href ? "page" : undefined }>
+															<span className="flex items-center gap-3"><span className="label-mono text-accent/70">0{ index + 1 }</span>{ item.label }</span>
+															<ArrowUpRight size={ 14 } className="opacity-0 transition group-hover/item:translate-x-0.5 group-hover/item:-translate-y-0.5 group-hover/item:opacity-100 rtl-flip" />
+														</Link>
+													) ) }
+												</div>
 											</div>
 									</details>
 								);
