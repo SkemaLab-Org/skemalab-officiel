@@ -20,6 +20,11 @@ export const ar = {
 	},
 
 	nav: [
+		{ href: "/expertise/cooperatives", label: "خبراتنا", items: [
+			{ href: "/expertise/cooperatives", label: "التعاونيات الزراعية" },
+			{ href: "/expertise/education", label: "الأنظمة التعليمية" },
+			{ href: "/expertise/dental", label: "رعاية الأسنان" },
+		] },
 		{ href: "/#services", label: "الخدمات" },
 		{ href: "/#method", label: "المنهجية" },
 		{ href: "/#projets", label: "المشاريع" },
@@ -590,7 +595,7 @@ export const ar = {
 			label: "سكيما لاب · ثلاثة قطاعات، معيار واحد",
 			h1Part1: "أنظمة مهنية مصممة لـ ",
 			h1Highlight: "واقعكم.",
-			lede: "تصمم سكيما لاب منصات قوية لثلاثة قطاعات متطلبة: Genossenschaften agricoles، المؤسسات التعليمية، وعيادات طب الأسنان.",
+			lede: "تصمم سكيما لاب منصات قوية لثلاثة قطاعات متطلبة: التعاونيات الزراعية، والمؤسسات التعليمية، وعيادات طب الأسنان.",
 			lead: "لكل قطاع تدفقاته وقيوده وتحدياته. نحن نعرفها ونبني وفقاً لها.",
 			cta1: "اكتشف خبراتنا",
 			cta2: "تحدث إلى خبير",
@@ -603,6 +608,8 @@ export const ar = {
 		ui: {
 			capabilities: "القدرات",
 			outcomes: "النتائج",
+			capabilityHeading: "مسارات العمل التي تدير عملياتك",
+			outcomeHeading: "ما الذي يغيّره النظام المناسب",
 		},
 		sectors: [
 			{

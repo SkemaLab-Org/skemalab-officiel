@@ -20,6 +20,11 @@ export const en = {
 	},
 
 	nav: [
+		{ href: "/expertise/cooperatives", label: "Expertise", items: [
+			{ href: "/expertise/cooperatives", label: "Agricultural cooperatives" },
+			{ href: "/expertise/education", label: "Education systems" },
+			{ href: "/expertise/dental", label: "Dental care" },
+		] },
 		{ href: "/#services", label: "Services" },
 		{ href: "/#method", label: "Method" },
 		{ href: "/#projets", label: "Projects" },
@@ -601,6 +606,8 @@ export const en = {
 		ui: {
 			capabilities: "Capabilities",
 			outcomes: "Outcomes",
+			capabilityHeading: "The workflows that keep your operation moving",
+			outcomeHeading: "What the right system changes",
 		},
 		sectors: [
 			{

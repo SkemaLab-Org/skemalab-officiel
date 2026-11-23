@@ -20,6 +20,11 @@ export const fr = {
 	},
 
 	nav: [
+		{ href: "/expertise/cooperatives", label: "Expertise", items: [
+			{ href: "/expertise/cooperatives", label: "Coopératives agricoles" },
+			{ href: "/expertise/education", label: "Systèmes éducatifs" },
+			{ href: "/expertise/dental", label: "Soins dentaires" },
+		] },
 		{ href: "/#services", label: "Services" },
 		{ href: "/#method", label: "Méthode" },
 		{ href: "/#projets", label: "Projets" },
@@ -604,6 +609,8 @@ export const fr = {
 		ui: {
 			capabilities: "Capacités",
 			outcomes: "Résultats",
+			capabilityHeading: "Les flux qui font tourner votre activité",
+			outcomeHeading: "Ce que le bon système change",
 		},
 		sectors: [
 			{
