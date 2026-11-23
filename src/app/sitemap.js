@@ -37,6 +37,11 @@ export default async function sitemap() {
         `${ baseUrl }/opengraph-image`,
       ],
     },
+    ...[ "cooperatives", "education", "dental" ].map( ( sector ) => ( {
+      url: `${ baseUrl }/expertise/${ sector }`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    } ) ),
     ...blogEntries,
   ];
 }

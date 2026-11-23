@@ -21,11 +21,15 @@ export const en = {
 
 	nav: [
 		{ href: "/#services", label: "Services" },
-		{ href: "/#method", label: "Method" },
 		{ href: "/#projets", label: "Projects" },
-		{ href: "/#agence", label: "Agency" },
+		{ href: "/#agence", label: "Studio" },
 		{ href: "/#contact", label: "Contact" },
 		{ href: "/our-story", label: "Our story" },
+		{ href: "/expertise/cooperatives", label: "Expertise", items: [
+			{ href: "/expertise/cooperatives", label: "Agricultural cooperatives" },
+			{ href: "/expertise/education", label: "Education systems" },
+			{ href: "/expertise/dental", label: "Dental care" },
+		] },
 		{ href: "/blog", label: "Blog" },
 	],
 
@@ -601,6 +605,8 @@ export const en = {
 		ui: {
 			capabilities: "Capabilities",
 			outcomes: "Outcomes",
+			capabilityHeading: "The workflows that keep your operation moving",
+			outcomeHeading: "What the right system changes",
 		},
 		sectors: [
 			{

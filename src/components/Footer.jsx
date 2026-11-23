@@ -48,7 +48,7 @@ export default function Footer( { animate = false } ) {
 			transition: { duration: 0.75, ease: [ 0.22, 1, 0.36, 1 ] },
 		}
 		: {};
-	const navLinks = t.nav;
+	const navLinks = t.nav.flatMap( ( link ) => link.items || [ link ] );
 	const linkClass =
 		"inline-flex min-h-9 items-center text-[13px] text-[#a2b8b1] transition-colors hover:text-[#3ad9bf]";
 
