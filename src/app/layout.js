@@ -113,8 +113,8 @@ export const viewport = {
 	],
 };
 
-const themeInitScript = `(function(){try{var t=localStorage.getItem("skemalab-theme");var r=document.documentElement;if(t==="light"){r.classList.remove("dark");r.style.colorScheme="light"}else{r.classList.add("dark");r.style.colorScheme="dark"}}catch(e){}})();`;
-const localeInitScript = `(function(){try{var p=location.pathname;var m=p.match(/^\\/(fr|en|ar)\\/blog(?:\\/|$)/);var l=m?m[1]:(localStorage.getItem("skemalab-locale")||"fr");if(m){localStorage.setItem("skemalab-locale",l)}var r=document.documentElement;r.setAttribute("lang",l);if(l==="ar"){r.setAttribute("dir","rtl");r.classList.add("rtl")}else{r.setAttribute("dir","ltr");r.classList.remove("rtl")}}catch(e){}})();`;
+const themeInitScript = `(function(){try{var t=localStorage.getItem("skemalab-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}var r=document.documentElement;r.classList.toggle("dark",t==="dark");r.style.colorScheme=t}catch(e){}})();`;
+const localeInitScript = `(function(){try{var p=location.pathname;var m=p.match(/^\\/(fr|en|ar)\\/blog(?:\\/|$)/);var q=new URLSearchParams(location.search).get("lang");var saved=localStorage.getItem("skemalab-locale");var prefs=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language];var system="fr";for(var i=0;i<prefs.length;i++){var candidate=(prefs[i]||"").toLowerCase().split("-")[0];if(candidate==="fr"||candidate==="en"||candidate==="ar"){system=candidate;break}}var l=m?m[1]:(q==="fr"||q==="en"||q==="ar"?q:(saved==="fr"||saved==="en"||saved==="ar"?saved:system));if(m){localStorage.setItem("skemalab-locale",l)}var r=document.documentElement;r.setAttribute("lang",l);if(l==="ar"){r.setAttribute("dir","rtl");r.classList.add("rtl")}else{r.setAttribute("dir","ltr");r.classList.remove("rtl")}}catch(e){}})();`;
 
 export default function RootLayout({ children }) {
 	return (

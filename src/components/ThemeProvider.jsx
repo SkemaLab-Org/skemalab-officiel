@@ -13,6 +13,12 @@ const STORAGE_KEY = "skemalab-theme";
 const DEFAULT_THEME = "dark";
 const THEMES = new Set(["dark", "light"]);
 
+function getSystemTheme() {
+  return window.matchMedia?.("(prefers-color-scheme: light)").matches
+    ? "light"
+    : DEFAULT_THEME;
+}
+
 const ThemeContext = createContext({
   theme: DEFAULT_THEME,
   toggleTheme: () => {},
@@ -25,9 +31,10 @@ function readStoredTheme() {
   if (typeof window === "undefined") return DEFAULT_THEME;
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    return THEMES.has(stored) ? stored : DEFAULT_THEME;
+    if (THEMES.has(stored)) return stored;
+    return getSystemTheme();
   } catch {
-    return DEFAULT_THEME;
+    return getSystemTheme();
   }
 }
 
@@ -65,9 +72,23 @@ function subscribe(onStoreChange) {
 
   window.addEventListener("storage", onStorage);
 
+  const colorScheme = window.matchMedia?.("(prefers-color-scheme: light)");
+  const onSystemThemeChange = () => {
+    try {
+      if (window.localStorage.getItem(STORAGE_KEY)) return;
+    } catch {
+      // Follow the system when storage is unavailable.
+    }
+    cachedTheme = readStoredTheme();
+    applyThemeClass(cachedTheme);
+    emitChange();
+  };
+  colorScheme?.addEventListener?.("change", onSystemThemeChange);
+
   return () => {
     listeners.delete(onStoreChange);
     window.removeEventListener("storage", onStorage);
+    colorScheme?.removeEventListener?.("change", onSystemThemeChange);
   };
 }
 
