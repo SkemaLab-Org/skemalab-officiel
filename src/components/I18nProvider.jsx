@@ -30,6 +30,17 @@ function applyLocaleToDoc(locale) {
   root.classList.toggle("rtl", isRtl);
 }
 
+function getSystemLocale() {
+  if (typeof navigator === "undefined") return defaultLocale;
+  for (const preference of navigator.languages?.length
+    ? navigator.languages
+    : [navigator.language]) {
+    const language = preference?.toLowerCase().split("-")[0];
+    if (locales[language]?.enabled) return language;
+  }
+  return defaultLocale;
+}
+
 function getStoredLocale() {
   if (typeof window === "undefined") return defaultLocale;
   try {
@@ -56,7 +67,7 @@ function getStoredLocale() {
   } catch {
     /* ignore error */
   }
-  return defaultLocale;
+  return getSystemLocale();
 }
 
 function subscribeLocale(onStoreChange) {
