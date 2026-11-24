@@ -393,7 +393,6 @@ export default function Navbar() {
 											</summary>
 											<div className="absolute left-0 top-full z-20 w-72 pt-3">
 												<div className="border border-line bg-page p-2 shadow-2xl dark:bg-[#07110e]">
-													<div className="px-3 py-2 label-mono text-accent">{ link.label }</div>
 													{ link.items.map( ( item, index ) => (
 														<Link key={ item.href } href={ item.href } onClick={ () => setExpertiseOpen( false ) } className="group/item flex items-center justify-between gap-3 px-3 py-3 text-sm text-muted transition-colors hover:bg-surface hover:text-fg dark:hover:bg-white/5 dark:hover:text-cream" aria-current={ pathname === item.href ? "page" : undefined }>
 															<span className="flex items-center gap-3"><span className="label-mono text-accent/70">0{ index + 1 }</span>{ item.label }</span>
