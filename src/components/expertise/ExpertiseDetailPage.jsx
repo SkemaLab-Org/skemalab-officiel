@@ -7,6 +7,7 @@ import { useI18n } from "@/components/I18nProvider";
 export default function ExpertiseDetailPage({ id }) {
 	const { t } = useI18n();
 	const sector = t.expertisePage.sectors.find( ( item ) => item.id === id );
+	const approach = t.expertisePage.approach;
 	if ( !sector ) return null;
 
 	return (
@@ -33,6 +34,29 @@ export default function ExpertiseDetailPage({ id }) {
 					<div className="mt-12 h-px w-full bg-cream/15"><span className="block h-px w-20 bg-accent-bright" /></div>
 				</div>
 			</section>
+			{ sector.challenges && sector.challenges.length > 0 && (
+				<section className="section-y bg-surface" aria-labelledby="challenges-heading">
+					<div className="shell">
+						<div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+							<div>
+								<p className="label-mono text-accent">{ sector.index } — { t.expertisePage.ui.challenges }</p>
+								<h2 id="challenges-heading" className="section-title mt-5 max-w-md text-fg">{ t.expertisePage.ui.challengeHeading }</h2>
+							</div>
+							<div>
+								<div className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+									{ sector.challenges.map( ( challenge, index ) => (
+										<div key={ index } className="min-h-36 bg-surface p-6 sm:p-7">
+											<span className="label-mono text-accent/70">{ sector.index }.{ String( index + 1 ).padStart( 2, "0" ) }</span>
+											<h3 className="mt-6 max-w-[24ch] font-display text-xl leading-snug text-fg">{ challenge.title }</h3>
+											<p className="mt-4 max-w-[40ch] text-base leading-relaxed text-muted">{ challenge.body }</p>
+										</div>
+									) ) }
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			) }
 			<section className="section-y bg-page">
 				<div className="shell">
 					<div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
@@ -43,6 +67,9 @@ export default function ExpertiseDetailPage({ id }) {
 						<div>
 							<p className="max-w-2xl text-lg leading-relaxed text-muted">{ sector.paragraphs[0] }</p>
 							<p className="mt-5 max-w-2xl text-base leading-relaxed text-muted">{ sector.paragraphs[1] }</p>
+							{ sector.paragraphs[2] && (
+								<p className="mt-5 max-w-2xl text-base leading-relaxed text-muted">{ sector.paragraphs[2] }</p>
+							) }
 						</div>
 					</div>
 					<div className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
@@ -55,6 +82,30 @@ export default function ExpertiseDetailPage({ id }) {
 					</div>
 				</div>
 			</section>
+			{ approach && approach.steps && approach.steps.length > 0 && (
+				<section className="section-y bg-page" aria-labelledby="approach-heading">
+					<div className="shell">
+						<div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+							<div>
+								<p className="label-mono text-accent">{ approach.eyebrow }</p>
+								<h2 id="approach-heading" className="section-title mt-5 max-w-md text-fg">{ approach.heading }</h2>
+								<p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{ approach.lead }</p>
+							</div>
+							<div>
+								<ol className="list-none p-0 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+									{ approach.steps.map( ( step, index ) => (
+										<li key={ index } className="p-6 sm:p-7">
+											<span className="label-mono text-accent/70">{ String( index + 1 ).padStart( 2, "0" ) }</span>
+											<h3 className="mt-5 font-display text-xl leading-snug text-fg">{ step.title }</h3>
+											<p className="mt-3 text-base leading-relaxed text-muted">{ step.body }</p>
+										</li>
+									) ) }
+								</ol>
+							</div>
+						</div>
+					</div>
+				</section>
+			) }
 			<section className="section-y bg-surface">
 				<div className="shell grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
 					<div>

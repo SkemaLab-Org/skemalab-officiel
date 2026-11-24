@@ -1,8 +1,8 @@
 import ExpertiseDetailPage from "@/components/expertise/ExpertiseDetailPage";
 
 export const metadata = {
-	title: "Coopératives agricoles | Skemalab",
-	description: "Des systèmes de gestion qui soutiennent les membres, les stocks et les flux de production des coopératives agricoles.",
+	title: "Coopératives de production | Skemalab",
+	description: "Des plateformes qui organisent les membres, la production et la répartition des résultats des coopératives de production.",
 	alternates: { canonical: "/expertise/cooperatives" },
 };
 
