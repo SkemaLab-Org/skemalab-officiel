@@ -645,19 +645,19 @@ export const en = {
 				id: "education",
 				index: "02",
 				name: "Educational systems",
-				promise: "Platforms that support students, teachers, and administration.",
+				promise: "Platforms that support students, teachers, and administration — from course management to AI-powered pedagogy.",
 				paragraphs: [
 					"Educational institutions need reliable systems to manage enrollments, schedules, grades, and communication. We build platforms that simplify daily life for every stakeholder.",
 					"From school management to parent-school communication, our solutions are designed to be intuitive and robust.",
-					"We work with school groups as well as independent institutions, respecting their curricula, calendars, and regulatory obligations.",
+					"We integrate modular course creation (modules, chapters, video/text/quiz content), granular progress tracking, automated certification, gamification (badges, challenges, leaderboards), QR/geolocation attendance, and contextual AI assistants for students and teachers.",
 				],
 				challenges: [
 					{ title: "Admissions and records", body: "Enrollments, re-enrollments, supporting documents, and incomplete files pile up every new school year." },
 					{ title: "Schedules and absences", body: "Rooms, teachers, and groups shift constantly without losing track of hours taught." },
 					{ title: "Communication with families", body: "Parents, teachers, and administration need reliable information, at the right time and in the right place." },
 				],
-				capabilities: ["Enrollment management", "Student records", "Schedules", "Grade tracking", "Attendance tracking", "Parent communication", "Student portals", "Pedagogical reports"],
-				outcomes: ["Calmer back-to-school periods", "Fewer lost documents", "Shared pedagogical tracking", "Smooth communication with families", "Decisions grounded in results", "Reduced administrative load"],
+				capabilities: ["Enrollment management", "Student records", "Schedules", "Grade tracking", "Attendance tracking (QR/geo)", "Parent communication", "Student portals", "Pedagogical reports", "Modular course creation", "Video/text/quiz content", "Granular progress tracking", "Automated certification", "Gamification (badges, challenges, leaderboards)", "Pedagogical AI assistant"],
+				outcomes: ["Calmer back-to-school periods", "Fewer lost documents", "Shared pedagogical tracking", "Smooth communication with families", "Decisions grounded in results", "Reduced administrative load", "Higher student engagement via gamification", "Teacher time saved via AI", "Improved completion rates", "Instantly verifiable certificates"],
 				cta: "Talk about your institution",
 			},
 			{

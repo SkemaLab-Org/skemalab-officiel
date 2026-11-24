@@ -648,19 +648,19 @@ export const fr = {
 				id: "education",
 				index: "02",
 				name: "Systèmes éducatifs",
-				promise: "Des plateformes qui accompagnent élèves, enseignants et administration.",
+				promise: "Des plateformes qui accompagnent élèves, enseignants et administration, de la gestion des cours à l'IA pédagogique.",
 				paragraphs: [
 					"Les établissements d'enseignement ont besoin de systèmes fiables pour gérer inscriptions, emplois du temps, notes et communication. Nous construisons des plateformes qui simplifient le quotidien de tous les acteurs.",
 					"De la gestion scolaire à la communication parents-école, nos solutions sont pensées pour être intuitives et robustes.",
-					"Nous travaillons aussi bien avec des groupes scolaires qu'avec des établissements indépendants, en respectant leurs programmes, leurs calendriers et leurs obligations réglementaires.",
+					"Nous intégrons la création de cours modulaire (modules, chapitres, contenus vidéo/texte/quiz), le suivi de progression granulaire, la certification automatisée, la gamification (badges, défis, classements), la gestion des présences par QR/géolocalisation, et des assistants IA contextuels pour élèves et enseignants.",
 				],
 				challenges: [
 					{ title: "Admissions et dossiers", body: "Inscriptions, réinscriptions, pièces justificatives et dossiers incomplets s'accumulent à chaque rentrée." },
 					{ title: "Emplois du temps et absences", body: "Salles, enseignants et groupes s'ajustent en continu, sans perdre le fil des heures effectuées." },
 					{ title: "Communication avec les familles", body: "Parents, enseignants et administration ont besoin d'une information fiable, au bon moment et au bon endroit." },
 				],
-				capabilities: ["Gestion des inscriptions", "Dossiers élèves", "Emplois du temps", "Suivi des notes", "Absences & présences", "Communication parents", "Portails élèves", "Rapports pédagogiques"],
-				outcomes: ["Rentrées plus sereines", "Moins de documents perdus", "Suivi pédagogique partagé", "Communication fluide avec les familles", "Décisions fondées sur les résultats", "Charge administrative réduite"],
+				capabilities: ["Gestion des inscriptions", "Dossiers élèves", "Emplois du temps", "Suivi des notes", "Absences & présences (QR/géo)", "Communication parents", "Portails élèves", "Rapports pédagogiques", "Création de cours modulaire", "Contenus vidéo/texte/quiz", "Suivi progression granulaire", "Certification automatisée", "Gamification (badges, défis, classements)", "Assistant IA pédagogique"],
+				outcomes: ["Rentrées plus sereines", "Moins de documents perdus", "Suivi pédagogique partagé", "Communication fluide avec les familles", "Décisions fondées sur les résultats", "Charge administrative réduite", "Engagement élève accru par la gamification", "Gain de temps enseignant via l'IA", "Taux de complétion améliorés", "Certificats vérifiables instantanément"],
 				cta: "Parler de votre établissement",
 			},
 			{
