@@ -21,15 +21,15 @@ export const fr = {
 
 	nav: [
 		{ href: "/#services", label: "Services" },
+		{ href: "/expertise/cooperatives", label: "Expertise", items: [
+			{ href: "/expertise/education", label: "Systèmes éducatifs" },
+			{ href: "/expertise/cooperatives", label: "Coopératives de production" },
+			{ href: "/expertise/dental", label: "Soins dentaires" },
+		] },
 		{ href: "/#projets", label: "Projets" },
 		{ href: "/#agence", label: "Le studio" },
 		{ href: "/#contact", label: "Contact" },
 		{ href: "/our-story", label: "Notre histoire" },
-		{ href: "/expertise/cooperatives", label: "Expertise", items: [
-			{ href: "/expertise/cooperatives", label: "Coopératives de production" },
-			{ href: "/expertise/education", label: "Systèmes éducatifs" },
-			{ href: "/expertise/dental", label: "Soins dentaires" },
-		] },
 		{ href: "/blog", label: "Blog" },
 	],
 

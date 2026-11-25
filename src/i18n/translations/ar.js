@@ -21,15 +21,15 @@ export const ar = {
 
 	nav: [
 		{ href: "/#services", label: "الخدمات" },
+		{ href: "/expertise/cooperatives", label: "خبراتنا", items: [
+			{ href: "/expertise/education", label: "الأنظمة التعليمية" },
+			{ href: "/expertise/cooperatives", label: "تعاونيات الإنتاج" },
+			{ href: "/expertise/dental", label: "رعاية الأسنان" },
+		] },
 		{ href: "/#projets", label: "المشاريع" },
 		{ href: "/#agence", label: "الاستوديو" },
 		{ href: "/#contact", label: "تواصل معنا" },
 		{ href: "/our-story", label: "قصتنا" },
-		{ href: "/expertise/cooperatives", label: "خبراتنا", items: [
-			{ href: "/expertise/cooperatives", label: "تعاونيات الإنتاج" },
-			{ href: "/expertise/education", label: "الأنظمة التعليمية" },
-			{ href: "/expertise/dental", label: "رعاية الأسنان" },
-		] },
 		{ href: "/blog", label: "المدونة" },
 	],
 
