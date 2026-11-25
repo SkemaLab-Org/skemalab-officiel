@@ -21,12 +21,12 @@ export const fr = {
 
 	nav: [
 		{ href: "/#services", label: "Services" },
-		{ href: "/expertise/cooperatives", label: "Expertise", items: [
-			{ href: "/expertise/education", label: "Systèmes éducatifs" },
-			{ href: "/expertise/cooperatives", label: "Coopératives de production" },
-			{ href: "/expertise/dental", label: "Soins dentaires" },
+		{ href: "/expertise/cooperatives", label: "Nos expertises", items: [
+			{ href: "/expertise/education", label: "Formation & Employabilité" },
+			{ href: "/expertise/cooperatives", label: "Solutions Coopératives" },
+			// { href: "/expertise/dental", label: "Soins dentaires" },
 		] },
-		{ href: "/#projets", label: "Projets" },
+		// { href: "/#projets", label: "Projets" },
 		{ href: "/#agence", label: "Le studio" },
 		{ href: "/our-story", label: "Notre histoire" },
 		{ href: "/#contact", label: "Contact" },

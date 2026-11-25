@@ -4,7 +4,7 @@ import Field from "@/components/sections/Field";
 import Statement from "@/components/sections/Statement";
 import Services from "@/components/sections/Services";
 import Stats from "@/components/sections/Stats";
-import Projects from "@/components/sections/Projects";
+// import Projects from "@/components/sections/Projects";
 import Studio from "@/components/sections/Studio";
 import FAQ from "@/components/sections/FAQ";
 import CTA from "@/components/sections/CTA";
@@ -23,7 +23,7 @@ export default function Home() {
 			<Statement />
 
 			{/* Normal bands */}
-			<Projects />
+			{/* <Projects /> Temporarily hidden; keep the section available for later. */}
 			<Stats />
 			<Studio />
 			<FAQ />
