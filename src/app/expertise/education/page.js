@@ -1,11 +1,11 @@
-import ExpertiseDetailPage from "@/components/expertise/ExpertiseDetailPage";
+import EducationTrainingPage from "@/components/expertise/EducationTrainingPage";
 
 export const metadata = {
-	title: "Systèmes éducatifs | Skemalab",
-	description: "Plateformes complètes : création de cours modulaire, suivi de progression granulaire, certification automatisée, gamification, présence QR/géo, assistant IA pédagogique.",
+	title: "Formations digitales | Skemalab",
+	description: "Formez-vous aux métiers du développement informatique, du marketing digital, de l'intelligence artificielle et de l'automatisation avec SkemaLab.",
 	alternates: { canonical: "/expertise/education" },
 };
 
 export default function EducationExpertisePage() {
-	return <ExpertiseDetailPage id="education" />;
+	return <EducationTrainingPage />;
 }
