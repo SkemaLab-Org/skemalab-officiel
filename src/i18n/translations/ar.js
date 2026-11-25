@@ -28,8 +28,8 @@ export const ar = {
 		] },
 		{ href: "/#projets", label: "المشاريع" },
 		{ href: "/#agence", label: "الاستوديو" },
-		{ href: "/#contact", label: "تواصل معنا" },
 		{ href: "/our-story", label: "قصتنا" },
+		{ href: "/#contact", label: "تواصل معنا" },
 		{ href: "/blog", label: "المدونة" },
 	],
 

@@ -28,8 +28,8 @@ export const fr = {
 		] },
 		{ href: "/#projets", label: "Projets" },
 		{ href: "/#agence", label: "Le studio" },
-		{ href: "/#contact", label: "Contact" },
 		{ href: "/our-story", label: "Notre histoire" },
+		{ href: "/#contact", label: "Contact" },
 		{ href: "/blog", label: "Blog" },
 	],
 
