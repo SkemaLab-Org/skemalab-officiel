@@ -64,3 +64,5 @@ NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/TON-USERNAME/decouverte
 5. Redémarre `npm run dev`, teste une résa, vérifie Google Calendar, puis annule le test.
 
 Sans `NEXT_PUBLIC_CALENDLY_URL`, le bouton redirige vers `#contact`. CSP : `frame-src` Calendly uniquement.
+
+
