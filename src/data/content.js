@@ -27,7 +27,7 @@ export const founders = [
 		title: "Chief Executive Officer & Stratégie Business",
 		shortBio:
 			"Entrepreneur et stratège digital, Feissal pilote la vision, la croissance et le développement commercial pour transformer les projets en leviers de rentabilité.",
-		image: "/team/feissal_tarkaoui.webp",
+		image: "/team/feissal_tarkaoui2.jpeg",
 		social: {
 			linkedin: "https://www.linkedin.com/company/skemalab",
 		},
