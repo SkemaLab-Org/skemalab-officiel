@@ -51,3 +51,6 @@ next-env.d.ts
 
 # local scratch (screenshots, generated previews)
 /.tmp/
+
+# test artifacts
+/test-results/
