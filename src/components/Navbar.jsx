@@ -57,7 +57,6 @@ export default function Navbar() {
 	// gap the size of the now-hidden header.
 	useEffect( () => {
 		document.documentElement.dataset.navHidden = hidden ? "true" : "false";
-		if ( hidden ) setExpertiseOpen( false );
 	}, [ hidden ] );
 
 	useEffect( () => {
@@ -123,6 +122,9 @@ export default function Navbar() {
 
 					if ( direction > DIRECTION_THRESHOLD && y > HIDE_AFTER ) {
 						setHidden( true );
+						// The expertise panel would be clipped once the header
+						// slides away, so close it as the navbar hides.
+						setExpertiseOpen( false );
 					} else if ( direction < -DIRECTION_THRESHOLD ) {
 						setHidden( false );
 					}
